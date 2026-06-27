@@ -38,6 +38,15 @@
     "tailwind-merge": "^3.5.0",
     "tslib": "^2.3.0"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "@parcel/watcher",
+      "lmdb",
+      "msgpackr-extract",
+      "nx"
+    ]
+  },
   "devDependencies": {
     "@angular-eslint/builder": "22.0.0",
     "@angular/build": "^22.0.4",
