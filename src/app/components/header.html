@@ -1,17 +1,17 @@
-<header class="relative z-50 mx-4 mt-3 rounded-full bg-white px-6 py-3 shadow-lg">
+<header class="relative z-50 mx-4 mt-3 rounded-full px-6 py-3 shadow-lg" style="background-color: #ffffff !important;">
   <div class="flex items-center justify-between">
     <!-- Logo -->
     <a routerLink="/" class="flex items-center gap-2">
-      <ng-icon name="lucideHome" class="text-primary size-5" />
-      <span class="text-lg font-bold text-neutral-900">MeuApp</span>
+      <ng-icon name="lucideHome" class="size-5" style="color: hsl(97, 57%, 61%) !important;" />
+      <span class="text-lg font-bold" style="color: #171717 !important;">MeuApp</span>
     </a>
 
     <!-- Nav links -->
     <nav class="hidden items-center gap-8 md:flex">
-      <a routerLink="/properties" class="text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900">
+      <a routerLink="/properties" class="text-sm font-medium transition-colors" style="color: #525252 !important;">
         Imóveis
       </a>
-      <a routerLink="/crm" class="text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900">
+      <a routerLink="/crm" class="text-sm font-medium transition-colors" style="color: #525252 !important;">
         CRM
       </a>
     </nav>
@@ -33,13 +33,13 @@
       </button>
 
       @if (auth.isLoggedIn()) {
-        <span class="hidden text-sm text-neutral-500 sm:inline">{{ auth.currentUserEmail() }}</span>
-        <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm text-neutral-700">Sair</button>
+        <span class="hidden text-sm sm:inline" style="color: #737373 !important;">{{ auth.currentUserEmail() }}</span>
+        <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" style="color: #404040 !important;">Sair</button>
       } @else {
-        <a routerLink="/auth/login" class="text-sm font-medium text-neutral-600 transition-colors hover:text-neutral-900">
+        <a routerLink="/auth/login" class="text-sm font-medium transition-colors" style="color: #525252 !important;">
           Entrar
         </a>
-        <a routerLink="/properties" hlmBtn size="sm" class="rounded-full bg-neutral-900 px-4 py-2 text-white hover:bg-neutral-800">
+        <a routerLink="/properties" hlmBtn size="sm" class="rounded-full px-4 py-2 text-white" style="background-color: #171717 !important;">
           Ver imóveis
         </a>
       }

@@ -6,35 +6,39 @@
   <section class="relative flex min-h-[85vh] flex-col items-center overflow-hidden px-6 pt-12 pb-0" style="background-color: hsl(97, 57%, 61%);">
     <!-- Headline -->
     <div class="relative z-10 mt-8 space-y-4 text-center md:mt-16">
-      <h1 class="mx-auto max-w-4xl text-5xl font-black leading-[0.95] tracking-tight text-foreground md:text-8xl md:leading-[0.9]">
+      <h1 class="mx-auto max-w-4xl text-5xl font-black leading-[0.95] tracking-tight md:text-8xl md:leading-[0.9]" style="color: #171717 !important;">
         Encontre o imóvel
         <br />
-        <span class="text-foreground">perfeito</span>
+        <span style="color: #171717 !important;">perfeito</span>
       </h1>
     </div>
 
     <!-- Subtitle -->
     <div class="relative z-10 mt-6 md:mt-8">
-      <p class="text-lg font-medium text-foreground/80 md:text-xl">
+      <p class="text-lg font-medium md:text-xl" style="color: rgba(23,23,23,0.7) !important;">
         Seu novo lar começa aqui
       </p>
     </div>
 
     <!-- Search Card — ZAP Imóveis style -->
     <div class="relative z-10 mt-10 w-full max-w-2xl md:mt-14">
-      <div class="rounded-2xl bg-white p-6 shadow-2xl">
+      <div class="rounded-2xl p-6 shadow-2xl" style="background-color: #ffffff !important;">
         <!-- Tabs -->
-        <div class="mb-5 flex gap-1 rounded-lg bg-muted p-1">
+        <div class="mb-5 flex gap-1 rounded-lg p-1" style="background-color: #f5f5f5 !important;">
           <button
             class="flex-1 rounded-md px-4 py-2.5 text-sm font-semibold transition-all"
-            [class]="searchType() === 'buy' ? 'bg-white text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+            [style]="searchType() === 'buy'
+              ? 'background-color: #ffffff !important; color: #171717 !important; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'
+              : 'color: #737373 !important;'"
             (click)="searchType.set('buy')"
           >
             Comprar
           </button>
           <button
             class="flex-1 rounded-md px-4 py-2.5 text-sm font-semibold transition-all"
-            [class]="searchType() === 'rent' ? 'bg-white text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+            [style]="searchType() === 'rent'
+              ? 'background-color: #ffffff !important; color: #171717 !important; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'
+              : 'color: #737373 !important;'"
             (click)="searchType.set('rent')"
           >
             Alugar
@@ -42,14 +46,14 @@
         </div>
 
         <!-- Search Input -->
-        <div class="mb-4 flex items-center gap-3 rounded-xl border border-border bg-muted/50 px-4 py-3">
-          <ng-icon name="lucideSearch" class="size-5 text-muted-foreground" />
+        <div class="mb-4 flex items-center gap-3 rounded-xl px-4 py-3" style="background-color: #f5f5f5 !important;">
+          <ng-icon name="lucideSearch" class="size-5" style="color: #737373 !important;" />
           <input
             type="text"
             [value]="searchQuery()"
             (input)="searchQuery.set($any($event.target).value)"
             placeholder="Bairro, cidade ou endereço"
-            class="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+            class="w-full bg-transparent text-sm outline-none" style="color: #171717 !important;"
           />
         </div>
 
@@ -59,7 +63,7 @@
             <select
               [value]="propertyType()"
               (change)="propertyType.set($any($event.target).value)"
-              class="w-full appearance-none rounded-xl border border-border bg-muted/50 px-4 py-3 pr-10 text-sm text-foreground outline-none"
+              class="w-full appearance-none rounded-xl px-4 py-3 pr-10 text-sm outline-none" style="background-color: #f5f5f5 !important; color: #171717 !important;"
             >
               <option value="all">Todos os tipos</option>
               <option value="apartment">Apartamento</option>
@@ -67,11 +71,11 @@
               <option value="condo">Condomínio</option>
               <option value="land">Terreno</option>
             </select>
-            <ng-icon name="lucideChevronDown" class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+            <ng-icon name="lucideChevronDown" class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2" style="color: #737373 !important;" />
           </div>
           <button
             (click)="onSearch()"
-            class="flex items-center gap-2 rounded-xl bg-foreground px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-foreground/90"
+            class="flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-semibold text-white transition-colors" style="background-color: hsl(97, 57%, 61%) !important; color: #171717 !important;"
           >
             <ng-icon name="lucideSearch" class="size-4" />
             Buscar
