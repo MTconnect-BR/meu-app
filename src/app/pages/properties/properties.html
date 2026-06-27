@@ -3,10 +3,10 @@
 <main class="flex flex-1 flex-col px-6 py-8">
   <div class="mx-auto w-full max-w-6xl space-y-8">
     <div class="space-y-2">
-      <h1 class="text-3xl font-bold tracking-tight text-foreground">
+      <h1 hlmH1 class="text-foreground">
         Find your perfect home
       </h1>
-      <p class="text-muted-foreground">
+      <p hlmLead>
         Browse thousands of properties for sale and rent
       </p>
     </div>
@@ -75,8 +75,8 @@
 
     @if (propertiesService.propertyType() === 'all' || propertiesService.propertyType() === 'sale') {
       <section class="space-y-4">
-        <h2 class="text-2xl font-bold tracking-tight text-foreground">For Sale</h2>
-        <hlm-carousel [options]="saleOptions" class="relative px-12">
+        <h2 hlmH2 class="text-foreground">For Sale</h2>
+        <hlm-carousel [options]="saleOptions">
           <hlm-carousel-content>
             @for (property of propertiesService.forSale; track property.id) {
               <hlm-carousel-item class="basis-1/3">
@@ -127,16 +127,18 @@
               </div>
             }
           </hlm-carousel-content>
-          <button hlmCarouselPrevious aria-label="Previous"></button>
-          <button hlmCarouselNext aria-label="Next"></button>
+          <div class="flex items-center justify-center gap-4 pt-4">
+            <button hlmCarouselPrevious aria-label="Previous" class="!relative !-start-0 !top-0 !translate-none"></button>
+            <button hlmCarouselNext aria-label="Next" class="!relative !-end-0 !top-0 !translate-none"></button>
+          </div>
         </hlm-carousel>
       </section>
     }
 
     @if (propertiesService.propertyType() === 'all' || propertiesService.propertyType() === 'rent') {
       <section class="space-y-4">
-        <h2 class="text-2xl font-bold tracking-tight text-foreground">For Rent</h2>
-        <hlm-carousel [options]="rentOptions" class="relative px-12">
+        <h2 hlmH2 class="text-foreground">For Rent</h2>
+        <hlm-carousel [options]="rentOptions">
           <hlm-carousel-content>
             @for (property of propertiesService.forRent; track property.id) {
               <hlm-carousel-item class="basis-1/3">
@@ -187,8 +189,10 @@
               </div>
             }
           </hlm-carousel-content>
-          <button hlmCarouselPrevious aria-label="Previous"></button>
-          <button hlmCarouselNext aria-label="Next"></button>
+          <div class="flex items-center justify-center gap-4 pt-4">
+            <button hlmCarouselPrevious aria-label="Previous" class="!relative !-start-0 !top-0 !translate-none"></button>
+            <button hlmCarouselNext aria-label="Next" class="!relative !-end-0 !top-0 !translate-none"></button>
+          </div>
         </hlm-carousel>
       </section>
     }

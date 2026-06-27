@@ -9,6 +9,7 @@ import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmSeparator } from '@spartan-ng/helm/separator';
 import { HlmCarousel, HlmCarouselContent, HlmCarouselItem, HlmCarouselNext, HlmCarouselPrevious } from '@spartan-ng/helm/carousel';
 import { NgIcon } from '@ng-icons/core';
+import { HlmH1, HlmH2, HlmP } from '@spartan-ng/helm/typography';
 
 @Component({
   selector: 'app-property-detail',
@@ -27,6 +28,9 @@ import { NgIcon } from '@ng-icons/core';
     HlmCarouselNext,
     HlmCarouselPrevious,
     NgIcon,
+    HlmH1,
+    HlmH2,
+    HlmP,
   ],
   templateUrl: './property-detail.html',
   styleUrl: './property-detail.scss',

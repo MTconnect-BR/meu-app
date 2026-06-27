@@ -4,20 +4,30 @@
       <h2 hlmCardTitle>Sign up</h2>
       <p hlmCardDescription>Create a new account</p>
     </div>
-    <div hlmCardContent class="space-y-4">
-      <hlm-field>
-        <label hlmLabel for="signup-email">Email</label>
-        <input hlmInput id="signup-email" type="email" placeholder="m@example.com" />
-      </hlm-field>
-      <hlm-field>
-        <label hlmLabel for="signup-password">Password</label>
-        <input hlmInput id="signup-password" type="password" placeholder="••••••••" />
-      </hlm-field>
-      <hlm-field>
-        <label hlmLabel for="signup-confirm-password">Repeat Password</label>
-        <input hlmInput id="signup-confirm-password" type="password" placeholder="••••••••" />
-      </hlm-field>
-      <button hlmBtn class="w-full">Sign up</button>
+    <div hlmCardContent>
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <hlm-field-group class="space-y-4">
+          <hlm-field>
+            <label hlmFieldLabel for="signup-email">Email</label>
+            <input hlmInput id="signup-email" type="email" placeholder="m@example.com" formControlName="email" />
+            <hlm-field-error validator="required">Email is required.</hlm-field-error>
+            <hlm-field-error validator="email">Please enter a valid email.</hlm-field-error>
+          </hlm-field>
+          <hlm-field>
+            <label hlmFieldLabel for="signup-password">Password</label>
+            <input hlmInput id="signup-password" type="password" placeholder="••••••••" formControlName="password" />
+            <hlm-field-error validator="required">Password is required.</hlm-field-error>
+            <hlm-field-error validator="minlength">Password must be at least 6 characters.</hlm-field-error>
+          </hlm-field>
+          <hlm-field>
+            <label hlmFieldLabel for="signup-confirm-password">Repeat Password</label>
+            <input hlmInput id="signup-confirm-password" type="password" placeholder="••••••••" formControlName="confirmPassword" />
+            <hlm-field-error validator="required">Please confirm your password.</hlm-field-error>
+            <hlm-field-error validator="passwordMismatch">Passwords do not match.</hlm-field-error>
+          </hlm-field>
+          <button hlmBtn type="submit" class="w-full">Sign up</button>
+        </hlm-field-group>
+      </form>
     </div>
     <div hlmCardFooter class="border-t-border">
       <p class="text-sm text-muted-foreground">
