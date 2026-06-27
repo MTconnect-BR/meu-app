@@ -1,31 +1,48 @@
-<header class="flex items-center justify-between px-6 py-4 border-b border-border">
-  <a routerLink="/" class="text-lg font-semibold text-foreground">
-    MeuApp
-  </a>
-  <nav class="flex items-center gap-4">
-    <a routerLink="/properties" hlmBtn variant="ghost" size="sm">
-      Imóveis
+<header class="relative z-50 mx-4 mt-3 rounded-full bg-white px-6 py-3 shadow-lg dark:bg-foreground/10">
+  <div class="flex items-center justify-between">
+    <!-- Logo -->
+    <a routerLink="/" class="flex items-center gap-2">
+      <ng-icon name="lucideHome" class="text-primary size-5" />
+      <span class="text-lg font-bold text-foreground">MeuApp</span>
     </a>
-    <a routerLink="/crm" hlmBtn variant="ghost" size="sm">
-      CRM
-    </a>
-    <button hlmToggle variant="outline" size="sm" class="size-8 p-0" (click)="theme.toggle()" [attr.aria-label]="theme.darkMode() ? 'Mudar para modo claro' : 'Mudar para modo escuro'">
-      @if (theme.darkMode()) {
-        <ng-icon name="lucideSun" />
+
+    <!-- Nav links -->
+    <nav class="hidden items-center gap-8 md:flex">
+      <a routerLink="/properties" class="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground">
+        Imóveis
+      </a>
+      <a routerLink="/crm" class="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground">
+        CRM
+      </a>
+    </nav>
+
+    <!-- Right side -->
+    <div class="flex items-center gap-3">
+      <button
+        hlmToggle
+        size="sm"
+        class="size-8 rounded-full p-0"
+        (click)="theme.toggle()"
+        [attr.aria-label]="theme.darkMode() ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
+      >
+        @if (theme.darkMode()) {
+          <ng-icon name="lucideSun" class="size-4" />
+        } @else {
+          <ng-icon name="lucideMoon" class="size-4" />
+        }
+      </button>
+
+      @if (auth.isLoggedIn()) {
+        <span class="hidden text-sm text-foreground/60 sm:inline">{{ auth.currentUserEmail() }}</span>
+        <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm">Sair</button>
       } @else {
-        <ng-icon name="lucideMoon" />
+        <a routerLink="/auth/login" class="text-sm font-medium text-foreground/70 transition-colors hover:text-foreground">
+          Entrar
+        </a>
+        <a routerLink="/properties" hlmBtn size="sm" class="rounded-full bg-foreground px-4 py-2 text-white hover:bg-foreground/90">
+          Ver imóveis
+        </a>
       }
-    </button>
-    @if (auth.isLoggedIn()) {
-      <span class="text-sm text-muted-foreground">{{ auth.currentUserEmail() }}</span>
-      <button hlmBtn variant="ghost" size="sm" (click)="logout()">Sair</button>
-    } @else {
-      <a routerLink="/auth/login" hlmBtn variant="ghost" size="sm">
-        Entrar
-      </a>
-      <a routerLink="/auth/sign-up" hlmBtn variant="default" size="sm">
-        Criar conta
-      </a>
-    }
-  </nav>
+    </div>
+  </div>
 </header>

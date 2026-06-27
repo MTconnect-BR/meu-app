@@ -3,10 +3,10 @@
 <main class="flex flex-1 flex-col">
 
   <!-- Hero Section — MindMarket style -->
-  <section class="relative flex min-h-[85vh] flex-col items-center overflow-hidden px-6 pt-16 pb-0" style="background-color: hsl(97, 57%, 61%);">
+  <section class="relative flex min-h-[85vh] flex-col items-center overflow-hidden px-6 pt-12 pb-0" style="background-color: hsl(97, 57%, 61%);">
     <!-- Headline -->
     <div class="relative z-10 mt-8 space-y-4 text-center md:mt-16">
-      <h1 class="text-foreground mx-auto max-w-4xl text-5xl font-black leading-[0.95] tracking-tight md:text-8xl md:leading-[0.9]">
+      <h1 class="mx-auto max-w-4xl text-5xl font-black leading-[0.95] tracking-tight text-foreground md:text-8xl md:leading-[0.9]">
         Encontre o imóvel
         <br />
         <span class="text-foreground">perfeito</span>
@@ -15,91 +15,70 @@
 
     <!-- Subtitle -->
     <div class="relative z-10 mt-6 md:mt-8">
-      <p class="text-foreground/80 text-lg font-medium md:text-xl">
+      <p class="text-lg font-medium text-foreground/80 md:text-xl">
         Seu novo lar começa aqui
       </p>
     </div>
 
-    <!-- Illustration — Real Estate Theme (CSS + SVG) -->
-    <div class="pointer-events-none relative z-10 mt-auto w-full max-w-3xl">
-      <svg viewBox="0 0 800 420" fill="none" xmlns="http://www.w3.org/2000/svg" class="h-auto w-full">
-        <!-- Ground -->
-        <ellipse cx="400" cy="410" rx="380" ry="30" fill="hsl(97, 45%, 50%)" />
+    <!-- Search Card — ZAP Imóveis style -->
+    <div class="relative z-10 mt-10 w-full max-w-2xl md:mt-14">
+      <div class="rounded-2xl bg-white p-6 shadow-2xl dark:bg-foreground/10">
+        <!-- Tabs -->
+        <div class="mb-5 flex gap-1 rounded-lg bg-muted p-1">
+          <button
+            class="flex-1 rounded-md px-4 py-2.5 text-sm font-semibold transition-all"
+            [class]="searchType() === 'buy' ? 'bg-white text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+            (click)="searchType.set('buy')"
+          >
+            Comprar
+          </button>
+          <button
+            class="flex-1 rounded-md px-4 py-2.5 text-sm font-semibold transition-all"
+            [class]="searchType() === 'rent' ? 'bg-white text-foreground shadow-sm' : 'text-muted-foreground hover:text-foreground'"
+            (click)="searchType.set('rent')"
+          >
+            Alugar
+          </button>
+        </div>
 
-        <!-- Building Left — tall -->
-        <rect x="100" y="140" width="120" height="270" rx="8" fill="hsl(195, 80%, 55%)" />
-        <rect x="115" y="160" width="28" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="155" y="160" width="28" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="195" y="160" width="18" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="115" y="205" width="28" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="155" y="205" width="28" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="195" y="205" width="18" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="115" y="250" width="28" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="155" y="250" width="28" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="195" y="250" width="18" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="115" y="295" width="28" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="155" y="295" width="28" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="195" y="295" width="18" height="28" rx="4" fill="hsl(50, 100%, 85%)" />
+        <!-- Search Input -->
+        <div class="mb-4 flex items-center gap-3 rounded-xl border border-border bg-muted/50 px-4 py-3">
+          <ng-icon name="lucideSearch" class="size-5 text-muted-foreground" />
+          <input
+            type="text"
+            [value]="searchQuery()"
+            (input)="searchQuery.set($any($event.target).value)"
+            placeholder="Bairro, cidade ou endereço"
+            class="w-full bg-transparent text-sm text-foreground outline-none placeholder:text-muted-foreground"
+          />
+        </div>
 
-        <!-- House Center -->
-        <rect x="300" y="260" width="200" height="150" rx="8" fill="hsl(30, 90%, 60%)" />
-        <!-- Roof -->
-        <polygon points="290,260 400,170 510,260" fill="hsl(0, 75%, 55%)" />
-        <!-- Windows -->
-        <rect x="330" y="290" width="40" height="40" rx="4" fill="hsl(50, 100%, 85%)" />
-        <rect x="390" y="290" width="40" height="40" rx="4" fill="hsl(50, 100%, 85%)" />
-        <!-- Door -->
-        <rect x="380" y="360" width="40" height="50" rx="6" fill="hsl(30, 70%, 35%)" />
-        <circle cx="412" cy="388" r="4" fill="hsl(50, 100%, 85%)" />
-
-        <!-- Building Right — medium -->
-        <rect x="580" y="200" width="130" height="210" rx="8" fill="hsl(200, 60%, 45%)" />
-        <rect x="595" y="220" width="25" height="25" rx="3" fill="hsl(50, 100%, 85%)" />
-        <rect x="630" y="220" width="25" height="25" rx="3" fill="hsl(50, 100%, 85%)" />
-        <rect x="665" y="220" width="25" height="25" rx="3" fill="hsl(50, 100%, 85%)" />
-        <rect x="595" y="260" width="25" height="25" rx="3" fill="hsl(50, 100%, 85%)" />
-        <rect x="630" y="260" width="25" height="25" rx="3" fill="hsl(50, 100%, 85%)" />
-        <rect x="665" y="260" width="25" height="25" rx="3" fill="hsl(50, 100%, 85%)" />
-        <rect x="595" y="300" width="25" height="25" rx="3" fill="hsl(50, 100%, 85%)" />
-        <rect x="630" y="300" width="25" height="25" rx="3" fill="hsl(50, 100%, 85%)" />
-        <rect x="665" y="300" width="25" height="25" rx="3" fill="hsl(50, 100%, 85%)" />
-
-        <!-- Person 1 — walking left -->
-        <circle cx="230" cy="290" r="18" fill="hsl(280, 60%, 55%)" />
-        <rect x="218" y="308" width="24" height="50" rx="10" fill="hsl(280, 60%, 55%)" />
-        <rect x="210" y="350" width="14" height="40" rx="6" fill="hsl(200, 60%, 40%)" />
-        <rect x="236" y="350" width="14" height="40" rx="6" fill="hsl(200, 60%, 40%)" />
-        <rect x="205" y="318" width="20" height="8" rx="4" fill="hsl(280, 60%, 55%)" transform="rotate(-20 215 322)" />
-        <rect x="238" y="316" width="22" height="8" rx="4" fill="hsl(280, 60%, 55%)" transform="rotate(30 249 320)" />
-
-        <!-- Person 2 — center, larger -->
-        <circle cx="470" cy="250" r="22" fill="hsl(0, 75%, 55%)" />
-        <rect x="455" y="272" width="30" height="58" rx="12" fill="hsl(0, 75%, 55%)" />
-        <rect x="445" y="324" width="16" height="50" rx="7" fill="hsl(30, 80%, 40%)" />
-        <rect x="475" y="324" width="16" height="50" rx="7" fill="hsl(30, 80%, 40%)" />
-        <rect x="440" y="282" width="25" height="8" rx="4" fill="hsl(0, 75%, 55%)" transform="rotate(-30 452 286)" />
-        <rect x="480" y="280" width="28" height="8" rx="4" fill="hsl(0, 75%, 55%)" transform="rotate(45 494 284)" />
-
-        <!-- Person 3 — small right -->
-        <circle cx="560" cy="320" r="14" fill="hsl(50, 90%, 50%)" />
-        <rect x="550" y="334" width="20" height="40" rx="8" fill="hsl(50, 90%, 50%)" />
-        <rect x="544" y="368" width="11" height="32" rx="5" fill="hsl(350, 60%, 40%)" />
-        <rect x="559" y="368" width="11" height="32" rx="5" fill="hsl(350, 60%, 40%)" />
-
-        <!-- Decorative dots -->
-        <circle cx="180" cy="220" r="5" fill="hsl(50, 90%, 55%)" opacity="0.7" />
-        <circle cx="540" cy="190" r="4" fill="hsl(200, 80%, 60%)" opacity="0.7" />
-        <circle cx="720" cy="280" r="6" fill="hsl(50, 90%, 55%)" opacity="0.5" />
-        <circle cx="90" cy="300" r="3" fill="hsl(280, 60%, 65%)" opacity="0.6" />
-
-        <!-- Cloud -->
-        <ellipse cx="650" cy="130" rx="50" ry="20" fill="white" opacity="0.6" />
-        <ellipse cx="670" cy="120" rx="35" ry="18" fill="white" opacity="0.5" />
-      </svg>
+        <!-- Bottom row: type selector + search button -->
+        <div class="flex items-center gap-3">
+          <div class="relative flex-1">
+            <select
+              [value]="propertyType()"
+              (change)="propertyType.set($any($event.target).value)"
+              class="w-full appearance-none rounded-xl border border-border bg-muted/50 px-4 py-3 pr-10 text-sm text-foreground outline-none"
+            >
+              <option value="all">Todos os tipos</option>
+              <option value="apartment">Apartamento</option>
+              <option value="house">Casa</option>
+              <option value="condo">Condomínio</option>
+              <option value="land">Terreno</option>
+            </select>
+            <ng-icon name="lucideChevronDown" class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
+          </div>
+          <button
+            (click)="onSearch()"
+            class="flex items-center gap-2 rounded-xl bg-foreground px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-foreground/90"
+          >
+            <ng-icon name="lucideSearch" class="size-4" />
+            Buscar
+          </button>
+        </div>
+      </div>
     </div>
-
-    <!-- Bottom rounded transition -->
-    <div class="absolute bottom-0 left-0 right-0 h-20 rounded-b-[3rem]" style="background-color: hsl(97, 57%, 61%);"></div>
   </section>
 
 </main>
