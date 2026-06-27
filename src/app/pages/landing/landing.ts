@@ -1,13 +1,12 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Header } from '../../components/header';
-import { Footer } from '../../components/footer';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideChevronDown } from '@ng-icons/lucide';
 
 @Component({
   selector: 'app-landing',
-  imports: [Header, Footer, NgIcon],
+  imports: [Header, NgIcon],
   providers: [
     provideIcons({ lucideSearch, lucideChevronDown }),
   ],
