@@ -1,8 +1,7 @@
 import { Component, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { Header } from '../../components/header';
-import { Footer } from '../../components/footer';
+
 import { PropertiesService, Property } from '../../services/properties';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmBadge } from '@spartan-ng/helm/badge';
@@ -35,8 +34,6 @@ import { HlmH1 } from '@spartan-ng/helm/typography';
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    Header,
-    Footer,
     HlmButton,
     HlmBadge,
     HlmInput,

@@ -1,4 +1,4 @@
-import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -14,24 +14,14 @@ import { PropertiesService } from '../../services/properties';
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 })
-export class Landing implements OnInit, OnDestroy {
+export class Landing {
   private readonly router = inject(Router);
   private readonly propertiesService = inject(PropertiesService);
-  private originalBg = '';
 
   protected readonly searchType = signal<'buy' | 'rent'>('buy');
   protected readonly searchQuery = signal('');
   protected readonly propertyType = signal('all');
   protected readonly featuredProperties = this.propertiesService.forSale.slice(0, 8);
-
-  ngOnInit() {
-    this.originalBg = document.body.style.backgroundColor;
-    document.body.style.backgroundColor = 'hsl(0, 0%, 91%)';
-  }
-
-  ngOnDestroy() {
-    document.body.style.backgroundColor = this.originalBg;
-  }
 
   formatPrice(property: { price: number; type: string }): string {
     return this.propertiesService.formatPrice(property.price, property.type as 'sale' | 'rent');
