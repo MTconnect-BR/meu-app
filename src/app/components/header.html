@@ -47,8 +47,8 @@
         <div class="rounded-2xl p-2 shadow-xl" [style.background-color]="'hsl(0, 0%, 87%)'">
           @if (auth.isLoggedIn()) {
             <div class="flex items-center justify-between px-4 py-3">
-              <span class="text-sm" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
-              <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" [style.color]="'hsl(0, 0%, 40%)'">Sair</button>
+              <span class="text-sm" [style.color]="'hsl(0, 0%, 13%)'">{{ auth.currentUserEmail() }}</span>
+              <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" [style.color]="'hsl(0, 0%, 13%)'">Sair</button>
             </div>
           } @else {
             <a routerLink="/auth/login" class="flex items-center justify-between px-4 py-3" (click)="mobileMenuOpen.set(false)">
@@ -70,10 +70,10 @@
       </a>
 
       <nav class="flex items-center gap-6">
-        <a routerLink="/properties" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 40%)'">
+        <a routerLink="/properties" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'">
           Imóveis
         </a>
-        <a routerLink="/crm" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 40%)'">
+        <a routerLink="/crm" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'">
           CRM
         </a>
       </nav>
@@ -82,10 +82,10 @@
     <!-- Right pill: CTA or Auth -->
     <div class="flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
       @if (auth.isLoggedIn()) {
-        <span class="text-sm" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
-        <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" [style.color]="'hsl(0, 0%, 40%)'">Sair</button>
+        <span class="text-sm" [style.color]="'hsl(0, 0%, 13%)'">{{ auth.currentUserEmail() }}</span>
+        <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" [style.color]="'hsl(0, 0%, 13%)'">Sair</button>
       } @else {
-        <a routerLink="/auth/login" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 40%)'">
+        <a routerLink="/auth/login" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'">
           Entrar
         </a>
         <a routerLink="/properties" hlmBtn size="sm" class="rounded-full px-4 py-2" [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'">
