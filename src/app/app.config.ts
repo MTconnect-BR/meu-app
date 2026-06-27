@@ -28,6 +28,7 @@ import {
 } from '@ng-icons/lucide';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 import { DialogModule } from '@angular/cdk/dialog';
+import { OverlayModule } from '@angular/cdk/overlay';
 
 import { routes } from './app.routes';
 
@@ -37,7 +38,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideAnimations(),
-    importProvidersFrom(DialogModule),
+    importProvidersFrom(DialogModule, OverlayModule),
     provideSpartanHlm(),
     provideIcons({
       lucideSun,

@@ -83,7 +83,9 @@ export class PropertyDetail implements OnInit, AfterViewInit, OnDestroy {
     if (!prop || !el) return;
 
     this._mapInitialized = true;
-    const L = await import('leaflet');
+    const leafletModule = await import('leaflet');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const L: any = (leafletModule as any).default ?? leafletModule;
     const container = el.nativeElement;
 
     this._map = L.map(container, { zoomControl: true }).setView([prop.lat, prop.lng], 14);
