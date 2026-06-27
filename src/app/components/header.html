@@ -5,9 +5,9 @@
   <nav class="flex items-center gap-4">
     <button hlmToggle variant="outline" size="sm" class="size-8 p-0" (click)="theme.toggle()" [attr.aria-label]="theme.darkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
       @if (theme.darkMode()) {
-        <ng-icon [name]="sunIcon" />
+        <ng-icon name="lucideSun" />
       } @else {
-        <ng-icon [name]="moonIcon" />
+        <ng-icon name="lucideMoon" />
       }
     </button>
     <a routerLink="/auth/login" hlmBtn variant="ghost" size="sm">

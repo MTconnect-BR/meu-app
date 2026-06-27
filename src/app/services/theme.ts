@@ -1,4 +1,4 @@
-import { Injectable, signal, effect, PLATFORM_ID, inject } from '@angular/core';
+import { Injectable, signal, PLATFORM_ID, inject } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({ providedIn: 'root' })
@@ -13,21 +13,21 @@ export class ThemeService {
       const stored = localStorage.getItem(this._storageKey);
       if (stored === 'dark') {
         this.darkMode.set(true);
+        document.documentElement.classList.add('dark');
       } else if (stored === 'light') {
         this.darkMode.set(false);
-      } else {
-        this.darkMode.set(window.matchMedia('(prefers-color-scheme: dark)').matches);
+        document.documentElement.classList.remove('dark');
+      } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        this.darkMode.set(true);
+        document.documentElement.classList.add('dark');
       }
-
-      effect(() => {
-        const isDark = this.darkMode();
-        document.documentElement.classList.toggle('dark', isDark);
-        localStorage.setItem(this._storageKey, isDark ? 'dark' : 'light');
-      });
     }
   }
 
   public toggle(): void {
-    this.darkMode.update((v) => !v);
+    const isDark = !this.darkMode();
+    this.darkMode.set(isDark);
+    document.documentElement.classList.toggle('dark', isDark);
+    localStorage.setItem(this._storageKey, isDark ? 'dark' : 'light');
   }
 }

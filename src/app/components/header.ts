@@ -3,7 +3,6 @@ import { RouterLink } from '@angular/router';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmToggle } from '@spartan-ng/helm/toggle';
 import { NgIcon } from '@ng-icons/core';
-import { lucideSun, lucideMoon } from '@ng-icons/lucide';
 import { ThemeService } from '../services/theme';
 
 @Component({
@@ -14,6 +13,4 @@ import { ThemeService } from '../services/theme';
 })
 export class Header {
   public readonly theme = inject(ThemeService);
-  protected readonly sunIcon = lucideSun;
-  protected readonly moonIcon = lucideMoon;
 }
