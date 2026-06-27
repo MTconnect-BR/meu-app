@@ -1,12 +1,13 @@
 import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideChevronDown } from '@ng-icons/lucide';
+import { PropertiesService } from '../../services/properties';
 
 @Component({
   selector: 'app-landing',
-  imports: [Header, NgIcon],
+  imports: [Header, RouterLink, NgIcon],
   providers: [
     provideIcons({ lucideSearch, lucideChevronDown }),
   ],
@@ -15,11 +16,13 @@ import { lucideSearch, lucideChevronDown } from '@ng-icons/lucide';
 })
 export class Landing implements OnInit, OnDestroy {
   private readonly router = inject(Router);
+  private readonly propertiesService = inject(PropertiesService);
   private originalBg = '';
 
   protected readonly searchType = signal<'buy' | 'rent'>('buy');
   protected readonly searchQuery = signal('');
   protected readonly propertyType = signal('all');
+  protected readonly featuredProperties = this.propertiesService.forSale.slice(0, 8);
 
   ngOnInit() {
     this.originalBg = document.body.style.backgroundColor;
@@ -28,6 +31,10 @@ export class Landing implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     document.body.style.backgroundColor = this.originalBg;
+  }
+
+  formatPrice(property: { price: number; type: string }): string {
+    return this.propertiesService.formatPrice(property.price, property.type as 'sale' | 'rent');
   }
 
   onSearch() {

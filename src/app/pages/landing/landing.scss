@@ -3,3 +3,10 @@
   flex-direction: column;
   min-height: 100dvh;
 }
+
+.carousel-container {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}

@@ -3,7 +3,7 @@
 <main class="flex flex-1 flex-col">
 
   <!-- Hero Section — MindMarket style -->
-  <section class="sticky top-0 flex min-h-dvh flex-col items-center overflow-hidden px-6 pt-12 pb-0" style="background-color: hsl(97, 57%, 61%);">
+  <section class="sticky top-0 flex min-h-dvh flex-col items-center overflow-hidden px-6 pt-12 pb-0 lg:min-h-[130vh]" style="background-color: hsl(97, 57%, 61%);">
     <!-- Headline -->
     <div class="relative z-10 mt-8 space-y-4 text-center md:mt-16">
       <h1 class="mx-auto max-w-4xl text-4xl font-black leading-[0.95] tracking-tight sm:text-5xl md:text-6xl lg:text-[7rem]"
@@ -122,6 +122,43 @@
          [style.background-color]="'#171717'" [style.color]="'#ffffff'">
         Ver imóveis
       </a>
+    </div>
+  </section>
+
+  <!-- Carousel Section — Featured Properties -->
+  <section class="relative z-10 px-6 py-16 md:py-24" style="background-color: hsl(46, 46%, 93%);">
+    <div class="mx-auto max-w-6xl space-y-8">
+      <div class="flex items-center justify-between">
+        <h2 class="text-2xl font-bold md:text-3xl" [style.color]="'#171717'">
+          Imóveis em destaque
+        </h2>
+        <a routerLink="/properties" class="text-sm font-medium transition-colors hover:underline" [style.color]="'#525252'">
+          Ver todos →
+        </a>
+      </div>
+
+      <!-- Horizontal scroll carousel -->
+      <div class="carousel-container -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 lg:mx-0 lg:px-0">
+        @for (property of featuredProperties; track property.id) {
+          <a [routerLink]="['/properties', property.slug]"
+             class="w-72 shrink-0 snap-start overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow hover:shadow-xl sm:w-80">
+            <div class="relative h-48 w-full overflow-hidden">
+              <img [src]="property.imageUrl" [alt]="property.title"
+                   class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
+            </div>
+            <div class="space-y-2 p-4">
+              <h3 class="line-clamp-1 font-semibold" [style.color]="'#171717'">{{ property.title }}</h3>
+              <p class="text-sm" [style.color]="'#737373'">{{ property.address }}</p>
+              <p class="text-lg font-bold" [style.color]="'#171717'">{{ formatPrice(property) }}</p>
+              <div class="flex gap-3 text-xs" [style.color]="'#a3a3a3'">
+                <span>{{ property.bedrooms }} quartos</span>
+                <span>{{ property.bathrooms }} banheiros</span>
+                <span>{{ property.area }}m²</span>
+              </div>
+            </div>
+          </a>
+        }
+      </div>
     </div>
   </section>
 
