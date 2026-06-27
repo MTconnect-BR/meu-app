@@ -1,2 +1,4 @@
 <router-outlet />
-<app-whatsapp-button />
+@if (showWhatsApp()) {
+  <app-whatsapp-button />
+}
