@@ -9,7 +9,6 @@ import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmInput } from '@spartan-ng/helm/input';
 import { HlmTextarea } from '@spartan-ng/helm/textarea';
 import { HlmSwitch } from '@spartan-ng/helm/switch';
-import { HlmSeparator } from '@spartan-ng/helm/separator';
 import {
   HlmTable,
   HlmTableContainer,
@@ -24,8 +23,13 @@ import {
   HlmFieldLabel,
   HlmFieldError,
 } from '@spartan-ng/helm/field';
+import { HlmSheet, HlmSheetContent, HlmSheetHeader, HlmSheetTitle, HlmSheetDescription, HlmSheetFooter } from '@spartan-ng/helm/sheet';
+import { HlmDropdownMenu, HlmDropdownMenuTrigger, HlmDropdownMenuItem, HlmDropdownMenuSeparator } from '@spartan-ng/helm/dropdown-menu';
+import { HlmRadioGroup, HlmRadio, HlmRadioIndicator } from '@spartan-ng/helm/radio-group';
+import { HlmAlert, HlmAlertTitle, HlmAlertDescription } from '@spartan-ng/helm/alert';
+import { HlmEmpty, HlmEmptyHeader, HlmEmptyMedia, HlmEmptyTitle, HlmEmptyDescription } from '@spartan-ng/helm/empty';
 import { NgIcon } from '@ng-icons/core';
-import { HlmH1, HlmH2 } from '@spartan-ng/helm/typography';
+import { HlmH1 } from '@spartan-ng/helm/typography';
 
 @Component({
   selector: 'app-crm',
@@ -39,7 +43,6 @@ import { HlmH1, HlmH2 } from '@spartan-ng/helm/typography';
     HlmInput,
     HlmTextarea,
     HlmSwitch,
-    HlmSeparator,
     HlmTable,
     HlmTableContainer,
     HlmTHead,
@@ -50,9 +53,29 @@ import { HlmH1, HlmH2 } from '@spartan-ng/helm/typography';
     HlmField,
     HlmFieldLabel,
     HlmFieldError,
+    HlmSheet,
+    HlmSheetContent,
+    HlmSheetHeader,
+    HlmSheetTitle,
+    HlmSheetDescription,
+    HlmSheetFooter,
+    HlmDropdownMenu,
+    HlmDropdownMenuTrigger,
+    HlmDropdownMenuItem,
+    HlmDropdownMenuSeparator,
+    HlmRadioGroup,
+    HlmRadio,
+    HlmRadioIndicator,
+    HlmAlert,
+    HlmAlertTitle,
+    HlmAlertDescription,
+    HlmEmpty,
+    HlmEmptyHeader,
+    HlmEmptyMedia,
+    HlmEmptyTitle,
+    HlmEmptyDescription,
     NgIcon,
     HlmH1,
-    HlmH2,
   ],
   templateUrl: './crm.html',
   styleUrl: './crm.scss',
@@ -65,6 +88,7 @@ export class Crm {
   protected readonly editingId = signal<number | null>(null);
   protected readonly showDeleteDialog = signal(false);
   protected readonly deletingId = signal<number | null>(null);
+  protected readonly alertMessage = signal('');
 
   protected readonly form = this._fb.nonNullable.group({
     title: ['', Validators.required],
@@ -90,6 +114,11 @@ export class Crm {
 
   protected get properties(): Property[] {
     return this._propertiesService.properties;
+  }
+
+  protected showAlert(message: string): void {
+    this.alertMessage.set(message);
+    setTimeout(() => this.alertMessage.set(''), 3000);
   }
 
   protected openCreateForm(): void {
@@ -159,8 +188,10 @@ export class Crm {
 
     if (this.editingId() !== null) {
       this._propertiesService.update(this.editingId()!, data);
+      this.showAlert('Property updated successfully!');
     } else {
       this._propertiesService.create(data);
+      this.showAlert('Property created successfully!');
     }
     this.closeForm();
   }
@@ -177,6 +208,7 @@ export class Crm {
     }
     this.showDeleteDialog.set(false);
     this.deletingId.set(null);
+    this.showAlert('Property deleted successfully!');
   }
 
   protected cancelDelete(): void {

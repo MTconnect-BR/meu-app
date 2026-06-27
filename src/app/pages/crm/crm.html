@@ -10,72 +10,110 @@
       </button>
     </div>
 
-    <div hlmTableContainer>
-      <table hlmTable class="w-full">
-        <thead hlmTHead>
-          <tr hlmTr>
-            <th hlmTh class="text-left">Title</th>
-            <th hlmTh class="text-left">Location</th>
-            <th hlmTh class="text-right">Price</th>
-            <th hlmTh class="text-center">Type</th>
-            <th hlmTh class="text-center">Beds</th>
-            <th hlmTh class="text-center">Baths</th>
-            <th hlmTh class="text-right">Area</th>
-            <th hlmTh class="text-right">Actions</th>
-          </tr>
-        </thead>
-        <tbody hlmTBody>
-          @for (p of properties; track p.id) {
-            <tr hlmTr class="border-b border-border">
-              <td hlmTd class="font-medium text-foreground">{{ p.title }}</td>
-              <td hlmTd class="text-muted-foreground">{{ p.city }}, {{ p.state }}</td>
-              <td hlmTd class="text-right font-semibold text-foreground">{{ formatPrice(p.price, p.type) }}</td>
-              <td hlmTd class="text-center">
-                <hlm-badge [variant]="p.type === 'sale' ? 'default' : 'secondary'">
-                  {{ p.type === 'sale' ? 'Sale' : 'Rent' }}
-                </hlm-badge>
-              </td>
-              <td hlmTd class="text-center text-muted-foreground">{{ p.bedrooms }}</td>
-              <td hlmTd class="text-center text-muted-foreground">{{ p.bathrooms }}</td>
-              <td hlmTd class="text-right text-muted-foreground">{{ p.area }}m²</td>
-              <td hlmTd class="text-right">
-                <div class="flex justify-end gap-2">
-                  <a [routerLink]="['/properties', p.slug]" hlmBtn variant="ghost" size="sm">
-                    <ng-icon name="lucideExternalLink" class="size-4" />
-                  </a>
-                  <button hlmBtn variant="ghost" size="sm" (click)="openEditForm(p)">
-                    <ng-icon name="lucidePencil" class="size-4" />
-                  </button>
-                  <button hlmBtn variant="ghost" size="sm" class="text-destructive hover:text-destructive" (click)="confirmDelete(p.id)">
-                    <ng-icon name="lucideTrash2" class="size-4" />
-                  </button>
-                </div>
-              </td>
-            </tr>
-          }
-        </tbody>
-      </table>
-    </div>
+    @if (alertMessage()) {
+      <hlm-alert>
+        <ng-icon name="lucideInfo" />
+        <h3 hlmAlertTitle>Success</h3>
+        <p hlmAlertDescription>{{ alertMessage() }}</p>
+      </hlm-alert>
+    }
 
     @if (properties.length === 0) {
-      <div class="py-12 text-center text-muted-foreground">
-        <p>No properties yet. Click "New Property" to create one.</p>
+      <div hlmEmpty>
+        <div hlmEmptyHeader>
+          <div hlmEmptyMedia variant="icon">
+            <ng-icon name="lucidePlus" />
+          </div>
+          <h3 hlmEmptyTitle>No properties yet</h3>
+          <p hlmEmptyDescription>Click "New Property" to create your first listing.</p>
+        </div>
+      </div>
+    } @else {
+      <div hlmTableContainer>
+        <table hlmTable class="w-full">
+          <thead hlmTHead>
+            <tr hlmTr>
+              <th hlmTh class="text-left">Title</th>
+              <th hlmTh class="text-left">Location</th>
+              <th hlmTh class="text-right">Price</th>
+              <th hlmTh class="text-center">Type</th>
+              <th hlmTh class="text-center">Beds</th>
+              <th hlmTh class="text-center">Baths</th>
+              <th hlmTh class="text-right">Area</th>
+              <th hlmTh class="text-right">Actions</th>
+            </tr>
+          </thead>
+          <tbody hlmTBody>
+            @for (p of properties; track p.id) {
+              <tr hlmTr class="border-b border-border">
+                <td hlmTd class="font-medium text-foreground">{{ p.title }}</td>
+                <td hlmTd class="text-muted-foreground">{{ p.city }}, {{ p.state }}</td>
+                <td hlmTd class="text-right font-semibold text-foreground">{{ formatPrice(p.price, p.type) }}</td>
+                <td hlmTd class="text-center">
+                  <hlm-badge [variant]="p.type === 'sale' ? 'default' : 'secondary'">
+                    {{ p.type === 'sale' ? 'Sale' : 'Rent' }}
+                  </hlm-badge>
+                </td>
+                <td hlmTd class="text-center text-muted-foreground">{{ p.bedrooms }}</td>
+                <td hlmTd class="text-center text-muted-foreground">{{ p.bathrooms }}</td>
+                <td hlmTd class="text-right text-muted-foreground">{{ p.area }}m²</td>
+                <td hlmTd class="text-right">
+                  <button
+                    hlmDropdownMenuTrigger
+                    [hlmDropdownMenuTrigger]="actionsMenu"
+                    hlmBtn
+                    variant="ghost"
+                    size="sm"
+                  >
+                    Actions
+                    <ng-icon name="lucideChevronDown" class="size-4" />
+                  </button>
+                  <ng-template #actionsMenu>
+                    <div hlmDropdownMenu>
+                      <a
+                        hlmDropdownMenuItem
+                        [routerLink]="['/properties', p.slug]"
+                      >
+                        <ng-icon name="lucideEye" class="size-4" />
+                        View
+                      </a>
+                      <div hlmDropdownMenuSeparator></div>
+                      <button
+                        hlmDropdownMenuItem
+                        (click)="openEditForm(p)"
+                      >
+                        <ng-icon name="lucidePencil" class="size-4" />
+                        Edit
+                      </button>
+                      <button
+                        hlmDropdownMenuItem
+                        variant="destructive"
+                        (click)="confirmDelete(p.id)"
+                      >
+                        <ng-icon name="lucideTrash2" class="size-4" />
+                        Delete
+                      </button>
+                    </div>
+                  </ng-template>
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
       </div>
     }
   </div>
 </main>
 
 @if (showForm()) {
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-    <div class="mx-4 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl border border-border bg-background p-6 shadow-lg">
-      <div class="mb-6 flex items-center justify-between">
-        <h2 hlmH2 class="text-foreground">{{ editingId() ? 'Edit Property' : 'New Property' }}</h2>
-        <button hlmBtn variant="ghost" size="sm" (click)="closeForm()">
-          <ng-icon name="lucideX" class="size-4" />
-        </button>
-      </div>
+  <hlm-sheet (closed)="closeForm()">
+    <hlm-sheet-content side="right" class="w-full sm:max-w-2xl">
+      <hlm-sheet-header>
+        <h2 hlmSheetTitle>{{ editingId() ? 'Edit Property' : 'New Property' }}</h2>
+        <p hlmSheetDescription>Fill in the property details below.</p>
+      </hlm-sheet-header>
 
-      <form [formGroup]="form" (ngSubmit)="save()" class="space-y-4">
+      <form [formGroup]="form" (ngSubmit)="save()" class="space-y-4 py-4">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div hlmField class="space-y-1">
             <label hlmFieldLabel for="crm-title">Title *</label>
@@ -119,13 +157,18 @@
             <hlm-field-error />
           </div>
 
-          <div hlmField class="space-y-1">
+          <div class="space-y-1">
             <label hlmFieldLabel for="crm-type">Type *</label>
-            <select hlmInput id="crm-type" formControlName="type" class="w-full">
-              <option value="sale">For Sale</option>
-              <option value="rent">For Rent</option>
-            </select>
-            <hlm-field-error />
+            <hlm-radio-group id="crm-type" formControlName="type" class="flex gap-4">
+              <hlm-radio value="sale" class="cursor-pointer">
+                <hlm-radio-indicator />
+                <span class="text-sm">For Sale</span>
+              </hlm-radio>
+              <hlm-radio value="rent" class="cursor-pointer">
+                <hlm-radio-indicator />
+                <span class="text-sm">For Rent</span>
+              </hlm-radio>
+            </hlm-radio-group>
           </div>
 
           <div hlmField class="space-y-1">
@@ -192,35 +235,35 @@
             Pet Friendly
           </label>
         </div>
-
-        <hlm-separator />
-
-        <div class="flex justify-end gap-3">
-          <button hlmBtn type="button" variant="outline" (click)="closeForm()">Cancel</button>
-          <button hlmBtn type="submit" [disabled]="form.invalid">
-            <ng-icon name="lucideCheck" class="size-4" />
-            {{ editingId() ? 'Update' : 'Create' }}
-          </button>
-        </div>
       </form>
-    </div>
-  </div>
+
+      <hlm-sheet-footer>
+        <button hlmBtn type="button" variant="outline" (click)="closeForm()">Cancel</button>
+        <button hlmBtn type="button" [disabled]="form.invalid" (click)="save()">
+          <ng-icon name="lucideCheck" class="size-4" />
+          {{ editingId() ? 'Update' : 'Create' }}
+        </button>
+      </hlm-sheet-footer>
+    </hlm-sheet-content>
+  </hlm-sheet>
 }
 
 @if (showDeleteDialog()) {
-  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-    <div class="mx-4 w-full max-w-sm rounded-xl border border-border bg-background p-6 shadow-lg">
-      <h2 hlmH2 class="text-foreground">Delete Property</h2>
-      <p class="mt-2 text-muted-foreground">Are you sure you want to delete this property? This action cannot be undone.</p>
-      <div class="mt-6 flex justify-end gap-3">
+  <hlm-sheet (closed)="cancelDelete()">
+    <hlm-sheet-content side="bottom" class="h-auto">
+      <hlm-sheet-header>
+        <h2 hlmSheetTitle>Delete Property</h2>
+        <p hlmSheetDescription>Are you sure? This action cannot be undone.</p>
+      </hlm-sheet-header>
+      <hlm-sheet-footer class="flex flex-row justify-end gap-3">
         <button hlmBtn variant="outline" (click)="cancelDelete()">Cancel</button>
         <button hlmBtn variant="destructive" (click)="doDelete()">
           <ng-icon name="lucideTrash2" class="size-4" />
           Delete
         </button>
-      </div>
-    </div>
-  </div>
+      </hlm-sheet-footer>
+    </hlm-sheet-content>
+  </hlm-sheet>
 }
 
 <app-footer />

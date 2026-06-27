@@ -1,4 +1,4 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
@@ -22,8 +22,12 @@ import {
   lucideCheck,
   lucideX,
   lucideExternalLink,
+  lucideInfo,
+  lucideEye,
+  lucideChevronDown,
 } from '@ng-icons/lucide';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
+import { DialogModule } from '@angular/cdk/dialog';
 
 import { routes } from './app.routes';
 
@@ -33,6 +37,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideClientHydration(),
     provideAnimations(),
+    importProvidersFrom(DialogModule),
     provideSpartanHlm(),
     provideIcons({
       lucideSun,
@@ -53,6 +58,9 @@ export const appConfig: ApplicationConfig = {
       lucideCheck,
       lucideX,
       lucideExternalLink,
+      lucideInfo,
+      lucideEye,
+      lucideChevronDown,
     }),
   ],
 };
