@@ -1,26 +1,31 @@
 <header class="flex items-center justify-between px-6 py-4 border-b border-border">
   <a routerLink="/" class="text-lg font-semibold text-foreground">
-    Supabase Next.js Starter
+    MeuApp
   </a>
   <nav class="flex items-center gap-4">
     <a routerLink="/properties" hlmBtn variant="ghost" size="sm">
-      Properties
+      Imóveis
     </a>
     <a routerLink="/crm" hlmBtn variant="ghost" size="sm">
       CRM
     </a>
-    <button hlmToggle variant="outline" size="sm" class="size-8 p-0" (click)="theme.toggle()" [attr.aria-label]="theme.darkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+    <button hlmToggle variant="outline" size="sm" class="size-8 p-0" (click)="theme.toggle()" [attr.aria-label]="theme.darkMode() ? 'Mudar para modo claro' : 'Mudar para modo escuro'">
       @if (theme.darkMode()) {
         <ng-icon name="lucideSun" />
       } @else {
         <ng-icon name="lucideMoon" />
       }
     </button>
-    <a routerLink="/auth/login" hlmBtn variant="ghost" size="sm">
-      Sign in
-    </a>
-    <a routerLink="/auth/sign-up" hlmBtn variant="default" size="sm">
-      Sign up
-    </a>
+    @if (auth.isLoggedIn()) {
+      <span class="text-sm text-muted-foreground">{{ auth.currentUserEmail() }}</span>
+      <button hlmBtn variant="ghost" size="sm" (click)="logout()">Sair</button>
+    } @else {
+      <a routerLink="/auth/login" hlmBtn variant="ghost" size="sm">
+        Entrar
+      </a>
+      <a routerLink="/auth/sign-up" hlmBtn variant="default" size="sm">
+        Criar conta
+      </a>
+    }
   </nav>
 </header>

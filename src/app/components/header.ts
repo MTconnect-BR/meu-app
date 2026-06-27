@@ -4,6 +4,7 @@ import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmToggle } from '@spartan-ng/helm/toggle';
 import { NgIcon } from '@ng-icons/core';
 import { ThemeService } from '../services/theme';
+import { AuthService } from '../services/auth';
 
 @Component({
   selector: 'app-header',
@@ -13,4 +14,9 @@ import { ThemeService } from '../services/theme';
 })
 export class Header {
   public readonly theme = inject(ThemeService);
+  public readonly auth = inject(AuthService);
+
+  logout() {
+    this.auth.logout();
+  }
 }

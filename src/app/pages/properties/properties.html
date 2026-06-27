@@ -4,10 +4,10 @@
   <div class="mx-auto w-full max-w-6xl space-y-8">
     <div class="space-y-2">
       <h1 hlmH1 class="text-foreground">
-        Find your perfect home
+        Encontre seu imóvel perfeito
       </h1>
       <p hlmLead>
-        Browse thousands of properties for sale and rent
+        Milhares de imóveis para venda e aluguel
       </p>
     </div>
 
@@ -19,7 +19,7 @@
         <input
           hlmInputGroupInput
           type="text"
-          placeholder="Search by location..."
+          placeholder="Buscar por localização..."
           [value]="propertiesService.searchQuery()"
           (input)="propertiesService.searchQuery.set($any($event.target).value)"
         />
@@ -30,21 +30,21 @@
           [variant]="propertiesService.propertyType() === 'all' ? 'default' : 'outline'"
           (click)="propertiesService.propertyType.set('all')"
         >
-          All
+          Todos
         </button>
         <button
           hlmBtn
           [variant]="propertiesService.propertyType() === 'sale' ? 'default' : 'outline'"
           (click)="propertiesService.propertyType.set('sale')"
         >
-          Buy
+          Comprar
         </button>
         <button
           hlmBtn
           [variant]="propertiesService.propertyType() === 'rent' ? 'default' : 'outline'"
           (click)="propertiesService.propertyType.set('rent')"
         >
-          Rent
+          Alugar
         </button>
       </div>
     </div>
@@ -56,7 +56,7 @@
         [variant]="propertiesService.furnished() ? 'default' : 'outline'"
         (click)="propertiesService.furnished.update(v => !v)"
       >
-        Furnished
+        Mobiliado
       </button>
       <button
         hlmBtn
@@ -64,7 +64,7 @@
         [variant]="propertiesService.petFriendly() ? 'default' : 'outline'"
         (click)="propertiesService.petFriendly.update(v => !v)"
       >
-        Pet Friendly
+        Aceita pets
       </button>
       <button
         hlmBtn
@@ -72,13 +72,13 @@
         [variant]="propertiesService.parkingSpot() ? 'default' : 'outline'"
         (click)="propertiesService.parkingSpot.update(v => !v)"
       >
-        Parking
+        Vaga de garagem
       </button>
     </div>
 
     @if (propertiesService.propertyType() === 'all' || propertiesService.propertyType() === 'sale') {
       <section class="space-y-4">
-        <h2 hlmH2 class="text-foreground">For Sale</h2>
+        <h2 hlmH2 class="text-foreground">À Venda</h2>
         <hlm-carousel [options]="saleOptions">
           <hlm-carousel-content>
             @for (property of propertiesService.forSale; track property.id) {
@@ -116,7 +116,7 @@
                       </div>
                       <div class="flex gap-2">
                         @if (property.furnished) {
-                          <hlm-badge variant="secondary">Furnished</hlm-badge>
+                          <hlm-badge variant="secondary">Mobiliado</hlm-badge>
                         }
                         @if (property.petFriendly) {
                           <hlm-badge variant="secondary">Pets</hlm-badge>
@@ -132,15 +132,15 @@
                   <div hlmEmptyMedia variant="icon">
                     <ng-icon name="lucideSearch" />
                   </div>
-                  <h3 hlmEmptyTitle>No properties found</h3>
-                  <p hlmEmptyDescription>Try adjusting your search filters.</p>
+                  <h3 hlmEmptyTitle>Nenhum imóvel encontrado</h3>
+                  <p hlmEmptyDescription>Tente ajustar os filtros de busca.</p>
                 </div>
               </div>
             }
           </hlm-carousel-content>
           <div class="flex items-center justify-center gap-4 pt-4">
-            <button hlmCarouselPrevious aria-label="Previous" class="!relative !-start-0 !top-0 !translate-none"></button>
-            <button hlmCarouselNext aria-label="Next" class="!relative !-end-0 !top-0 !translate-none"></button>
+            <button hlmCarouselPrevious aria-label="Anterior" class="!relative !-start-0 !top-0 !translate-none"></button>
+            <button hlmCarouselNext aria-label="Próximo" class="!relative !-end-0 !top-0 !translate-none"></button>
           </div>
         </hlm-carousel>
       </section>
@@ -148,7 +148,7 @@
 
     @if (propertiesService.propertyType() === 'all' || propertiesService.propertyType() === 'rent') {
       <section class="space-y-4">
-        <h2 hlmH2 class="text-foreground">For Rent</h2>
+        <h2 hlmH2 class="text-foreground">Para Alugar</h2>
         <hlm-carousel [options]="rentOptions">
           <hlm-carousel-content>
             @for (property of propertiesService.forRent; track property.id) {
@@ -186,7 +186,7 @@
                       </div>
                       <div class="flex gap-2">
                         @if (property.furnished) {
-                          <hlm-badge variant="secondary">Furnished</hlm-badge>
+                          <hlm-badge variant="secondary">Mobiliado</hlm-badge>
                         }
                         @if (property.petFriendly) {
                           <hlm-badge variant="secondary">Pets</hlm-badge>
@@ -202,15 +202,15 @@
                   <div hlmEmptyMedia variant="icon">
                     <ng-icon name="lucideSearch" />
                   </div>
-                  <h3 hlmEmptyTitle>No properties found</h3>
-                  <p hlmEmptyDescription>Try adjusting your search filters.</p>
+                  <h3 hlmEmptyTitle>Nenhum imóvel encontrado</h3>
+                  <p hlmEmptyDescription>Tente ajustar os filtros de busca.</p>
                 </div>
               </div>
             }
           </hlm-carousel-content>
           <div class="flex items-center justify-center gap-4 pt-4">
-            <button hlmCarouselPrevious aria-label="Previous" class="!relative !-start-0 !top-0 !translate-none"></button>
-            <button hlmCarouselNext aria-label="Next" class="!relative !-end-0 !top-0 !translate-none"></button>
+            <button hlmCarouselPrevious aria-label="Anterior" class="!relative !-start-0 !top-0 !translate-none"></button>
+            <button hlmCarouselNext aria-label="Próximo" class="!relative !-end-0 !top-0 !translate-none"></button>
           </div>
         </hlm-carousel>
       </section>

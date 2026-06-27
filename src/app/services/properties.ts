@@ -33,12 +33,12 @@ export class PropertiesService {
   public readonly petFriendly = signal(false);
   public readonly parkingSpot = signal(false);
 
-  private readonly _description = 'This stunning property offers a modern and comfortable living space with top-notch finishes. Located in a prime area with easy access to restaurants, shops, and public transportation. The property features spacious rooms, abundant natural light, and a functional layout perfect for families or professionals.';
+  private readonly _description = 'Este imóvel impressionante oferece um espaço moderno e confortável com acabamentos de primeira. Localizado em uma área privilegiada com fácil acesso a restaurantes, lojas e transporte público. O imóvel possui amplos cômodos, abundância de luz natural e uma distribuição funcional perfeita para famílias ou profissionais.';
 
   public readonly mockProperties: Property[] = [
     {
       id: 1,
-      title: 'Modern Apartment with Ocean View',
+      title: 'Apartamento Moderno com Vista para o Mar',
       slug: 'venda-apartamento-3-quartos-barra-da-tijuca-rj-120m2-id-1',
       address: 'Barra da Tijuca, Rio de Janeiro',
       neighborhood: 'Barra da Tijuca',
@@ -60,7 +60,7 @@ export class PropertiesService {
     },
     {
       id: 2,
-      title: 'Cozy Studio Near Metro',
+      title: 'Estúdio Acolhedor perto do Metrô',
       slug: 'aluguel-estudio-1-quarto-vila-madalena-sp-45m2-id-2',
       address: 'Vila Madalena, São Paulo',
       neighborhood: 'Vila Madalena',
@@ -82,7 +82,7 @@ export class PropertiesService {
     },
     {
       id: 3,
-      title: 'Spacious Family House',
+      title: 'Casa Amplia para Família',
       slug: 'venda-casa-4-quartos-alphaville-barueri-250m2-id-3',
       address: 'Alphaville, Barueri',
       neighborhood: 'Alphaville',
@@ -104,7 +104,7 @@ export class PropertiesService {
     },
     {
       id: 4,
-      title: 'Penthouse with Rooftop',
+      title: 'Penthouse com Terraço',
       slug: 'aluguel-penthouse-2-quartos-itaim-bibi-sp-95m2-id-4',
       address: 'Itaim Bibi, São Paulo',
       neighborhood: 'Itaim Bibi',
@@ -126,7 +126,7 @@ export class PropertiesService {
     },
     {
       id: 5,
-      title: 'Beachfront Condo',
+      title: 'Condomínio na Beira da Praia',
       slug: 'venda-condominio-2-quartos-copacabana-rj-75m2-id-5',
       address: 'Copacabana, Rio de Janeiro',
       neighborhood: 'Copacabana',
@@ -148,7 +148,7 @@ export class PropertiesService {
     },
     {
       id: 6,
-      title: 'Garden Loft Pet Friendly',
+      title: 'Loft com Jardim Pet Friendly',
       slug: 'aluguel-loft-1-quarto-pinheiros-sp-60m2-id-6',
       address: 'Pinheiros, São Paulo',
       neighborhood: 'Pinheiros',
@@ -170,7 +170,7 @@ export class PropertiesService {
     },
     {
       id: 7,
-      title: 'Luxury Villa with Pool',
+      title: 'Villa de Luxo com Piscina',
       slug: 'venda-casa-5-quartos-maringa-pr-350m2-id-7',
       address: 'Maringá, Paraná',
       neighborhood: 'Zona Nova',
@@ -192,7 +192,7 @@ export class PropertiesService {
     },
     {
       id: 8,
-      title: 'Compact Apt Near University',
+      title: 'Apartamento Compacto perto da Universidade',
       slug: 'aluguel-apartamento-1-quarto-ufmg-mg-35m2-id-8',
       address: 'Pampulha, Belo Horizonte',
       neighborhood: 'Pampulha',
@@ -214,7 +214,7 @@ export class PropertiesService {
     },
     {
       id: 9,
-      title: 'Downtown Loft Studio',
+      title: 'Estúdio no Centro',
       slug: 'venda-estudio-centro-rj-40m2-id-9',
       address: 'Centro, Rio de Janeiro',
       neighborhood: 'Centro',
@@ -236,7 +236,7 @@ export class PropertiesService {
     },
     {
       id: 10,
-      title: 'Family Home with Garden',
+      title: 'Casa Familiar com Jardim',
       slug: 'venda-casa-3-quartos-campinas-sp-180m2-id-10',
       address: 'Jardim das Palmeiras, Campinas',
       neighborhood: 'Jardim das Palmeiras',
@@ -258,7 +258,7 @@ export class PropertiesService {
     },
     {
       id: 11,
-      title: 'Modern Flat in Business District',
+      title: 'Apartamento Moderno no Distrito Empresarial',
       slug: 'aluguel-apartamento-2-quartos-vila-olimpia-sp-80m2-id-11',
       address: 'Vila Olímpia, São Paulo',
       neighborhood: 'Vila Olímpia',
@@ -280,7 +280,7 @@ export class PropertiesService {
     },
     {
       id: 12,
-      title: 'Charming Colonial House',
+      title: 'Casa Colonial Acolhedora',
       slug: 'venda-casa-3-quartos-santa-maria-sc-200m2-id-12',
       address: 'Centro, Santa Maria',
       neighborhood: 'Centro',
@@ -302,7 +302,7 @@ export class PropertiesService {
     },
     {
       id: 13,
-      title: 'Beach Studio in Florianópolis',
+      title: 'Estúdio na Praia em Florianópolis',
       slug: 'aluguel-estudio-1-quarto-jurerê-sc-50m2-id-13',
       address: 'Jurerê Internacional, Florianópolis',
       neighborhood: 'Jurerê Internacional',
@@ -324,7 +324,7 @@ export class PropertiesService {
     },
     {
       id: 14,
-      title: 'Penthouse in Porto Alegre',
+      title: 'Penthouse em Porto Alegre',
       slug: 'venda-penthouse-3-quartos-moinhos-rs-150m2-id-14',
       address: 'Moinhos de Vento, Porto Alegre',
       neighborhood: 'Moinhos de Vento',
@@ -346,7 +346,7 @@ export class PropertiesService {
     },
     {
       id: 15,
-      title: 'Simple Room in Shared House',
+      title: 'Quarto Simples em Casa Compartilhada',
       slug: 'aluguel-quarto-casa-compartilhada-goiania-go-15m2-id-15',
       address: 'Setor Central, Goiânia',
       neighborhood: 'Setor Central',
@@ -368,7 +368,7 @@ export class PropertiesService {
     },
     {
       id: 16,
-      title: 'New Construction Apartment',
+      title: 'Apartamento em Obra Nova',
       slug: 'venda-apartamento-novo-2-quartos-fortaleza-ce-90m2-id-16',
       address: 'Aldeota, Fortaleza',
       neighborhood: 'Aldeota',
@@ -390,7 +390,7 @@ export class PropertiesService {
     },
     {
       id: 17,
-      title: 'Studio Near Beach in Recife',
+      title: 'Estúdio perto da Praia em Recife',
       slug: 'aluguel-estudio-1-quarto-boa-viagem-pe-42m2-id-17',
       address: 'Boa Viagem, Recife',
       neighborhood: 'Boa Viagem',
@@ -412,7 +412,7 @@ export class PropertiesService {
     },
     {
       id: 18,
-      title: 'Country House with Land',
+      title: 'Casa de Campo com Terreno',
       slug: 'venda-casa-4-quartos-gramado-rs-300m2-id-18',
       address: 'Gramado, Rio Grande do Sul',
       neighborhood: 'Centro',
@@ -434,7 +434,7 @@ export class PropertiesService {
     },
     {
       id: 19,
-      title: 'Minimalist Apt in Brasília',
+      title: 'Apartamento Minimalista em Brasília',
       slug: 'aluguel-apartamento-2-quartos-asa-norte-df-70m2-id-19',
       address: 'Asa Norte, Brasília',
       neighborhood: 'Asa Norte',
@@ -456,7 +456,7 @@ export class PropertiesService {
     },
     {
       id: 20,
-      title: 'Waterfront Condo in Salvador',
+      title: 'Condomínio na Beira-mar em Salvador',
       slug: 'venda-condominio-3-quartos-barra-salvador-ba-110m2-id-20',
       address: 'Barra, Salvador',
       neighborhood: 'Barra',

@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { AuthService } from '../../services/auth';
 import { HlmCard, HlmCardContent, HlmCardHeader, HlmCardTitle, HlmCardDescription, HlmCardFooter } from '@spartan-ng/helm/card';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmInput } from '@spartan-ng/helm/input';
@@ -20,6 +21,10 @@ import { HlmField, HlmFieldLabel, HlmFieldError, HlmFieldGroup } from '@spartan-
 })
 export class Signup {
   private readonly _fb = inject(FormBuilder);
+  private readonly _auth = inject(AuthService);
+  private readonly _router = inject(Router);
+
+  errorMessage: string | null = null;
 
   public form = this._fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -38,6 +43,12 @@ export class Signup {
       this.form.markAllAsTouched();
       return;
     }
-    console.log('Signup:', this.form.value);
+    const { email, password } = this.form.value;
+    const result = this._auth.signup(email!, password!);
+    if (result.success) {
+      this._router.navigate(['/crm']);
+    } else {
+      this.errorMessage = result.error ?? null;
+    }
   }
 }

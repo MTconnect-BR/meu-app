@@ -3,17 +3,17 @@
 <main class="flex flex-1 flex-col px-6 py-8">
   <div class="mx-auto w-full max-w-6xl space-y-8">
     <div class="flex items-center justify-between">
-      <h1 hlmH1 class="text-foreground">Property Management</h1>
+      <h1 hlmH1 class="text-foreground">Gerenciamento de Imóveis</h1>
       <button hlmBtn (click)="openCreateForm()">
         <ng-icon name="lucidePlus" class="size-4" />
-        New Property
+        Novo Imóvel
       </button>
     </div>
 
     @if (alertMessage()) {
       <hlm-alert>
         <ng-icon name="lucideInfo" />
-        <h3 hlmAlertTitle>Success</h3>
+        <h3 hlmAlertTitle>Sucesso</h3>
         <p hlmAlertDescription>{{ alertMessage() }}</p>
       </hlm-alert>
     }
@@ -24,8 +24,8 @@
           <div hlmEmptyMedia variant="icon">
             <ng-icon name="lucidePlus" />
           </div>
-          <h3 hlmEmptyTitle>No properties yet</h3>
-          <p hlmEmptyDescription>Click "New Property" to create your first listing.</p>
+          <h3 hlmEmptyTitle>Nenhum imóvel cadastrado</h3>
+          <p hlmEmptyDescription>Clique em "Novo Imóvel" para criar seu primeiro anúncio.</p>
         </div>
       </div>
     } @else {
@@ -33,14 +33,14 @@
         <table hlmTable class="w-full">
           <thead hlmTHead>
             <tr hlmTr>
-              <th hlmTh class="text-left">Title</th>
-              <th hlmTh class="text-left">Location</th>
-              <th hlmTh class="text-right">Price</th>
-              <th hlmTh class="text-center">Type</th>
-              <th hlmTh class="text-center">Beds</th>
-              <th hlmTh class="text-center">Baths</th>
-              <th hlmTh class="text-right">Area</th>
-              <th hlmTh class="text-right">Actions</th>
+              <th hlmTh class="text-left">Título</th>
+              <th hlmTh class="text-left">Localização</th>
+              <th hlmTh class="text-right">Preço</th>
+              <th hlmTh class="text-center">Tipo</th>
+              <th hlmTh class="text-center">Quartos</th>
+              <th hlmTh class="text-center">Banheiros</th>
+              <th hlmTh class="text-right">Área</th>
+              <th hlmTh class="text-right">Ações</th>
             </tr>
           </thead>
           <tbody hlmTBody>
@@ -51,7 +51,7 @@
                 <td hlmTd class="text-right font-semibold text-foreground">{{ formatPrice(p.price, p.type) }}</td>
                 <td hlmTd class="text-center">
                   <hlm-badge [variant]="p.type === 'sale' ? 'default' : 'secondary'">
-                    {{ p.type === 'sale' ? 'Sale' : 'Rent' }}
+                    {{ p.type === 'sale' ? 'Venda' : 'Aluguel' }}
                   </hlm-badge>
                 </td>
                 <td hlmTd class="text-center text-muted-foreground">{{ p.bedrooms }}</td>
@@ -65,7 +65,7 @@
                     variant="ghost"
                     size="sm"
                   >
-                    Actions
+                    Ações
                     <ng-icon name="lucideChevronDown" class="size-4" />
                   </button>
                   <ng-template #actionsMenu>
@@ -75,7 +75,7 @@
                         [routerLink]="['/properties', p.slug]"
                       >
                         <ng-icon name="lucideEye" class="size-4" />
-                        View
+                        Visualizar
                       </a>
                       <div hlmDropdownMenuSeparator></div>
                       <button
@@ -83,7 +83,7 @@
                         (click)="openEditForm(p)"
                       >
                         <ng-icon name="lucidePencil" class="size-4" />
-                        Edit
+                        Editar
                       </button>
                       <button
                         hlmDropdownMenuItem
@@ -91,7 +91,7 @@
                         (click)="confirmDelete(p.id)"
                       >
                         <ng-icon name="lucideTrash2" class="size-4" />
-                        Delete
+                        Excluir
                       </button>
                     </div>
                   </ng-template>
@@ -111,8 +111,8 @@
     <div class="relative z-10 h-full w-full max-w-2xl overflow-y-auto bg-background p-6 shadow-xl" tabindex="-1" (click)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation()">
       <div class="mb-4 flex items-center justify-between">
         <div>
-          <h2 class="text-lg font-semibold text-foreground">{{ editingId() ? 'Edit Property' : 'New Property' }}</h2>
-          <p class="text-sm text-muted-foreground">Fill in the property details below.</p>
+          <h2 class="text-lg font-semibold text-foreground">{{ editingId() ? 'Editar Imóvel' : 'Novo Imóvel' }}</h2>
+          <p class="text-sm text-muted-foreground">Preencha os dados do imóvel abaixo.</p>
         </div>
         <button hlmBtn variant="ghost" size="sm" (click)="closeForm()">
           <ng-icon name="lucideX" class="size-4" />
@@ -122,8 +122,8 @@
       <form [formGroup]="form" (ngSubmit)="save()" class="space-y-4">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-title">Title *</label>
-            <input hlmInput id="crm-title" formControlName="title" class="w-full" placeholder="Modern Apartment" />
+            <label hlmFieldLabel for="crm-title">Título *</label>
+            <input hlmInput id="crm-title" formControlName="title" class="w-full" placeholder="Apartamento Moderno" />
             <hlm-field-error />
           </div>
 
@@ -134,69 +134,69 @@
           </div>
 
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-address">Address *</label>
+            <label hlmFieldLabel for="crm-address">Endereço *</label>
             <input hlmInput id="crm-address" formControlName="address" class="w-full" placeholder="Vila Madalena, São Paulo" />
             <hlm-field-error />
           </div>
 
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-neighborhood">Neighborhood *</label>
+            <label hlmFieldLabel for="crm-neighborhood">Bairro *</label>
             <input hlmInput id="crm-neighborhood" formControlName="neighborhood" class="w-full" placeholder="Vila Madalena" />
             <hlm-field-error />
           </div>
 
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-city">City *</label>
+            <label hlmFieldLabel for="crm-city">Cidade *</label>
             <input hlmInput id="crm-city" formControlName="city" class="w-full" placeholder="São Paulo" />
             <hlm-field-error />
           </div>
 
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-state">State (UF) *</label>
+            <label hlmFieldLabel for="crm-state">Estado (UF) *</label>
             <input hlmInput id="crm-state" formControlName="state" class="w-full" maxlength="2" placeholder="SP" />
             <hlm-field-error />
           </div>
 
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-price">Price (BRL) *</label>
+            <label hlmFieldLabel for="crm-price">Preço (R$) *</label>
             <input hlmInput id="crm-price" type="number" formControlName="price" class="w-full" placeholder="500000" />
             <hlm-field-error />
           </div>
 
           <div class="space-y-1">
-            <label hlmFieldLabel for="crm-type">Type *</label>
+            <label hlmFieldLabel for="crm-type">Tipo *</label>
             <hlm-radio-group id="crm-type" formControlName="type" class="flex gap-4">
               <hlm-radio value="sale" class="cursor-pointer">
                 <hlm-radio-indicator />
-                <span class="text-sm">For Sale</span>
+                <span class="text-sm">À Venda</span>
               </hlm-radio>
               <hlm-radio value="rent" class="cursor-pointer">
                 <hlm-radio-indicator />
-                <span class="text-sm">For Rent</span>
+                <span class="text-sm">Para Alugar</span>
               </hlm-radio>
             </hlm-radio-group>
           </div>
 
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-bedrooms">Bedrooms *</label>
+            <label hlmFieldLabel for="crm-bedrooms">Quartos *</label>
             <input hlmInput id="crm-bedrooms" type="number" formControlName="bedrooms" class="w-full" />
             <hlm-field-error />
           </div>
 
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-bathrooms">Bathrooms *</label>
+            <label hlmFieldLabel for="crm-bathrooms">Banheiros *</label>
             <input hlmInput id="crm-bathrooms" type="number" formControlName="bathrooms" class="w-full" />
             <hlm-field-error />
           </div>
 
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-parking">Parking Spots *</label>
+            <label hlmFieldLabel for="crm-parking">Vagas *</label>
             <input hlmInput id="crm-parking" type="number" formControlName="parkingSpots" class="w-full" />
             <hlm-field-error />
           </div>
 
           <div hlmField class="space-y-1">
-            <label hlmFieldLabel for="crm-area">Area (m²) *</label>
+            <label hlmFieldLabel for="crm-area">Área (m²) *</label>
             <input hlmInput id="crm-area" type="number" formControlName="area" class="w-full" />
             <hlm-field-error />
           </div>
@@ -215,39 +215,39 @@
         </div>
 
         <div hlmField class="space-y-1">
-          <label hlmFieldLabel for="crm-imageUrl">Image URL *</label>
-          <input hlmInput id="crm-imageUrl" formControlName="imageUrl" class="w-full" placeholder="https://picsum.photos/seed/myprop/600/400" />
+          <label hlmFieldLabel for="crm-imageUrl">URL da Imagem *</label>
+          <input hlmInput id="crm-imageUrl" formControlName="imageUrl" class="w-full" placeholder="https://picsum.photos/seed/meuimovel/600/400" />
           <hlm-field-error />
         </div>
 
         <div hlmField class="space-y-1">
-          <label hlmFieldLabel for="crm-images">Additional Image URLs (one per line)</label>
+          <label hlmFieldLabel for="crm-images">URLs de Imagens Adicionais (uma por linha)</label>
           <textarea hlmTextarea id="crm-images" formControlName="images" class="w-full" rows="3" placeholder="https://picsum.photos/seed/img1/800/600&#10;https://picsum.photos/seed/img2/800/600"></textarea>
         </div>
 
         <div hlmField class="space-y-1">
-          <label hlmFieldLabel for="crm-description">Description *</label>
-          <textarea hlmTextarea id="crm-description" formControlName="description" class="w-full" rows="3" placeholder="Describe the property..."></textarea>
+          <label hlmFieldLabel for="crm-description">Descrição *</label>
+          <textarea hlmTextarea id="crm-description" formControlName="description" class="w-full" rows="3" placeholder="Descreva o imóvel..."></textarea>
           <hlm-field-error />
         </div>
 
         <div class="flex gap-6">
           <label for="crm-furnished" class="flex items-center gap-2 text-sm text-foreground">
             <hlm-switch id="crm-furnished" formControlName="furnished" />
-            Furnished
+            Mobiliado
           </label>
           <label for="crm-petFriendly" class="flex items-center gap-2 text-sm text-foreground">
             <hlm-switch id="crm-petFriendly" formControlName="petFriendly" />
-            Pet Friendly
+            Aceita pets
           </label>
         </div>
       </form>
 
       <div class="mt-6 flex justify-end gap-3 border-t border-border pt-4">
-        <button hlmBtn type="button" variant="outline" (click)="closeForm()">Cancel</button>
+        <button hlmBtn type="button" variant="outline" (click)="closeForm()">Cancelar</button>
         <button hlmBtn type="button" [disabled]="form.invalid" (click)="save()">
           <ng-icon name="lucideCheck" class="size-4" />
-          {{ editingId() ? 'Update' : 'Create' }}
+          {{ editingId() ? 'Atualizar' : 'Criar' }}
         </button>
       </div>
     </div>
@@ -258,13 +258,13 @@
   <div class="fixed inset-0 z-50 flex items-end justify-center sm:items-center" role="dialog" aria-modal="true" (keydown.escape)="cancelDelete()" (click)="cancelDelete()">
     <div class="absolute inset-0 bg-black/50" tabindex="-1"></div>
     <div class="relative z-10 w-full max-w-md rounded-t-xl bg-background p-6 shadow-xl sm:rounded-xl" tabindex="-1" (click)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation()">
-      <h2 class="text-lg font-semibold text-foreground">Delete Property</h2>
-      <p class="mt-2 text-sm text-muted-foreground">Are you sure? This action cannot be undone.</p>
+      <h2 class="text-lg font-semibold text-foreground">Excluir Imóvel</h2>
+      <p class="mt-2 text-sm text-muted-foreground">Tem certeza? Esta ação não pode ser desfeita.</p>
       <div class="mt-6 flex justify-end gap-3">
-        <button hlmBtn variant="outline" (click)="cancelDelete()">Cancel</button>
+        <button hlmBtn variant="outline" (click)="cancelDelete()">Cancelar</button>
         <button hlmBtn variant="destructive" (click)="doDelete()">
           <ng-icon name="lucideTrash2" class="size-4" />
-          Delete
+          Excluir
         </button>
       </div>
     </div>

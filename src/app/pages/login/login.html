@@ -1,38 +1,36 @@
 <main class="flex flex-1 items-center justify-center px-6 py-16">
   <hlm-card class="w-full max-w-md">
     <div hlmCardHeader>
-      <h2 hlmCardTitle>Login</h2>
-      <p hlmCardDescription>Enter your email below to login to your account</p>
+      <h2 hlmCardTitle>Entrar</h2>
+      <p hlmCardDescription>Entre com seu email para acessar sua conta</p>
     </div>
     <div hlmCardContent>
       <form [formGroup]="form" (ngSubmit)="submit()">
         <hlm-field-group class="space-y-4">
+          @if (errorMessage) {
+            <p class="text-sm text-destructive">{{ errorMessage }}</p>
+          }
           <hlm-field>
             <label hlmFieldLabel for="login-email">Email</label>
-            <input hlmInput id="login-email" type="email" placeholder="m@example.com" formControlName="email" />
-            <hlm-field-error validator="required">Email is required.</hlm-field-error>
-            <hlm-field-error validator="email">Please enter a valid email.</hlm-field-error>
+            <input hlmInput id="login-email" type="email" placeholder="m@exemplo.com" formControlName="email" />
+            <hlm-field-error validator="required">Email é obrigatório.</hlm-field-error>
+            <hlm-field-error validator="email">Digite um email válido.</hlm-field-error>
           </hlm-field>
           <hlm-field>
-            <div class="flex items-center justify-between">
-              <label hlmFieldLabel for="login-password">Password</label>
-              <a routerLink="/auth/forgot-password" class="text-sm text-muted-foreground hover:underline">
-                Forgot your password?
-              </a>
-            </div>
+            <label hlmFieldLabel for="login-password">Senha</label>
             <input hlmInput id="login-password" type="password" placeholder="••••••••" formControlName="password" />
-            <hlm-field-error validator="required">Password is required.</hlm-field-error>
-            <hlm-field-error validator="minlength">Password must be at least 6 characters.</hlm-field-error>
+            <hlm-field-error validator="required">Senha é obrigatória.</hlm-field-error>
+            <hlm-field-error validator="minlength">A senha deve ter pelo menos 6 caracteres.</hlm-field-error>
           </hlm-field>
-          <button hlmBtn type="submit" class="w-full">Login</button>
+          <button hlmBtn type="submit" class="w-full">Entrar</button>
         </hlm-field-group>
       </form>
     </div>
     <div hlmCardFooter class="border-t-border">
       <p class="text-sm text-muted-foreground">
-        Don't have an account?
+        Não tem uma conta?
         <a routerLink="/auth/sign-up" class="font-medium text-foreground hover:underline">
-          Sign up
+          Criar conta
         </a>
       </p>
     </div>

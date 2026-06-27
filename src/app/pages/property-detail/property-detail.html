@@ -5,7 +5,7 @@
     <div class="mx-auto w-full max-w-6xl space-y-8">
       <a routerLink="/properties" class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
         <ng-icon name="lucideArrowLeft" class="size-4" />
-        Back to properties
+        Voltar para imóveis
       </a>
 
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
@@ -22,7 +22,7 @@
                 [class.ring-transparent]="selectedImage() !== $index"
                 [class.opacity-50]="selectedImage() !== $index"
               >
-                <img [src]="img" [alt]="prop.title + ' photo ' + ($index + 1)" class="h-20 w-full object-cover" />
+                <img [src]="img" [alt]="prop.title + ' foto ' + ($index + 1)" class="h-20 w-full object-cover" />
               </button>
             }
           </div>
@@ -46,49 +46,49 @@
               <ng-icon name="lucideBedDouble" class="size-5 text-muted-foreground" />
               <div>
                 <p class="text-sm font-medium text-foreground">{{ prop.bedrooms }}</p>
-                <p class="text-xs text-muted-foreground">Bedrooms</p>
+                <p class="text-xs text-muted-foreground">Quartos</p>
               </div>
             </div>
             <div class="flex items-center gap-2 rounded-lg bg-muted p-3">
               <ng-icon name="lucideBath" class="size-5 text-muted-foreground" />
               <div>
                 <p class="text-sm font-medium text-foreground">{{ prop.bathrooms }}</p>
-                <p class="text-xs text-muted-foreground">Bathrooms</p>
+                <p class="text-xs text-muted-foreground">Banheiros</p>
               </div>
             </div>
             <div class="flex items-center gap-2 rounded-lg bg-muted p-3">
               <ng-icon name="lucideCar" class="size-5 text-muted-foreground" />
               <div>
                 <p class="text-sm font-medium text-foreground">{{ prop.parkingSpots }}</p>
-                <p class="text-xs text-muted-foreground">Parking</p>
+                <p class="text-xs text-muted-foreground">Vagas</p>
               </div>
             </div>
             <div class="flex items-center gap-2 rounded-lg bg-muted p-3">
               <ng-icon name="lucideMaximize" class="size-5 text-muted-foreground" />
               <div>
                 <p class="text-sm font-medium text-foreground">{{ prop.area }}m²</p>
-                <p class="text-xs text-muted-foreground">Area</p>
+                <p class="text-xs text-muted-foreground">Área</p>
               </div>
             </div>
           </div>
 
           <div class="flex gap-2">
             @if (prop.furnished) {
-              <hlm-badge variant="secondary">Furnished</hlm-badge>
+              <hlm-badge variant="secondary">Mobiliado</hlm-badge>
             }
             @if (prop.petFriendly) {
-              <hlm-badge variant="secondary">Pet Friendly</hlm-badge>
+              <hlm-badge variant="secondary">Aceita pets</hlm-badge>
             }
           </div>
 
           <div class="flex gap-3">
             <button hlmBtn class="flex-1">
               <ng-icon name="lucidePhone" class="size-4" />
-              Contact Agent
+              Contatar corretor
             </button>
             <button hlmBtn variant="outline" class="flex-1">
               <ng-icon name="lucideHeart" class="size-4" />
-              Save Property
+              Salvar imóvel
             </button>
           </div>
         </div>
@@ -97,36 +97,36 @@
       <hlm-separator />
 
       <div class="space-y-4">
-        <h2 hlmH2 class="text-foreground">Description</h2>
+        <h2 hlmH2 class="text-foreground">Descrição</h2>
         <p hlmP class="text-muted-foreground">{{ prop.description }}</p>
       </div>
 
       <hlm-separator />
 
       <div class="space-y-4">
-        <h2 hlmH2 class="text-foreground">Location</h2>
+        <h2 hlmH2 class="text-foreground">Localização</h2>
         <div #mapContainer class="h-80 w-full rounded-xl overflow-hidden border border-border"></div>
       </div>
 
       <hlm-separator />
 
       <div class="space-y-4">
-        <h2 hlmH2 class="text-foreground">Property Details</h2>
+        <h2 hlmH2 class="text-foreground">Detalhes do imóvel</h2>
         <div class="grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
           <div>
-            <p class="text-muted-foreground">Type</p>
-            <p class="font-medium text-foreground">{{ prop.type === 'sale' ? 'For Sale' : 'For Rent' }}</p>
+            <p class="text-muted-foreground">Tipo</p>
+            <p class="font-medium text-foreground">{{ prop.type === 'sale' ? 'À Venda' : 'Para Alugar' }}</p>
           </div>
           <div>
-            <p class="text-muted-foreground">Area</p>
+            <p class="text-muted-foreground">Área</p>
             <p class="font-medium text-foreground">{{ prop.area }}m²</p>
           </div>
           <div>
-            <p class="text-muted-foreground">Neighborhood</p>
+            <p class="text-muted-foreground">Bairro</p>
             <p class="font-medium text-foreground">{{ prop.neighborhood }}</p>
           </div>
           <div>
-            <p class="text-muted-foreground">City</p>
+            <p class="text-muted-foreground">Cidade</p>
             <p class="font-medium text-foreground">{{ prop.city }}, {{ prop.state }}</p>
           </div>
         </div>
@@ -136,7 +136,7 @@
         <hlm-separator />
 
         <section class="space-y-4">
-          <h2 hlmH2 class="text-foreground">Similar Properties</h2>
+          <h2 hlmH2 class="text-foreground">Imóveis similares</h2>
           <hlm-carousel [options]="similarOptions">
             <hlm-carousel-content>
               @for (similar of similarProperties(); track similar.id) {
@@ -155,8 +155,8 @@
               }
             </hlm-carousel-content>
             <div class="flex items-center justify-center gap-4 pt-4">
-              <button hlmCarouselPrevious aria-label="Previous" class="!relative !-start-0 !top-0 !translate-none"></button>
-              <button hlmCarouselNext aria-label="Next" class="!relative !-end-0 !top-0 !translate-none"></button>
+              <button hlmCarouselPrevious aria-label="Anterior" class="!relative !-start-0 !top-0 !translate-none"></button>
+              <button hlmCarouselNext aria-label="Próximo" class="!relative !-end-0 !top-0 !translate-none"></button>
             </div>
           </hlm-carousel>
         </section>
@@ -169,9 +169,9 @@
           <div hlmEmptyMedia variant="icon">
             <ng-icon name="lucideSearch" />
           </div>
-          <h3 hlmEmptyTitle>Property not found</h3>
-          <p hlmEmptyDescription>The property you're looking for doesn't exist or has been removed.</p>
-          <a routerLink="/properties" hlmBtn>Back to Properties</a>
+          <h3 hlmEmptyTitle>Imóvel não encontrado</h3>
+          <p hlmEmptyDescription>O imóvel que você procura não existe ou foi removido.</p>
+          <a routerLink="/properties" hlmBtn>Voltar para Imóveis</a>
         </div>
       </div>
     </div>

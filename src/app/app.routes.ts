@@ -5,12 +5,13 @@ import { Signup } from './pages/signup/signup';
 import { Properties } from './pages/properties/properties';
 import { PropertyDetail } from './pages/property-detail/property-detail';
 import { Crm } from './pages/crm/crm';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: Landing },
   { path: 'properties', component: Properties },
   { path: 'properties/:slug', component: PropertyDetail },
-  { path: 'crm', component: Crm },
+  { path: 'crm', component: Crm, canActivate: [authGuard] },
   { path: 'auth/login', component: Login },
   { path: 'auth/sign-up', component: Signup },
   { path: '**', redirectTo: '' },

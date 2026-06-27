@@ -181,10 +181,10 @@ export class Crm {
 
     if (this.editingId() !== null) {
       this._propertiesService.update(this.editingId()!, data);
-      this.showAlert('Property updated successfully!');
+      this.showAlert('Imóvel atualizado com sucesso!');
     } else {
       this._propertiesService.create(data);
-      this.showAlert('Property created successfully!');
+      this.showAlert('Imóvel criado com sucesso!');
     }
     this.closeForm();
   }
@@ -201,7 +201,7 @@ export class Crm {
     }
     this.showDeleteDialog.set(false);
     this.deletingId.set(null);
-    this.showAlert('Property deleted successfully!');
+    this.showAlert('Imóvel excluído com sucesso!');
   }
 
   protected cancelDelete(): void {
