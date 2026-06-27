@@ -3,6 +3,13 @@
     Supabase Next.js Starter
   </a>
   <nav class="flex items-center gap-4">
+    <button hlmToggle variant="outline" size="sm" class="size-8 p-0" (click)="theme.toggle()" [attr.aria-label]="theme.darkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
+      @if (theme.darkMode()) {
+        <ng-icon [name]="sunIcon" />
+      } @else {
+        <ng-icon [name]="moonIcon" />
+      }
+    </button>
     <a routerLink="/auth/login" hlmBtn variant="ghost" size="sm">
       Sign in
     </a>

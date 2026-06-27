@@ -1,11 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { HlmButton } from '@spartan-ng/helm/button';
+import { HlmToggle } from '@spartan-ng/helm/toggle';
+import { NgIcon } from '@ng-icons/core';
+import { lucideSun, lucideMoon } from '@ng-icons/lucide';
+import { ThemeService } from '../services/theme';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, HlmButton],
+  imports: [RouterLink, HlmButton, HlmToggle, NgIcon],
   templateUrl: './header.html',
   styleUrl: './header.scss',
 })
-export class Header {}
+export class Header {
+  public readonly theme = inject(ThemeService);
+  protected readonly sunIcon = lucideSun;
+  protected readonly moonIcon = lucideMoon;
+}
