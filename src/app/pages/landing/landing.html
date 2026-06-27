@@ -3,26 +3,27 @@
 <main class="flex flex-1 flex-col">
 
   <!-- Hero Section — MindMarket style -->
-  <section class="sticky top-0 flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 pb-0 lg:min-h-[130vh]" style="background-color: hsl(0, 0%, 91%);">
-    <!-- Headline -->
-    <div class="relative z-10 space-y-4 text-center">
-      <h1 class="mx-auto max-w-4xl text-4xl font-black leading-[0.95] tracking-tight sm:text-5xl md:text-6xl lg:text-6xl"
-          [style.color]="'hsl(0, 0%, 13%)'">
-        Encontre o imóvel
-        <br />
-        <span [style.color]="'hsl(0, 0%, 13%)'">perfeito</span>
-      </h1>
-    </div>
+  <section class="sticky top-0 min-h-dvh overflow-hidden px-6 pb-0 lg:min-h-[130vh]" style="background-color: hsl(0, 0%, 91%);">
+    <div class="flex h-dvh flex-col items-center justify-center">
+      <!-- Headline -->
+      <div class="relative z-10 space-y-4 text-center">
+        <h1 class="mx-auto max-w-4xl text-4xl font-black leading-[0.95] tracking-tight sm:text-5xl md:text-6xl lg:text-6xl"
+            [style.color]="'hsl(0, 0%, 13%)'">
+          Encontre o imóvel
+          <br />
+          <span [style.color]="'hsl(0, 0%, 13%)'">perfeito</span>
+        </h1>
+      </div>
 
-    <!-- Subtitle -->
-    <div class="relative z-10 mt-4 text-center lg:mt-8">
-      <p class="text-base font-medium sm:text-lg md:text-xl lg:text-2xl" [style.color]="'hsl(0, 0%, 40%)'">
-        Seu novo lar começa aqui
-      </p>
-    </div>
+      <!-- Subtitle -->
+      <div class="relative z-10 mt-4 text-center">
+        <p class="text-base font-medium sm:text-lg md:text-xl lg:text-2xl" [style.color]="'hsl(0, 0%, 40%)'">
+          Seu novo lar começa aqui
+        </p>
+      </div>
 
-    <!-- Search Card — ZAP Imóveis style -->
-    <div class="relative z-10 mt-8 w-full max-w-2xl md:mt-14">
+      <!-- Search Card — ZAP Imóveis style -->
+      <div class="relative z-10 mt-8 w-full max-w-2xl">
       <div class="rounded-2xl p-5 shadow-2xl sm:p-6" [style.background-color]="'hsl(0, 0%, 87%)'">
         <!-- Tabs -->
         <div class="mb-4 flex gap-1 rounded-lg p-1 sm:mb-5" [style.background-color]="'hsl(0, 0%, 91%)'">
@@ -85,6 +86,7 @@
           </button>
         </div>
       </div>
+    </div>
     </div>
   </section>
 
