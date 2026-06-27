@@ -3,5 +3,14 @@
   "buildCommand": "ng build",
   "outputDirectory": "dist/meu-app/browser",
   "installCommand": "pnpm install",
-  "regions": ["iad1"]
+  "regions": ["iad1"],
+  "rewrites": [
+    { "source": "/", "destination": "/api" },
+    { "source": "/(.*)", "destination": "/api" }
+  ],
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "dist/meu-app/**"
+    }
+  }
 }
