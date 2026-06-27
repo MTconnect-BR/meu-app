@@ -36,6 +36,7 @@
 hlm-card {
   --tw-ring-shadow: none !important;
   box-shadow: none !important;
+  border-radius: 0 !important;
 }
 
 .dark {
