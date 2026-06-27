@@ -8,66 +8,61 @@
         <span class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">MeuApp</span>
       </a>
 
-      <!-- Right: Theme toggle + Hamburger -->
+      <!-- Right: CTA or Close -->
       <div class="flex items-center gap-2">
-        <button
-          hlmToggle
-          size="sm"
-          class="size-8 rounded-full p-0"
-          (click)="theme.toggle()"
-          [attr.aria-label]="theme.darkMode() ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
-        >
-          @if (theme.darkMode()) {
-            <ng-icon name="lucideSun" class="size-4" [style.color]="'hsl(0, 0%, 40%)'" />
-          } @else {
-            <ng-icon name="lucideMoon" class="size-4" [style.color]="'hsl(0, 0%, 40%)'" />
-          }
-        </button>
-        <button
-          class="flex size-9 items-center justify-center rounded-full"
-          [style.background-color]="'hsl(0, 0%, 13%)'"
-          (click)="toggleMobileMenu()"
-          aria-label="Menu"
-        >
-          @if (mobileMenuOpen()) {
+        @if (mobileMenuOpen()) {
+          <button
+            class="flex size-9 items-center justify-center rounded-full"
+            [style.background-color]="'hsl(0, 0%, 13%)'"
+            (click)="toggleMobileMenu()"
+            aria-label="Fechar menu"
+          >
             <ng-icon name="lucideX" class="size-5" [style.color]="'hsl(0, 0%, 91%)'" />
-          } @else {
-            <ng-icon name="lucideMenu" class="size-5" [style.color]="'hsl(0, 0%, 91%)'" />
-          }
-        </button>
+          </button>
+        } @else {
+          <a routerLink="/properties" class="rounded-full px-4 py-2 text-sm font-semibold transition-colors" [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'">
+            Ver imóveis
+          </a>
+        }
       </div>
     </header>
 
     <!-- Mobile dropdown menu -->
     @if (mobileMenuOpen()) {
-      <div class="absolute left-4 right-4 mt-2 rounded-2xl p-4 shadow-xl" [style.background-color]="'hsl(0, 0%, 87%)'">
-        <nav class="flex flex-col gap-3">
-          <a routerLink="/properties" class="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
-            Imóveis
-          </a>
-          <a routerLink="/crm" class="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
-            CRM
-          </a>
-          <hr [style.border-color]="'hsl(0, 0%, 75%)'" />
-          @if (auth.isLoggedIn()) {
-            <span class="px-3 py-1 text-sm" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
-            <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="justify-start text-sm" [style.color]="'hsl(0, 0%, 40%)'">Sair</button>
-          } @else {
-            <a routerLink="/auth/login" class="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
-              Entrar
+      <div class="absolute left-4 right-4 mt-2 space-y-2">
+        <!-- Nav card -->
+        <div class="rounded-2xl p-2 shadow-xl" [style.background-color]="'hsl(0, 0%, 87%)'">
+          <nav class="flex flex-col">
+            <a routerLink="/properties" class="px-4 py-3 text-lg font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
+              Imóveis
             </a>
-            <a routerLink="/properties" hlmBtn size="sm" class="rounded-full px-4 py-2" [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'" (click)="mobileMenuOpen.set(false)">
-              Ver imóveis
+            <div [style.background-color]="'hsl(0, 0%, 75%)'" class="mx-4 h-px"></div>
+            <a routerLink="/crm" class="px-4 py-3 text-lg font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
+              CRM
+            </a>
+          </nav>
+        </div>
+
+        <!-- Auth card -->
+        <div class="rounded-2xl p-2 shadow-xl" [style.background-color]="'hsl(0, 0%, 87%)'">
+          @if (auth.isLoggedIn()) {
+            <div class="flex items-center justify-between px-4 py-3">
+              <span class="text-sm" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
+              <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" [style.color]="'hsl(0, 0%, 40%)'">Sair</button>
+            </div>
+          } @else {
+            <a routerLink="/auth/login" class="flex items-center justify-between px-4 py-3" (click)="mobileMenuOpen.set(false)">
+              <span class="text-lg font-medium" [style.color]="'hsl(0, 0%, 13%)'">Entrar</span>
             </a>
           }
-        </nav>
+        </div>
       </div>
     }
   </div>
 
   <!-- Desktop: Two pills centered -->
   <div class="mx-auto mt-3 hidden max-w-5xl items-center justify-center gap-2 px-6 lg:flex">
-    <!-- Left pill: Logo + Nav + Theme toggle -->
+    <!-- Left pill: Logo + Nav -->
     <header class="flex items-center gap-4 rounded-2xl px-5 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
       <a routerLink="/" class="flex items-center gap-2">
         <ng-icon name="lucideHome" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
@@ -82,20 +77,6 @@
           CRM
         </a>
       </nav>
-
-      <button
-        hlmToggle
-        size="sm"
-        class="size-8 rounded-full p-0"
-        (click)="theme.toggle()"
-        [attr.aria-label]="theme.darkMode() ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
-      >
-        @if (theme.darkMode()) {
-          <ng-icon name="lucideSun" class="size-4" [style.color]="'hsl(0, 0%, 40%)'" />
-        } @else {
-          <ng-icon name="lucideMoon" class="size-4" [style.color]="'hsl(0, 0%, 40%)'" />
-        }
-      </button>
     </header>
 
     <!-- Right pill: CTA or Auth -->

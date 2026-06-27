@@ -4,8 +4,6 @@ import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideIcons } from '@ng-icons/core';
 import {
-  lucideSun,
-  lucideMoon,
   lucideSearch,
   lucideBedDouble,
   lucideBath,
@@ -40,8 +38,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(CdkMenuModule),
     provideSpartanHlm(),
     provideIcons({
-      lucideSun,
-      lucideMoon,
       lucideSearch,
       lucideBedDouble,
       lucideBath,
