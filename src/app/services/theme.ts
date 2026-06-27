@@ -26,8 +26,17 @@ export class ThemeService {
 
   public toggle(): void {
     const isDark = !this.darkMode();
+
+    document.documentElement.classList.add('no-transition');
+
     this.darkMode.set(isDark);
     document.documentElement.classList.toggle('dark', isDark);
     localStorage.setItem(this._storageKey, isDark ? 'dark' : 'light');
+
+    // Force reflow to apply changes before restoring transitions
+    void document.documentElement.offsetHeight;
+    requestAnimationFrame(() => {
+      document.documentElement.classList.remove('no-transition');
+    });
   }
 }
