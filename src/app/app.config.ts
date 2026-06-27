@@ -12,6 +12,10 @@ import {
   lucideCar,
   lucideMapPin,
   lucideHeart,
+  lucideArrowLeft,
+  lucideArrowRight,
+  lucidePhone,
+  lucideMaximize,
 } from '@ng-icons/lucide';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 
@@ -33,6 +37,10 @@ export const appConfig: ApplicationConfig = {
       lucideCar,
       lucideMapPin,
       lucideHeart,
+      lucideArrowLeft,
+      lucideArrowRight,
+      lucidePhone,
+      lucideMaximize,
     }),
   ],
 };

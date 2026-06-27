@@ -1,0 +1,167 @@
+<app-header />
+
+<main class="flex flex-1 flex-col px-6 py-8">
+  @if (property(); as prop) {
+    <div class="mx-auto w-full max-w-6xl space-y-8">
+      <a routerLink="/properties" class="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+        <ng-icon name="lucideArrowLeft" class="size-4" />
+        Back to properties
+      </a>
+
+      <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
+        <div class="space-y-4">
+          <div class="overflow-hidden rounded-xl">
+            <img [src]="currentImage" [alt]="prop.title" class="h-96 w-full object-cover" />
+          </div>
+          <div class="grid grid-cols-4 gap-2">
+            @for (img of prop.images; track $index) {
+              <button
+                (click)="selectImage($index)"
+                class="overflow-hidden rounded-lg ring-2 transition-all"
+                [class.ring-foreground]="selectedImage() === $index"
+                [class.ring-transparent]="selectedImage() !== $index"
+                [class.opacity-50]="selectedImage() !== $index"
+              >
+                <img [src]="img" [alt]="prop.title + ' photo ' + ($index + 1)" class="h-20 w-full object-cover" />
+              </button>
+            }
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="space-y-2">
+            <h1 class="text-2xl font-bold text-foreground">{{ prop.title }}</h1>
+            <p class="flex items-center gap-1 text-muted-foreground">
+              <ng-icon name="lucideMapPin" class="size-4" />
+              {{ prop.address }}
+            </p>
+          </div>
+
+          <p class="text-3xl font-bold text-foreground">
+            {{ propertiesService.formatPrice(prop.price, prop.type) }}
+          </p>
+
+          <div class="grid grid-cols-2 gap-4">
+            <div class="flex items-center gap-2 rounded-lg bg-muted p-3">
+              <ng-icon name="lucideBedDouble" class="size-5 text-muted-foreground" />
+              <div>
+                <p class="text-sm font-medium text-foreground">{{ prop.bedrooms }}</p>
+                <p class="text-xs text-muted-foreground">Bedrooms</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 rounded-lg bg-muted p-3">
+              <ng-icon name="lucideBath" class="size-5 text-muted-foreground" />
+              <div>
+                <p class="text-sm font-medium text-foreground">{{ prop.bathrooms }}</p>
+                <p class="text-xs text-muted-foreground">Bathrooms</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 rounded-lg bg-muted p-3">
+              <ng-icon name="lucideCar" class="size-5 text-muted-foreground" />
+              <div>
+                <p class="text-sm font-medium text-foreground">{{ prop.parkingSpots }}</p>
+                <p class="text-xs text-muted-foreground">Parking</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 rounded-lg bg-muted p-3">
+              <ng-icon name="lucideMaximize" class="size-5 text-muted-foreground" />
+              <div>
+                <p class="text-sm font-medium text-foreground">{{ prop.area }}m²</p>
+                <p class="text-xs text-muted-foreground">Area</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex gap-2">
+            @if (prop.furnished) {
+              <hlm-badge variant="secondary">Furnished</hlm-badge>
+            }
+            @if (prop.petFriendly) {
+              <hlm-badge variant="secondary">Pet Friendly</hlm-badge>
+            }
+          </div>
+
+          <div class="flex gap-3">
+            <button hlmBtn class="flex-1">
+              <ng-icon name="lucidePhone" class="size-4" />
+              Contact Agent
+            </button>
+            <button hlmBtn variant="outline" class="flex-1">
+              <ng-icon name="lucideHeart" class="size-4" />
+              Save Property
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <hlm-separator />
+
+      <div class="space-y-4">
+        <h2 class="text-xl font-bold text-foreground">Description</h2>
+        <p class="leading-relaxed text-muted-foreground">{{ prop.description }}</p>
+      </div>
+
+      <hlm-separator />
+
+      <div class="space-y-4">
+        <h2 class="text-xl font-bold text-foreground">Property Details</h2>
+        <div class="grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
+          <div>
+            <p class="text-muted-foreground">Type</p>
+            <p class="font-medium text-foreground">{{ prop.type === 'sale' ? 'For Sale' : 'For Rent' }}</p>
+          </div>
+          <div>
+            <p class="text-muted-foreground">Area</p>
+            <p class="font-medium text-foreground">{{ prop.area }}m²</p>
+          </div>
+          <div>
+            <p class="text-muted-foreground">Neighborhood</p>
+            <p class="font-medium text-foreground">{{ prop.neighborhood }}</p>
+          </div>
+          <div>
+            <p class="text-muted-foreground">City</p>
+            <p class="font-medium text-foreground">{{ prop.city }}, {{ prop.state }}</p>
+          </div>
+        </div>
+      </div>
+
+      @if (similarProperties().length > 0) {
+        <hlm-separator />
+
+        <section class="space-y-4">
+          <h2 class="text-xl font-bold text-foreground">Similar Properties</h2>
+          <hlm-carousel [options]="similarOptions" class="relative px-12">
+            <hlm-carousel-content>
+              @for (similar of similarProperties(); track similar.id) {
+                <hlm-carousel-item class="basis-1/3">
+                  <a [routerLink]="['/properties', similar.slug]" class="block">
+                    <hlm-card hlmCard class="overflow-hidden transition-shadow hover:shadow-md">
+                      <img [src]="similar.imageUrl" [alt]="similar.title" class="h-40 w-full object-cover" />
+                      <div hlmCardContent class="space-y-2">
+                        <h3 class="font-semibold text-foreground">{{ similar.title }}</h3>
+                        <p class="text-sm text-muted-foreground">{{ similar.address }}</p>
+                        <p class="font-bold text-foreground">{{ propertiesService.formatPrice(similar.price, similar.type) }}</p>
+                      </div>
+                    </hlm-card>
+                  </a>
+                </hlm-carousel-item>
+              }
+            </hlm-carousel-content>
+            <button hlmCarouselPrevious aria-label="Previous"></button>
+            <button hlmCarouselNext aria-label="Next"></button>
+          </hlm-carousel>
+        </section>
+      }
+    </div>
+  } @else {
+    <div class="flex flex-1 items-center justify-center">
+      <div class="text-center space-y-4">
+        <h1 class="text-2xl font-bold text-foreground">Property not found</h1>
+        <p class="text-muted-foreground">The property you're looking for doesn't exist.</p>
+        <a routerLink="/properties" hlmBtn>Back to Properties</a>
+      </div>
+    </div>
+  }
+</main>
+
+<app-footer />
