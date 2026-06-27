@@ -1,11 +1,11 @@
 <div class="fixed inset-x-0 top-0 z-[100]">
   <!-- Mobile/Tablet: Single pill -->
   <div class="mx-4 mt-3 lg:hidden">
-    <header class="flex items-center justify-between rounded-2xl px-5 py-2.5 shadow-lg" [style.background-color]="'#ffffff'">
+    <header class="flex items-center justify-between rounded-2xl px-5 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
       <!-- Left: Logo -->
       <a routerLink="/" class="flex items-center gap-2">
-        <ng-icon name="lucideHome" class="size-5" [style.color]="'hsl(97, 57%, 61%)'" />
-        <span class="text-lg font-bold" [style.color]="'#171717'">MeuApp</span>
+        <ng-icon name="lucideHome" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
+        <span class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">MeuApp</span>
       </a>
 
       <!-- Right: Theme toggle + Hamburger -->
@@ -18,21 +18,21 @@
           [attr.aria-label]="theme.darkMode() ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
         >
           @if (theme.darkMode()) {
-            <ng-icon name="lucideSun" class="size-4" [style.color]="'#525252'" />
+            <ng-icon name="lucideSun" class="size-4" [style.color]="'hsl(0, 0%, 40%)'" />
           } @else {
-            <ng-icon name="lucideMoon" class="size-4" [style.color]="'#525252'" />
+            <ng-icon name="lucideMoon" class="size-4" [style.color]="'hsl(0, 0%, 40%)'" />
           }
         </button>
         <button
           class="flex size-9 items-center justify-center rounded-full"
-          [style.background-color]="'hsl(97, 57%, 61%)'"
+          [style.background-color]="'hsl(0, 0%, 13%)'"
           (click)="toggleMobileMenu()"
           aria-label="Menu"
         >
           @if (mobileMenuOpen()) {
-            <ng-icon name="lucideX" class="size-5" [style.color]="'#171717'" />
+            <ng-icon name="lucideX" class="size-5" [style.color]="'hsl(0, 0%, 91%)'" />
           } @else {
-            <ng-icon name="lucideMenu" class="size-5" [style.color]="'#171717'" />
+            <ng-icon name="lucideMenu" class="size-5" [style.color]="'hsl(0, 0%, 91%)'" />
           }
         </button>
       </div>
@@ -40,23 +40,23 @@
 
     <!-- Mobile dropdown menu -->
     @if (mobileMenuOpen()) {
-      <div class="absolute left-4 right-4 mt-2 rounded-2xl p-4 shadow-xl" [style.background-color]="'#ffffff'">
+      <div class="absolute left-4 right-4 mt-2 rounded-2xl p-4 shadow-xl" [style.background-color]="'hsl(0, 0%, 87%)'">
         <nav class="flex flex-col gap-3">
-          <a routerLink="/properties" class="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted" [style.color]="'#171717'" (click)="mobileMenuOpen.set(false)">
+          <a routerLink="/properties" class="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
             Imóveis
           </a>
-          <a routerLink="/crm" class="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted" [style.color]="'#171717'" (click)="mobileMenuOpen.set(false)">
+          <a routerLink="/crm" class="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
             CRM
           </a>
-          <hr [style.border-color]="'#e5e5e5'" />
+          <hr [style.border-color]="'hsl(0, 0%, 75%)'" />
           @if (auth.isLoggedIn()) {
-            <span class="px-3 py-1 text-sm" [style.color]="'#737373'">{{ auth.currentUserEmail() }}</span>
-            <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="justify-start text-sm" [style.color]="'#404040'">Sair</button>
+            <span class="px-3 py-1 text-sm" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
+            <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="justify-start text-sm" [style.color]="'hsl(0, 0%, 40%)'">Sair</button>
           } @else {
-            <a routerLink="/auth/login" class="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted" [style.color]="'#171717'" (click)="mobileMenuOpen.set(false)">
+            <a routerLink="/auth/login" class="rounded-lg px-3 py-2 text-sm font-medium transition-colors hover:bg-muted" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
               Entrar
             </a>
-            <a routerLink="/properties" hlmBtn size="sm" class="rounded-full px-4 py-2" [style.background-color]="'#171717'" [style.color]="'#ffffff'" (click)="mobileMenuOpen.set(false)">
+            <a routerLink="/properties" hlmBtn size="sm" class="rounded-full px-4 py-2" [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'" (click)="mobileMenuOpen.set(false)">
               Ver imóveis
             </a>
           }
@@ -68,17 +68,17 @@
   <!-- Desktop: Two pills centered -->
   <div class="mx-auto mt-3 hidden max-w-5xl items-center justify-center gap-2 px-6 lg:flex">
     <!-- Left pill: Logo + Nav + Theme toggle -->
-    <header class="flex items-center gap-4 rounded-2xl px-5 py-2.5 shadow-lg" [style.background-color]="'#ffffff'">
+    <header class="flex items-center gap-4 rounded-2xl px-5 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
       <a routerLink="/" class="flex items-center gap-2">
-        <ng-icon name="lucideHome" class="size-5" [style.color]="'hsl(97, 57%, 61%)'" />
-        <span class="text-lg font-bold" [style.color]="'#171717'">MeuApp</span>
+        <ng-icon name="lucideHome" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
+        <span class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">MeuApp</span>
       </a>
 
       <nav class="flex items-center gap-6">
-        <a routerLink="/properties" class="text-sm font-medium transition-colors" [style.color]="'#525252'">
+        <a routerLink="/properties" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 40%)'">
           Imóveis
         </a>
-        <a routerLink="/crm" class="text-sm font-medium transition-colors" [style.color]="'#525252'">
+        <a routerLink="/crm" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 40%)'">
           CRM
         </a>
       </nav>
@@ -91,23 +91,23 @@
         [attr.aria-label]="theme.darkMode() ? 'Mudar para modo claro' : 'Mudar para modo escuro'"
       >
         @if (theme.darkMode()) {
-          <ng-icon name="lucideSun" class="size-4" [style.color]="'#525252'" />
+          <ng-icon name="lucideSun" class="size-4" [style.color]="'hsl(0, 0%, 40%)'" />
         } @else {
-          <ng-icon name="lucideMoon" class="size-4" [style.color]="'#525252'" />
+          <ng-icon name="lucideMoon" class="size-4" [style.color]="'hsl(0, 0%, 40%)'" />
         }
       </button>
     </header>
 
     <!-- Right pill: CTA or Auth -->
-    <div class="flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg" [style.background-color]="'#ffffff'">
+    <div class="flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
       @if (auth.isLoggedIn()) {
-        <span class="text-sm" [style.color]="'#737373'">{{ auth.currentUserEmail() }}</span>
-        <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" [style.color]="'#404040'">Sair</button>
+        <span class="text-sm" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
+        <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" [style.color]="'hsl(0, 0%, 40%)'">Sair</button>
       } @else {
-        <a routerLink="/auth/login" class="text-sm font-medium transition-colors" [style.color]="'#525252'">
+        <a routerLink="/auth/login" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 40%)'">
           Entrar
         </a>
-        <a routerLink="/properties" hlmBtn size="sm" class="rounded-full px-4 py-2" [style.background-color]="'#171717'" [style.color]="'#ffffff'">
+        <a routerLink="/properties" hlmBtn size="sm" class="rounded-full px-4 py-2" [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'">
           Ver imóveis
         </a>
       }

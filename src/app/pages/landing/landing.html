@@ -3,34 +3,34 @@
 <main class="flex flex-1 flex-col">
 
   <!-- Hero Section — MindMarket style -->
-  <section class="sticky top-0 flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 pb-0 lg:min-h-[130vh] lg:justify-start lg:pt-12" style="background-color: hsl(97, 57%, 61%);">
+  <section class="sticky top-0 flex min-h-dvh flex-col items-center justify-center overflow-hidden px-6 pb-0 lg:min-h-[130vh] lg:justify-start lg:pt-12" style="background-color: hsl(0, 0%, 91%);">
     <!-- Headline -->
     <div class="relative z-10 space-y-4 text-center lg:mt-16">
       <h1 class="mx-auto max-w-4xl text-4xl font-black leading-[0.95] tracking-tight sm:text-5xl md:text-6xl lg:text-[7rem]"
-          [style.color]="'#171717'">
+          [style.color]="'hsl(0, 0%, 13%)'">
         Encontre o imóvel
         <br />
-        <span [style.color]="'#171717'">perfeito</span>
+        <span [style.color]="'hsl(0, 0%, 13%)'">perfeito</span>
       </h1>
     </div>
 
     <!-- Subtitle -->
     <div class="relative z-10 mt-4 text-center lg:mt-8">
-      <p class="text-base font-medium sm:text-lg md:text-xl lg:text-2xl" [style.color]="'rgba(23,23,23,0.7)'">
+      <p class="text-base font-medium sm:text-lg md:text-xl lg:text-2xl" [style.color]="'hsl(0, 0%, 40%)'">
         Seu novo lar começa aqui
       </p>
     </div>
 
     <!-- Search Card — ZAP Imóveis style -->
     <div class="relative z-10 mt-8 w-full max-w-2xl md:mt-14">
-      <div class="rounded-2xl p-5 shadow-2xl sm:p-6" [style.background-color]="'#ffffff'">
+      <div class="rounded-2xl p-5 shadow-2xl sm:p-6" [style.background-color]="'hsl(0, 0%, 87%)'">
         <!-- Tabs -->
-        <div class="mb-4 flex gap-1 rounded-lg p-1 sm:mb-5" [style.background-color]="'#f5f5f5'">
+        <div class="mb-4 flex gap-1 rounded-lg p-1 sm:mb-5" [style.background-color]="'hsl(0, 0%, 91%)'">
           <button
             class="flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-all sm:px-4 sm:py-2.5"
             [style]="searchType() === 'buy'
-              ? 'background-color: #ffffff; color: #171717; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'
-              : 'background-color: transparent; color: #737373;'"
+              ? 'background-color: hsl(0, 0%, 100%); color: hsl(0, 0%, 13%); box-shadow: 0 1px 3px rgba(0,0,0,0.1);'
+              : 'background-color: transparent; color: hsl(0, 0%, 50%);'"
             (click)="searchType.set('buy')"
           >
             Comprar
@@ -38,8 +38,8 @@
           <button
             class="flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-all sm:px-4 sm:py-2.5"
             [style]="searchType() === 'rent'
-              ? 'background-color: #ffffff; color: #171717; box-shadow: 0 1px 3px rgba(0,0,0,0.1);'
-              : 'background-color: transparent; color: #737373;'"
+              ? 'background-color: hsl(0, 0%, 100%); color: hsl(0, 0%, 13%); box-shadow: 0 1px 3px rgba(0,0,0,0.1);'
+              : 'background-color: transparent; color: hsl(0, 0%, 50%);'"
             (click)="searchType.set('rent')"
           >
             Alugar
@@ -47,14 +47,14 @@
         </div>
 
         <!-- Search Input -->
-        <div class="mb-4 flex items-center gap-3 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3" [style.background-color]="'#f5f5f5'">
-          <ng-icon name="lucideSearch" class="size-5 shrink-0" [style.color]="'#737373'" />
+        <div class="mb-4 flex items-center gap-3 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3" [style.background-color]="'hsl(0, 0%, 91%)'">
+          <ng-icon name="lucideSearch" class="size-5 shrink-0" [style.color]="'hsl(0, 0%, 50%)'" />
           <input
             type="text"
             [value]="searchQuery()"
             (input)="searchQuery.set($any($event.target).value)"
             placeholder="Bairro, cidade ou endereço"
-            class="w-full bg-transparent text-sm outline-none" [style.color]="'#171717'"
+            class="w-full bg-transparent text-sm outline-none" [style.color]="'hsl(0, 0%, 13%)'"
           />
         </div>
 
@@ -65,7 +65,7 @@
               [value]="propertyType()"
               (change)="propertyType.set($any($event.target).value)"
               class="w-full appearance-none rounded-xl px-3 py-2.5 pr-10 text-sm outline-none sm:px-4 sm:py-3"
-              [style.background-color]="'#f5f5f5'" [style.color]="'#171717'"
+              [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'"
             >
               <option value="all">Todos os tipos</option>
               <option value="apartment">Apartamento</option>
@@ -73,12 +73,12 @@
               <option value="condo">Condomínio</option>
               <option value="land">Terreno</option>
             </select>
-            <ng-icon name="lucideChevronDown" class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2" [style.color]="'#737373'" />
+            <ng-icon name="lucideChevronDown" class="pointer-events-none absolute right-3 top-1/2 size-4 -translate-y-1/2" [style.color]="'hsl(0, 0%, 50%)'" />
           </div>
           <button
             (click)="onSearch()"
             class="flex items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors sm:px-6 sm:py-3"
-            [style.background-color]="'hsl(97, 57%, 61%)'" [style.color]="'#171717'"
+            [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'"
           >
             <ng-icon name="lucideSearch" class="size-4" />
             Buscar
@@ -91,10 +91,10 @@
   <!-- Content Section -->
   <section class="relative z-10 rounded-t-3xl px-6 py-16 md:py-24" style="background-color: hsl(46, 46%, 93%);">
     <div class="mx-auto max-w-3xl space-y-8">
-      <h2 class="text-2xl font-bold md:text-3xl lg:text-4xl" [style.color]="'#171717'">
+      <h2 class="text-2xl font-bold md:text-3xl lg:text-4xl" [style.color]="'hsl(0, 0%, 13%)'">
         Sua jornada para o imóvel ideal começa aqui
       </h2>
-      <div class="space-y-6 text-base leading-relaxed md:text-lg" [style.color]="'#525252'">
+      <div class="space-y-6 text-base leading-relaxed md:text-lg" [style.color]="'hsl(0, 0%, 40%)'">
         <p>
           Encontrar o imóvel certo é uma das decisões mais importantes da vida.
           Seja para morar, investir ou começar um novo capítulo, cada escolha carrega
@@ -119,7 +119,7 @@
       </div>
       <a routerLink="/properties"
          class="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
-         [style.background-color]="'#171717'" [style.color]="'#ffffff'">
+         [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'">
         Ver imóveis
       </a>
     </div>
@@ -129,10 +129,10 @@
   <section class="relative z-10 px-6 py-16 md:py-24" style="background-color: hsl(46, 46%, 93%);">
     <div class="mx-auto max-w-6xl space-y-8">
       <div class="flex items-center justify-between">
-        <h2 class="text-2xl font-bold md:text-3xl" [style.color]="'#171717'">
+        <h2 class="text-2xl font-bold md:text-3xl" [style.color]="'hsl(0, 0%, 13%)'">
           Imóveis em destaque
         </h2>
-        <a routerLink="/properties" class="text-sm font-medium transition-colors hover:underline" [style.color]="'#525252'">
+        <a routerLink="/properties" class="text-sm font-medium transition-colors hover:underline" [style.color]="'hsl(0, 0%, 40%)'">
           Ver todos →
         </a>
       </div>
@@ -141,16 +141,16 @@
       <div class="carousel-container -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 lg:mx-0 lg:px-0">
         @for (property of featuredProperties; track property.id) {
           <a [routerLink]="['/properties', property.slug]"
-             class="w-72 shrink-0 snap-start overflow-hidden rounded-2xl bg-white shadow-lg transition-shadow hover:shadow-xl sm:w-80">
+             class="w-72 shrink-0 snap-start overflow-hidden rounded-2xl shadow-lg transition-shadow hover:shadow-xl sm:w-80" [style.background-color]="'hsl(0, 0%, 87%)'">
             <div class="relative h-48 w-full overflow-hidden">
               <img [src]="property.imageUrl" [alt]="property.title"
                    class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
             </div>
             <div class="space-y-2 p-4">
-              <h3 class="line-clamp-1 font-semibold" [style.color]="'#171717'">{{ property.title }}</h3>
-              <p class="text-sm" [style.color]="'#737373'">{{ property.address }}</p>
-              <p class="text-lg font-bold" [style.color]="'#171717'">{{ formatPrice(property) }}</p>
-              <div class="flex gap-3 text-xs" [style.color]="'#a3a3a3'">
+              <h3 class="line-clamp-1 font-semibold" [style.color]="'hsl(0, 0%, 13%)'">{{ property.title }}</h3>
+              <p class="text-sm" [style.color]="'hsl(0, 0%, 50%)'">{{ property.address }}</p>
+              <p class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">{{ formatPrice(property) }}</p>
+              <div class="flex gap-3 text-xs" [style.color]="'hsl(0, 0%, 60%)'">
                 <span>{{ property.bedrooms }} quartos</span>
                 <span>{{ property.bathrooms }} banheiros</span>
                 <span>{{ property.area }}m²</span>

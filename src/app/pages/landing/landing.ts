@@ -26,7 +26,7 @@ export class Landing implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.originalBg = document.body.style.backgroundColor;
-    document.body.style.backgroundColor = 'hsl(97, 57%, 61%)';
+    document.body.style.backgroundColor = 'hsl(0, 0%, 91%)';
   }
 
   ngOnDestroy() {
