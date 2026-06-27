@@ -33,12 +33,6 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-hlm-card {
-  --tw-ring-shadow: none !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-}
-
 .dark {
   color-scheme: dark;
   --background: oklch(0.145 0 0);
