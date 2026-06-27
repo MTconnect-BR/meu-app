@@ -1,3 +1,3 @@
-import { reqHandler } from '../dist/meu-app/server/server.mjs';
-
-export default reqHandler;
+export default function handler(req, res) {
+  res.status(200).json({ ok: true, url: req.url });
+}
