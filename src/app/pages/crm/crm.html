@@ -106,14 +106,20 @@
 </main>
 
 @if (showForm()) {
-  <hlm-sheet (closed)="closeForm()">
-    <hlm-sheet-content side="right" class="w-full sm:max-w-2xl">
-      <hlm-sheet-header>
-        <h2 hlmSheetTitle>{{ editingId() ? 'Edit Property' : 'New Property' }}</h2>
-        <p hlmSheetDescription>Fill in the property details below.</p>
-      </hlm-sheet-header>
+  <div class="fixed inset-0 z-50 flex justify-end" role="dialog" aria-modal="true" (keydown.escape)="closeForm()" (click)="closeForm()">
+    <div class="absolute inset-0 bg-black/50" tabindex="-1"></div>
+    <div class="relative z-10 h-full w-full max-w-2xl overflow-y-auto bg-background p-6 shadow-xl" tabindex="-1" (click)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation()">
+      <div class="mb-4 flex items-center justify-between">
+        <div>
+          <h2 class="text-lg font-semibold text-foreground">{{ editingId() ? 'Edit Property' : 'New Property' }}</h2>
+          <p class="text-sm text-muted-foreground">Fill in the property details below.</p>
+        </div>
+        <button hlmBtn variant="ghost" size="sm" (click)="closeForm()">
+          <ng-icon name="lucideX" class="size-4" />
+        </button>
+      </div>
 
-      <form [formGroup]="form" (ngSubmit)="save()" class="space-y-4 py-4">
+      <form [formGroup]="form" (ngSubmit)="save()" class="space-y-4">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
           <div hlmField class="space-y-1">
             <label hlmFieldLabel for="crm-title">Title *</label>
@@ -237,33 +243,32 @@
         </div>
       </form>
 
-      <hlm-sheet-footer>
+      <div class="mt-6 flex justify-end gap-3 border-t border-border pt-4">
         <button hlmBtn type="button" variant="outline" (click)="closeForm()">Cancel</button>
         <button hlmBtn type="button" [disabled]="form.invalid" (click)="save()">
           <ng-icon name="lucideCheck" class="size-4" />
           {{ editingId() ? 'Update' : 'Create' }}
         </button>
-      </hlm-sheet-footer>
-    </hlm-sheet-content>
-  </hlm-sheet>
+      </div>
+    </div>
+  </div>
 }
 
 @if (showDeleteDialog()) {
-  <hlm-sheet (closed)="cancelDelete()">
-    <hlm-sheet-content side="bottom" class="h-auto">
-      <hlm-sheet-header>
-        <h2 hlmSheetTitle>Delete Property</h2>
-        <p hlmSheetDescription>Are you sure? This action cannot be undone.</p>
-      </hlm-sheet-header>
-      <hlm-sheet-footer class="flex flex-row justify-end gap-3">
+  <div class="fixed inset-0 z-50 flex items-end justify-center sm:items-center" role="dialog" aria-modal="true" (keydown.escape)="cancelDelete()" (click)="cancelDelete()">
+    <div class="absolute inset-0 bg-black/50" tabindex="-1"></div>
+    <div class="relative z-10 w-full max-w-md rounded-t-xl bg-background p-6 shadow-xl sm:rounded-xl" tabindex="-1" (click)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation()">
+      <h2 class="text-lg font-semibold text-foreground">Delete Property</h2>
+      <p class="mt-2 text-sm text-muted-foreground">Are you sure? This action cannot be undone.</p>
+      <div class="mt-6 flex justify-end gap-3">
         <button hlmBtn variant="outline" (click)="cancelDelete()">Cancel</button>
         <button hlmBtn variant="destructive" (click)="doDelete()">
           <ng-icon name="lucideTrash2" class="size-4" />
           Delete
         </button>
-      </hlm-sheet-footer>
-    </hlm-sheet-content>
-  </hlm-sheet>
+      </div>
+    </div>
+  </div>
 }
 
 <app-footer />
