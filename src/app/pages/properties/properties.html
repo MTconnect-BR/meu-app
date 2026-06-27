@@ -1,0 +1,132 @@
+<app-header />
+
+<main class="flex flex-1 flex-col px-6 py-8">
+  <div class="mx-auto w-full max-w-6xl space-y-8">
+    <div class="space-y-2">
+      <h1 class="text-3xl font-bold tracking-tight text-foreground">
+        Find your perfect home
+      </h1>
+      <p class="text-muted-foreground">
+        Browse thousands of properties for sale and rent
+      </p>
+    </div>
+
+    <div class="flex flex-col gap-4 sm:flex-row">
+      <hlm-field class="flex-1">
+        <input
+          hlmInput
+          type="text"
+          placeholder="Search by location..."
+          [value]="propertiesService.searchQuery()"
+          (input)="propertiesService.searchQuery.set($any($event.target).value)"
+        />
+      </hlm-field>
+      <div class="flex gap-2">
+        <button
+          hlmBtn
+          [variant]="propertiesService.propertyType() === 'all' ? 'default' : 'outline'"
+          (click)="propertiesService.propertyType.set('all')"
+        >
+          All
+        </button>
+        <button
+          hlmBtn
+          [variant]="propertiesService.propertyType() === 'sale' ? 'default' : 'outline'"
+          (click)="propertiesService.propertyType.set('sale')"
+        >
+          Buy
+        </button>
+        <button
+          hlmBtn
+          [variant]="propertiesService.propertyType() === 'rent' ? 'default' : 'outline'"
+          (click)="propertiesService.propertyType.set('rent')"
+        >
+          Rent
+        </button>
+      </div>
+    </div>
+
+    <div class="flex flex-wrap gap-2">
+      <button
+        hlmBtn
+        size="sm"
+        [variant]="propertiesService.furnished() ? 'default' : 'outline'"
+        (click)="propertiesService.furnished.update(v => !v)"
+      >
+        Furnished
+      </button>
+      <button
+        hlmBtn
+        size="sm"
+        [variant]="propertiesService.petFriendly() ? 'default' : 'outline'"
+        (click)="propertiesService.petFriendly.update(v => !v)"
+      >
+        Pet Friendly
+      </button>
+      <button
+        hlmBtn
+        size="sm"
+        [variant]="propertiesService.parkingSpot() ? 'default' : 'outline'"
+        (click)="propertiesService.parkingSpot.update(v => !v)"
+      >
+        Parking
+      </button>
+    </div>
+
+    <hlm-separator />
+
+    <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      @for (property of propertiesService.filteredProperties; track property.id) {
+        <hlm-card hlmCard class="overflow-hidden">
+          <img [src]="property.imageUrl" [alt]="property.title" class="h-48 w-full object-cover" />
+          <div hlmCardContent class="space-y-3">
+            <div class="flex items-start justify-between">
+              <div class="space-y-1">
+                <h3 class="font-semibold text-foreground">{{ property.title }}</h3>
+                <p class="flex items-center gap-1 text-sm text-muted-foreground">
+                  <ng-icon name="lucideMapPin" class="size-3" />
+                  {{ property.address }}
+                </p>
+              </div>
+              <button hlmBtn variant="ghost" size="icon" class="size-8 shrink-0">
+                <ng-icon name="lucideHeart" class="size-4" />
+              </button>
+            </div>
+            <p class="text-lg font-bold text-foreground">
+              {{ propertiesService.formatPrice(property.price, property.type) }}
+            </p>
+            <div class="flex items-center gap-4 text-sm text-muted-foreground">
+              <span class="flex items-center gap-1">
+                <ng-icon name="lucideBedDouble" class="size-4" />
+                {{ property.bedrooms }}
+              </span>
+              <span class="flex items-center gap-1">
+                <ng-icon name="lucideBath" class="size-4" />
+                {{ property.bathrooms }}
+              </span>
+              <span class="flex items-center gap-1">
+                <ng-icon name="lucideCar" class="size-4" />
+                {{ property.parkingSpots }}
+              </span>
+              <span class="ml-auto">{{ property.area }}m²</span>
+            </div>
+            <div class="flex gap-2">
+              @if (property.furnished) {
+                <hlm-badge variant="secondary">Furnished</hlm-badge>
+              }
+              @if (property.petFriendly) {
+                <hlm-badge variant="secondary">Pets</hlm-badge>
+              }
+            </div>
+          </div>
+        </hlm-card>
+      } @empty {
+        <div class="col-span-full py-16 text-center text-muted-foreground">
+          No properties found matching your criteria.
+        </div>
+      }
+    </div>
+  </div>
+</main>
+
+<app-footer />
