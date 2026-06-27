@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
 import { Header } from '../../components/header';
 import { Footer } from '../../components/footer';
@@ -14,12 +14,22 @@ import { lucideSearch, lucideChevronDown } from '@ng-icons/lucide';
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
 })
-export class Landing {
+export class Landing implements OnInit, OnDestroy {
   private readonly router = inject(Router);
+  private originalBg = '';
 
   protected readonly searchType = signal<'buy' | 'rent'>('buy');
   protected readonly searchQuery = signal('');
   protected readonly propertyType = signal('all');
+
+  ngOnInit() {
+    this.originalBg = document.body.style.backgroundColor;
+    document.body.style.backgroundColor = 'hsl(97, 57%, 61%)';
+  }
+
+  ngOnDestroy() {
+    document.body.style.backgroundColor = this.originalBg;
+  }
 
   onSearch() {
     const params: Record<string, string> = {
