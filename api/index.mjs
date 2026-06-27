@@ -1,3 +1,3 @@
-import handler from '../dist/meu-app/server/server.mjs';
+import { reqHandler } from '../dist/meu-app/server/server.mjs';
 
-export default handler;
+export default reqHandler;

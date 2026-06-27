@@ -10,6 +10,7 @@
   ],
   "functions": {
     "api/index.mjs": {
+      "runtime": "@vercel/node@3",
       "includeFiles": "dist/meu-app/**"
     }
   }
