@@ -19,7 +19,11 @@ export interface Property {
   description: string;
   furnished: boolean;
   petFriendly: boolean;
+  lat: number;
+  lng: number;
 }
+
+const STORAGE_KEY = 'meu_app_custom_properties';
 
 @Injectable({ providedIn: 'root' })
 export class PropertiesService {
@@ -31,7 +35,7 @@ export class PropertiesService {
 
   private readonly _description = 'This stunning property offers a modern and comfortable living space with top-notch finishes. Located in a prime area with easy access to restaurants, shops, and public transportation. The property features spacious rooms, abundant natural light, and a functional layout perfect for families or professionals.';
 
-  public readonly properties: Property[] = [
+  public readonly mockProperties: Property[] = [
     {
       id: 1,
       title: 'Modern Apartment with Ocean View',
@@ -51,6 +55,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: false,
+      lat: -23.0068,
+      lng: -43.3654,
     },
     {
       id: 2,
@@ -71,6 +77,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: true,
+      lat: -23.5558,
+      lng: -46.6918,
     },
     {
       id: 3,
@@ -91,6 +99,8 @@ export class PropertiesService {
       description: this._description,
       furnished: false,
       petFriendly: true,
+      lat: -23.4815,
+      lng: -46.8537,
     },
     {
       id: 4,
@@ -111,6 +121,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: false,
+      lat: -23.5818,
+      lng: -46.6847,
     },
     {
       id: 5,
@@ -131,6 +143,8 @@ export class PropertiesService {
       description: this._description,
       furnished: false,
       petFriendly: false,
+      lat: -22.9711,
+      lng: -43.1822,
     },
     {
       id: 6,
@@ -151,6 +165,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: true,
+      lat: -23.5613,
+      lng: -46.6918,
     },
     {
       id: 7,
@@ -171,6 +187,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: true,
+      lat: -23.421,
+      lng: -51.933,
     },
     {
       id: 8,
@@ -191,6 +209,8 @@ export class PropertiesService {
       description: this._description,
       furnished: false,
       petFriendly: false,
+      lat: -19.8711,
+      lng: -43.9684,
     },
     {
       id: 9,
@@ -211,6 +231,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: false,
+      lat: -22.9068,
+      lng: -43.1729,
     },
     {
       id: 10,
@@ -231,6 +253,8 @@ export class PropertiesService {
       description: this._description,
       furnished: false,
       petFriendly: true,
+      lat: -22.8184,
+      lng: -47.0647,
     },
     {
       id: 11,
@@ -251,6 +275,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: false,
+      lat: -23.5958,
+      lng: -46.6847,
     },
     {
       id: 12,
@@ -271,6 +297,8 @@ export class PropertiesService {
       description: this._description,
       furnished: false,
       petFriendly: true,
+      lat: -29.6842,
+      lng: -53.8069,
     },
     {
       id: 13,
@@ -291,6 +319,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: false,
+      lat: -27.4456,
+      lng: -48.5012,
     },
     {
       id: 14,
@@ -311,6 +341,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: true,
+      lat: -30.0346,
+      lng: -51.2177,
     },
     {
       id: 15,
@@ -331,6 +363,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: false,
+      lat: -16.6869,
+      lng: -49.2648,
     },
     {
       id: 16,
@@ -351,6 +385,8 @@ export class PropertiesService {
       description: this._description,
       furnished: false,
       petFriendly: true,
+      lat: -3.7327,
+      lng: -38.5267,
     },
     {
       id: 17,
@@ -371,6 +407,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: false,
+      lat: -8.1208,
+      lng: -34.8941,
     },
     {
       id: 18,
@@ -391,6 +429,8 @@ export class PropertiesService {
       description: this._description,
       furnished: true,
       petFriendly: true,
+      lat: -29.3744,
+      lng: -50.8767,
     },
     {
       id: 19,
@@ -411,6 +451,8 @@ export class PropertiesService {
       description: this._description,
       furnished: false,
       petFriendly: false,
+      lat: -15.7939,
+      lng: -47.8828,
     },
     {
       id: 20,
@@ -431,8 +473,48 @@ export class PropertiesService {
       description: this._description,
       furnished: false,
       petFriendly: true,
+      lat: -12.9714,
+      lng: -38.5014,
     },
   ];
+
+  private _customProperties: Property[] = this._loadFromStorage();
+
+  public get properties(): Property[] {
+    return [...this.mockProperties, ...this._customProperties];
+  }
+
+  private _nextId(): number {
+    const allIds = this.properties.map((p) => p.id);
+    return Math.max(0, ...allIds) + 1;
+  }
+
+  public create(property: Omit<Property, 'id'>): Property {
+    const newProperty: Property = { ...property, id: this._nextId() };
+    this._customProperties = [...this._customProperties, newProperty];
+    this._saveToStorage();
+    return newProperty;
+  }
+
+  public update(id: number, changes: Partial<Property>): Property | undefined {
+    const idx = this._customProperties.findIndex((p) => p.id === id);
+    if (idx !== -1) {
+      this._customProperties[idx] = { ...this._customProperties[idx], ...changes, id };
+      this._saveToStorage();
+      return this._customProperties[idx];
+    }
+    return undefined;
+  }
+
+  public delete(id: number): boolean {
+    const before = this._customProperties.length;
+    this._customProperties = this._customProperties.filter((p) => p.id !== id);
+    if (this._customProperties.length < before) {
+      this._saveToStorage();
+      return true;
+    }
+    return false;
+  }
 
   public get forSale(): Property[] {
     return this._applyFilters(this.properties.filter((p) => p.type === 'sale'));
@@ -476,5 +558,24 @@ export class PropertiesService {
       }
       return true;
     });
+  }
+
+  private _loadFromStorage(): Property[] {
+    if (typeof window === 'undefined') return [];
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
+    } catch {
+      return [];
+    }
+  }
+
+  private _saveToStorage(): void {
+    if (typeof window === 'undefined') return;
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this._customProperties));
+    } catch {
+      // storage full or unavailable
+    }
   }
 }

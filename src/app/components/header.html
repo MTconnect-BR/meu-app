@@ -6,6 +6,9 @@
     <a routerLink="/properties" hlmBtn variant="ghost" size="sm">
       Properties
     </a>
+    <a routerLink="/crm" hlmBtn variant="ghost" size="sm">
+      CRM
+    </a>
     <button hlmToggle variant="outline" size="sm" class="size-8 p-0" (click)="theme.toggle()" [attr.aria-label]="theme.darkMode() ? 'Switch to light mode' : 'Switch to dark mode'">
       @if (theme.darkMode()) {
         <ng-icon name="lucideSun" />

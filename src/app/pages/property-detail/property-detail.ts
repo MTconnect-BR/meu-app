@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, OnInit } from '@angular/core';
+import { Component, inject, signal, computed, OnInit, AfterViewInit, OnDestroy, ElementRef, viewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { Footer } from '../../components/footer';
@@ -35,7 +35,7 @@ import { HlmH1, HlmH2, HlmP } from '@spartan-ng/helm/typography';
   templateUrl: './property-detail.html',
   styleUrl: './property-detail.scss',
 })
-export class PropertyDetail implements OnInit {
+export class PropertyDetail implements OnInit, AfterViewInit, OnDestroy {
   private readonly _route = inject(ActivatedRoute);
   private readonly _propertiesService = inject(PropertiesService);
   protected readonly propertiesService = this._propertiesService;
@@ -48,11 +48,59 @@ export class PropertyDetail implements OnInit {
   });
   protected readonly similarOptions = { align: 'start', slidesToScroll: 2, containScroll: 'trimSnaps' } as const;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private _map: any;
+  private _mapInitialized = false;
+  protected readonly mapContainer = viewChild<ElementRef>('mapContainer');
+
   ngOnInit(): void {
     const slug = this._route.snapshot.paramMap.get('slug');
     if (slug) {
       this.property.set(this._propertiesService.getBySlug(slug));
     }
+  }
+
+  ngAfterViewInit(): void {
+    this._initMap();
+  }
+
+  ngOnDestroy(): void {
+    this._map?.remove();
+  }
+
+  private async _initMap(): Promise<void> {
+    if (this._mapInitialized) return;
+    const prop = this.property();
+    const el = this.mapContainer();
+    if (!prop || !el) return;
+
+    this._mapInitialized = true;
+    const L = await import('leaflet');
+    const container = el.nativeElement;
+
+    this._map = L.map(container, { zoomControl: true }).setView([prop.lat, prop.lng], 14);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 19,
+    }).addTo(this._map);
+
+    const defaultIcon = L.icon({
+      iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+      iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+      shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+      iconSize: [25, 41],
+      iconAnchor: [12, 41],
+      popupAnchor: [1, -34],
+      shadowSize: [41, 41],
+    });
+
+    L.marker([prop.lat, prop.lng], { icon: defaultIcon })
+      .addTo(this._map)
+      .bindPopup(`<b>${prop.title}</b><br>${prop.address}`)
+      .openPopup();
+
+    setTimeout(() => this._map?.invalidateSize(), 0);
   }
 
   protected selectImage(index: number): void {

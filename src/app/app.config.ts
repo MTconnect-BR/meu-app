@@ -16,6 +16,12 @@ import {
   lucideArrowRight,
   lucidePhone,
   lucideMaximize,
+  lucidePlus,
+  lucidePencil,
+  lucideTrash2,
+  lucideCheck,
+  lucideX,
+  lucideExternalLink,
 } from '@ng-icons/lucide';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 
@@ -41,6 +47,12 @@ export const appConfig: ApplicationConfig = {
       lucideArrowRight,
       lucidePhone,
       lucideMaximize,
+      lucidePlus,
+      lucidePencil,
+      lucideTrash2,
+      lucideCheck,
+      lucideX,
+      lucideExternalLink,
     }),
   ],
 };

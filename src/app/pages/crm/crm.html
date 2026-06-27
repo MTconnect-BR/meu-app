@@ -1,0 +1,226 @@
+<app-header />
+
+<main class="flex flex-1 flex-col px-6 py-8">
+  <div class="mx-auto w-full max-w-6xl space-y-8">
+    <div class="flex items-center justify-between">
+      <h1 hlmH1 class="text-foreground">Property Management</h1>
+      <button hlmBtn (click)="openCreateForm()">
+        <ng-icon name="lucidePlus" class="size-4" />
+        New Property
+      </button>
+    </div>
+
+    <div hlmTableContainer>
+      <table hlmTable class="w-full">
+        <thead hlmTHead>
+          <tr hlmTr>
+            <th hlmTh class="text-left">Title</th>
+            <th hlmTh class="text-left">Location</th>
+            <th hlmTh class="text-right">Price</th>
+            <th hlmTh class="text-center">Type</th>
+            <th hlmTh class="text-center">Beds</th>
+            <th hlmTh class="text-center">Baths</th>
+            <th hlmTh class="text-right">Area</th>
+            <th hlmTh class="text-right">Actions</th>
+          </tr>
+        </thead>
+        <tbody hlmTBody>
+          @for (p of properties; track p.id) {
+            <tr hlmTr class="border-b border-border">
+              <td hlmTd class="font-medium text-foreground">{{ p.title }}</td>
+              <td hlmTd class="text-muted-foreground">{{ p.city }}, {{ p.state }}</td>
+              <td hlmTd class="text-right font-semibold text-foreground">{{ formatPrice(p.price, p.type) }}</td>
+              <td hlmTd class="text-center">
+                <hlm-badge [variant]="p.type === 'sale' ? 'default' : 'secondary'">
+                  {{ p.type === 'sale' ? 'Sale' : 'Rent' }}
+                </hlm-badge>
+              </td>
+              <td hlmTd class="text-center text-muted-foreground">{{ p.bedrooms }}</td>
+              <td hlmTd class="text-center text-muted-foreground">{{ p.bathrooms }}</td>
+              <td hlmTd class="text-right text-muted-foreground">{{ p.area }}m²</td>
+              <td hlmTd class="text-right">
+                <div class="flex justify-end gap-2">
+                  <a [routerLink]="['/properties', p.slug]" hlmBtn variant="ghost" size="sm">
+                    <ng-icon name="lucideExternalLink" class="size-4" />
+                  </a>
+                  <button hlmBtn variant="ghost" size="sm" (click)="openEditForm(p)">
+                    <ng-icon name="lucidePencil" class="size-4" />
+                  </button>
+                  <button hlmBtn variant="ghost" size="sm" class="text-destructive hover:text-destructive" (click)="confirmDelete(p.id)">
+                    <ng-icon name="lucideTrash2" class="size-4" />
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    @if (properties.length === 0) {
+      <div class="py-12 text-center text-muted-foreground">
+        <p>No properties yet. Click "New Property" to create one.</p>
+      </div>
+    }
+  </div>
+</main>
+
+@if (showForm()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div class="mx-4 max-h-[90vh] w-full max-w-2xl overflow-y-auto rounded-xl border border-border bg-background p-6 shadow-lg">
+      <div class="mb-6 flex items-center justify-between">
+        <h2 hlmH2 class="text-foreground">{{ editingId() ? 'Edit Property' : 'New Property' }}</h2>
+        <button hlmBtn variant="ghost" size="sm" (click)="closeForm()">
+          <ng-icon name="lucideX" class="size-4" />
+        </button>
+      </div>
+
+      <form [formGroup]="form" (ngSubmit)="save()" class="space-y-4">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-title">Title *</label>
+            <input hlmInput id="crm-title" formControlName="title" class="w-full" placeholder="Modern Apartment" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-slug">Slug *</label>
+            <input hlmInput id="crm-slug" formControlName="slug" class="w-full" placeholder="venda-apartamento-sp-100m2" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-address">Address *</label>
+            <input hlmInput id="crm-address" formControlName="address" class="w-full" placeholder="Vila Madalena, São Paulo" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-neighborhood">Neighborhood *</label>
+            <input hlmInput id="crm-neighborhood" formControlName="neighborhood" class="w-full" placeholder="Vila Madalena" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-city">City *</label>
+            <input hlmInput id="crm-city" formControlName="city" class="w-full" placeholder="São Paulo" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-state">State (UF) *</label>
+            <input hlmInput id="crm-state" formControlName="state" class="w-full" maxlength="2" placeholder="SP" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-price">Price (BRL) *</label>
+            <input hlmInput id="crm-price" type="number" formControlName="price" class="w-full" placeholder="500000" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-type">Type *</label>
+            <select hlmInput id="crm-type" formControlName="type" class="w-full">
+              <option value="sale">For Sale</option>
+              <option value="rent">For Rent</option>
+            </select>
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-bedrooms">Bedrooms *</label>
+            <input hlmInput id="crm-bedrooms" type="number" formControlName="bedrooms" class="w-full" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-bathrooms">Bathrooms *</label>
+            <input hlmInput id="crm-bathrooms" type="number" formControlName="bathrooms" class="w-full" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-parking">Parking Spots *</label>
+            <input hlmInput id="crm-parking" type="number" formControlName="parkingSpots" class="w-full" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-area">Area (m²) *</label>
+            <input hlmInput id="crm-area" type="number" formControlName="area" class="w-full" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-lat">Latitude *</label>
+            <input hlmInput id="crm-lat" type="number" step="any" formControlName="lat" class="w-full" placeholder="-23.5505" />
+            <hlm-field-error />
+          </div>
+
+          <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-lng">Longitude *</label>
+            <input hlmInput id="crm-lng" type="number" step="any" formControlName="lng" class="w-full" placeholder="-46.6333" />
+            <hlm-field-error />
+          </div>
+        </div>
+
+        <div hlmField class="space-y-1">
+          <label hlmFieldLabel for="crm-imageUrl">Image URL *</label>
+          <input hlmInput id="crm-imageUrl" formControlName="imageUrl" class="w-full" placeholder="https://picsum.photos/seed/myprop/600/400" />
+          <hlm-field-error />
+        </div>
+
+        <div hlmField class="space-y-1">
+          <label hlmFieldLabel for="crm-images">Additional Image URLs (one per line)</label>
+          <textarea hlmTextarea id="crm-images" formControlName="images" class="w-full" rows="3" placeholder="https://picsum.photos/seed/img1/800/600&#10;https://picsum.photos/seed/img2/800/600"></textarea>
+        </div>
+
+        <div hlmField class="space-y-1">
+          <label hlmFieldLabel for="crm-description">Description *</label>
+          <textarea hlmTextarea id="crm-description" formControlName="description" class="w-full" rows="3" placeholder="Describe the property..."></textarea>
+          <hlm-field-error />
+        </div>
+
+        <div class="flex gap-6">
+          <label for="crm-furnished" class="flex items-center gap-2 text-sm text-foreground">
+            <hlm-switch id="crm-furnished" formControlName="furnished" />
+            Furnished
+          </label>
+          <label for="crm-petFriendly" class="flex items-center gap-2 text-sm text-foreground">
+            <hlm-switch id="crm-petFriendly" formControlName="petFriendly" />
+            Pet Friendly
+          </label>
+        </div>
+
+        <hlm-separator />
+
+        <div class="flex justify-end gap-3">
+          <button hlmBtn type="button" variant="outline" (click)="closeForm()">Cancel</button>
+          <button hlmBtn type="submit" [disabled]="form.invalid">
+            <ng-icon name="lucideCheck" class="size-4" />
+            {{ editingId() ? 'Update' : 'Create' }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+}
+
+@if (showDeleteDialog()) {
+  <div class="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div class="mx-4 w-full max-w-sm rounded-xl border border-border bg-background p-6 shadow-lg">
+      <h2 hlmH2 class="text-foreground">Delete Property</h2>
+      <p class="mt-2 text-muted-foreground">Are you sure you want to delete this property? This action cannot be undone.</p>
+      <div class="mt-6 flex justify-end gap-3">
+        <button hlmBtn variant="outline" (click)="cancelDelete()">Cancel</button>
+        <button hlmBtn variant="destructive" (click)="doDelete()">
+          <ng-icon name="lucideTrash2" class="size-4" />
+          Delete
+        </button>
+      </div>
+    </div>
+  </div>
+}
+
+<app-footer />
