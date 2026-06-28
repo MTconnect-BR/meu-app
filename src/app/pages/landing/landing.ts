@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, inject, signal, viewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
@@ -17,6 +17,11 @@ import { PropertiesService } from '../../services/properties';
 export class Landing {
   private readonly router = inject(Router);
   private readonly propertiesService = inject(PropertiesService);
+  private readonly destroyRef = inject(DestroyRef);
+
+  protected readonly heroOverlay = viewChild<ElementRef<HTMLDivElement>>('heroOverlay');
+
+  private rafId = 0;
 
   protected readonly searchType = signal<'buy' | 'rent'>('buy');
   protected readonly searchQuery = signal('');
@@ -40,5 +45,32 @@ export class Landing {
       params['propertyType'] = pt;
     }
     this.router.navigate(['/properties'], { queryParams: params });
+  }
+
+  constructor() {
+    afterNextRender(() => {
+      const onScroll = () => {
+        if (this.rafId) return;
+        this.rafId = requestAnimationFrame(() => {
+          this.rafId = 0;
+          const overlay = this.heroOverlay()?.nativeElement;
+          if (!overlay) return;
+          const hero = overlay.parentElement;
+          if (!hero) return;
+          const heroHeight = hero.offsetHeight;
+          const content = hero.nextElementSibling as HTMLElement | null;
+          if (!content) return;
+          const contentTop = content.getBoundingClientRect().top;
+          const overlap = Math.max(0, Math.min(1, 1 - contentTop / heroHeight));
+          const opacity = overlap * 0.45;
+          overlay.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+        });
+      };
+      window.addEventListener('scroll', onScroll, { passive: true });
+      this.destroyRef.onDestroy(() => {
+        window.removeEventListener('scroll', onScroll);
+        if (this.rafId) cancelAnimationFrame(this.rafId);
+      });
+    });
   }
 }
