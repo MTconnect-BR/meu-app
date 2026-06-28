@@ -187,12 +187,7 @@
     <!-- Card 1 — Imóveis anunciados -->
     <section class="sticky px-6 pb-3 pt-4 md:px-6 md:pb-4" style="top: 0; z-index: 1; background-color: hsl(0, 0%, 13%);">
       <div class="mx-auto max-w-3xl overflow-hidden rounded-3xl p-8 md:p-12" style="background-color: hsl(0, 0%, 91%);">
-        <div class="flex items-start justify-between">
-          <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">5.000+</span>
-          <div class="flex size-12 items-center justify-center rounded-full md:size-14" [style.background-color]="'hsl(0, 0%, 82%)'">
-            <ng-icon name="lucideBuilding2" class="size-6 md:size-7" [style.color]="'hsl(0, 0%, 40%)'" />
-          </div>
-        </div>
+        <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">5.000+</span>
         <p class="mt-8 text-lg font-medium leading-snug md:text-xl" [style.color]="'hsl(0, 0%, 40%)'">
           Imóveis anunciados em todo o Brasil, desde apartamentoscompactos até casas de luxo.
         </p>
@@ -202,12 +197,7 @@
     <!-- Card 2 — Famílias atendidas -->
     <section class="sticky px-6 pb-3 pt-4 md:px-6 md:pb-4" style="top: 16px; z-index: 2; background-color: hsl(0, 0%, 13%);">
       <div class="mx-auto max-w-3xl overflow-hidden rounded-3xl p-8 md:p-12" style="background-color: hsl(0, 0%, 82%);">
-        <div class="flex items-start justify-between">
-          <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">1.200+</span>
-          <div class="flex size-12 items-center justify-center rounded-full md:size-14" [style.background-color]="'hsl(0, 0%, 75%)'">
-            <ng-icon name="lucideHeart" class="size-6 md:size-7" [style.color]="'hsl(0, 0%, 35%)'" />
-          </div>
-        </div>
+        <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">1.200+</span>
         <p class="mt-8 text-lg font-medium leading-snug md:text-xl" [style.color]="'hsl(0, 0%, 35%)'">
           Famílias que encontraram o imóvel dos seus sonhos com a nossa ajuda.
         </p>
@@ -217,12 +207,7 @@
     <!-- Card 3 — Avaliação -->
     <section class="sticky px-6 pb-3 pt-4 md:px-6 md:pb-4" style="top: 32px; z-index: 3; background-color: hsl(0, 0%, 13%);">
       <div class="mx-auto max-w-3xl overflow-hidden rounded-3xl p-8 md:p-12" style="background-color: hsl(0, 0%, 76%);">
-        <div class="flex items-start justify-between">
-          <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">98%</span>
-          <div class="flex size-12 items-center justify-center rounded-full md:size-14" [style.background-color]="'hsl(0, 0%, 68%)'">
-            <ng-icon name="lucideStar" class="size-6 md:size-7" [style.color]="'hsl(0, 0%, 30%)'" />
-          </div>
-        </div>
+        <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">98%</span>
         <p class="mt-8 text-lg font-medium leading-snug md:text-xl" [style.color]="'hsl(0, 0%, 30%)'">
           Dos clientes nos avaliam com 5 estrelas — confiança que nos move.
         </p>
@@ -232,5 +217,56 @@
     <!-- Spacer so last card can fully stack -->
     <div class="h-40"></div>
   </div>
+
+  <!-- FAQ Section — Perguntas Frequentes -->
+  <section class="relative z-10 px-6 py-16 md:py-24" style="background-color: hsl(0, 0%, 13%);">
+    <div class="mx-auto max-w-3xl space-y-8">
+      <div>
+        <h2 class="text-3xl font-black leading-tight tracking-tight md:text-4xl lg:text-5xl" [style.color]="'hsl(0, 0%, 91%)'">
+          Perguntas Frequentes
+        </h2>
+        <p class="mt-4 max-w-md text-base md:text-lg" [style.color]="'hsl(0, 0%, 65%)'">
+          Tire suas dúvidas sobre o MeuApp.
+        </p>
+      </div>
+
+      <hlm-accordion [type]="'single'">
+        <hlm-accordion-item>
+          <hlm-accordion-trigger>Como funciona a busca de imóveis no MeuApp?</hlm-accordion-trigger>
+          <hlm-accordion-content>
+            <p>Utilize os filtros na página de imóveis para refinar por localização, tipo, faixa de preço e finalidade (compra ou aluguel). Os resultados são atualizados em tempo real.</p>
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+
+        <hlm-accordion-item>
+          <hlm-accordion-trigger>Os imóveis têm informações verificadas?</hlm-accordion-trigger>
+          <hlm-accordion-content>
+            <p>Sim. Cada anúncio passa por verificação para garantir que metragem, valores e condições do imóvel estejam precisos e atualizados.</p>
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+
+        <hlm-accordion-item>
+          <hlm-accordion-trigger>Posso salvar imóveis favoritos?</hlm-accordion-trigger>
+          <hlm-accordion-content>
+            <p>Sim. Ao criar uma conta, você pode salvar imóveis favoritos e acessá-los a qualquer momento pelo seu perfil.</p>
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+
+        <hlm-accordion-item>
+          <hlm-accordion-trigger>Como entro em contato com o proprietário?</hlm-accordion-trigger>
+          <hlm-accordion-content>
+            <p>Na página de detalhes do imóvel, utilize o botão de contato para enviar uma mensagem diretamente ao proprietário ou corretor responsável.</p>
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+
+        <hlm-accordion-item>
+          <hlm-accordion-trigger>O MeuApp cobra alguma taxa?</hlm-accordion-trigger>
+          <hlm-accordion-content>
+            <p>Não. A busca e visualização de imóveis no MeuApp são completamente gratuitas. Taxas só são aplicadas em serviços adicionais, quando aplicável.</p>
+          </hlm-accordion-content>
+        </hlm-accordion-item>
+      </hlm-accordion>
+    </div>
+  </section>
 
 </main>

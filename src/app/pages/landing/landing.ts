@@ -2,15 +2,16 @@ import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, s
 import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearch, lucideChevronDown, lucideCheck, lucideBuilding2, lucideHeart, lucideStar } from '@ng-icons/lucide';
+import { lucideSearch, lucideChevronDown, lucideCheck } from '@ng-icons/lucide';
 import { PropertiesService } from '../../services/properties';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
+import { HlmAccordionImports } from '@spartan-ng/helm/accordion';
 
 @Component({
   selector: 'app-landing',
-  imports: [Header, RouterLink, NgIcon, ...HlmDropdownMenuImports],
+  imports: [Header, RouterLink, NgIcon, ...HlmDropdownMenuImports, ...HlmAccordionImports],
   providers: [
-    provideIcons({ lucideSearch, lucideChevronDown, lucideCheck, lucideBuilding2, lucideHeart, lucideStar }),
+    provideIcons({ lucideSearch, lucideChevronDown, lucideCheck }),
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
