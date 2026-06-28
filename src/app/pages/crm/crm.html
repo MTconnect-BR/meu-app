@@ -1,11 +1,27 @@
-<main class="flex flex-1 flex-col px-6 py-8" style="background-color: hsl(0, 0%, 13%); --background: hsl(0, 0%, 13%); --foreground: hsl(0, 0%, 91%); --card: hsl(0, 0%, 18%); --card-foreground: hsl(0, 0%, 91%); --popover: hsl(0, 0%, 18%); --popover-foreground: hsl(0, 0%, 91%); --primary: hsl(0, 0%, 91%); --primary-foreground: hsl(0, 0%, 13%); --secondary: hsl(0, 0%, 22%); --secondary-foreground: hsl(0, 0%, 91%); --muted: hsl(0, 0%, 22%); --muted-foreground: hsl(0, 0%, 65%); --accent: hsl(0, 0%, 22%); --accent-foreground: hsl(0, 0%, 91%); --border: hsl(0, 0%, 30%); --input: hsl(0, 0%, 22%); --ring: hsl(0, 0%, 65%);">
+<main class="flex flex-1 flex-col px-6 py-8" style="background-color: hsl(0, 0%, 13%); color: var(--foreground); --background: hsl(0, 0%, 13%); --foreground: hsl(0, 0%, 91%); --card: hsl(0, 0%, 18%); --card-foreground: hsl(0, 0%, 91%); --popover: hsl(0, 0%, 18%); --popover-foreground: hsl(0, 0%, 91%); --primary: hsl(0, 0%, 91%); --primary-foreground: hsl(0, 0%, 13%); --secondary: hsl(0, 0%, 22%); --secondary-foreground: hsl(0, 0%, 91%); --muted: hsl(0, 0%, 22%); --muted-foreground: hsl(0, 0%, 65%); --accent: hsl(0, 0%, 22%); --accent-foreground: hsl(0, 0%, 91%); --border: hsl(0, 0%, 30%); --input: hsl(0, 0%, 22%); --ring: hsl(0, 0%, 65%);">
   <div class="mx-auto w-full max-w-6xl space-y-8">
-    <div class="flex items-center justify-between">
+    <div class="flex items-center justify-between gap-4">
       <h1 hlmH1 class="text-foreground">Gerenciamento de Imóveis</h1>
       <button hlmBtn (click)="openCreateForm()">
         <ng-icon name="lucidePlus" class="size-4" />
         Novo Imóvel
       </button>
+    </div>
+
+    <div class="flex items-center gap-3">
+      <hlm-input-group class="flex-1 max-w-sm">
+        <hlm-input-group-addon>
+          <ng-icon name="lucideSearch" />
+        </hlm-input-group-addon>
+        <input
+          hlmInputGroupInput
+          type="text"
+          placeholder="Buscar por título, cidade ou endereço..."
+          [value]="searchQuery()"
+          (input)="searchQuery.set($any($event.target).value)"
+        />
+      </hlm-input-group>
+      <span class="text-sm text-muted-foreground">{{ filteredProperties().length }} imóveis</span>
     </div>
 
     @if (alertMessage()) {
@@ -16,14 +32,14 @@
       </hlm-alert>
     }
 
-    @if (properties.length === 0) {
+    @if (filteredProperties().length === 0) {
       <div hlmEmpty>
         <div hlmEmptyHeader>
           <div hlmEmptyMedia variant="icon">
-            <ng-icon name="lucidePlus" />
+            <ng-icon name="lucideSearch" />
           </div>
-          <h3 hlmEmptyTitle>Nenhum imóvel cadastrado</h3>
-          <p hlmEmptyDescription>Clique em "Novo Imóvel" para criar seu primeiro anúncio.</p>
+          <h3 hlmEmptyTitle>Nenhum imóvel encontrado</h3>
+          <p hlmEmptyDescription>{{ searchQuery() ? 'Tente ajustar os filtros de busca.' : 'Clique em "Novo Imóvel" para criar seu primeiro anúncio.' }}</p>
         </div>
       </div>
     } @else {
@@ -31,18 +47,18 @@
         <table hlmTable class="w-full">
           <thead hlmTHead>
             <tr hlmTr>
-              <th hlmTh class="text-left">Título</th>
-              <th hlmTh class="text-left">Localização</th>
-              <th hlmTh class="text-right">Preço</th>
+              <th hlmTh class="cursor-pointer select-none text-left hover:text-foreground" (click)="toggleSort('title')">Título{{ sortIcon('title') }}</th>
+              <th hlmTh class="cursor-pointer select-none text-left hover:text-foreground" (click)="toggleSort('city')">Localização{{ sortIcon('city') }}</th>
+              <th hlmTh class="cursor-pointer select-none text-right hover:text-foreground" (click)="toggleSort('price')">Preço{{ sortIcon('price') }}</th>
               <th hlmTh class="text-center">Tipo</th>
-              <th hlmTh class="text-center">Quartos</th>
-              <th hlmTh class="text-center">Banheiros</th>
-              <th hlmTh class="text-right">Área</th>
+              <th hlmTh class="cursor-pointer select-none text-center hover:text-foreground" (click)="toggleSort('bedrooms')">Quartos{{ sortIcon('bedrooms') }}</th>
+              <th hlmTh class="cursor-pointer select-none text-center hover:text-foreground" (click)="toggleSort('bathrooms')">Banheiros{{ sortIcon('bathrooms') }}</th>
+              <th hlmTh class="cursor-pointer select-none text-right hover:text-foreground" (click)="toggleSort('area')">Área{{ sortIcon('area') }}</th>
               <th hlmTh class="text-right">Ações</th>
             </tr>
           </thead>
           <tbody hlmTBody>
-            @for (p of properties; track p.id) {
+            @for (p of filteredProperties(); track p.id) {
               <tr hlmTr class="border-b border-border">
                 <td hlmTd class="font-medium text-foreground">{{ p.title }}</td>
                 <td hlmTd class="text-muted-foreground">{{ p.city }}, {{ p.state }}</td>
@@ -106,7 +122,7 @@
 @if (showForm()) {
   <div class="fixed inset-0 z-50 flex justify-end" role="dialog" aria-modal="true" (keydown.escape)="closeForm()" (click)="closeForm()">
     <div class="absolute inset-0 bg-black/50" tabindex="-1"></div>
-    <div class="relative z-10 h-full w-full max-w-2xl overflow-y-auto p-6 shadow-xl" tabindex="-1" (click)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation()" style="background-color: hsl(0, 0%, 18%); --foreground: hsl(0, 0%, 91%); --muted-foreground: hsl(0, 0%, 65%); --border: hsl(0, 0%, 30%); --input: hsl(0, 0%, 22%); --primary: hsl(0, 0%, 91%); --primary-foreground: hsl(0, 0%, 13%);">
+    <div class="relative z-10 h-full w-full max-w-2xl overflow-y-auto p-6 shadow-xl" tabindex="-1" (click)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation()" style="background-color: hsl(0, 0%, 18%); color: var(--foreground); --foreground: hsl(0, 0%, 91%); --muted-foreground: hsl(0, 0%, 65%); --border: hsl(0, 0%, 30%); --input: hsl(0, 0%, 22%); --primary: hsl(0, 0%, 91%); --primary-foreground: hsl(0, 0%, 13%);">
       <div class="mb-4 flex items-center justify-between">
         <div>
           <h2 class="text-lg font-semibold text-foreground">{{ editingId() ? 'Editar Imóvel' : 'Novo Imóvel' }}</h2>
@@ -215,6 +231,11 @@
         <div hlmField class="space-y-1">
           <label hlmFieldLabel for="crm-imageUrl">URL da Imagem *</label>
           <input hlmInput id="crm-imageUrl" formControlName="imageUrl" class="w-full" placeholder="https://picsum.photos/seed/meuimovel/600/400" />
+          @if (form.controls.imageUrl.value) {
+            <div class="mt-2 overflow-hidden rounded-lg border border-border">
+              <img [src]="form.controls.imageUrl.value" alt="Preview" class="h-40 w-full object-cover" (error)="form.controls.imageUrl.setValue('')" />
+            </div>
+          }
           <hlm-field-error />
         </div>
 
@@ -255,7 +276,7 @@
 @if (showDeleteDialog()) {
   <div class="fixed inset-0 z-50 flex items-end justify-center sm:items-center" role="dialog" aria-modal="true" (keydown.escape)="cancelDelete()" (click)="cancelDelete()">
     <div class="absolute inset-0 bg-black/50" tabindex="-1"></div>
-    <div class="relative z-10 w-full max-w-md rounded-t-xl p-6 shadow-xl sm:rounded-xl" tabindex="-1" (click)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation()" style="background-color: hsl(0, 0%, 18%); --foreground: hsl(0, 0%, 91%); --muted-foreground: hsl(0, 0%, 65%);">
+    <div class="relative z-10 w-full max-w-md rounded-t-xl p-6 shadow-xl sm:rounded-xl" tabindex="-1" (click)="$event.stopPropagation()" (keydown.escape)="$event.stopPropagation()" style="background-color: hsl(0, 0%, 18%); color: var(--foreground); --foreground: hsl(0, 0%, 91%); --muted-foreground: hsl(0, 0%, 65%);">
       <h2 class="text-lg font-semibold text-foreground">Excluir Imóvel</h2>
       <p class="mt-2 text-sm text-muted-foreground">Tem certeza? Esta ação não pode ser desfeita.</p>
       <div class="mt-6 flex justify-end gap-3">

@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -26,6 +26,7 @@ import { HlmDropdownMenu, HlmDropdownMenuTrigger, HlmDropdownMenuItem, HlmDropdo
 import { HlmRadioGroup, HlmRadio, HlmRadioIndicator } from '@spartan-ng/helm/radio-group';
 import { HlmAlert, HlmAlertTitle, HlmAlertDescription } from '@spartan-ng/helm/alert';
 import { HlmEmpty, HlmEmptyHeader, HlmEmptyMedia, HlmEmptyTitle, HlmEmptyDescription } from '@spartan-ng/helm/empty';
+import { HlmInputGroup, HlmInputGroupAddon, HlmInputGroupInput } from '@spartan-ng/helm/input-group';
 import { NgIcon } from '@ng-icons/core';
 import { HlmH1 } from '@spartan-ng/helm/typography';
 
@@ -64,6 +65,9 @@ import { HlmH1 } from '@spartan-ng/helm/typography';
     HlmEmptyMedia,
     HlmEmptyTitle,
     HlmEmptyDescription,
+    HlmInputGroup,
+    HlmInputGroupAddon,
+    HlmInputGroupInput,
     NgIcon,
     HlmH1,
   ],
@@ -79,6 +83,44 @@ export class Crm {
   protected readonly showDeleteDialog = signal(false);
   protected readonly deletingId = signal<number | null>(null);
   protected readonly alertMessage = signal('');
+  protected readonly searchQuery = signal('');
+  protected readonly sortKey = signal<'title' | 'city' | 'price' | 'area' | 'bedrooms' | 'bathrooms'>('title');
+  protected readonly sortDirection = signal<'asc' | 'desc'>('asc');
+
+  protected readonly filteredProperties = computed(() => {
+    const query = this.searchQuery().toLowerCase().trim();
+    const key = this.sortKey();
+    const dir = this.sortDirection();
+    let list = this._propertiesService.properties;
+    if (query) {
+      list = list.filter(p =>
+        p.title.toLowerCase().includes(query) ||
+        p.city.toLowerCase().includes(query) ||
+        p.state.toLowerCase().includes(query) ||
+        p.address.toLowerCase().includes(query)
+      );
+    }
+    return [...list].sort((a, b) => {
+      const av = a[key];
+      const bv = b[key];
+      const cmp = typeof av === 'string' ? av.localeCompare(bv as string) : (av as number) - (bv as number);
+      return dir === 'asc' ? cmp : -cmp;
+    });
+  });
+
+  protected toggleSort(key: 'title' | 'city' | 'price' | 'area' | 'bedrooms' | 'bathrooms'): void {
+    if (this.sortKey() === key) {
+      this.sortDirection.update(d => d === 'asc' ? 'desc' : 'asc');
+    } else {
+      this.sortKey.set(key);
+      this.sortDirection.set('asc');
+    }
+  }
+
+  protected sortIcon(key: string): string {
+    if (this.sortKey() !== key) return '';
+    return this.sortDirection() === 'asc' ? ' ↑' : ' ↓';
+  }
 
   protected readonly form = this._fb.nonNullable.group({
     title: ['', Validators.required],
@@ -101,10 +143,6 @@ export class Crm {
     lat: [0, Validators.required],
     lng: [0, Validators.required],
   });
-
-  protected get properties(): Property[] {
-    return this._propertiesService.properties;
-  }
 
   protected showAlert(message: string): void {
     this.alertMessage.set(message);
