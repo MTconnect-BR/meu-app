@@ -139,16 +139,18 @@
           de comprar ou alugar um imóvel deve ser tão boa quanto viver nele.
         </p>
       </div>
-      <a routerLink="/properties"
-         class="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
-         [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'">
-        Ver imóveis
-      </a>
+      <div class="flex justify-center">
+        <a routerLink="/properties"
+           class="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-colors"
+           [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'">
+          Ver imóveis
+        </a>
+      </div>
     </div>
   </section>
 
   <!-- Carousel Section — Featured Properties -->
-  <section class="relative z-10 px-6 py-16 md:py-24" style="background-color: hsl(0, 0%, 13%);">
+  <section class="relative z-10 px-0 py-16 md:px-6 md:py-24" style="background-color: hsl(0, 0%, 13%);">
     <div class="mx-auto max-w-6xl space-y-8">
       <div class="flex items-center justify-between">
         <h2 class="text-2xl font-bold md:text-3xl" [style.color]="'hsl(0, 0%, 91%)'">
@@ -247,7 +249,7 @@
       <div class="space-y-4">
         @for (faq of faqs; track faq.question) {
           <span
-            class="inline-block cursor-default text-sm font-medium underline decoration-dashed underline-offset-4 transition-opacity hover:opacity-70"
+            class="block cursor-default text-sm font-medium underline decoration-dashed underline-offset-4 transition-opacity hover:opacity-70"
             [style.color]="'hsl(0, 0%, 91%)'"
             [hlmTooltip]="faq.answer"
             position="right">
