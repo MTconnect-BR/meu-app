@@ -8,11 +8,11 @@ import { Crm } from './pages/crm/crm';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: Landing },
-  { path: 'properties', component: Properties },
-  { path: 'properties/:slug', component: PropertyDetail },
-  { path: 'crm', component: Crm, canActivate: [authGuard] },
-  { path: 'auth/login', component: Login },
-  { path: 'auth/sign-up', component: Signup },
+  { path: '', component: Landing, data: { animation: 'home' } },
+  { path: 'properties', component: Properties, data: { animation: 'properties' } },
+  { path: 'properties/:slug', component: PropertyDetail, data: { animation: 'detail' } },
+  { path: 'crm', component: Crm, canActivate: [authGuard], data: { animation: 'crm' } },
+  { path: 'auth/login', component: Login, data: { animation: 'login' } },
+  { path: 'auth/sign-up', component: Signup, data: { animation: 'signup' } },
   { path: '**', redirectTo: '' },
 ];
