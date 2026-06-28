@@ -63,17 +63,25 @@
 
         <!-- Bottom row: type selector + search button -->
         <div class="flex items-center gap-3">
-          <hlm-select [value]="propertyType()" (valueChange)="propertyType.set($event ?? 'all')" [itemToString]="propertyTypeToString" class="flex-1">
-            <hlm-select-trigger class="w-full rounded-xl py-2.5 sm:py-3"
+          <div class="flex-1">
+            <button [hlmDropdownMenuTrigger]="propertyTypeMenu"
+              class="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm sm:px-4 sm:py-3"
               [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'">
-              <hlm-select-value />
-            </hlm-select-trigger>
-            <hlm-select-content>
-              @for (type of propertyTypes; track type.value) {
-                <hlm-select-item [value]="type.value">{{ type.label }}</hlm-select-item>
-              }
-            </hlm-select-content>
-          </hlm-select>
+              {{ selectedPropertyTypeLabel() }}
+              <ng-icon name="lucideChevronDown" class="size-4 shrink-0" [style.color]="'hsl(0, 0%, 50%)'" />
+            </button>
+            <ng-template #propertyTypeMenu>
+              <hlm-dropdown-menu>
+                @for (type of propertyTypes; track type.value) {
+                  <button hlmDropdownMenuItem (click)="onPropertyTypeSelect(type.value)">
+                    <ng-icon name="lucideCheck" class="size-4"
+                      [style.visibility]="propertyType() === type.value ? 'visible' : 'hidden'" />
+                    {{ type.label }}
+                  </button>
+                }
+              </hlm-dropdown-menu>
+            </ng-template>
+          </div>
           <button
             (click)="onSearch()"
             class="flex items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors sm:px-6 sm:py-3"
@@ -175,9 +183,9 @@
   </section>
 
   <!-- Stacking Cards — scroll-triggered folder effect -->
-  <div style="background-color: hsl(0, 0%, 13%);">
+  <div class="relative z-10" style="background-color: hsl(0, 0%, 13%);">
     <!-- Card 1 — Imóveis anunciados -->
-    <section class="sticky px-6 pb-3 pt-4 md:px-6 md:pb-4" style="top: 0; z-index: 1;">
+    <section class="sticky px-6 pb-3 pt-4 md:px-6 md:pb-4" style="top: 0; z-index: 1; background-color: hsl(0, 0%, 13%);">
       <div class="mx-auto max-w-3xl overflow-hidden rounded-3xl p-8 md:p-12" style="background-color: hsl(0, 0%, 91%);">
         <div class="flex items-start justify-between">
           <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">5.000+</span>
@@ -192,7 +200,7 @@
     </section>
 
     <!-- Card 2 — Famílias atendidas -->
-    <section class="sticky px-6 pb-3 pt-4 md:px-6 md:pb-4" style="top: 16px; z-index: 2;">
+    <section class="sticky px-6 pb-3 pt-4 md:px-6 md:pb-4" style="top: 16px; z-index: 2; background-color: hsl(0, 0%, 13%);">
       <div class="mx-auto max-w-3xl overflow-hidden rounded-3xl p-8 md:p-12" style="background-color: hsl(0, 0%, 82%);">
         <div class="flex items-start justify-between">
           <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">1.200+</span>
@@ -207,7 +215,7 @@
     </section>
 
     <!-- Card 3 — Avaliação -->
-    <section class="sticky px-6 pb-3 pt-4 md:px-6 md:pb-4" style="top: 32px; z-index: 3;">
+    <section class="sticky px-6 pb-3 pt-4 md:px-6 md:pb-4" style="top: 32px; z-index: 3; background-color: hsl(0, 0%, 13%);">
       <div class="mx-auto max-w-3xl overflow-hidden rounded-3xl p-8 md:p-12" style="background-color: hsl(0, 0%, 76%);">
         <div class="flex items-start justify-between">
           <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">98%</span>

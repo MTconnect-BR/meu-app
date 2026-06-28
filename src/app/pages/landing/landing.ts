@@ -1,16 +1,16 @@
-import { Component, DestroyRef, ElementRef, afterNextRender, inject, signal, viewChild } from '@angular/core';
+import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, signal, viewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearch, lucideBuilding2, lucideHeart, lucideStar } from '@ng-icons/lucide';
+import { lucideSearch, lucideChevronDown, lucideCheck, lucideBuilding2, lucideHeart, lucideStar } from '@ng-icons/lucide';
 import { PropertiesService } from '../../services/properties';
-import { HlmSelectImports } from '@spartan-ng/helm/select';
+import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 
 @Component({
   selector: 'app-landing',
-  imports: [Header, RouterLink, NgIcon, ...HlmSelectImports],
+  imports: [Header, RouterLink, NgIcon, ...HlmDropdownMenuImports],
   providers: [
-    provideIcons({ lucideSearch, lucideBuilding2, lucideHeart, lucideStar }),
+    provideIcons({ lucideSearch, lucideChevronDown, lucideCheck, lucideBuilding2, lucideHeart, lucideStar }),
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
@@ -37,8 +37,13 @@ export class Landing {
     { value: 'land', label: 'Terreno' },
   ];
 
-  protected readonly propertyTypeToString = (value: string): string =>
-    this.propertyTypes.find(t => t.value === value)?.label ?? value;
+  protected readonly selectedPropertyTypeLabel = computed(() =>
+    this.propertyTypes.find(t => t.value === this.propertyType())?.label ?? 'Todos os tipos'
+  );
+
+  onPropertyTypeSelect(value: string) {
+    this.propertyType.set(value);
+  }
 
   formatPrice(property: { price: number; type: string }): string {
     return this.propertiesService.formatPrice(property.price, property.type as 'sale' | 'rent');
