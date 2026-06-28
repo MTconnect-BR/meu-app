@@ -26,14 +26,14 @@
 
       <!-- Search Card — ZAP Imóveis style -->
       <div class="relative z-10 mt-8 w-full max-w-2xl">
-      <div class="rounded-2xl p-5 shadow-2xl sm:p-6" [style.background-color]="'hsl(0, 0%, 87%)'">
+      <div class="rounded-2xl p-5 shadow-2xl sm:p-6" [style.background-color]="'hsl(0, 0%, 13%)'">
         <!-- Tabs -->
-        <div class="mb-4 flex gap-1 rounded-lg p-1 sm:mb-5" [style.background-color]="'hsl(0, 0%, 91%)'">
+        <div class="mb-4 flex gap-1 rounded-lg p-1 sm:mb-5" [style.background-color]="'hsl(0, 0%, 18%)'">
           <button
             class="flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-all sm:px-4 sm:py-2.5"
             [style]="searchType() === 'buy'
-              ? 'background-color: hsl(0, 0%, 100%); color: hsl(0, 0%, 13%); box-shadow: 0 1px 3px rgba(0,0,0,0.1);'
-              : 'background-color: transparent; color: hsl(0, 0%, 50%);'"
+              ? 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 91%); box-shadow: 0 1px 3px rgba(0,0,0,0.3);'
+              : 'background-color: transparent; color: hsl(0, 0%, 55%);'"
             (click)="searchType.set('buy')"
           >
             Comprar
@@ -41,8 +41,8 @@
           <button
             class="flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-all sm:px-4 sm:py-2.5"
             [style]="searchType() === 'rent'
-              ? 'background-color: hsl(0, 0%, 100%); color: hsl(0, 0%, 13%); box-shadow: 0 1px 3px rgba(0,0,0,0.1);'
-              : 'background-color: transparent; color: hsl(0, 0%, 50%);'"
+              ? 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 91%); box-shadow: 0 1px 3px rgba(0,0,0,0.3);'
+              : 'background-color: transparent; color: hsl(0, 0%, 55%);'"
             (click)="searchType.set('rent')"
           >
             Alugar
@@ -50,14 +50,14 @@
         </div>
 
         <!-- Search Input -->
-        <div class="mb-4 flex items-center gap-3 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3" [style.background-color]="'hsl(0, 0%, 91%)'">
+        <div class="mb-4 flex items-center gap-3 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3" [style.background-color]="'hsl(0, 0%, 18%)'">
           <ng-icon name="lucideSearch" class="size-5 shrink-0" [style.color]="'hsl(0, 0%, 50%)'" />
           <input
             type="text"
             [value]="searchQuery()"
             (input)="searchQuery.set($any($event.target).value)"
             placeholder="Bairro, cidade ou endereço"
-            class="w-full bg-transparent text-sm outline-none" [style.color]="'hsl(0, 0%, 13%)'"
+            class="w-full bg-transparent text-sm outline-none" [style.color]="'hsl(0, 0%, 91%)'"
           />
         </div>
 
@@ -66,7 +66,7 @@
           <div class="flex-1">
             <button [hlmDropdownMenuTrigger]="propertyTypeMenu"
               class="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm sm:px-4 sm:py-3"
-              [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'">
+              [style.background-color]="'hsl(0, 0%, 18%)'" [style.color]="'hsl(0, 0%, 91%)'">
               {{ selectedPropertyTypeLabel() }}
               <ng-icon name="lucideChevronDown" class="size-4 shrink-0" [style.color]="'hsl(0, 0%, 50%)'" />
             </button>
@@ -85,7 +85,7 @@
           <button
             (click)="onSearch()"
             class="flex items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors sm:px-6 sm:py-3"
-            [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'"
+            [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'"
           >
             <ng-icon name="lucideSearch" class="size-4" />
             Buscar
@@ -94,17 +94,18 @@
       </div>
     </div>
 
-      <!-- Company logos carousel -->
-      <div class="relative z-10 mt-8 w-full max-w-2xl text-center">
-        <p class="mb-4 text-xs font-medium tracking-wide uppercase" [style.color]="'hsl(0, 0%, 50%)'">
+      <!-- Company logos grid -->
+      <div class="relative z-10 mt-8 w-full max-w-3xl">
+        <p class="mb-4 text-center text-xs font-medium tracking-wide uppercase" [style.color]="'hsl(0, 0%, 50%)'">
           Empresas que confiam na nossa plataforma
         </p>
-        <div class="carousel-container -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 lg:mx-0 lg:justify-center lg:px-0">
-          @for (company of companies; track company) {
-            <span class="flex shrink-0 snap-start items-center justify-center rounded-full px-5 py-2 text-sm font-semibold whitespace-nowrap"
-                  [style.background-color]="'hsl(0, 0%, 82%)'" [style.color]="'hsl(0, 0%, 40%)'">
-              {{ company }}
-            </span>
+        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+          @for (company of companies; track company.name) {
+            <div class="flex items-center justify-center gap-2 rounded-xl border px-4 py-5"
+                 style="border-color: hsl(0, 0%, 22%); background-color: hsl(0, 0%, 13%);">
+              <ng-icon [name]="company.icon" class="size-5 shrink-0" [style.color]="'hsl(0, 0%, 60%)'" />
+              <span class="text-sm font-semibold" [style.color]="'hsl(0, 0%, 70%)'">{{ company.name }}</span>
+            </div>
           }
         </div>
       </div>
