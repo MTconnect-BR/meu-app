@@ -7,7 +7,6 @@ export const routeAnimation = trigger('routeAnimation', [
   transition('* <=> *', [
     query(':enter', [
       style({
-        position: 'absolute',
         width: '100%',
         transformOrigin: '50% 50svh',
         transform: 'translateY(110svh)',
@@ -16,7 +15,6 @@ export const routeAnimation = trigger('routeAnimation', [
     ], { optional: true }),
     query(':leave', [
       style({
-        position: 'absolute',
         width: '100%',
         transformOrigin: '50% 50%',
       }),

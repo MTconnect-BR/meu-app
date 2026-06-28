@@ -33,7 +33,7 @@ export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     importProvidersFrom(
-      RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' }),
+      RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled' }),
       CdkMenuModule,
     ),
     provideClientHydration(),
