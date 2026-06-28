@@ -2,14 +2,15 @@ import { Component, DestroyRef, ElementRef, afterNextRender, inject, signal, vie
 import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearch, lucideChevronDown } from '@ng-icons/lucide';
+import { lucideSearch, lucideBuilding2, lucideHeart, lucideStar } from '@ng-icons/lucide';
 import { PropertiesService } from '../../services/properties';
+import { HlmSelectImports } from '@spartan-ng/helm/select';
 
 @Component({
   selector: 'app-landing',
-  imports: [Header, RouterLink, NgIcon],
+  imports: [Header, RouterLink, NgIcon, ...HlmSelectImports],
   providers: [
-    provideIcons({ lucideSearch, lucideChevronDown }),
+    provideIcons({ lucideSearch, lucideBuilding2, lucideHeart, lucideStar }),
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
@@ -27,6 +28,14 @@ export class Landing {
   protected readonly searchQuery = signal('');
   protected readonly propertyType = signal('all');
   protected readonly featuredProperties = this.propertiesService.forSale.slice(0, 8);
+
+  protected readonly propertyTypes = [
+    { value: 'all', label: 'Todos os tipos' },
+    { value: 'apartment', label: 'Apartamento' },
+    { value: 'house', label: 'Casa' },
+    { value: 'condo', label: 'Condomínio' },
+    { value: 'land', label: 'Terreno' },
+  ];
 
   formatPrice(property: { price: number; type: string }): string {
     return this.propertiesService.formatPrice(property.price, property.type as 'sale' | 'rent');
