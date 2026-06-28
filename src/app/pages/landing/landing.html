@@ -93,6 +93,22 @@
         </div>
       </div>
     </div>
+
+      <!-- Company logos carousel -->
+      <div class="relative z-10 mt-8 w-full max-w-2xl text-center">
+        <p class="mb-4 text-xs font-medium tracking-wide uppercase" [style.color]="'hsl(0, 0%, 50%)'">
+          Empresas que confiam na nossa plataforma
+        </p>
+        <div class="carousel-container -mx-6 flex snap-x snap-mandatory gap-4 overflow-x-auto px-6 pb-2 lg:mx-0 lg:justify-center lg:px-0">
+          @for (company of companies; track company) {
+            <span class="flex shrink-0 snap-start items-center justify-center rounded-full px-5 py-2 text-sm font-semibold whitespace-nowrap"
+                  [style.background-color]="'hsl(0, 0%, 82%)'" [style.color]="'hsl(0, 0%, 40%)'">
+              {{ company }}
+            </span>
+          }
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -230,7 +246,7 @@
         </p>
       </div>
 
-      <div class="dark">
+      <div class="rounded-2xl p-4" style="background-color: hsl(0, 0%, 100%);">
         <hlm-accordion [type]="'single'">
         <hlm-accordion-item>
           <hlm-accordion-trigger>Como funciona a busca de imóveis no MeuApp?</hlm-accordion-trigger>

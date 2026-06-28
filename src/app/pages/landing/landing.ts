@@ -30,6 +30,11 @@ export class Landing {
   protected readonly propertyType = signal('all');
   protected readonly featuredProperties = this.propertiesService.forSale.slice(0, 8);
 
+  protected readonly companies = [
+    'Google', 'Microsoft', 'Amazon', 'Apple', 'Meta',
+    'Netflix', 'Spotify', 'Uber', 'Airbnb', 'iFood',
+  ];
+
   protected readonly propertyTypes = [
     { value: 'all', label: 'Todos os tipos' },
     { value: 'apartment', label: 'Apartamento' },
