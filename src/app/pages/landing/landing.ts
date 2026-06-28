@@ -1,5 +1,5 @@
 import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, signal, viewChild } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideCheck } from '@ng-icons/lucide';
@@ -17,6 +17,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
   styleUrl: './landing.scss',
 })
 export class Landing {
+  private readonly router = inject(Router);
   private readonly propertiesService = inject(PropertiesService);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -28,6 +29,15 @@ export class Landing {
   protected readonly searchQuery = signal('');
   protected readonly propertyType = signal('all');
   protected readonly featuredProperties = this.propertiesService.forSale.slice(0, 8);
+
+  protected readonly companies = [
+    { name: 'Google', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/google.svg' },
+    { name: 'Microsoft', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/microsoft.svg' },
+    { name: 'Apple', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/apple.svg' },
+    { name: 'Netflix', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/netflix.svg' },
+    { name: 'Spotify', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/spotify.svg' },
+    { name: 'Airbnb', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/airbnb.svg' },
+  ];
 
   protected readonly propertyTypes = [
     { value: 'all', label: 'Todos os tipos' },
@@ -73,7 +83,13 @@ export class Landing {
   }
 
   onSearch() {
-    // Search functionality placeholder
+    this.router.navigate(['/properties'], {
+      queryParams: {
+        type: this.searchType(),
+        q: this.searchQuery() || undefined,
+        propertyType: this.propertyType() !== 'all' ? this.propertyType() : undefined,
+      },
+    });
   }
 
   constructor() {

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Component, inject } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { filter, map } from 'rxjs/operators';
 import { trigger, transition, style, animate, query, group } from '@angular/animations';
 import { WhatsAppButton } from './components/whatsapp-button';
 
@@ -44,6 +46,16 @@ export const routeAnimation = trigger('routeAnimation', [
   animations: [routeAnimation],
 })
 export class App {
+  private readonly router = inject(Router);
+
+  protected readonly isCrmRoute = toSignal(
+    this.router.events.pipe(
+      filter(() => true),
+      map(() => this.router.url),
+    ),
+    { initialValue: this.router.url },
+  );
+
   getRouteAnimationData(outlet: RouterOutlet) {
     return outlet?.activatedRouteData?.['animation'];
   }

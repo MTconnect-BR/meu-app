@@ -32,12 +32,16 @@
        [style.color]="'hsl(0, 0%, 13%)'" style="--index: 0">
       Início
     </a>
+    <a routerLink="/properties" (click)="closeMenu()" class="menu-item rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
+       [style.color]="'hsl(0, 0%, 13%)'" style="--index: 1">
+      Imóveis
+    </a>
   </div>
 
   <!-- Auth section -->
   <div class="mt-auto border-t pt-4" [style.border-color]="'hsl(0, 0%, 90%)'">
     @if (auth.isLoggedIn()) {
-      <div class="menu-item flex items-center justify-between px-4" style="--index: 1">
+      <div class="menu-item flex items-center justify-between px-4" style="--index: 2">
         <span class="text-xs" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
         <button class="rounded-lg px-3 py-2 text-xs font-medium transition-colors hover:bg-black/5"
                 [style.color]="'hsl(0, 0%, 13%)'" (click)="logout()">
@@ -46,7 +50,7 @@
       </div>
     } @else {
       <a routerLink="/auth/login" (click)="closeMenu()" class="menu-item block rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
-         [style.color]="'hsl(0, 0%, 13%)'" style="--index: 1">
+         [style.color]="'hsl(0, 0%, 13%)'" style="--index: 2">
         Entrar
       </a>
     }

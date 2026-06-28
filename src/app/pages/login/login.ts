@@ -39,7 +39,7 @@ export class Login {
     const { email, password } = this.form.value;
     const result = this._auth.login(email!, password!);
     if (result.success) {
-      this._router.navigate(['/']);
+      this._router.navigate(['/crm']);
     } else {
       this.errorMessage = result.error ?? null;
     }
