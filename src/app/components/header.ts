@@ -1,13 +1,12 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideMenu, lucideHome, lucideX } from '@ng-icons/lucide';
 import { AuthService } from '../services/auth';
-import { HlmSheetImports } from '@spartan-ng/helm/sheet';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, NgIcon, ...HlmSheetImports],
+  imports: [RouterLink, NgIcon],
   providers: [
     provideIcons({ lucideMenu, lucideHome, lucideX }),
   ],
@@ -16,8 +15,18 @@ import { HlmSheetImports } from '@spartan-ng/helm/sheet';
 })
 export class Header {
   public readonly auth = inject(AuthService);
+  menuOpen = signal(false);
+
+  toggleMenu() {
+    this.menuOpen.update(v => !v);
+  }
+
+  closeMenu() {
+    this.menuOpen.set(false);
+  }
 
   logout() {
     this.auth.logout();
+    this.closeMenu();
   }
 }
