@@ -37,6 +37,9 @@ export class Landing {
     { value: 'land', label: 'Terreno' },
   ];
 
+  protected readonly propertyTypeToString = (value: string): string =>
+    this.propertyTypes.find(t => t.value === value)?.label ?? value;
+
   formatPrice(property: { price: number; type: string }): string {
     return this.propertiesService.formatPrice(property.price, property.type as 'sale' | 'rent');
   }

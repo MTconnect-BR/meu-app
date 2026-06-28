@@ -63,7 +63,7 @@
 
         <!-- Bottom row: type selector + search button -->
         <div class="flex items-center gap-3">
-          <hlm-select [value]="propertyType()" (valueChange)="propertyType.set($event ?? 'all')" class="flex-1">
+          <hlm-select [value]="propertyType()" (valueChange)="propertyType.set($event ?? 'all')" [itemToString]="propertyTypeToString" class="flex-1">
             <hlm-select-trigger class="w-full rounded-xl py-2.5 sm:py-3"
               [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'">
               <hlm-select-value />
