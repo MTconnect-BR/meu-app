@@ -1,5 +1,4 @@
 import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
-import { provideRouter } from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideIcons } from '@ng-icons/core';
@@ -26,16 +25,19 @@ import {
 } from '@ng-icons/lucide';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 import { CdkMenuModule } from '@angular/cdk/menu';
+import { RouterModule } from '@angular/router';
 
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    provideRouter(routes),
+    importProvidersFrom(
+      RouterModule.forRoot(routes, { scrollPositionRestoration: 'top' }),
+      CdkMenuModule,
+    ),
     provideClientHydration(),
     provideAnimations(),
-    importProvidersFrom(CdkMenuModule),
     provideSpartanHlm(),
     provideIcons({
       lucideSearch,
