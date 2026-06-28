@@ -9,32 +9,27 @@ export const routeAnimation = trigger('routeAnimation', [
   transition('* <=> *', [
     query(':enter', [
       style({
-        position: 'absolute',
         width: '100%',
-        top: 0,
-        left: 0,
-        transformOrigin: '50% 0%',
-        transform: 'translateY(40px)',
+        transformOrigin: '50% 50svh',
+        transform: 'translateY(110svh)',
         opacity: 0,
       }),
     ], { optional: true }),
     query(':leave', [
       style({
-        position: 'absolute',
         width: '100%',
-        top: 0,
-        left: 0,
+        transformOrigin: '50% 50%',
       }),
     ], { optional: true }),
     group([
       query(':leave', [
-        animate('0.3s cubic-bezier(0.4, 0, 0.2, 1)', style({
-          transform: 'translateY(-20px)',
-          opacity: 0,
+        animate('0.75s cubic-bezier(.5,0,0,1)', style({
+          transform: 'scale(0.9) translateY(10svh)',
+          opacity: 0.5,
         })),
       ], { optional: true }),
       query(':enter', [
-        animate('0.3s cubic-bezier(0.4, 0, 0.2, 1)', style({
+        animate('0.75s cubic-bezier(.5,0,0,1)', style({
           transform: 'translateY(0)',
           opacity: 1,
         })),
