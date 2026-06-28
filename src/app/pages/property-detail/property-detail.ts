@@ -1,7 +1,6 @@
 import { Component, inject, signal, computed, OnInit, AfterViewInit, OnDestroy, ElementRef, viewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
-import { Footer } from '../../components/footer';
 import { PropertiesService, Property } from '../../services/properties';
 import { HlmCard, HlmCardContent } from '@spartan-ng/helm/card';
 import { HlmButton } from '@spartan-ng/helm/button';
@@ -18,7 +17,6 @@ import { HlmH1, HlmH2, HlmP } from '@spartan-ng/helm/typography';
   imports: [
     RouterLink,
     Header,
-    Footer,
     HlmCard,
     HlmCardContent,
     HlmButton,

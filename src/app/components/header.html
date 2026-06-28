@@ -1,97 +1,57 @@
-<div class="fixed inset-x-0 top-0 z-[100]">
-  <!-- Mobile/Tablet: Single pill -->
-  <div class="mx-4 mt-3 lg:hidden">
-    <header class="flex items-center justify-between rounded-2xl px-5 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
-      <!-- Left: Logo -->
-      <a routerLink="/" class="flex items-center gap-2">
-        <ng-icon name="lucideHome" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
-        <span class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">MeuApp</span>
-      </a>
+<hlm-sheet>
+  <div class="fixed inset-x-0 top-0 z-[100]">
+    <div class="mx-4 mt-3 lg:mx-auto lg:mt-4 lg:max-w-5xl">
+      <header class="flex items-center justify-between rounded-2xl px-5 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
+        <!-- Left: Hamburger -->
+        <button hlmSheetTrigger side="left" class="flex items-center gap-2">
+          <ng-icon name="lucideMenu" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
+        </button>
 
-      <!-- Right: CTA or Close -->
-      <div class="flex items-center gap-2">
-        @if (mobileMenuOpen()) {
-          <button
-            class="flex size-9 items-center justify-center rounded-full"
-            [style.background-color]="'hsl(0, 0%, 13%)'"
-            (click)="toggleMobileMenu()"
-            aria-label="Fechar menu"
-          >
-            <ng-icon name="lucideX" class="size-5" [style.color]="'hsl(0, 0%, 91%)'" />
-          </button>
-        } @else {
-          <a routerLink="/properties" class="rounded-full px-4 py-2 text-sm font-semibold transition-colors" [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'">
-            Ver imóveis
-          </a>
-        }
-      </div>
-    </header>
+        <!-- Center: Logo -->
+        <a routerLink="/" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2">
+          <ng-icon name="lucideHome" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
+          <span class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">MeuApp</span>
+        </a>
 
-    <!-- Mobile dropdown menu -->
-    @if (mobileMenuOpen()) {
-      <div class="absolute left-4 right-4 mt-2 space-y-2">
-        <!-- Nav card -->
-        <div class="rounded-2xl p-2 shadow-xl" [style.background-color]="'hsl(0, 0%, 87%)'">
-          <nav class="flex flex-col">
-            <a routerLink="/properties" class="px-4 py-3 text-lg font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
-              Imóveis
-            </a>
-            <div [style.background-color]="'hsl(0, 0%, 75%)'" class="mx-4 h-px"></div>
-            <a routerLink="/crm" class="px-4 py-3 text-lg font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'" (click)="mobileMenuOpen.set(false)">
-              CRM
-            </a>
-          </nav>
-        </div>
-
-        <!-- Auth card -->
-        <div class="rounded-2xl p-2 shadow-xl" [style.background-color]="'hsl(0, 0%, 87%)'">
-          @if (auth.isLoggedIn()) {
-            <div class="flex items-center justify-between px-4 py-3">
-              <span class="text-sm" [style.color]="'hsl(0, 0%, 13%)'">{{ auth.currentUserEmail() }}</span>
-              <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" [style.color]="'hsl(0, 0%, 13%)'">Sair</button>
-            </div>
-          } @else {
-            <a routerLink="/auth/login" class="flex items-center justify-between px-4 py-3" (click)="mobileMenuOpen.set(false)">
-              <span class="text-lg font-medium" [style.color]="'hsl(0, 0%, 13%)'">Entrar</span>
-            </a>
-          }
-        </div>
-      </div>
-    }
+        <!-- Right: spacer -->
+        <div class="w-5"></div>
+      </header>
+    </div>
   </div>
 
-  <!-- Desktop: Two pills centered -->
-  <div class="mx-auto mt-3 hidden max-w-5xl items-center justify-center gap-2 px-6 lg:flex">
-    <!-- Left pill: Logo + Nav -->
-    <header class="flex items-center gap-4 rounded-2xl px-5 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
-      <a routerLink="/" class="flex items-center gap-2">
-        <ng-icon name="lucideHome" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
-        <span class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">MeuApp</span>
+  <hlm-sheet-content side="left" class="w-72">
+    <h2 hlmSheetTitle class="text-lg font-bold">Menu</h2>
+
+    <nav class="mt-6 flex flex-col gap-1">
+      <a routerLink="/" class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
+         [style.color]="'hsl(0, 0%, 13%)'">
+        Início
       </a>
+      <a routerLink="/properties" class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
+         [style.color]="'hsl(0, 0%, 13%)'">
+        Imóveis
+      </a>
+      <a routerLink="/crm" class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
+         [style.color]="'hsl(0, 0%, 13%)'">
+        CRM
+      </a>
+    </nav>
 
-      <nav class="flex items-center gap-6">
-        <a routerLink="/properties" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'">
-          Imóveis
-        </a>
-        <a routerLink="/crm" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'">
-          CRM
-        </a>
-      </nav>
-    </header>
-
-    <!-- Right pill: CTA or Auth -->
-    <div class="flex items-center gap-2 rounded-2xl px-4 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
+    <div class="mt-auto border-t pt-4">
       @if (auth.isLoggedIn()) {
-        <span class="text-sm" [style.color]="'hsl(0, 0%, 13%)'">{{ auth.currentUserEmail() }}</span>
-        <button hlmBtn variant="ghost" size="sm" (click)="logout()" class="text-sm" [style.color]="'hsl(0, 0%, 13%)'">Sair</button>
+        <div class="flex items-center justify-between px-4">
+          <span class="text-xs" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
+          <button class="rounded-lg px-3 py-2 text-xs font-medium transition-colors hover:bg-muted"
+                  [style.color]="'hsl(0, 0%, 13%)'" (click)="logout()">
+            Sair
+          </button>
+        </div>
       } @else {
-        <a routerLink="/auth/login" class="text-sm font-medium transition-colors" [style.color]="'hsl(0, 0%, 13%)'">
+        <a routerLink="/auth/login" class="block rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-muted"
+           [style.color]="'hsl(0, 0%, 13%)'">
           Entrar
-        </a>
-        <a routerLink="/properties" hlmBtn size="sm" class="rounded-full px-4 py-2" [style.background-color]="'hsl(0, 0%, 13%)'" [style.color]="'hsl(0, 0%, 91%)'">
-          Ver imóveis
         </a>
       }
     </div>
-  </div>
-</div>
+  </hlm-sheet-content>
+</hlm-sheet>

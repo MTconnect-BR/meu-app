@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
-import { Footer } from '../../components/footer';
 import { PropertiesService } from '../../services/properties';
 import { HlmCard, HlmCardContent } from '@spartan-ng/helm/card';
 import { HlmButton } from '@spartan-ng/helm/button';
@@ -19,7 +18,6 @@ import { HlmH1, HlmH2, HlmLead } from '@spartan-ng/helm/typography';
   imports: [
     RouterLink,
     Header,
-    Footer,
     HlmCard,
     HlmCardContent,
     HlmButton,
