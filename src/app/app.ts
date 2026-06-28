@@ -11,7 +11,8 @@ export const routeAnimation = trigger('routeAnimation', [
       style({
         position: 'absolute',
         width: '100%',
-        transform: 'translateY(100vh)',
+        transformOrigin: '50% 50svh',
+        transform: 'translateY(110svh)',
         opacity: 0,
       }),
     ], { optional: true }),
@@ -19,19 +20,18 @@ export const routeAnimation = trigger('routeAnimation', [
       style({
         position: 'absolute',
         width: '100%',
-        transform: 'scale(1)',
-        opacity: 1,
+        transformOrigin: '50% 50%',
       }),
     ], { optional: true }),
     group([
       query(':leave', [
-        animate('0.35s cubic-bezier(0.5, 0, 0, 1)', style({
-          transform: 'scale(0.95) translateY(30px)',
-          opacity: 0,
+        animate('0.75s cubic-bezier(.5,0,0,1)', style({
+          transform: 'scale(0.9) translateY(10svh)',
+          opacity: 0.5,
         })),
       ], { optional: true }),
       query(':enter', [
-        animate('0.5s 0.15s cubic-bezier(0.5, 0, 0, 1)', style({
+        animate('0.75s cubic-bezier(.5,0,0,1)', style({
           transform: 'translateY(0)',
           opacity: 1,
         })),
