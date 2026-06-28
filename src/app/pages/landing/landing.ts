@@ -1,5 +1,5 @@
 import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, signal, viewChild } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideCheck } from '@ng-icons/lucide';
@@ -17,7 +17,6 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
   styleUrl: './landing.scss',
 })
 export class Landing {
-  private readonly router = inject(Router);
   private readonly propertiesService = inject(PropertiesService);
   private readonly destroyRef = inject(DestroyRef);
 
@@ -83,18 +82,7 @@ export class Landing {
   }
 
   onSearch() {
-    const params: Record<string, string> = {
-      type: this.searchType(),
-    };
-    const q = this.searchQuery().trim();
-    if (q) {
-      params['q'] = q;
-    }
-    const pt = this.propertyType();
-    if (pt !== 'all') {
-      params['propertyType'] = pt;
-    }
-    this.router.navigate(['/properties'], { queryParams: params });
+    // Search functionality placeholder
   }
 
   constructor() {

@@ -107,6 +107,14 @@
         </div>
       </div>
 
+      <!-- Scroll indicator -->
+      <div class="relative z-10 mt-12 flex justify-center">
+        <div class="scroll-indicator flex flex-col items-center gap-2">
+          <span class="text-xs font-medium tracking-wide" [style.color]="'hsl(0, 0%, 50%)'">Scroll</span>
+          <ng-icon name="lucideChevronDown" class="size-5" [style.color]="'hsl(0, 0%, 50%)'" />
+        </div>
+      </div>
+
     </div>
   </section>
 
@@ -139,13 +147,6 @@
           de comprar ou alugar um imóvel deve ser tão boa quanto viver nele.
         </p>
       </div>
-      <div class="flex justify-center">
-        <a routerLink="/properties"
-           class="flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-colors sm:max-w-xs"
-           [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'">
-          Ver imóveis
-        </a>
-      </div>
     </div>
   </section>
 
@@ -156,19 +157,16 @@
         <h2 class="text-2xl font-bold md:text-3xl" [style.color]="'hsl(0, 0%, 91%)'">
           Imóveis em destaque
         </h2>
-        <a routerLink="/properties" class="text-sm font-medium transition-colors hover:underline" [style.color]="'hsl(0, 0%, 75%)'">
-          Ver todos →
-        </a>
       </div>
 
       <!-- Horizontal scroll carousel -->
       <div class="carousel-container -mx-6 flex snap-x snap-mandatory gap-6 overflow-x-auto px-6 lg:mx-0 lg:px-0">
         @for (property of featuredProperties; track property.id) {
-          <a [routerLink]="['/properties', property.slug]"
-             class="w-72 shrink-0 snap-start overflow-hidden rounded-2xl shadow-lg transition-shadow hover:shadow-xl sm:w-80" [style.background-color]="'hsl(0, 0%, 87%)'">
+          <div
+             class="w-72 shrink-0 snap-start overflow-hidden rounded-2xl shadow-lg sm:w-80" [style.background-color]="'hsl(0, 0%, 87%)'">
             <div class="relative h-48 w-full overflow-hidden">
               <img [src]="property.imageUrl" [alt]="property.title"
-                   class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" />
+                   class="h-full w-full object-cover" />
             </div>
             <div class="space-y-2 p-4">
               <h3 class="line-clamp-1 font-semibold" [style.color]="'hsl(0, 0%, 13%)'">{{ property.title }}</h3>
@@ -180,7 +178,7 @@
                 <span>{{ property.area }}m²</span>
               </div>
             </div>
-          </a>
+          </div>
         }
       </div>
     </div>
