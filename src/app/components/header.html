@@ -1,22 +1,8 @@
-<div class="fixed inset-x-0 top-0 z-[100]">
-  <div class="mx-4 mt-3 lg:mx-auto lg:mt-4 lg:max-w-5xl">
-    <header class="flex items-center justify-between rounded-2xl px-5 py-2.5 shadow-lg" [style.background-color]="'hsl(0, 0%, 87%)'">
-      <!-- Left: Hamburger -->
-      <button (click)="toggleMenu()" class="flex items-center gap-2">
-        <ng-icon name="lucideMenu" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
-      </button>
-
-      <!-- Center: Logo -->
-      <a routerLink="/" class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center gap-2">
-        <ng-icon name="lucideHome" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
-        <span class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">MeuApp</span>
-      </a>
-
-      <!-- Right: spacer -->
-      <div class="w-5"></div>
-    </header>
-  </div>
-</div>
+<button type="button" (click)="toggleMenu()"
+  class="fixed left-4 top-4 z-[100] flex size-10 items-center justify-center rounded-2xl shadow-lg transition-shadow hover:shadow-xl"
+  [style.background-color]="'hsl(0, 0%, 87%)'">
+  <ng-icon name="lucideMenu" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
+</button>
 
 @if (menuOpen()) {
   <!-- Backdrop -->
