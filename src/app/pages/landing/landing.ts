@@ -2,16 +2,16 @@ import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, s
 import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearch, lucideChevronDown, lucideCheck } from '@ng-icons/lucide';
+import { lucideSearch, lucideCheck } from '@ng-icons/lucide';
 import { PropertiesService } from '../../services/properties';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
-import { HlmAccordionImports } from '@spartan-ng/helm/accordion';
+import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 
 @Component({
   selector: 'app-landing',
-  imports: [Header, RouterLink, NgIcon, ...HlmDropdownMenuImports, ...HlmAccordionImports],
+  imports: [Header, RouterLink, NgIcon, ...HlmDropdownMenuImports, ...HlmTooltipImports],
   providers: [
-    provideIcons({ lucideSearch, lucideChevronDown, lucideCheck }),
+    provideIcons({ lucideSearch, lucideCheck }),
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
@@ -50,6 +50,29 @@ export class Landing {
   protected readonly selectedPropertyTypeLabel = computed(() =>
     this.propertyTypes.find(t => t.value === this.propertyType())?.label ?? 'Todos os tipos'
   );
+
+  protected readonly faqs = [
+    {
+      question: 'Como funciona a busca de imóveis no MeuApp?',
+      answer: 'Utilize os filtros na página de imóveis para refinar por localização, tipo, faixa de preço e finalidade (compra ou aluguel). Os resultados são atualizados em tempo real.',
+    },
+    {
+      question: 'Os imóveis têm informações verificadas?',
+      answer: 'Sim. Cada anúncio passa por verificação para garantir que metragem, valores e condições do imóvel estejam precisos e atualizados.',
+    },
+    {
+      question: 'Posso salvar imóveis favoritos?',
+      answer: 'Sim. Ao criar uma conta, você pode salvar imóveis favoritos e acessá-los a qualquer momento pelo seu perfil.',
+    },
+    {
+      question: 'Como entro em contato com o proprietário?',
+      answer: 'Na página de detalhes do imóvel, utilize o botão de contato para enviar uma mensagem diretamente ao proprietário ou corretor responsável.',
+    },
+    {
+      question: 'O MeuApp cobra alguma taxa?',
+      answer: 'Não. A busca e visualização de imóveis no MeuApp são completamente gratuitas. Taxas só são aplicadas em serviços adicionais, quando aplicável.',
+    },
+  ];
 
   onPropertyTypeSelect(value: string) {
     this.propertyType.set(value);

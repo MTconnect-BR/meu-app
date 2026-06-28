@@ -244,42 +244,17 @@
         </p>
       </div>
 
-      <hlm-accordion [type]="'single'" class="w-full overflow-hidden rounded-2xl" [style.background-color]="'hsl(0, 0%, 91%)'">
-        <hlm-accordion-item>
-          <hlm-accordion-trigger>Como funciona a busca de imóveis no MeuApp?</hlm-accordion-trigger>
-          <hlm-accordion-content>
-            <p>Utilize os filtros na página de imóveis para refinar por localização, tipo, faixa de preço e finalidade (compra ou aluguel). Os resultados são atualizados em tempo real.</p>
-          </hlm-accordion-content>
-        </hlm-accordion-item>
-
-        <hlm-accordion-item>
-          <hlm-accordion-trigger>Os imóveis têm informações verificadas?</hlm-accordion-trigger>
-          <hlm-accordion-content>
-            <p>Sim. Cada anúncio passa por verificação para garantir que metragem, valores e condições do imóvel estejam precisos e atualizados.</p>
-          </hlm-accordion-content>
-        </hlm-accordion-item>
-
-        <hlm-accordion-item>
-          <hlm-accordion-trigger>Posso salvar imóveis favoritos?</hlm-accordion-trigger>
-          <hlm-accordion-content>
-            <p>Sim. Ao criar uma conta, você pode salvar imóveis favoritos e acessá-los a qualquer momento pelo seu perfil.</p>
-          </hlm-accordion-content>
-        </hlm-accordion-item>
-
-        <hlm-accordion-item>
-          <hlm-accordion-trigger>Como entro em contato com o proprietário?</hlm-accordion-trigger>
-          <hlm-accordion-content>
-            <p>Na página de detalhes do imóvel, utilize o botão de contato para enviar uma mensagem diretamente ao proprietário ou corretor responsável.</p>
-          </hlm-accordion-content>
-        </hlm-accordion-item>
-
-        <hlm-accordion-item>
-          <hlm-accordion-trigger>O MeuApp cobra alguma taxa?</hlm-accordion-trigger>
-          <hlm-accordion-content>
-            <p>Não. A busca e visualização de imóveis no MeuApp são completamente gratuitas. Taxas só são aplicadas em serviços adicionais, quando aplicável.</p>
-          </hlm-accordion-content>
-        </hlm-accordion-item>
-      </hlm-accordion>
+      <div class="space-y-4">
+        @for (faq of faqs; track faq.question) {
+          <span
+            class="inline-block cursor-default text-sm font-medium underline decoration-dashed underline-offset-4 transition-opacity hover:opacity-70"
+            [style.color]="'hsl(0, 0%, 91%)'"
+            [hlmTooltip]="faq.answer"
+            position="right">
+            {{ faq.question }}
+          </span>
+        }
+      </div>
     </div>
   </section>
 
