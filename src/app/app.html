@@ -1,5 +1,7 @@
-<div [@routeAnimation]="getRouteAnimationData(outlet)">
-  <router-outlet #outlet="outlet" />
+<div class="animation-wrapper">
+  <div [@routeAnimation]="getRouteAnimationData(outlet)">
+    <router-outlet #outlet="outlet" />
+  </div>
 </div>
 @if (!isCrmRoute()) {
   <app-whatsapp-button />

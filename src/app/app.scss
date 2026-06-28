@@ -1,5 +1,10 @@
 :host {
   display: block;
   min-height: 100dvh;
+}
+
+.animation-wrapper {
+  position: relative;
   overflow: hidden;
+  min-height: 100dvh;
 }

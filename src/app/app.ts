@@ -9,15 +9,22 @@ export const routeAnimation = trigger('routeAnimation', [
   transition('* <=> *', [
     query(':enter', [
       style({
+        position: 'absolute',
         width: '100%',
-        transformOrigin: '50% 50svh',
+        top: 0,
+        left: 0,
+        zIndex: 2,
         transform: 'translateY(110svh)',
         opacity: 0,
       }),
     ], { optional: true }),
     query(':leave', [
       style({
+        position: 'absolute',
         width: '100%',
+        top: 0,
+        left: 0,
+        zIndex: 1,
         transformOrigin: '50% 50%',
       }),
     ], { optional: true }),
