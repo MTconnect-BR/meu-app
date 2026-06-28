@@ -29,15 +29,6 @@ export class Landing {
   protected readonly propertyType = signal('all');
   protected readonly featuredProperties = this.propertiesService.forSale.slice(0, 8);
 
-  protected readonly companies = [
-    { name: 'Google', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/google.svg' },
-    { name: 'Microsoft', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/microsoft.svg' },
-    { name: 'Apple', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/apple.svg' },
-    { name: 'Netflix', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/netflix.svg' },
-    { name: 'Spotify', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/spotify.svg' },
-    { name: 'Airbnb', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/airbnb.svg' },
-  ];
-
   protected readonly propertyTypes = [
     { value: 'all', label: 'Todos os tipos' },
     { value: 'apartment', label: 'Apartamento' },
