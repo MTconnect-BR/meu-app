@@ -2,7 +2,7 @@ import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, s
 import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearch, lucideChevronDown, lucideCheck, lucideMonitor, lucideShoppingBag, lucideSmartphone, lucideGlobe, lucidePlay, lucideMusic, lucideCar, lucideHome, lucideUtensils } from '@ng-icons/lucide';
+import { lucideSearch, lucideChevronDown, lucideCheck } from '@ng-icons/lucide';
 import { PropertiesService } from '../../services/properties';
 import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmAccordionImports } from '@spartan-ng/helm/accordion';
@@ -11,7 +11,7 @@ import { HlmAccordionImports } from '@spartan-ng/helm/accordion';
   selector: 'app-landing',
   imports: [Header, RouterLink, NgIcon, ...HlmDropdownMenuImports, ...HlmAccordionImports],
   providers: [
-    provideIcons({ lucideSearch, lucideChevronDown, lucideCheck, lucideMonitor, lucideShoppingBag, lucideSmartphone, lucideGlobe, lucidePlay, lucideMusic, lucideCar, lucideHome, lucideUtensils }),
+    provideIcons({ lucideSearch, lucideChevronDown, lucideCheck }),
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
@@ -31,16 +31,12 @@ export class Landing {
   protected readonly featuredProperties = this.propertiesService.forSale.slice(0, 8);
 
   protected readonly companies = [
-    { name: 'Google', icon: 'lucideSearch' },
-    { name: 'Microsoft', icon: 'lucideMonitor' },
-    { name: 'Amazon', icon: 'lucideShoppingBag' },
-    { name: 'Apple', icon: 'lucideSmartphone' },
-    { name: 'Meta', icon: 'lucideGlobe' },
-    { name: 'Netflix', icon: 'lucidePlay' },
-    { name: 'Spotify', icon: 'lucideMusic' },
-    { name: 'Uber', icon: 'lucideCar' },
-    { name: 'Airbnb', icon: 'lucideHome' },
-    { name: 'iFood', icon: 'lucideUtensils' },
+    { name: 'Google', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/google.svg' },
+    { name: 'Microsoft', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/microsoft.svg' },
+    { name: 'Apple', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/apple.svg' },
+    { name: 'Netflix', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/netflix.svg' },
+    { name: 'Spotify', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/spotify.svg' },
+    { name: 'Airbnb', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/airbnb.svg' },
   ];
 
   protected readonly propertyTypes = [

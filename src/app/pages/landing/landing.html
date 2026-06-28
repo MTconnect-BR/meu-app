@@ -94,18 +94,15 @@
       </div>
     </div>
 
-      <!-- Company logos grid -->
+      <!-- Company logos -->
       <div class="relative z-10 mt-8 w-full max-w-3xl">
-        <p class="mb-4 text-center text-xs font-medium tracking-wide uppercase" [style.color]="'hsl(0, 0%, 50%)'">
+        <p class="mb-6 text-center text-xs font-medium tracking-wide uppercase" [style.color]="'hsl(0, 0%, 50%)'">
           Empresas que confiam na nossa plataforma
         </p>
-        <div class="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-5">
+        <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-6">
           @for (company of companies; track company.name) {
-            <div class="flex items-center justify-center gap-2 rounded-xl border px-4 py-5"
-                 style="border-color: hsl(0, 0%, 22%); background-color: hsl(0, 0%, 13%);">
-              <ng-icon [name]="company.icon" class="size-5 shrink-0" [style.color]="'hsl(0, 0%, 60%)'" />
-              <span class="text-sm font-semibold" [style.color]="'hsl(0, 0%, 70%)'">{{ company.name }}</span>
-            </div>
+            <img [src]="company.logo" [alt]="company.name"
+                 class="h-7 w-auto opacity-50 grayscale transition-all hover:opacity-80 hover:grayscale-0 sm:h-8 lg:h-9" />
           }
         </div>
       </div>
