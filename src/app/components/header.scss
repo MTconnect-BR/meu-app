@@ -1,3 +1,84 @@
 :host {
   display: block;
 }
+
+/* ===== Burger Button ===== */
+.burger-button {
+  transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.3, 1.33),
+              background-color 0.3s ease;
+}
+
+.burger-button.is-open {
+  transform: rotate(90deg);
+}
+
+/* ===== Burger Lines ===== */
+.burger-line {
+  position: absolute;
+  width: 18px;
+  height: 2px;
+  background-color: hsl(0, 0%, 13%);
+  border-radius: 2px;
+  transition: transform 0.3s cubic-bezier(0.17, 0.67, 0.3, 1.33),
+              opacity 0.2s ease;
+}
+
+.burger-line-1 {
+  transform: translateY(-3px);
+}
+
+.burger-line-2 {
+  transform: translateY(3px);
+}
+
+.burger-line-1.is-open {
+  transform: rotate(45deg);
+}
+
+.burger-line-2.is-open {
+  transform: rotate(-45deg);
+}
+
+/* ===== Backdrop ===== */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease,
+              visibility 0s 0.3s;
+}
+
+.menu-backdrop.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.3s ease,
+              visibility 0s 0s;
+}
+
+/* ===== Menu Panel ===== */
+.menu-panel {
+  transform: translateX(-100%);
+  transition: transform 0.4s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.menu-panel.is-open {
+  transform: translateX(0);
+}
+
+/* ===== Menu Items (Staggered) ===== */
+.menu-item {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 0.3s ease,
+              transform 0.3s cubic-bezier(0.17, 0.67, 0.3, 1.33);
+  transition-delay: 0s;
+}
+
+.menu-panel.is-open .menu-item {
+  opacity: 1;
+  transform: translateX(0);
+  transition-delay: calc(var(--index, 0) * 60ms + 100ms);
+}

@@ -1,4 +1,6 @@
-<router-outlet />
+<div [@routeAnimation]="getRouteAnimationData(outlet)">
+  <router-outlet #outlet="outlet" />
+</div>
 @if (showWhatsApp()) {
   <app-whatsapp-button />
 }

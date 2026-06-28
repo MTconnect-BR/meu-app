@@ -1,60 +1,62 @@
 <button type="button" (click)="toggleMenu()"
-  class="fixed left-4 top-4 z-[100] flex size-10 items-center justify-center rounded-2xl shadow-lg transition-shadow hover:shadow-xl"
+  class="burger-button fixed left-4 top-4 z-[100] flex size-10 items-center justify-center rounded-2xl shadow-lg transition-shadow hover:shadow-xl"
+  [class.is-open]="menuOpen()"
   [style.background-color]="'hsl(0, 0%, 87%)'">
-  <ng-icon name="lucideMenu" class="size-5" [style.color]="'hsl(0, 0%, 13%)'" />
+  <span class="burger-line burger-line-1" [class.is-open]="menuOpen()"></span>
+  <span class="burger-line burger-line-2" [class.is-open]="menuOpen()"></span>
 </button>
 
-@if (menuOpen()) {
-  <!-- Backdrop -->
-  <div class="fixed inset-0 z-[200] bg-black/50" role="button" tabindex="0" (click)="closeMenu()" (keydown.escape)="closeMenu()" (keydown.enter)="closeMenu()"></div>
+<!-- Backdrop -->
+<div class="menu-backdrop"
+     role="button" tabindex="0"
+     [class.is-visible]="menuOpen()"
+     (click)="closeMenu()" (keydown.escape)="closeMenu()" (keydown.enter)="closeMenu()"></div>
 
-  <!-- Slide-in panel -->
-  <nav class="fixed inset-y-0 left-0 z-[300] flex w-72 flex-col border-r p-6 transition-transform duration-300 ease-in-out"
-       [style.background-color]="'hsl(0, 0%, 100%)'"
-       [style.border-color]="'hsl(0, 0%, 90%)'"
-       [class.translate-x-0]="menuOpen()"
-       [class.-translate-x-full]="!menuOpen()">
+<!-- Slide-in panel -->
+<nav class="menu-panel fixed inset-y-0 left-0 z-[300] flex w-72 flex-col border-r p-6"
+     [class.is-open]="menuOpen()"
+     [style.background-color]="'hsl(0, 0%, 100%)'"
+     [style.border-color]="'hsl(0, 0%, 90%)'">
 
-    <!-- Close button -->
-    <div class="mb-6 flex items-center justify-between">
-      <span class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">Menu</span>
-      <button type="button" (click)="closeMenu()" (keydown.escape)="closeMenu()">
-        <ng-icon name="lucideX" class="size-5" [style.color]="'hsl(0, 0%, 50%)'" />
-      </button>
-    </div>
+  <!-- Close button -->
+  <div class="mb-6 flex items-center justify-between">
+    <span class="text-lg font-bold" [style.color]="'hsl(0, 0%, 13%)'">Menu</span>
+    <button type="button" (click)="closeMenu()" (keydown.escape)="closeMenu()">
+      <ng-icon name="lucideX" class="size-5" [style.color]="'hsl(0, 0%, 50%)'" />
+    </button>
+  </div>
 
-    <!-- Nav links -->
-    <div class="flex flex-col gap-1">
-      <a routerLink="/" (click)="closeMenu()" class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
-         [style.color]="'hsl(0, 0%, 13%)'">
-        Início
+  <!-- Nav links -->
+  <div class="flex flex-col gap-1">
+    <a routerLink="/" (click)="closeMenu()" class="menu-item rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
+       [style.color]="'hsl(0, 0%, 13%)'" style="--index: 0">
+      Início
+    </a>
+    <a routerLink="/properties" (click)="closeMenu()" class="menu-item rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
+       [style.color]="'hsl(0, 0%, 13%)'" style="--index: 1">
+      Imóveis
+    </a>
+    <a routerLink="/crm" (click)="closeMenu()" class="menu-item rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
+       [style.color]="'hsl(0, 0%, 13%)'" style="--index: 2">
+      CRM
+    </a>
+  </div>
+
+  <!-- Auth section -->
+  <div class="mt-auto border-t pt-4" [style.border-color]="'hsl(0, 0%, 90%)'">
+    @if (auth.isLoggedIn()) {
+      <div class="menu-item flex items-center justify-between px-4" style="--index: 3">
+        <span class="text-xs" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
+        <button class="rounded-lg px-3 py-2 text-xs font-medium transition-colors hover:bg-black/5"
+                [style.color]="'hsl(0, 0%, 13%)'" (click)="logout()">
+          Sair
+        </button>
+      </div>
+    } @else {
+      <a routerLink="/auth/login" (click)="closeMenu()" class="menu-item block rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
+         [style.color]="'hsl(0, 0%, 13%)'" style="--index: 3">
+        Entrar
       </a>
-      <a routerLink="/properties" (click)="closeMenu()" class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
-         [style.color]="'hsl(0, 0%, 13%)'">
-        Imóveis
-      </a>
-      <a routerLink="/crm" (click)="closeMenu()" class="rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
-         [style.color]="'hsl(0, 0%, 13%)'">
-        CRM
-      </a>
-    </div>
-
-    <!-- Auth section -->
-    <div class="mt-auto border-t pt-4" [style.border-color]="'hsl(0, 0%, 90%)'">
-      @if (auth.isLoggedIn()) {
-        <div class="flex items-center justify-between px-4">
-          <span class="text-xs" [style.color]="'hsl(0, 0%, 50%)'">{{ auth.currentUserEmail() }}</span>
-          <button class="rounded-lg px-3 py-2 text-xs font-medium transition-colors hover:bg-black/5"
-                  [style.color]="'hsl(0, 0%, 13%)'" (click)="logout()">
-            Sair
-          </button>
-        </div>
-      } @else {
-        <a routerLink="/auth/login" (click)="closeMenu()" class="block rounded-lg px-4 py-3 text-sm font-medium transition-colors hover:bg-black/5"
-           [style.color]="'hsl(0, 0%, 13%)'">
-          Entrar
-        </a>
-      }
-    </div>
-  </nav>
-}
+    }
+  </div>
+</nav>
