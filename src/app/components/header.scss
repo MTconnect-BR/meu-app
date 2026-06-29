@@ -62,9 +62,9 @@
   transform: scale(0);
 }
 
-/* When open: show close lines centered */
+/* When open: show close lines centered, rotated 45deg to form X */
 .burger-button.is-open .burger-icon_line.-close {
-  transform: scale(1);
+  transform: scale(1) rotate(45deg);
 }
 
 /* X first line — vertical, centered */
