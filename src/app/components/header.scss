@@ -12,7 +12,7 @@
 }
 
 .burger-button.is-open {
-  transform: rotate(-180deg);
+  transform: none;
 }
 
 /* ===== Burger Icon ===== */
@@ -47,36 +47,38 @@
 
 /* Default lines (hamburger) */
 .burger-icon_line.-default {
-  transform: rotate(0deg) scale(1);
+  transform: scale(1);
 }
 
-/* Close lines (X) */
+/* Close lines (X) — hidden by default, centered layout */
 .burger-icon_line.-close {
-  transform: rotate(0deg) scale(0);
+  transform: scale(0);
+  justify-content: center;
+  align-items: center;
 }
 
+/* When open: hide default lines */
 .burger-button.is-open .burger-icon_line.-default {
-  transform: rotate(180deg) scale(0.8);
+  transform: scale(0);
 }
 
-.burger-button.is-open .burger-icon_line.-default .burger-icon_line_inner:first-child {
-  transform: scaleX(0);
-}
-
-.burger-button.is-open .burger-icon_line.-default .burger-icon_line_inner:last-child {
-  transform: scaleX(0);
-}
-
+/* When open: show close lines centered */
 .burger-button.is-open .burger-icon_line.-close {
-  transform: rotate(180deg) scale(1);
+  transform: scale(1);
 }
 
+/* X first line — vertical, centered */
 .burger-button.is-open .burger-icon_line.-close .burger-icon_line_inner:first-child {
-  transform: rotate(90deg) translate(0, -0.5px);
+  width: 2px;
+  height: 100%;
+  transform: none;
 }
 
+/* X second line — horizontal, centered */
 .burger-button.is-open .burger-icon_line.-close .burger-icon_line_inner:last-child {
-  transform: scaleX(1);
+  width: 100%;
+  height: 2px;
+  transform: none;
 }
 
 /* ===== Backdrop ===== */
