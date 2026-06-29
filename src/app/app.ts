@@ -9,17 +9,18 @@ const routeAnimation = trigger('routeAnimation', [
   transition('* <=> *', [
     query(':enter', [
       style({
+        opacity: 0,
+        transform: 'translateY(100svh)',
+      }),
+    ], { optional: true }),
+    query(':leave', [
+      style({
         position: 'absolute',
         width: '100%',
         top: 0,
         left: 0,
-        zIndex: 2,
-        transform: 'translateY(100svh)',
-        opacity: 0,
+        zIndex: 1,
       }),
-    ], { optional: true }),
-    query(':leave', [
-      style({ zIndex: 1 }),
     ], { optional: true }),
     group([
       query(':leave', [
@@ -29,8 +30,8 @@ const routeAnimation = trigger('routeAnimation', [
       ], { optional: true }),
       query(':enter', [
         animate('0.75s cubic-bezier(.5,0,0,1)', style({
-          transform: 'translateY(0)',
           opacity: 1,
+          transform: 'translateY(0)',
         })),
       ], { optional: true }),
     ]),
@@ -61,6 +62,7 @@ export class App {
     this.router.events.pipe(
       filter((e): e is NavigationEnd => e instanceof NavigationEnd),
     ).subscribe(() => {
+      window.scrollTo(0, 0);
       if (this.isInitialLoad()) {
         this.isInitialLoad.set(false);
       }

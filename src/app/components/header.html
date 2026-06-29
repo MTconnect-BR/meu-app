@@ -31,8 +31,18 @@
         </a>
       </li>
       <li class="menu-list_item" style="--index: 1">
-        <a routerLink="/properties" (click)="closeMenu()" class="menu-nav_link">
-          <span class="menu-nav_label">Imóveis</span>
+        <a routerLink="/terms" (click)="closeMenu()" class="menu-nav_link">
+          <span class="menu-nav_label">Termos de Serviço</span>
+        </a>
+      </li>
+      <li class="menu-list_item" style="--index: 2">
+        <a routerLink="/privacy" (click)="closeMenu()" class="menu-nav_link">
+          <span class="menu-nav_label">Privacidade</span>
+        </a>
+      </li>
+      <li class="menu-list_item" style="--index: 3">
+        <a routerLink="/contact" (click)="closeMenu()" class="menu-nav_link">
+          <span class="menu-nav_label">Fale Conosco</span>
         </a>
       </li>
     </ul>
@@ -40,14 +50,14 @@
     <!-- Auth CTA -->
     <div class="menu-panel_footer">
       @if (auth.isLoggedIn()) {
-        <div class="menu-item menu-auth" style="--index: 2">
+        <div class="menu-item menu-auth" style="--index: 4">
           <span class="menu-auth_email">{{ auth.currentUserEmail() }}</span>
           <button class="menu-cta_button" (click)="logout()">
             <span class="menu-cta_label">Sair</span>
           </button>
         </div>
       } @else {
-        <a routerLink="/auth/login" (click)="closeMenu()" class="menu-item menu-cta_link" style="--index: 2">
+        <a routerLink="/auth/login" (click)="closeMenu()" class="menu-item menu-cta_link" style="--index: 4">
           <span class="menu-cta_label">Entrar</span>
         </a>
       }

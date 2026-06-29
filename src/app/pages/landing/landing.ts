@@ -28,7 +28,6 @@ export class Landing {
   protected readonly searchType = signal<'buy' | 'rent'>('buy');
   protected readonly searchQuery = signal('');
   protected readonly propertyType = signal('all');
-  protected readonly featuredProperties = this.propertiesService.forSale.slice(0, 8);
 
   protected readonly companies = [
     { name: 'Google', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/google.svg' },

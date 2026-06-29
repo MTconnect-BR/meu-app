@@ -7,5 +7,8 @@ export const serverRoutes: ServerRoute[] = [
   { path: 'crm', renderMode: RenderMode.Client },
   { path: 'auth/login', renderMode: RenderMode.Client },
   { path: 'auth/sign-up', renderMode: RenderMode.Client },
+  { path: 'terms', renderMode: RenderMode.Client },
+  { path: 'privacy', renderMode: RenderMode.Client },
+  { path: 'contact', renderMode: RenderMode.Client },
   { path: '**', renderMode: RenderMode.Client },
 ];

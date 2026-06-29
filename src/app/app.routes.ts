@@ -5,6 +5,9 @@ import { Signup } from './pages/signup/signup';
 import { Properties } from './pages/properties/properties';
 import { PropertyDetail } from './pages/property-detail/property-detail';
 import { Crm } from './pages/crm/crm';
+import { Terms } from './pages/terms/terms';
+import { Privacy } from './pages/privacy/privacy';
+import { Contact } from './pages/contact/contact';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -14,5 +17,8 @@ export const routes: Routes = [
   { path: 'crm', component: Crm, canActivate: [authGuard], data: { animation: 'crm' } },
   { path: 'auth/login', component: Login, data: { animation: 'login' } },
   { path: 'auth/sign-up', component: Signup, data: { animation: 'signup' } },
+  { path: 'terms', component: Terms, data: { animation: 'terms' } },
+  { path: 'privacy', component: Privacy, data: { animation: 'privacy' } },
+  { path: 'contact', component: Contact, data: { animation: 'contact' } },
   { path: '**', redirectTo: '' },
 ];
