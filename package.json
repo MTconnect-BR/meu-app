@@ -55,7 +55,7 @@
     "@nx/eslint": "^23.0.1",
     "@nx/workspace": "23.0.1",
     "@schematics/angular": "^22.0.4",
-    "@spartan-ng/cli": "^1.0.1",
+    "@spartan-ng/cli": "^1.0.2",
     "@tailwindcss/postcss": "^4.3.2",
     "@types/express": "^5.0.1",
     "@types/leaflet": "^1.9.21",
