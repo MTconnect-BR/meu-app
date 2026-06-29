@@ -65,7 +65,7 @@
     "knip": "^6.23.0",
     "nx": "23.0.1",
     "playwright": "^1.61.1",
-    "postcss": "^8.5.15",
+    "postcss": "^8.5.16",
     "prettier": "^3.9.3",
     "prettier-plugin-tailwindcss": "^0.8.0",
     "tailwindcss": "^4.3.2",
