@@ -1,0 +1,49 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "packageRules": [
+    {
+      "matchPackagePatterns": ["^@angular/"],
+      "groupName": "Angular",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["^@spartan-ng/"],
+      "groupName": "Spartan NG",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["^@nx/"],
+      "groupName": "Nx",
+      "automerge": false
+    },
+    {
+      "matchPackagePatterns": ["^@ngrx/"],
+      "groupName": "NgRx",
+      "automerge": false
+    },
+    {
+      "matchPackagePatterns": ["tailwindcss", "@tailwindcss/"],
+      "groupName": "Tailwind CSS",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["^eslint", "^@eslint/", "^angular-eslint$", "^typescript-eslint$"],
+      "groupName": "ESLint",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["prettier"],
+      "groupName": "Prettier",
+      "automerge": true
+    },
+    {
+      "matchPackagePatterns": ["playwright"],
+      "groupName": "Playwright",
+      "automerge": false
+    }
+  ]
+}
