@@ -1,4 +1,19 @@
 {
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=827846
-  "recommendations": ["angular.ng-template"]
+  "recommendations": [
+    "Angular.ng-template",
+    "nrwl.angular-console",
+    "yoavbls.pretty-ts-errors",
+    "usernamehw.errorlens",
+    "bradlc.vscode-tailwindcss",
+    "wix.vscode-import-cost",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "editorconfig.editorconfig",
+    "eamodio.gitlens",
+    "vivaxy.vscode-conventional-commits",
+    "christian-kohler.path-intellisense",
+    "formulahendry.auto-rename-tag",
+    "formulahendry.auto-close-tag",
+    "SonarSource.sonarlint-vscode"
+  ]
 }
