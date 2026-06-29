@@ -48,8 +48,8 @@ importers:
         specifier: ^32.2.0
         version: 32.5.0
       '@spartan-ng/brain':
-        specifier: ^1.0.1
-        version: 1.0.1(96e0117633b2cacefa2db958815a4f22)
+        specifier: ^1.0.2
+        version: 1.0.2(96e0117633b2cacefa2db958815a4f22)
       '@vercel/analytics':
         specifier: ^2.0.1
         version: 2.0.1
@@ -2977,8 +2977,8 @@ packages:
   '@sinclair/typebox@0.34.49':
     resolution: {integrity: sha512-brySQQs7Jtn0joV8Xh9ZV/hZb9Ozb0pmazDIASBkYKCjXrXU3mpcFahmK/z4YDhGkQvP9mWJbVyahdtU5wQA+A==}
 
-  '@spartan-ng/brain@1.0.1':
-    resolution: {integrity: sha512-PfZkAzW96PJqiQ20QaqXOECB0dxZ9UrqqMnej5kxWdcj7eOGr3Wq4vzVxxRjBoW8JSqvbrA5d5tgAQ4YRRQYOQ==}
+  '@spartan-ng/brain@1.0.2':
+    resolution: {integrity: sha512-5JaI/C9ZheJWWQq07PrYUmEFrF6K3WhgfblfeOsWHO/T1vFZL+dotGDOoncEfxfaNHmX7ApS1otNHuzc9SMstQ==}
     peerDependencies:
       '@angular/cdk': '>=21.0.0 <23.0.0'
       '@angular/common': '>=21.0.0 <23.0.0'
@@ -9833,7 +9833,7 @@ snapshots:
 
   '@sinclair/typebox@0.34.49': {}
 
-  '@spartan-ng/brain@1.0.1(96e0117633b2cacefa2db958815a4f22)':
+  '@spartan-ng/brain@1.0.2(96e0117633b2cacefa2db958815a4f22)':
     dependencies:
       '@angular/cdk': 22.0.2(@angular/common@22.0.3(@angular/core@22.0.4(@angular/compiler@22.0.4)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.0.4(@angular/compiler@22.0.4)(rxjs@7.8.2))(@angular/platform-browser@22.0.3(@angular/animations@22.0.3(@angular/core@22.0.4(@angular/compiler@22.0.4)(rxjs@7.8.2)))(@angular/common@22.0.3(@angular/core@22.0.4(@angular/compiler@22.0.4)(rxjs@7.8.2))(rxjs@7.8.2))(@angular/core@22.0.4(@angular/compiler@22.0.4)(rxjs@7.8.2)))(rxjs@7.8.2)
       '@angular/common': 22.0.3(@angular/core@22.0.4(@angular/compiler@22.0.4)(rxjs@7.8.2))(rxjs@7.8.2)

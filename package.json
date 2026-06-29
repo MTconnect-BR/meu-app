@@ -28,7 +28,7 @@
     "@bluehalo/ngx-leaflet": "^22.0.0",
     "@ng-icons/core": "^32.2.0",
     "@ng-icons/lucide": "^32.2.0",
-    "@spartan-ng/brain": "^1.0.1",
+    "@spartan-ng/brain": "^1.0.2",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "class-variance-authority": "^0.7.0",
