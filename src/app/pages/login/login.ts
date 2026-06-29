@@ -31,13 +31,13 @@ export class Login {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  submit() {
+  async submit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
     const { email, password } = this.form.value;
-    const result = this._auth.login(email!, password!);
+    const result = await this._auth.login(email!, password!);
     if (result.success) {
       this._router.navigate(['/crm']);
     } else {

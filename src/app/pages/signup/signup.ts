@@ -38,13 +38,13 @@ export class Signup {
     return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
-  submit() {
+  async submit() {
     if (this.form.invalid) {
       this.form.markAllAsTouched();
       return;
     }
     const { email, password } = this.form.value;
-    const result = this._auth.signup(email!, password!);
+    const result = await this._auth.signup(email!, password!);
     if (result.success) {
       this._router.navigate(['/crm']);
     } else {
