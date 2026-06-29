@@ -2,16 +2,15 @@ import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, s
 import { Router, RouterLink } from '@angular/router';
 import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearch, lucideCheck } from '@ng-icons/lucide';
+import { lucideSearch, lucideCheck, lucideChevronUp } from '@ng-icons/lucide';
 import { PropertiesService } from '../../services/properties';
-import { HlmDropdownMenuImports } from '@spartan-ng/helm/dropdown-menu';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 
 @Component({
   selector: 'app-landing',
-  imports: [Header, RouterLink, NgIcon, ...HlmDropdownMenuImports, ...HlmTooltipImports],
+  imports: [Header, RouterLink, NgIcon, ...HlmTooltipImports],
   providers: [
-    provideIcons({ lucideSearch, lucideCheck }),
+    provideIcons({ lucideSearch, lucideCheck, lucideChevronUp }),
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
@@ -28,6 +27,7 @@ export class Landing {
   protected readonly searchType = signal<'buy' | 'rent'>('buy');
   protected readonly searchQuery = signal('');
   protected readonly propertyType = signal('all');
+  protected readonly filterOpen = signal(false);
 
   protected readonly companies = [
     { name: 'Google', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/google.svg' },
@@ -75,6 +75,15 @@ export class Landing {
 
   onPropertyTypeSelect(value: string) {
     this.propertyType.set(value);
+    this.filterOpen.set(false);
+  }
+
+  toggleFilter() {
+    this.filterOpen.update(v => !v);
+  }
+
+  closeFilter() {
+    this.filterOpen.set(false);
   }
 
   formatPrice(property: { price: number; type: string }): string {

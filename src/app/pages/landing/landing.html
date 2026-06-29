@@ -63,24 +63,38 @@
 
         <!-- Bottom row: type selector + search button -->
         <div class="flex items-center gap-3">
-          <div class="flex-1">
-            <button [hlmDropdownMenuTrigger]="propertyTypeMenu"
+          <div class="relative flex-1">
+            <button
+              (click)="toggleFilter()"
               class="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm sm:px-4 sm:py-3"
               [style.background-color]="'hsl(0, 0%, 18%)'" [style.color]="'hsl(0, 0%, 91%)'">
               {{ selectedPropertyTypeLabel() }}
-              <ng-icon name="lucideChevronDown" class="size-4 shrink-0" [style.color]="'hsl(0, 0%, 50%)'" />
+              <ng-icon name="lucideChevronUp" class="size-4 shrink-0 transition-transform duration-200"
+                [style.color]="'hsl(0, 0%, 50%)'"
+                [class.rotate-180]="!filterOpen()" />
             </button>
-            <ng-template #propertyTypeMenu>
-              <hlm-dropdown-menu>
-                @for (type of propertyTypes; track type.value) {
-                  <button hlmDropdownMenuItem (click)="onPropertyTypeSelect(type.value)">
-                    <ng-icon name="lucideCheck" class="size-4"
-                      [style.visibility]="propertyType() === type.value ? 'visible' : 'hidden'" />
-                    {{ type.label }}
-                  </button>
-                }
-              </hlm-dropdown-menu>
-            </ng-template>
+
+            <!-- MindMarket-style filter panel -->
+            @if (filterOpen()) {
+              <!-- Backdrop -->
+              <div class="filter-backdrop" (click)="closeFilter()"></div>
+
+              <div class="filter-panel">
+                <div class="filter-group">
+                  <span class="filter-group-title">Tipos de imóvel</span>
+                  @for (type of propertyTypes; track type.value) {
+                    <button class="filter-option" (click)="onPropertyTypeSelect(type.value)">
+                      <span class="filter-checkbox" [class.is-checked]="propertyType() === type.value">
+                        @if (propertyType() === type.value) {
+                          <ng-icon name="lucideCheck" class="size-3" [style.color]="'hsl(0, 0%, 13%)'" />
+                        }
+                      </span>
+                      <span class="filter-label">{{ type.label }}</span>
+                    </button>
+                  }
+                </div>
+              </div>
+            }
           </div>
           <button
             (click)="onSearch()"
