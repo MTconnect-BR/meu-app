@@ -62,23 +62,23 @@
   transform: scale(0);
 }
 
-/* When open: show close lines centered, rotated 45deg to form X */
+/* When open: show close lines centered */
 .burger-button.is-open .burger-icon_line.-close {
-  transform: scale(1) rotate(45deg);
+  transform: scale(1);
 }
 
-/* X first line — vertical, centered */
+/* X line 1 — diagonal / */
 .burger-button.is-open .burger-icon_line.-close .burger-icon_line_inner:first-child {
-  width: 2px;
-  height: 100%;
-  transform: none;
+  width: 14px;
+  height: 2px;
+  transform: rotate(45deg);
 }
 
-/* X second line — horizontal, centered */
+/* X line 2 — diagonal \ */
 .burger-button.is-open .burger-icon_line.-close .burger-icon_line_inner:last-child {
-  width: 100%;
+  width: 14px;
   height: 2px;
-  transform: none;
+  transform: rotate(-45deg);
 }
 
 /* ===== Backdrop ===== */
