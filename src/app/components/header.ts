@@ -1,4 +1,4 @@
-import { Component, inject, signal, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, effect } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { AuthService } from '../services/auth';
@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth';
   imports: [RouterLink],
   templateUrl: './header.html',
   styleUrl: './header.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Header {
   public readonly auth = inject(AuthService);

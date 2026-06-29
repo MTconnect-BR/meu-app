@@ -103,7 +103,9 @@
 
       <div class="space-y-4">
         <h2 hlmH2 class="text-foreground">Localização</h2>
-        <div #mapContainer class="h-80 w-full rounded-xl overflow-hidden border border-border"></div>
+        @defer (hydrate on viewport) {
+          <div #mapContainer class="h-80 w-full rounded-xl overflow-hidden border border-border"></div>
+        }
       </div>
 
       <hlm-separator />

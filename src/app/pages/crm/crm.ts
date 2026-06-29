@@ -1,4 +1,4 @@
-import { Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
@@ -73,6 +73,7 @@ import { HlmH1 } from '@spartan-ng/helm/typography';
   ],
   templateUrl: './crm.html',
   styleUrl: './crm.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Crm {
   private readonly _fb = inject(FormBuilder);

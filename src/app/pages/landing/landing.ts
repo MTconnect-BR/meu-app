@@ -1,4 +1,4 @@
-import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, signal, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, afterNextRender, computed, inject, signal, viewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideCheck, lucideChevronUp } from '@ng-icons/lucide';
@@ -13,6 +13,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Landing {
   private readonly router = inject(Router);

@@ -1,4 +1,4 @@
-import { Component, inject, signal, computed, OnInit, AfterViewInit, OnDestroy, ElementRef, viewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, AfterViewInit, OnDestroy, ElementRef, viewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PropertiesService, Property } from '../../services/properties';
 import { HlmCard, HlmCardContent } from '@spartan-ng/helm/card';
@@ -38,6 +38,7 @@ import { HlmH1, HlmH2, HlmP } from '@spartan-ng/helm/typography';
   ],
   templateUrl: './property-detail.html',
   styleUrl: './property-detail.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PropertyDetail implements OnInit, AfterViewInit, OnDestroy {
   private readonly _route = inject(ActivatedRoute);

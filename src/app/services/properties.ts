@@ -1,4 +1,4 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, debounced } from '@angular/core';
 
 export interface Property {
   id: number;
@@ -28,6 +28,7 @@ const STORAGE_KEY = 'meu_app_custom_properties';
 @Injectable({ providedIn: 'root' })
 export class PropertiesService {
   public readonly searchQuery = signal('');
+  private readonly _debouncedQuery = debounced(this.searchQuery, 300);
   public readonly propertyType = signal<'all' | 'sale' | 'rent'>('all');
   public readonly furnished = signal(false);
   public readonly petFriendly = signal(false);
@@ -548,12 +549,12 @@ export class PropertiesService {
   }
 
   private _applyFilters(properties: Property[]): Property[] {
+    const q = this._debouncedQuery.value().toLowerCase();
     return properties.filter((p) => {
       if (this.furnished() && !p.furnished) return false;
       if (this.petFriendly() && !p.petFriendly) return false;
       if (this.parkingSpot() && p.parkingSpots === 0) return false;
-      if (this.searchQuery()) {
-        const q = this.searchQuery().toLowerCase();
+      if (q) {
         if (!p.title.toLowerCase().includes(q) && !p.address.toLowerCase().includes(q)) return false;
       }
       return true;
