@@ -13,8 +13,13 @@
   </span>
 </button>
 
-<!-- Slide-in panel -->
-<nav class="menu-panel fixed inset-y-0 left-0 z-[300] flex w-72 flex-col"
+<!-- Backdrop -->
+<div class="menu-backdrop"
+     [class.is-visible]="menuOpen()"
+     (click)="closeMenu()"></div>
+
+<!-- Dropdown panel below burger -->
+<nav class="menu-panel fixed left-4 z-[300] flex w-72 flex-col"
      [class.is-open]="menuOpen()">
 
   <!-- Nav links -->

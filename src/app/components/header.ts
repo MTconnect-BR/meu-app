@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, signal, effect } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { AuthService } from '../services/auth';
@@ -12,6 +12,13 @@ import { AuthService } from '../services/auth';
 export class Header {
   public readonly auth = inject(AuthService);
   menuOpen = signal(false);
+
+  constructor() {
+    effect(() => {
+      const open = this.menuOpen();
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+  }
 
   toggleMenu() {
     this.menuOpen.update(v => !v);
