@@ -3,6 +3,7 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs/operators';
 import { trigger, transition, style, animate, query, group } from '@angular/animations';
+import { Header } from './components/header';
 import { WhatsAppButton } from './components/whatsapp-button';
 
 const routeAnimation = trigger('routeAnimation', [
@@ -40,7 +41,7 @@ const routeAnimation = trigger('routeAnimation', [
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, WhatsAppButton],
+  imports: [RouterOutlet, Header, WhatsAppButton],
   templateUrl: './app.html',
   styleUrl: './app.scss',
   animations: [routeAnimation],

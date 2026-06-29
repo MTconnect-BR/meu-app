@@ -1,6 +1,5 @@
 import { Component, DestroyRef, ElementRef, afterNextRender, computed, inject, signal, viewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { Header } from '../../components/header';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideCheck, lucideChevronUp } from '@ng-icons/lucide';
 import { PropertiesService } from '../../services/properties';
@@ -8,7 +7,7 @@ import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 
 @Component({
   selector: 'app-landing',
-  imports: [Header, RouterLink, NgIcon, ...HlmTooltipImports],
+  imports: [RouterLink, NgIcon, ...HlmTooltipImports],
   providers: [
     provideIcons({ lucideSearch, lucideCheck, lucideChevronUp }),
   ],

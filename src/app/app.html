@@ -1,3 +1,7 @@
+@if (!isCrmRoute()) {
+  <app-header />
+}
+
 <div class="animation-wrapper">
   <div [@routeAnimation]="getRouteAnimationData(outlet)">
     <router-outlet #outlet="outlet" />
