@@ -5,6 +5,6 @@
 
 .animation-wrapper {
   position: relative;
-  overflow: hidden;
+  overflow: clip;
   min-height: 100dvh;
 }
