@@ -1,11 +1,11 @@
-import { Component, inject } from '@angular/core';
-import { Router, RouterOutlet } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs/operators';
 import { trigger, transition, style, animate, query, group } from '@angular/animations';
 import { WhatsAppButton } from './components/whatsapp-button';
 
-export const routeAnimation = trigger('routeAnimation', [
+const routeAnimation = trigger('routeAnimation', [
   transition('* <=> *', [
     query(':enter', [
       style({
@@ -14,25 +14,17 @@ export const routeAnimation = trigger('routeAnimation', [
         top: 0,
         left: 0,
         zIndex: 2,
-        transform: 'translateY(110svh)',
+        transform: 'translateY(100svh)',
         opacity: 0,
       }),
     ], { optional: true }),
     query(':leave', [
-      style({
-        position: 'absolute',
-        width: '100%',
-        top: 0,
-        left: 0,
-        zIndex: 1,
-        transformOrigin: '50% 50%',
-      }),
+      style({ zIndex: 1 }),
     ], { optional: true }),
     group([
       query(':leave', [
         animate('0.75s cubic-bezier(.5,0,0,1)', style({
-          transform: 'scale(0.9) translateY(10svh)',
-          opacity: 0.5,
+          opacity: 0,
         })),
       ], { optional: true }),
       query(':enter', [
@@ -55,6 +47,8 @@ export const routeAnimation = trigger('routeAnimation', [
 export class App {
   private readonly router = inject(Router);
 
+  protected readonly isInitialLoad = signal(true);
+
   protected readonly isCrmRoute = toSignal(
     this.router.events.pipe(
       filter(() => true),
@@ -63,7 +57,18 @@ export class App {
     { initialValue: this.router.url },
   );
 
+  constructor() {
+    this.router.events.pipe(
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+    ).subscribe(() => {
+      if (this.isInitialLoad()) {
+        this.isInitialLoad.set(false);
+      }
+    });
+  }
+
   getRouteAnimationData(outlet: RouterOutlet) {
+    if (this.isInitialLoad()) return undefined;
     return outlet?.activatedRouteData?.['animation'];
   }
 }
