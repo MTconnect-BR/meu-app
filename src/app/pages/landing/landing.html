@@ -75,7 +75,11 @@
             <!-- MindMarket-style filter panel -->
             @if (filterOpen()) {
               <!-- Backdrop -->
-              <div class="filter-backdrop" (click)="closeFilter()"></div>
+              <div class="filter-backdrop"
+     role="button"
+     tabindex="0"
+     (click)="closeFilter()"
+     (keyup.enter)="closeFilter()"></div>
 
               <div class="filter-panel">
                 <div class="filter-group">
