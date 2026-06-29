@@ -54,9 +54,9 @@ export class App {
   protected readonly isCrmRoute = toSignal(
     this.router.events.pipe(
       filter(() => true),
-      map(() => this.router.url),
+      map(() => this.router.url.includes('/crm')),
     ),
-    { initialValue: this.router.url },
+    { initialValue: this.router.url.includes('/crm') },
   );
 
   constructor() {
