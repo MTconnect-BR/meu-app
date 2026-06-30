@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security Issue
+    url: https://github.com/MTconnect-BR/meu-app/blob/main/SECURITY.md
+    about: Report security vulnerabilities privately. Do not open a public issue.
+  - name: Support Request
+    url: https://github.com/MTconnect-BR/meu-app/blob/main/CONTRIBUTING.md
+    about: Questions about development or usage? Check our Contributing Guide first.

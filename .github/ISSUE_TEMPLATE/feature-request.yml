@@ -1,0 +1,54 @@
+name: Feature Request
+description: Suggest a feature for MTconnect-BR
+labels: ["Type: Feature"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for suggesting a feature! Please describe your idea below.
+
+  - type: dropdown
+    id: affected-area
+    attributes:
+      label: Which area does this affect?
+      options:
+        - Landing Page
+        - Properties
+        - Property Detail
+        - Authentication
+        - CRM Dashboard
+        - Contact
+        - Legal Pages
+        - Header / Navigation
+        - General / Multi-area
+      multiple: true
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear and concise description of the feature you'd like.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposed-solution
+    attributes:
+      label: Proposed solution
+      description: Describe the solution you'd like to see implemented.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe any alternative solutions or features you've considered.
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Any other information, mockups, or screenshots that help explain the feature.

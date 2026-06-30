@@ -1,0 +1,93 @@
+name: Bug Report
+description: Report a bug in MTconnect-BR
+labels: ["Type: Bug", "Status: Unconfirmed"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug! Please fill out the form below to help us investigate.
+
+        Before opening a new issue, please [search existing issues](https://github.com/MTconnect-BR/meu-app/issues) to avoid duplicates.
+
+  - type: dropdown
+    id: affected-area
+    attributes:
+      label: Which area is affected?
+      options:
+        - Landing Page (home, search, stats)
+        - Properties (listing, filters)
+        - Property Detail (single property view)
+        - Authentication (login, signup)
+        - CRM Dashboard
+        - Contact Page
+        - Legal Pages (terms, privacy)
+        - Header / Navigation
+        - WhatsApp Button
+        - Other
+      multiple: true
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: A clear and concise description of what the bug is.
+    validations:
+      required: true
+
+  - type: input
+    id: reproduction-url
+    attributes:
+      label: Link to reproduction
+      description: A link to a live site or repository that reproduces the issue.
+      placeholder: "https://meu-app-kohl-mu.vercel.app/..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduction-steps
+    attributes:
+      label: Steps to reproduce
+      description: A step-by-step description of how to reproduce the issue.
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected-behavior
+    attributes:
+      label: Expected behavior
+      description: A clear description of what you expected to happen.
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots
+      description: If applicable, add screenshots to help explain the problem.
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Please provide your environment details.
+      render: bash
+      placeholder: |
+        OS: Windows 11 / macOS / Linux
+        Browser: Chrome 125 / Firefox 126 / Safari 18
+        Node.js: v24.x
+        pnpm: v11.9.0
+    validations:
+      required: true
+
+  - type: textarea
+    id: additional-context
+    attributes:
+      label: Additional context
+      description: Any other information that might help us investigate.

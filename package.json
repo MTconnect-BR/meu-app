@@ -1,6 +1,17 @@
 {
   "name": "meu-app",
   "version": "0.0.0",
+  "description": "Plataforma imobiliária Angular 22 com SSR para compra e aluguel de imóveis em todo o Brasil",
+  "author": "Matheus Moraes",
+  "license": "MIT",
+  "homepage": "https://meu-app-kohl-mu.vercel.app",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MTconnect-BR/meu-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MTconnect-BR/meu-app/issues"
+  },
   "scripts": {
     "start": "nx serve meu-app",
     "build": "nx build meu-app",
