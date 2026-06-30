@@ -28,7 +28,6 @@ import {
   lucideSlidersHorizontal,
 } from '@ng-icons/lucide';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
-import { CdkMenuModule } from '@angular/cdk/menu';
 import { RouterModule } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -39,7 +38,6 @@ export const appConfig: ApplicationConfig = {
     provideBrowserGlobalErrorListeners(),
     importProvidersFrom(
       RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled' }),
-      CdkMenuModule,
     ),
     provideClientHydration(),
     provideAnimationsAsync(),
