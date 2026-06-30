@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, afterNextRender } from '@angular/core';
 import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs/operators';
@@ -54,20 +54,22 @@ export class App {
 
   protected readonly isCrmRoute = toSignal(
     this.router.events.pipe(
-      filter(() => true),
+      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
       map(() => this.router.url.includes('/crm')),
     ),
     { initialValue: this.router.url.includes('/crm') },
   );
 
   constructor() {
-    this.router.events.pipe(
-      filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-    ).subscribe(() => {
-      window.scrollTo(0, 0);
-      if (this.isInitialLoad()) {
-        this.isInitialLoad.set(false);
-      }
+    afterNextRender(() => {
+      this.router.events.pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+      ).subscribe(() => {
+        window.scrollTo(0, 0);
+        if (this.isInitialLoad()) {
+          this.isInitialLoad.set(false);
+        }
+      });
     });
   }
 

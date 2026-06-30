@@ -11,13 +11,22 @@
   ],
   "functions": {
     "api/index.mjs": {
-      "includeFiles": "dist/meu-app/**",
+      "includeFiles": "dist/meu-app/server/**",
       "maxDuration": 30
     }
   },
   "headers": [
     {
       "source": "/assets/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/logos/(.*)",
       "headers": [
         {
           "key": "Cache-Control",

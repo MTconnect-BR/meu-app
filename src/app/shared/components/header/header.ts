@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, inject, signal, effect } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal, afterNextRender, effect } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth';
@@ -15,9 +15,11 @@ export class Header {
   menuOpen = signal(false);
 
   constructor() {
-    effect(() => {
-      const open = this.menuOpen();
-      document.body.style.overflow = open ? 'hidden' : '';
+    afterNextRender(() => {
+      effect(() => {
+        const open = this.menuOpen();
+        document.body.style.overflow = open ? 'hidden' : '';
+      });
     });
   }
 

@@ -18,7 +18,7 @@ const angularApp = new AngularNodeAppEngine();
  * The nonce is injected into script tags via the response interception below.
  */
 app.use((_req, res, next) => {
-  const nonce = crypto.randomBytes(16).toString('base64');
+  const nonce = crypto.randomUUID().replace(/-/g, '');
 
   const cspDirectives = [
     "default-src 'none'",

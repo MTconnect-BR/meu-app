@@ -1,8 +1,7 @@
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearch, lucideMapPin, lucideBedDouble, lucideBath, lucideCar, lucideSlidersHorizontal } from '@ng-icons/lucide';
+import { NgIcon } from '@ng-icons/core';
 import { PropertiesService } from '../../core/services/properties';
 import { HlmButton } from '@spartan-ng/helm/button';
 import {
@@ -14,6 +13,7 @@ import {
   HlmDropdownMenuLabel,
   HlmDropdownMenuSeparator,
 } from '@spartan-ng/helm/dropdown-menu';
+import { CdkMenuModule } from '@angular/cdk/menu';
 
 @Component({
   selector: 'app-properties',
@@ -29,9 +29,7 @@ import {
     HlmDropdownMenuGroup,
     HlmDropdownMenuLabel,
     HlmDropdownMenuSeparator,
-  ],
-  providers: [
-    provideIcons({ lucideSearch, lucideMapPin, lucideBedDouble, lucideBath, lucideCar, lucideSlidersHorizontal }),
+    CdkMenuModule,
   ],
   templateUrl: './properties.html',
   styleUrl: './properties.scss',

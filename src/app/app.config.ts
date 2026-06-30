@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideBrowserGlobalErrorListeners,
+} from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideIcons } from '@ng-icons/core';
@@ -24,17 +28,16 @@ import {
   lucideSlidersHorizontal,
 } from '@ng-icons/lucide';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
-import { CdkMenuModule } from '@angular/cdk/menu';
 import { RouterModule } from '@angular/router';
 
 import { routes } from './app.routes';
+import { provideVercelAnalytics } from './analytics';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
     importProvidersFrom(
       RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled' }),
-      CdkMenuModule,
     ),
     provideClientHydration(),
     provideAnimationsAsync(),
@@ -60,5 +63,6 @@ export const appConfig: ApplicationConfig = {
       lucideChevronUp,
       lucideSlidersHorizontal,
     }),
+    provideVercelAnalytics(),
   ],
 };
