@@ -93,7 +93,7 @@
 
   <!-- Results Section -->
   <section class="flex-1 px-6 pb-16">
-    <div class="mx-auto max-w-6xl">
+    <div class="mx-auto max-w-5xl">
       <!-- Result count -->
       <p class="mb-6 text-sm" style="color: hsl(0, 0%, 50%)">
         {{ resultCount }} imóvel{{ resultCount !== 1 ? 'is' : '' }} encontrado{{ resultCount !== 1 ? 's' : '' }}
@@ -101,7 +101,7 @@
 
       @if (displayedProperties.length > 0) {
         <!-- Property Grid -->
-        <div class="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           @for (property of displayedProperties; track property.id) {
             <a [routerLink]="['/properties', property.slug]"
                class="group overflow-hidden rounded-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-xl"
@@ -120,7 +120,7 @@
               </div>
 
               <!-- Content -->
-              <div class="space-y-2.5 p-4">
+              <div class="space-y-2 p-3">
                 <div class="space-y-1">
                   <h3 class="line-clamp-1 font-semibold" style="color: hsl(0, 0%, 13%)">
                     {{ property.title }}
@@ -131,7 +131,7 @@
                   </p>
                 </div>
 
-                <p class="text-lg font-bold" style="color: hsl(0, 0%, 13%)">
+                <p class="text-base font-bold" style="color: hsl(0, 0%, 13%)">
                   {{ formatPrice(property.price, property.type) }}
                 </p>
 
