@@ -1,6 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal, computed, OnInit, AfterViewInit, OnDestroy, ElementRef, viewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { PropertiesService, Property } from '../../services/properties';
+import { PropertiesService } from '../../core/services/properties';
+import { Property } from '../../core/models/property.model';
 import { HlmCard, HlmCardContent } from '@spartan-ng/helm/card';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmBadge } from '@spartan-ng/helm/badge';

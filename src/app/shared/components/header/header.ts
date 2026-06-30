@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, signal, effect } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { AuthService } from '../services/auth';
+import { AuthService } from '../../../core/services/auth';
 
 @Component({
   selector: 'app-header',

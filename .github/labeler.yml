@@ -1,0 +1,38 @@
+frontend:
+  - changed-files:
+      - any-glob-to-any-file: 'src/**'
+
+documentation:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'docs/**'
+          - '**/*.md'
+
+configuration:
+  - changed-files:
+      - any-glob-to-any-file:
+          - 'angular.json'
+          - 'nx.json'
+          - 'tsconfig*.json'
+          - 'eslint.config.js'
+          - '.prettierrc'
+          - 'package.json'
+          - 'pnpm-lock.yaml'
+
+ci:
+  - changed-files:
+      - any-glob-to-any-file: '.github/**'
+
+dependencies:
+  - changed-files:
+      - any-glob-to-any-file: 'pnpm-lock.yaml'
+
+tests:
+  - changed-files:
+      - any-glob-to-any-file:
+          - '**/*.spec.ts'
+          - '**/*.test.ts'
+
+library:
+  - changed-files:
+      - any-glob-to-any-file: 'libs/**'

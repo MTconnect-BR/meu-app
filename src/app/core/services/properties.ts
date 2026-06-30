@@ -1,30 +1,7 @@
 import { Injectable, signal, computed, debounced } from '@angular/core';
+import { Property, PropertyCategory } from '../models/property.model';
 
-export type PropertyCategory = 'apartment' | 'house' | 'condo' | 'land';
-
-export interface Property {
-  id: number;
-  title: string;
-  slug: string;
-  address: string;
-  neighborhood: string;
-  city: string;
-  state: string;
-  price: number;
-  type: 'sale' | 'rent';
-  category: PropertyCategory;
-  bedrooms: number;
-  bathrooms: number;
-  parkingSpots: number;
-  area: number;
-  imageUrl: string;
-  images: string[];
-  description: string;
-  furnished: boolean;
-  petFriendly: boolean;
-  lat: number;
-  lng: number;
-}
+export type { Property, PropertyCategory };
 
 const STORAGE_KEY = 'meu_app_custom_properties';
 

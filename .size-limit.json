@@ -1,0 +1,10 @@
+[
+  {
+    "path": "dist/meu-app/browser/main-*.js",
+    "limit": "450 kB"
+  },
+  {
+    "path": "dist/meu-app/browser/styles-*.css",
+    "limit": "50 kB"
+  }
+]

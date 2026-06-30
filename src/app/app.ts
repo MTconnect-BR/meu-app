@@ -3,8 +3,8 @@ import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map } from 'rxjs/operators';
 import { trigger, transition, style, animate, query, group } from '@angular/animations';
-import { Header } from './components/header';
-import { WhatsAppButton } from './components/whatsapp-button';
+import { Header } from './shared/components/header/header';
+import { WhatsAppButton } from './shared/components/whatsapp-button/whatsapp-button';
 
 const routeAnimation = trigger('routeAnimation', [
   transition('* <=> *', [

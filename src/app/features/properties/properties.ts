@@ -3,7 +3,7 @@ import { NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideMapPin, lucideBedDouble, lucideBath, lucideCar, lucideSlidersHorizontal } from '@ng-icons/lucide';
-import { PropertiesService } from '../../services/properties';
+import { PropertiesService } from '../../core/services/properties';
 import { HlmButton } from '@spartan-ng/helm/button';
 import {
   HlmDropdownMenu,

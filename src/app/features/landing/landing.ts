@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, afterNextRe
 import { Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
 import { lucideSearch, lucideCheck, lucideChevronUp, lucideSlidersHorizontal } from '@ng-icons/lucide';
-import { PropertiesService } from '../../services/properties';
+import { PropertiesService } from '../../core/services/properties';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import {
   HlmDropdownMenu,

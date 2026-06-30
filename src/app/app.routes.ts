@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { Landing } from './pages/landing/landing';
-import { Login } from './pages/login/login';
-import { Signup } from './pages/signup/signup';
-import { Properties } from './pages/properties/properties';
-import { PropertyDetail } from './pages/property-detail/property-detail';
-import { Crm } from './pages/crm/crm';
-import { Terms } from './pages/terms/terms';
-import { Privacy } from './pages/privacy/privacy';
-import { Contact } from './pages/contact/contact';
-import { authGuard } from './guards/auth.guard';
+import { Landing } from './features/landing/landing';
+import { Login } from './features/auth/login';
+import { Signup } from './features/auth/signup';
+import { Properties } from './features/properties/properties';
+import { PropertyDetail } from './features/property-detail/property-detail';
+import { Crm } from './features/crm/crm';
+import { Terms } from './features/legal/terms';
+import { Privacy } from './features/legal/privacy';
+import { Contact } from './features/contact/contact';
+import { authGuard } from './core/guards/auth.guard';
 
 export const routes: Routes = [
   { path: '', component: Landing, data: { animation: 'home' } },
