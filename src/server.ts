@@ -11,7 +11,9 @@ import crypto from 'node:crypto';
 const browserDistFolder = join(import.meta.dirname, '../browser');
 
 const app = express();
-const angularApp = new AngularNodeAppEngine();
+const angularApp = new AngularNodeAppEngine({
+  trustProxyHeaders: ['x-forwarded-host', 'x-forwarded-proto'],
+});
 
 /**
  * Nonce-based CSP header: generates a unique nonce per request.

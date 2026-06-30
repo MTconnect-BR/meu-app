@@ -1,6 +1,6 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "ng build",
+  "buildCommand": "ng build && rm -f dist/meu-app/browser/index.csr.html",
   "outputDirectory": "dist/meu-app/browser",
   "installCommand": "pnpm install",
   "regions": ["iad1"],
