@@ -1,0 +1,27 @@
+# MeuApp
+
+MeuApp é uma plataforma de imóveis para compra e aluguel em todo o Brasil.
+
+## Sobre
+- Site: https://meu-app-kohl-mu.vercel.app
+- Descrição: Encontre apartamentos, casas, condomínios e terrenos com informações verificadas
+- Localização: Brasil (todas as regiões)
+- Idioma: Português (pt-BR)
+
+## Páginas
+- `/` — Landing page com busca e estatísticas
+- `/properties` — Listagem de imóveis com filtros
+- `/properties/:slug` — Detalhe do imóvel com mapa
+- `/contact` — Fale conosco via WhatsApp
+- `/terms` — Termos de Serviço
+- `/privacy` — Política de Privacidade
+
+## API
+- Não há API pública. Dados são mockados no frontend.
+
+## Tecnologias
+- Angular 22 com SSR
+- Tailwind CSS 4
+- Spartan NG Helm (componentes UI)
+- Leaflet (mapas)
+- Vercel (hosting)

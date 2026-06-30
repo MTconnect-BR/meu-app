@@ -12,6 +12,7 @@
 }
 
 .scroll-indicator {
+  will-change: transform;
   animation: bounce-down 2s ease-in-out 3;
 }
 

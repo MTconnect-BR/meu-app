@@ -10,7 +10,6 @@ import {
   lucideMapPin,
   lucideHeart,
   lucideArrowLeft,
-  lucideArrowRight,
   lucidePhone,
   lucideMaximize,
   lucidePlus,
@@ -18,10 +17,11 @@ import {
   lucideTrash2,
   lucideCheck,
   lucideX,
-  lucideExternalLink,
   lucideInfo,
   lucideEye,
   lucideChevronDown,
+  lucideChevronUp,
+  lucideSlidersHorizontal,
 } from '@ng-icons/lucide';
 import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 import { CdkMenuModule } from '@angular/cdk/menu';
@@ -47,7 +47,6 @@ export const appConfig: ApplicationConfig = {
       lucideMapPin,
       lucideHeart,
       lucideArrowLeft,
-      lucideArrowRight,
       lucidePhone,
       lucideMaximize,
       lucidePlus,
@@ -55,10 +54,11 @@ export const appConfig: ApplicationConfig = {
       lucideTrash2,
       lucideCheck,
       lucideX,
-      lucideExternalLink,
       lucideInfo,
       lucideEye,
       lucideChevronDown,
+      lucideChevronUp,
+      lucideSlidersHorizontal,
     }),
   ],
 };

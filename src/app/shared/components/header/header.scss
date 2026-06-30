@@ -108,9 +108,9 @@
   transform: translateY(-8px);
   opacity: 0;
   visibility: hidden;
+  will-change: transform, opacity;
   transition: transform 0.3s cubic-bezier(0.5, 0, 0, 1),
-              opacity 0.2s ease,
-              visibility 0s 0.3s;
+              opacity 0.2s ease;
 }
 
 .menu-panel.is-open {
@@ -118,8 +118,7 @@
   opacity: 1;
   visibility: visible;
   transition: transform 0.3s cubic-bezier(0.5, 0, 0, 1),
-              opacity 0.2s ease,
-              visibility 0s 0s;
+              opacity 0.2s ease;
 }
 
 .menu-panel_inner {
@@ -169,6 +168,7 @@
 .menu-item {
   opacity: 0;
   transform: translateY(16px);
+  will-change: transform, opacity;
   transition: opacity 0.2s ease,
               transform 0.2s cubic-bezier(0.5, 0, 0, 1);
   transition-delay: 0s;
