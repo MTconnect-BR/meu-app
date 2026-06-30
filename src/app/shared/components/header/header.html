@@ -1,6 +1,8 @@
 <button type="button" (click)="toggleMenu()"
   class="burger-button fixed left-4 top-4 z-[250] flex items-center justify-center"
-  [class.is-open]="menuOpen()">
+  [class.is-open]="menuOpen()"
+  [attr.aria-label]="menuOpen() ? 'Fechar menu' : 'Abrir menu'"
+  [attr.aria-expanded]="menuOpen()">
   <span class="burger-icon">
     <span class="burger-icon_line -default">
       <span class="burger-icon_line_inner"></span>
@@ -18,6 +20,7 @@
      [class.is-visible]="menuOpen()"
      role="button"
      tabindex="0"
+     aria-label="Fechar menu"
      (click)="closeMenu()"
      (keyup.enter)="closeMenu()"></div>
 

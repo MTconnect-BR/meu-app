@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /crm
+Disallow: /auth
+
+Sitemap: https://meu-app-kohl-mu.vercel.app/sitemap.xml

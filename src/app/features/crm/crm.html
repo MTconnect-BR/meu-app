@@ -128,7 +128,7 @@
           <h2 class="text-lg font-semibold text-foreground">{{ editingId() ? 'Editar Imóvel' : 'Novo Imóvel' }}</h2>
           <p class="text-sm text-muted-foreground">Preencha os dados do imóvel abaixo.</p>
         </div>
-        <button hlmBtn variant="ghost" size="sm" (click)="closeForm()">
+        <button hlmBtn variant="ghost" size="sm" (click)="closeForm()" aria-label="Fechar formulário">
           <ng-icon name="lucideX" class="size-4" />
         </button>
       </div>
@@ -243,7 +243,7 @@
           <input hlmInput id="crm-imageUrl" formControlName="imageUrl" class="w-full" placeholder="https://picsum.photos/seed/meuimovel/600/400" />
           @if (form.controls.imageUrl.value) {
             <div class="mt-2 overflow-hidden rounded-lg border border-border">
-              <img [src]="form.controls.imageUrl.value" alt="Preview" class="h-40 w-full object-cover" (error)="form.controls.imageUrl.setValue('')" />
+              <img [src]="form.controls.imageUrl.value" alt="Preview" width="600" height="160" class="h-40 w-full object-cover" (error)="form.controls.imageUrl.setValue('')" />
             </div>
           }
           <hlm-field-error />

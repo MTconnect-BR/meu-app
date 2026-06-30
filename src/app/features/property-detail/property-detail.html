@@ -9,7 +9,7 @@
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div class="space-y-4">
           <div hlmAspectRatio="16/9" class="overflow-hidden rounded-xl">
-            <img [src]="currentImage" [alt]="prop.title" class="h-full w-full object-cover" />
+            <img [src]="currentImage" [alt]="prop.title" width="800" height="450" class="h-full w-full object-cover" />
           </div>
           <div class="grid grid-cols-4 gap-2">
             @for (img of prop.images; track $index) {
@@ -19,8 +19,9 @@
                 [class.ring-foreground]="selectedImage() === $index"
                 [class.ring-transparent]="selectedImage() !== $index"
                 [class.opacity-50]="selectedImage() !== $index"
+                [attr.aria-label]="'Ver foto ' + ($index + 1)"
               >
-                <img [src]="img" [alt]="prop.title + ' foto ' + ($index + 1)" class="h-20 w-full object-cover" />
+                <img [src]="img" [alt]="prop.title + ' foto ' + ($index + 1)" width="120" height="80" class="h-20 w-full object-cover" />
               </button>
             }
           </div>
@@ -143,7 +144,7 @@
                 <hlm-carousel-item class="basis-1/3">
                   <a [routerLink]="['/properties', similar.slug]" class="block">
                     <hlm-card hlmCard class="overflow-hidden transition-shadow hover:shadow-md">
-                      <img [src]="similar.imageUrl" [alt]="similar.title" class="h-40 w-full object-cover" />
+                      <img [src]="similar.imageUrl" [alt]="similar.title" width="400" height="160" class="h-40 w-full object-cover" />
                       <div hlmCardContent class="space-y-2">
                         <h3 class="font-semibold text-foreground">{{ similar.title }}</h3>
                         <p class="text-sm text-muted-foreground">{{ similar.address }}</p>

@@ -1,6 +1,6 @@
 import { ApplicationConfig, importProvidersFrom, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { provideClientHydration } from '@angular/platform-browser';
-import { provideAnimations } from '@angular/platform-browser/animations';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { provideIcons } from '@ng-icons/core';
 import {
   lucideSearch,
@@ -37,7 +37,7 @@ export const appConfig: ApplicationConfig = {
       CdkMenuModule,
     ),
     provideClientHydration(),
-    provideAnimations(),
+    provideAnimationsAsync(),
     provideSpartanHlm(),
     provideIcons({
       lucideSearch,

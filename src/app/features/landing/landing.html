@@ -186,7 +186,7 @@
       </p>
       <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
         @for (company of companies; track company.name) {
-          <img [src]="company.logo" [alt]="company.name"
+          <img [src]="company.logo" [alt]="company.name" width="80" height="24"
                class="h-6 w-auto brightness-0 invert opacity-40 transition-all duration-300 hover:opacity-70 md:h-7" />
         }
       </div>
