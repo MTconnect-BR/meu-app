@@ -5,8 +5,8 @@
 **Plataforma imobiliária Angular 22 com SSR para compra e aluguel de imóveis em todo o Brasil.**
 
 [![CI](https://github.com/MTconnect-BR/meu-app/actions/workflows/ci.yml/badge.svg)](https://github.com/MTconnect-BR/meu-app/actions/workflows/ci.yml)
-[![Lighthouse](https://github.com/MTconnect-BR/meu-app/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/MTconnect-BR/meu-app/actions/workflows/lighthouse.yml)
-[![Size Limit](https://img.shields.io/bundlephobia/minzip/meu-app)](https://github.com/MTconnect-BR/meu-app)
+[![Lighthouse CI](https://github.com/MTconnect-BR/meu-app/actions/workflows/lighthouse.yml/badge.svg)](https://github.com/MTconnect-BR/meu-app/actions/workflows/lighthouse.yml)
+[![Size Limit](https://img.shields.io/badge/Size%20Limit-5.13%20kB-brightgreen)](https://github.com/ai/size-limit)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 </div>
@@ -28,6 +28,147 @@
 | **Testing** | Vitest + Playwright (E2E) |
 | **Analytics** | Vercel Analytics + Speed Insights |
 | **Deployment** | Vercel (SSR Serverless) |
+
+## Architecture
+
+```mermaid
+graph TB
+    subgraph "Client Browser"
+        A[Angular 22 SPA] --> B[Router]
+        B --> C[Landing]
+        B --> D[Properties]
+        B --> E[Property Detail]
+        B --> F[CRM Dashboard]
+        B --> G[Auth]
+        B --> H[Contact]
+    end
+
+    subgraph "Vercel Edge"
+        I[CDN / Edge Network]
+        I --> J[Serverless Function]
+        J --> K[Express SSR]
+        K --> L[Angular Universal]
+        L --> M[HTML Response]
+    end
+
+    A -->|"HTTP Request"| I
+    M -->|"Hydration"| A
+
+    subgraph "Data Layer"
+        N[Mock Properties Service]
+        O[AuthService - localStorage]
+        P[Vercel Analytics]
+    end
+
+    C --> N
+    D --> N
+    E --> N
+    G --> O
+    A --> P
+```
+
+## Project Structure
+
+```mermaid
+graph LR
+    subgraph "src/app/"
+        subgraph "core/"
+            A[guards/auth.guard.ts]
+            B[services/auth.ts]
+            C[services/properties.ts]
+            D[models/property.ts]
+        end
+
+        subgraph "shared/"
+            E[components/header/]
+            F[components/whatsapp-button/]
+        end
+
+        subgraph "features/"
+            G[landing/]
+            H[properties/]
+            I[property-detail/]
+            J[auth/]
+            K[contact/]
+            L[crm/]
+            M[legal/]
+        end
+    end
+
+    G --> C
+    H --> C
+    I --> C
+    J --> B
+    L --> A
+    M --> G
+```
+
+## CI/CD Pipeline
+
+```mermaid
+graph TD
+    A[Push to main] --> B{Workflows}
+    B --> C[CI - Lint, Test, Build]
+    B --> D[Lighthouse CI - Performance Audit]
+    B --> E[Size Limit - Bundle Check]
+    B --> F[CodeQL - Security Analysis]
+    B --> G[OpenSSF Scorecard]
+
+    C --> H[All Pass?]
+    D --> H
+    E --> H
+    F --> H
+    G --> H
+
+    H -->|Yes| I[Deploy to Vercel]
+    H -->|No| J[Block PR]
+
+    I --> K[Vercel Serverless]
+    K --> L[SSR + Client Hydration]
+
+    subgraph "PR Checks"
+        M[semantic-pr] --> N[Conventional Commits]
+        O[labeler] --> P[Auto Label PRs]
+        Q[merge-conflict-labeler] --> R[Label Conflicts]
+    end
+```
+
+## Component Tree
+
+```mermaid
+graph TD
+    ROOT[app-root] --> HEADER[app-header]
+    ROOT --> OUTLET[router-outlet]
+    ROOT --> WA[app-whatsapp-button]
+
+    HEADER --> BURGER[Burger Menu]
+    HEADER --> MENU[Nav Menu - MindMarket Style]
+
+    MENU --> M1[Inicio]
+    MENU --> M2[Terminos]
+    MENU --> M3[Privacidade]
+    MENU --> M4[Fale Conosco]
+    MENU --> M5[Entrar / Sair]
+
+    OUTLET --> LANDING[app-landing]
+    OUTLET --> PROPS[app-properties]
+    OUTLET --> DETAIL[app-property-detail]
+    OUTLET --> AUTH[app-login / app-signup]
+    OUTLET --> CONTACT[app-contact]
+    OUTLET --> CRM[app-crm]
+
+    LANDING --> SEARCH[Search Bar]
+    LANDING --> STATS[Stats Section]
+    LANDING --> CAROUSEL[Embla Carousel]
+
+    PROPS --> FILTERS[Property Filters]
+    PROPS --> GRID[Property Grid]
+    PROPS --> MAP[Leaflet Map]
+
+    DETAIL --> GALLERY[Image Gallery]
+    DETAIL --> INFO[Property Info]
+    DETAIL --> MAP2[Location Map]
+```
 
 ## Quick Start
 
