@@ -13,7 +13,6 @@ import {
   HlmDropdownMenuLabel,
   HlmDropdownMenuSeparator,
 } from '@spartan-ng/helm/dropdown-menu';
-import { CdkMenuModule } from '@angular/cdk/menu';
 
 @Component({
   selector: 'app-properties',
@@ -29,7 +28,6 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     HlmDropdownMenuGroup,
     HlmDropdownMenuLabel,
     HlmDropdownMenuSeparator,
-    CdkMenuModule,
   ],
   templateUrl: './properties.html',
   styleUrl: './properties.scss',

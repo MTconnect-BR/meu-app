@@ -23,7 +23,6 @@ import {
   HlmDropdownMenuLabel,
   HlmDropdownMenuSeparator,
 } from '@spartan-ng/helm/dropdown-menu';
-import { CdkMenuModule } from '@angular/cdk/menu';
 
 @Component({
   selector: 'app-landing',
@@ -39,7 +38,6 @@ import { CdkMenuModule } from '@angular/cdk/menu';
     HlmDropdownMenuGroup,
     HlmDropdownMenuLabel,
     HlmDropdownMenuSeparator,
-    CdkMenuModule,
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
