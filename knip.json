@@ -15,6 +15,12 @@
     "embla-carousel-angular",
     "ngx-scrollbar",
     "tailwind-merge",
-    "tw-animate-css"
-  ]
+    "tw-animate-css",
+    "@bluehalo/ngx-leaflet"
+  ],
+  "ignore": [
+    "src/app/core/services/theme.ts",
+    "src/app/shared/components/footer/footer.ts"
+  ],
+  "ignoreExportsUsedInFile": true
 }
