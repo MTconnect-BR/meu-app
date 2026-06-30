@@ -25,12 +25,5 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - name: Run Lighthouse
-        uses: treosh/lighthouse-ci-action@3e7e23fb74242897f95c0ba9cabad3d0227b9b18 # v12
-        with:
-          configPath: ./lighthouserc.json
-          urls: |
-            https://meu-app-kohl-mu.vercel.app/
-            https://meu-app-kohl-mu.vercel.app/properties
-          uploadArtifacts: true
-          temporaryPublicStorage: true
+      - name: Run Lighthouse CI
+        run: npx @lhci/cli autorun --config=./lighthouserc.json

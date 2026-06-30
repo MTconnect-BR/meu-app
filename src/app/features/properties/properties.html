@@ -14,11 +14,12 @@
       <!-- Search Bar -->
       <div class="relative mx-auto max-w-xl">
         <div class="pointer-events-none absolute inset-y-0 left-4 flex items-center">
-          <ng-icon name="lucideSearch" class="size-5" style="color: hsl(0, 0%, 63%)" />
+          <ng-icon name="lucideSearch" class="size-5" style="color: hsl(0, 0%, 63%)" aria-hidden="true" />
         </div>
         <input
           type="text"
           placeholder="Buscar por localização..."
+          aria-label="Buscar por localização"
           [value]="propertiesService.searchQuery()"
           (input)="propertiesService.searchQuery.set($any($event.target).value)"
           class="w-full rounded-xl border py-3 pl-12 pr-4 text-base outline-none transition-shadow focus:ring-2"
@@ -68,7 +69,7 @@
           size="sm"
           class="rounded-full"
         >
-          <ng-icon name="lucideSlidersHorizontal" class="size-4" />
+          <ng-icon name="lucideSlidersHorizontal" class="size-4" aria-hidden="true" />
           @if (activeFilterCount() > 0) {
             Filtros ({{ activeFilterCount() }})
           } @else {
@@ -148,8 +149,8 @@
                   <h3 class="line-clamp-1 font-semibold" style="color: hsl(0, 0%, 13%)">
                     {{ property.title }}
                   </h3>
-                  <p class="flex items-center gap-1 text-sm" style="color: hsl(0, 0%, 40%)">
-                    <ng-icon name="lucideMapPin" class="size-3 shrink-0" />
+                  <p class="flex items-center gap-1 text-sm" style="color: hsl(0, 0%, 65%)">
+                    <ng-icon name="lucideMapPin" class="size-3 shrink-0" aria-hidden="true" />
                     <span class="truncate">{{ property.address }}</span>
                   </p>
                 </div>
@@ -159,17 +160,17 @@
                 </p>
 
                 <!-- Specs -->
-                <div class="flex items-center gap-3 text-sm" style="color: hsl(0, 0%, 55%)">
-                  <span class="flex items-center gap-1">
-                    <ng-icon name="lucideBedDouble" class="size-3.5" />
+                <div class="flex items-center gap-3 text-sm" style="color: hsl(0, 0%, 70%)">
+                  <span class="flex items-center gap-1" [attr.aria-label]="property.bedrooms + ' quarto' + (property.bedrooms !== 1 ? 's' : '')">
+                    <ng-icon name="lucideBedDouble" class="size-3.5" aria-hidden="true" />
                     {{ property.bedrooms }}
                   </span>
-                  <span class="flex items-center gap-1">
-                    <ng-icon name="lucideBath" class="size-3.5" />
+                  <span class="flex items-center gap-1" [attr.aria-label]="property.bathrooms + ' banheiro' + (property.bathrooms !== 1 ? 's' : '')">
+                    <ng-icon name="lucideBath" class="size-3.5" aria-hidden="true" />
                     {{ property.bathrooms }}
                   </span>
-                  <span class="flex items-center gap-1">
-                    <ng-icon name="lucideCar" class="size-3.5" />
+                  <span class="flex items-center gap-1" [attr.aria-label]="property.parkingSpots + ' vaga' + (property.parkingSpots !== 1 ? 's' : '')">
+                    <ng-icon name="lucideCar" class="size-3.5" aria-hidden="true" />
                     {{ property.parkingSpots }}
                   </span>
                   <span class="ml-auto font-medium">{{ property.area }}m²</span>
@@ -180,13 +181,13 @@
                   <div class="flex gap-1.5 pt-0.5">
                     @if (property.furnished) {
                       <span class="rounded-md px-2 py-0.5 text-xs font-medium"
-                            style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 40%);">
+                            style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 55%);">
                         Mobiliado
                       </span>
                     }
                     @if (property.petFriendly) {
                       <span class="rounded-md px-2 py-0.5 text-xs font-medium"
-                            style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 40%);">
+                            style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 55%);">
                         Pets
                       </span>
                     }
@@ -201,7 +202,7 @@
         <!-- Empty State -->
         <div class="flex flex-col items-center justify-center rounded-xl py-20 text-center"
              style="background-color: hsl(0, 0%, 16%);">
-          <ng-icon name="lucideSearch" class="mb-4 size-12" style="color: hsl(0, 0%, 50%)" />
+          <ng-icon name="lucideSearch" class="mb-4 size-12" style="color: hsl(0, 0%, 50%)" aria-hidden="true" />
           <h3 class="text-lg font-medium" style="color: hsl(0, 0%, 75%)">
             Nenhum imóvel encontrado
           </h3>
