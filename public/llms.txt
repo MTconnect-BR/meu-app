@@ -1,27 +1,26 @@
 # MeuApp
 
-MeuApp é uma plataforma de imóveis para compra e aluguel em todo o Brasil.
+> Plataforma de imóveis para compra e aluguel em todo o Brasil. Encontre apartamentos, casas, condomínios e terrenos com informações verificadas.
 
 ## Sobre
-- Site: https://meu-app-kohl-mu.vercel.app
-- Descrição: Encontre apartamentos, casas, condomínios e terrenos com informações verificadas
-- Localização: Brasil (todas as regiões)
-- Idioma: Português (pt-BR)
 
-## Páginas
-- `/` — Landing page com busca e estatísticas
-- `/properties` — Listagem de imóveis com filtros
-- `/properties/:slug` — Detalhe do imóvel com mapa
-- `/contact` — Fale conosco via WhatsApp
-- `/terms` — Termos de Serviço
-- `/privacy` — Política de Privacidade
+MeuApp é uma plataforma de busca de imóveis que reúne uma seleção cuidadosa de imóveis para venda e aluguel em diversas regiões do Brasil.
 
-## API
-- Não há API pública. Dados são mockados no frontend.
+## Páginas Principais
+
+- [Landing Page](https://meu-app-kohl-mu.vercel.app/): Página inicial com busca e estatísticas
+- [Imóveis](https://meu-app-kohl-mu.vercel.app/properties): Listagem completa com filtros por tipo, preço e comodidades
+- [Fale Conosco](https://meu-app-kohl-mu.vercel.app/contact): Contato via WhatsApp
+
+## Informações
+
+- [Termos de Serviço](https://meu-app-kohl-mu.vercel.app/terms): Termos e condições de uso
+- [Política de Privacidade](https://meu-app-kohl-mu.vercel.app/privacy): Como tratamos seus dados
 
 ## Tecnologias
-- Angular 22 com SSR
-- Tailwind CSS 4
-- Spartan NG Helm (componentes UI)
-- Leaflet (mapas)
-- Vercel (hosting)
+
+Angular 22 com SSR, Tailwind CSS 4, Spartan NG, Leaflet para mapas, hospedado na Vercel.
+
+## Contato
+
+Acesse nossa [página de contato](https://meu-app-kohl-mu.vercel.app/contact) para falar com nossa equipe via WhatsApp.
