@@ -1,15 +1,37 @@
 import { ChangeDetectionStrategy, Component, DestroyRef, ElementRef, afterNextRender, computed, inject, signal, viewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NgIcon, provideIcons } from '@ng-icons/core';
-import { lucideSearch, lucideCheck, lucideChevronUp } from '@ng-icons/lucide';
+import { lucideSearch, lucideCheck, lucideChevronUp, lucideSlidersHorizontal } from '@ng-icons/lucide';
 import { PropertiesService } from '../../services/properties';
 import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
+import {
+  HlmDropdownMenu,
+  HlmDropdownMenuTrigger,
+  HlmDropdownMenuItem,
+  HlmDropdownMenuCheckbox,
+  HlmDropdownMenuCheckboxIndicator,
+  HlmDropdownMenuGroup,
+  HlmDropdownMenuLabel,
+  HlmDropdownMenuSeparator,
+} from '@spartan-ng/helm/dropdown-menu';
 
 @Component({
   selector: 'app-landing',
-  imports: [RouterLink, NgIcon, ...HlmTooltipImports],
+  imports: [
+    RouterLink,
+    NgIcon,
+    ...HlmTooltipImports,
+    HlmDropdownMenu,
+    HlmDropdownMenuTrigger,
+    HlmDropdownMenuItem,
+    HlmDropdownMenuCheckbox,
+    HlmDropdownMenuCheckboxIndicator,
+    HlmDropdownMenuGroup,
+    HlmDropdownMenuLabel,
+    HlmDropdownMenuSeparator,
+  ],
   providers: [
-    provideIcons({ lucideSearch, lucideCheck, lucideChevronUp }),
+    provideIcons({ lucideSearch, lucideCheck, lucideChevronUp, lucideSlidersHorizontal }),
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
@@ -26,8 +48,32 @@ export class Landing {
 
   protected readonly searchType = signal<'buy' | 'rent'>('buy');
   protected readonly searchQuery = signal('');
-  protected readonly propertyType = signal('all');
-  protected readonly filterOpen = signal(false);
+
+  protected readonly tempSelectedTypes = signal<string[]>([]);
+  protected readonly tempSelectedAmenities = signal<string[]>([]);
+
+  protected readonly propertyTypes = [
+    { value: 'apartment', label: 'Apartamento' },
+    { value: 'house', label: 'Casa' },
+    { value: 'condo', label: 'Condomínio' },
+    { value: 'land', label: 'Terreno' },
+  ];
+
+  protected readonly amenityTypes = [
+    { value: 'furnished', label: 'Mobiliado' },
+    { value: 'petFriendly', label: 'Aceita pets' },
+    { value: 'parking', label: 'Vaga de garagem' },
+  ];
+
+  protected readonly activeFilterCount = computed(() => {
+    return this.tempSelectedTypes().length + this.tempSelectedAmenities().length;
+  });
+
+  protected readonly activeFilterLabel = computed(() => {
+    const count = this.activeFilterCount();
+    if (count === 0) return 'Filtros';
+    return `Filtros (${count})`;
+  });
 
   protected readonly companies = [
     { name: 'Google', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/google.svg' },
@@ -37,18 +83,6 @@ export class Landing {
     { name: 'Spotify', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/spotify.svg' },
     { name: 'Airbnb', logo: 'https://raw.githubusercontent.com/gilbarbara/logos/main/logos/airbnb.svg' },
   ];
-
-  protected readonly propertyTypes = [
-    { value: 'all', label: 'Todos os tipos' },
-    { value: 'apartment', label: 'Apartamento' },
-    { value: 'house', label: 'Casa' },
-    { value: 'condo', label: 'Condomínio' },
-    { value: 'land', label: 'Terreno' },
-  ];
-
-  protected readonly selectedPropertyTypeLabel = computed(() =>
-    this.propertyTypes.find(t => t.value === this.propertyType())?.label ?? 'Todos os tipos'
-  );
 
   protected readonly faqs = [
     {
@@ -73,31 +107,41 @@ export class Landing {
     },
   ];
 
-  onPropertyTypeSelect(value: string) {
-    this.propertyType.set(value);
-    this.filterOpen.set(false);
+  toggleType(value: string) {
+    this.tempSelectedTypes.update(current =>
+      current.includes(value) ? current.filter(v => v !== value) : [...current, value]
+    );
   }
 
-  toggleFilter() {
-    this.filterOpen.update(v => !v);
+  toggleAmenity(value: string) {
+    this.tempSelectedAmenities.update(current =>
+      current.includes(value) ? current.filter(v => v !== value) : [...current, value]
+    );
   }
 
-  closeFilter() {
-    this.filterOpen.set(false);
+  isTypeSelected(value: string): boolean {
+    return this.tempSelectedTypes().includes(value);
   }
 
-  formatPrice(property: { price: number; type: string }): string {
-    return this.propertiesService.formatPrice(property.price, property.type as 'sale' | 'rent');
+  isAmenitySelected(value: string): boolean {
+    return this.tempSelectedAmenities().includes(value);
+  }
+
+  applyFilters() {
+    this.propertiesService.selectedTypes.set([...this.tempSelectedTypes()]);
+    this.propertiesService.selectedAmenities.set([...this.tempSelectedAmenities()]);
+    this.router.navigate(['/properties'], {
+      queryParams: {
+        type: this.searchType() !== 'buy' ? this.searchType() : undefined,
+        q: this.searchQuery() || undefined,
+        types: this.tempSelectedTypes().length > 0 ? this.tempSelectedTypes().join(',') : undefined,
+        amenities: this.tempSelectedAmenities().length > 0 ? this.tempSelectedAmenities().join(',') : undefined,
+      },
+    });
   }
 
   onSearch() {
-    this.router.navigate(['/properties'], {
-      queryParams: {
-        type: this.searchType(),
-        q: this.searchQuery() || undefined,
-        propertyType: this.propertyType() !== 'all' ? this.propertyType() : undefined,
-      },
-    });
+    this.applyFilters();
   }
 
   constructor() {

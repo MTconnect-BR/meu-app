@@ -192,6 +192,16 @@
           </div>
 
           <div hlmField class="space-y-1">
+            <label hlmFieldLabel for="crm-category">Categoria *</label>
+            <select hlmInput id="crm-category" formControlName="category" class="w-full">
+              <option value="apartment">Apartamento</option>
+              <option value="house">Casa</option>
+              <option value="condo">Condomínio</option>
+              <option value="land">Terreno</option>
+            </select>
+          </div>
+
+          <div hlmField class="space-y-1">
             <label hlmFieldLabel for="crm-bedrooms">Quartos *</label>
             <input hlmInput id="crm-bedrooms" type="number" formControlName="bedrooms" class="w-full" />
             <hlm-field-error />

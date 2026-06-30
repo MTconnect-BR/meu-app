@@ -26,11 +26,11 @@
         />
       </div>
 
-      <!-- Filter Chips -->
+      <!-- Filter Row -->
       <div class="flex flex-wrap items-center justify-center gap-2 pt-2">
-        <!-- Type filters -->
+        <!-- Status chips (Todos / Comprar / Alugar) -->
         <button
-          (click)="propertiesService.propertyType.set('all')"
+          (click)="toggleStatus('all')"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
           [style]="propertiesService.propertyType() === 'all'
             ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
@@ -39,7 +39,7 @@
           Todos
         </button>
         <button
-          (click)="propertiesService.propertyType.set('sale')"
+          (click)="toggleStatus('sale')"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
           [style]="propertiesService.propertyType() === 'sale'
             ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
@@ -48,7 +48,7 @@
           Comprar
         </button>
         <button
-          (click)="propertiesService.propertyType.set('rent')"
+          (click)="toggleStatus('rent')"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
           [style]="propertiesService.propertyType() === 'rent'
             ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
@@ -59,34 +59,56 @@
 
         <span class="mx-1 h-5 w-px" style="background-color: hsl(0, 0%, 30%)"></span>
 
-        <!-- Attribute filters -->
+        <!-- Filter dropdown -->
         <button
-          (click)="propertiesService.furnished.update(v => !v)"
-          class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
-          [style]="propertiesService.furnished()
-            ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-            : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'"
+          hlmDropdownMenuTrigger
+          [hlmDropdownMenuTrigger]="filterMenu"
+          hlmBtn
+          variant="outline"
+          size="sm"
+          class="rounded-full"
         >
-          Mobiliado
+          <ng-icon name="lucideSlidersHorizontal" class="size-4" />
+          @if (activeFilterCount() > 0) {
+            Filtros ({{ activeFilterCount() }})
+          } @else {
+            Filtros
+          }
         </button>
-        <button
-          (click)="propertiesService.petFriendly.update(v => !v)"
-          class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
-          [style]="propertiesService.petFriendly()
-            ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-            : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'"
-        >
-          Aceita pets
-        </button>
-        <button
-          (click)="propertiesService.parkingSpot.update(v => !v)"
-          class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
-          [style]="propertiesService.parkingSpot()
-            ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-            : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'"
-        >
-          Vaga de garagem
-        </button>
+
+        <ng-template #filterMenu>
+          <div hlmDropdownMenu class="w-64">
+            <!-- Property Types Group -->
+            <div hlmDropdownMenuGroup>
+              <span hlmDropdownMenuLabel>Tipo de imóvel</span>
+              @for (type of propertyTypes; track type.value) {
+                <button
+                  hlmDropdownMenuCheckbox
+                  [checked]="isTypeSelected(type.value)"
+                  (triggered)="toggleType(type.value)">
+                  {{ type.label }}
+                  <hlm-dropdown-menu-checkbox-indicator />
+                </button>
+              }
+            </div>
+
+            <div hlmDropdownMenuSeparator></div>
+
+            <!-- Amenities Group -->
+            <div hlmDropdownMenuGroup>
+              <span hlmDropdownMenuLabel>Comodidades</span>
+              @for (amenity of amenityTypes; track amenity.value) {
+                <button
+                  hlmDropdownMenuCheckbox
+                  [checked]="isAmenitySelected(amenity.value)"
+                  (triggered)="toggleAmenity(amenity.value)">
+                  {{ amenity.label }}
+                  <hlm-dropdown-menu-checkbox-indicator />
+                </button>
+              }
+            </div>
+          </div>
+        </ng-template>
       </div>
     </div>
   </section>
@@ -96,13 +118,13 @@
     <div class="mx-auto max-w-5xl">
       <!-- Result count -->
       <p class="mb-6 text-sm" style="color: hsl(0, 0%, 50%)">
-        {{ resultCount }} imóvel{{ resultCount !== 1 ? 'is' : '' }} encontrado{{ resultCount !== 1 ? 's' : '' }}
+        {{ resultCount() }} imóvel{{ resultCount() !== 1 ? 'is' : '' }} encontrado{{ resultCount() !== 1 ? 's' : '' }}
       </p>
 
-      @if (displayedProperties.length > 0) {
+      @if (filteredProperties().length > 0) {
         <!-- Property Grid -->
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-          @for (property of displayedProperties; track property.id) {
+          @for (property of filteredProperties(); track property.id) {
             <a [routerLink]="['/properties', property.slug]"
                class="group overflow-hidden rounded-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-xl"
                style="background-color: hsl(0, 0%, 91%);">

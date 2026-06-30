@@ -59,44 +59,62 @@
           />
         </div>
 
-        <!-- Bottom row: type selector + search button -->
+        <!-- Bottom row: filter dropdown + search button -->
         <div class="flex items-center gap-3">
           <div class="relative flex-1">
             <button
-              (click)="toggleFilter()"
+              hlmDropdownMenuTrigger
+              [hlmDropdownMenuTrigger]="filterMenu"
               class="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm sm:px-4 sm:py-3"
               [style.background-color]="'hsl(0, 0%, 18%)'" [style.color]="'hsl(0, 0%, 91%)'">
-              {{ selectedPropertyTypeLabel() }}
+              <span class="flex items-center gap-2">
+                <ng-icon name="lucideSlidersHorizontal" class="size-4" [style.color]="'hsl(0, 0%, 50%)'" />
+                {{ activeFilterLabel() }}
+              </span>
               <ng-icon name="lucideChevronUp" class="size-4 shrink-0 transition-transform duration-200"
-                [style.color]="'hsl(0, 0%, 50%)'"
-                [class.rotate-180]="!filterOpen()" />
+                [style.color]="'hsl(0, 0%, 50%)'" />
             </button>
 
-            <!-- MindMarket-style filter panel -->
-            @if (filterOpen()) {
-              <!-- Backdrop -->
-              <div class="filter-backdrop"
-     role="button"
-     tabindex="0"
-     (click)="closeFilter()"
-     (keyup.enter)="closeFilter()"></div>
-
-              <div class="filter-panel">
-                <div class="filter-group">
-                  <span class="filter-group-title">Tipos de imóvel</span>
+            <ng-template #filterMenu>
+              <div hlmDropdownMenu class="w-72">
+                <!-- Property Types Group -->
+                <div hlmDropdownMenuGroup>
+                  <span hlmDropdownMenuLabel>Tipo de imóvel</span>
                   @for (type of propertyTypes; track type.value) {
-                    <button class="filter-option" (click)="onPropertyTypeSelect(type.value)">
-                      <span class="filter-checkbox" [class.is-checked]="propertyType() === type.value">
-                        @if (propertyType() === type.value) {
-                          <ng-icon name="lucideCheck" class="size-3" [style.color]="'hsl(0, 0%, 13%)'" />
-                        }
-                      </span>
-                      <span class="filter-label">{{ type.label }}</span>
+                    <button
+                      hlmDropdownMenuCheckbox
+                      [checked]="isTypeSelected(type.value)"
+                      (triggered)="toggleType(type.value)">
+                      {{ type.label }}
+                      <hlm-dropdown-menu-checkbox-indicator />
                     </button>
                   }
                 </div>
+
+                <div hlmDropdownMenuSeparator></div>
+
+                <!-- Amenities Group -->
+                <div hlmDropdownMenuGroup>
+                  <span hlmDropdownMenuLabel>Comodidades</span>
+                  @for (amenity of amenityTypes; track amenity.value) {
+                    <button
+                      hlmDropdownMenuCheckbox
+                      [checked]="isAmenitySelected(amenity.value)"
+                      (triggered)="toggleAmenity(amenity.value)">
+                      {{ amenity.label }}
+                      <hlm-dropdown-menu-checkbox-indicator />
+                    </button>
+                  }
+                </div>
+
+                <div hlmDropdownMenuSeparator></div>
+
+                <!-- Apply Button -->
+                <button hlmDropdownMenuItem (click)="applyFilters()">
+                  Aplicar filtro
+                </button>
               </div>
-            }
+            </ng-template>
           </div>
           <button
             (click)="onSearch()"

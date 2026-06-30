@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@a
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
-import { PropertiesService, Property } from '../../services/properties';
+import { PropertiesService, Property, PropertyCategory } from '../../services/properties';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmBadge } from '@spartan-ng/helm/badge';
 import { HlmInput } from '@spartan-ng/helm/input';
@@ -132,6 +132,7 @@ export class Crm {
     state: ['', [Validators.required, Validators.maxLength(2)]],
     price: [0, [Validators.required, Validators.min(1)]],
     type: ['sale' as 'sale' | 'rent', Validators.required],
+    category: ['apartment' as PropertyCategory, Validators.required],
     bedrooms: [1, [Validators.required, Validators.min(0)]],
     bathrooms: [1, [Validators.required, Validators.min(0)]],
     parkingSpots: [0, [Validators.required, Validators.min(0)]],
@@ -161,6 +162,7 @@ export class Crm {
       state: '',
       price: 0,
       type: 'sale',
+      category: 'apartment',
       bedrooms: 1,
       bathrooms: 1,
       parkingSpots: 0,
@@ -187,6 +189,7 @@ export class Crm {
       state: property.state,
       price: property.price,
       type: property.type,
+      category: property.category,
       bedrooms: property.bedrooms,
       bathrooms: property.bathrooms,
       parkingSpots: property.parkingSpots,

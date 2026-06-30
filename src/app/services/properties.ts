@@ -1,4 +1,6 @@
-import { Injectable, signal, debounced } from '@angular/core';
+import { Injectable, signal, computed, debounced } from '@angular/core';
+
+export type PropertyCategory = 'apartment' | 'house' | 'condo' | 'land';
 
 export interface Property {
   id: number;
@@ -10,6 +12,7 @@ export interface Property {
   state: string;
   price: number;
   type: 'sale' | 'rent';
+  category: PropertyCategory;
   bedrooms: number;
   bathrooms: number;
   parkingSpots: number;
@@ -30,9 +33,12 @@ export class PropertiesService {
   public readonly searchQuery = signal('');
   private readonly _debouncedQuery = debounced(this.searchQuery, 300);
   public readonly propertyType = signal<'all' | 'sale' | 'rent'>('all');
-  public readonly furnished = signal(false);
-  public readonly petFriendly = signal(false);
-  public readonly parkingSpot = signal(false);
+  public readonly selectedTypes = signal<string[]>([]);
+  public readonly selectedAmenities = signal<string[]>([]);
+
+  public readonly activeFilterCount = computed(() =>
+    this.selectedTypes().length + this.selectedAmenities().length
+  );
 
   private readonly _description = 'Este imóvel impressionante oferece um espaço moderno e confortável com acabamentos de primeira. Localizado em uma área privilegiada com fácil acesso a restaurantes, lojas e transporte público. O imóvel possui amplos cômodos, abundância de luz natural e uma distribuição funcional perfeita para famílias ou profissionais.';
 
@@ -47,6 +53,7 @@ export class PropertiesService {
       state: 'RJ',
       price: 850000,
       type: 'sale',
+      category: 'apartment',
       bedrooms: 3,
       bathrooms: 2,
       parkingSpots: 2,
@@ -69,6 +76,7 @@ export class PropertiesService {
       state: 'SP',
       price: 2500,
       type: 'rent',
+      category: 'apartment',
       bedrooms: 1,
       bathrooms: 1,
       parkingSpots: 0,
@@ -91,6 +99,7 @@ export class PropertiesService {
       state: 'SP',
       price: 1200000,
       type: 'sale',
+      category: 'house',
       bedrooms: 4,
       bathrooms: 3,
       parkingSpots: 3,
@@ -113,6 +122,7 @@ export class PropertiesService {
       state: 'SP',
       price: 8000,
       type: 'rent',
+      category: 'apartment',
       bedrooms: 2,
       bathrooms: 2,
       parkingSpots: 2,
@@ -135,6 +145,7 @@ export class PropertiesService {
       state: 'RJ',
       price: 670000,
       type: 'sale',
+      category: 'condo',
       bedrooms: 2,
       bathrooms: 1,
       parkingSpots: 1,
@@ -157,6 +168,7 @@ export class PropertiesService {
       state: 'SP',
       price: 3200,
       type: 'rent',
+      category: 'apartment',
       bedrooms: 1,
       bathrooms: 1,
       parkingSpots: 1,
@@ -179,6 +191,7 @@ export class PropertiesService {
       state: 'PR',
       price: 1800000,
       type: 'sale',
+      category: 'house',
       bedrooms: 5,
       bathrooms: 4,
       parkingSpots: 4,
@@ -201,6 +214,7 @@ export class PropertiesService {
       state: 'MG',
       price: 1800,
       type: 'rent',
+      category: 'apartment',
       bedrooms: 1,
       bathrooms: 1,
       parkingSpots: 0,
@@ -223,6 +237,7 @@ export class PropertiesService {
       state: 'RJ',
       price: 320000,
       type: 'sale',
+      category: 'apartment',
       bedrooms: 1,
       bathrooms: 1,
       parkingSpots: 1,
@@ -245,6 +260,7 @@ export class PropertiesService {
       state: 'SP',
       price: 750000,
       type: 'sale',
+      category: 'house',
       bedrooms: 3,
       bathrooms: 2,
       parkingSpots: 2,
@@ -267,6 +283,7 @@ export class PropertiesService {
       state: 'SP',
       price: 4500,
       type: 'rent',
+      category: 'apartment',
       bedrooms: 2,
       bathrooms: 2,
       parkingSpots: 1,
@@ -289,6 +306,7 @@ export class PropertiesService {
       state: 'SC',
       price: 520000,
       type: 'sale',
+      category: 'house',
       bedrooms: 3,
       bathrooms: 2,
       parkingSpots: 2,
@@ -311,6 +329,7 @@ export class PropertiesService {
       state: 'SC',
       price: 3800,
       type: 'rent',
+      category: 'apartment',
       bedrooms: 1,
       bathrooms: 1,
       parkingSpots: 1,
@@ -333,6 +352,7 @@ export class PropertiesService {
       state: 'RS',
       price: 980000,
       type: 'sale',
+      category: 'apartment',
       bedrooms: 3,
       bathrooms: 3,
       parkingSpots: 2,
@@ -355,6 +375,7 @@ export class PropertiesService {
       state: 'GO',
       price: 800,
       type: 'rent',
+      category: 'house',
       bedrooms: 1,
       bathrooms: 1,
       parkingSpots: 0,
@@ -377,6 +398,7 @@ export class PropertiesService {
       state: 'CE',
       price: 480000,
       type: 'sale',
+      category: 'apartment',
       bedrooms: 2,
       bathrooms: 2,
       parkingSpots: 1,
@@ -399,6 +421,7 @@ export class PropertiesService {
       state: 'PE',
       price: 2200,
       type: 'rent',
+      category: 'apartment',
       bedrooms: 1,
       bathrooms: 1,
       parkingSpots: 1,
@@ -421,6 +444,7 @@ export class PropertiesService {
       state: 'RS',
       price: 2100000,
       type: 'sale',
+      category: 'house',
       bedrooms: 4,
       bathrooms: 3,
       parkingSpots: 3,
@@ -443,6 +467,7 @@ export class PropertiesService {
       state: 'DF',
       price: 3500,
       type: 'rent',
+      category: 'apartment',
       bedrooms: 2,
       bathrooms: 1,
       parkingSpots: 1,
@@ -465,6 +490,7 @@ export class PropertiesService {
       state: 'BA',
       price: 620000,
       type: 'sale',
+      category: 'condo',
       bedrooms: 3,
       bathrooms: 2,
       parkingSpots: 2,
@@ -525,9 +551,7 @@ export class PropertiesService {
     return this._applyFilters(this.properties.filter((p) => p.type === 'rent'));
   }
 
-  public get filteredProperties(): Property[] {
-    return this._applyFilters(this.properties);
-  }
+  public readonly filteredProperties = computed(() => this._applyFilters(this.properties));
 
   public getById(id: number): Property | undefined {
     return this.properties.find((p) => p.id === id);
@@ -550,10 +574,15 @@ export class PropertiesService {
 
   private _applyFilters(properties: Property[]): Property[] {
     const q = this._debouncedQuery.value().toLowerCase();
+    const selectedTypes = this.selectedTypes();
+    const selectedAmenities = this.selectedAmenities();
+    const statusFilter = this.propertyType();
     return properties.filter((p) => {
-      if (this.furnished() && !p.furnished) return false;
-      if (this.petFriendly() && !p.petFriendly) return false;
-      if (this.parkingSpot() && p.parkingSpots === 0) return false;
+      if (statusFilter !== 'all' && p.type !== statusFilter) return false;
+      if (selectedTypes.length > 0 && !selectedTypes.includes(p.category)) return false;
+      if (selectedAmenities.includes('furnished') && !p.furnished) return false;
+      if (selectedAmenities.includes('petFriendly') && !p.petFriendly) return false;
+      if (selectedAmenities.includes('parking') && p.parkingSpots === 0) return false;
       if (q) {
         if (!p.title.toLowerCase().includes(q) && !p.address.toLowerCase().includes(q)) return false;
       }
