@@ -17,10 +17,12 @@ const angularApp = new AngularNodeAppEngine({
 
 /**
  * Nonce-based CSP header: generates a unique nonce per request.
- * The nonce is injected into script tags via the response interception below.
+ * The nonce is injected into all <script> tags in the SSR HTML below.
  */
 app.use((_req, res, next) => {
   const nonce = crypto.randomUUID().replace(/-/g, '');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  (_req as any).nonce = nonce;
 
   const cspDirectives = [
     "default-src 'none'",
@@ -33,7 +35,6 @@ app.use((_req, res, next) => {
     "base-uri 'self'",
     "form-action 'self'",
     "frame-ancestors 'none'",
-    "require-trusted-types-for 'script'",
     'upgrade-insecure-requests',
   ];
 
@@ -55,13 +56,33 @@ app.use(
 
 /**
  * Handle all other requests by rendering the Angular application.
+ * Injects the per-request nonce into every <script> tag for CSP compliance.
  */
 app.use((req, res, next) => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const nonce = (req as any).nonce as string;
+
   angularApp
     .handle(req)
-    .then((response) =>
-      response ? writeResponseToNodeResponse(response, res) : next(),
-    )
+    .then(async (response) => {
+      if (!response) {
+        return next();
+      }
+
+      const contentType = response.headers.get('content-type') ?? '';
+
+      if (contentType.includes('text/html')) {
+        const html = await response.text();
+        const safeHtml = html.replace(
+          /<script(?=[\s>])/g,
+          `<script nonce="${nonce}"`,
+        );
+        res.setHeader('Content-Type', 'text/html;charset=UTF-8');
+        res.send(safeHtml);
+      } else {
+        writeResponseToNodeResponse(response, res);
+      }
+    })
     .catch(next);
 });
 
