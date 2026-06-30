@@ -2,6 +2,7 @@ import {
   AngularNodeAppEngine,
   createNodeRequestHandler,
   isMainModule,
+  writeResponseToNodeResponse,
 } from '@angular/ssr/node';
 import express from 'express';
 import { join } from 'node:path';
@@ -13,8 +14,8 @@ const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 /**
- * Nonce-based CSP middleware: generates a unique nonce per request,
- * injects it into <script> tags, and sets a strict CSP header.
+ * Nonce-based CSP header: generates a unique nonce per request.
+ * The nonce is injected into script tags via the response interception below.
  */
 app.use((_req, res, next) => {
   const nonce = crypto.randomBytes(16).toString('base64');
@@ -36,9 +37,6 @@ app.use((_req, res, next) => {
 
   res.setHeader('Content-Security-Policy', cspDirectives.join('; '));
 
-  // Store nonce for use in the Angular handler
-  res.locals['nonce'] = nonce;
-
   next();
 });
 
@@ -55,59 +53,13 @@ app.use(
 
 /**
  * Handle all other requests by rendering the Angular application.
- * Intercepts the response body to inject nonces into <script> tags.
  */
 app.use((req, res, next) => {
   angularApp
     .handle(req)
-    .then(async (response) => {
-      if (!response) {
-        return next();
-      }
-
-      const nonce = res.locals['nonce'] as string;
-
-      if (nonce) {
-        // Read the response body, inject nonces, and send
-        const body = await response.text();
-        const sanitized = body.replace(
-          /<script(?![^>]*nonce=)/g,
-          `<script nonce="${nonce}"`,
-        );
-        // Copy status and headers from the original response
-        response.headers.forEach((value, key) => {
-          if (!res.getHeader(key)) {
-            res.setHeader(key, value);
-          }
-        });
-        res.status(response.status).send(sanitized);
-      } else {
-        // Fallback: stream the response directly
-        const { Writable } = await import('node:stream');
-        const nodeRes = res;
-        const reader = response.body?.getReader();
-        if (reader) {
-          const writer = new Writable({
-            write(chunk, _encoding, callback) {
-              nodeRes.write(chunk);
-              callback();
-            },
-          });
-          try {
-            while (true) {
-              const { done, value } = await reader.read();
-              if (done) break;
-              writer.write(value);
-            }
-            writer.end(() => nodeRes.end());
-          } catch {
-            nodeRes.end();
-          }
-        } else {
-          res.end();
-        }
-      }
-    })
+    .then((response) =>
+      response ? writeResponseToNodeResponse(response, res) : next(),
+    )
     .catch(next);
 });
 
