@@ -12,7 +12,6 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { PropertiesService } from '../../core/services/properties';
-import { HlmTooltipImports } from '@spartan-ng/helm/tooltip';
 import {
   HlmDropdownMenu,
   HlmDropdownMenuTrigger,
@@ -29,7 +28,6 @@ import {
   imports: [
     RouterLink,
     NgIcon,
-    ...HlmTooltipImports,
     HlmDropdownMenu,
     HlmDropdownMenuTrigger,
     HlmDropdownMenuItem,
@@ -54,6 +52,8 @@ export class Landing {
 
   protected readonly searchType = signal<'buy' | 'rent'>('buy');
   protected readonly searchQuery = signal('');
+  protected readonly faqOpen = signal(false);
+  protected readonly expandedFaq = signal(-1);
 
   protected readonly tempSelectedTypes = signal<string[]>([]);
   protected readonly tempSelectedAmenities = signal<string[]>([]);
@@ -156,6 +156,10 @@ export class Landing {
 
   onSearch() {
     this.applyFilters();
+  }
+
+  toggleFaq() {
+    this.faqOpen.update((v) => !v);
   }
 
   constructor() {

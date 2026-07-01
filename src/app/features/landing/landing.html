@@ -267,30 +267,66 @@
     <div class="h-56"></div>
   </div>
 
-  <!-- FAQ Section — Perguntas Frequentes -->
-  <section class="relative z-10 px-6 py-16 md:py-24" style="background-color: hsl(0, 0%, 13%);">
-    <div class="mx-auto max-w-3xl space-y-8 text-center">
-      <div>
-        <h2 class="text-3xl font-black leading-tight tracking-tight md:text-4xl lg:text-5xl" [style.color]="'hsl(0, 0%, 91%)'">
-          Perguntas Frequentes
-        </h2>
-        <p class="mx-auto mt-4 max-w-md text-base md:text-lg" [style.color]="'hsl(0, 0%, 65%)'">
-          Tire suas dúvidas sobre o MeuApp.
-        </p>
-      </div>
+  <!-- FAQ Section — MindMarket-style sticky bottom filter bar -->
+  <div class="faq-filters" [class.is-open]="faqOpen()">
+    <!-- Toggle bar -->
+    <button
+      type="button"
+      class="faq-filters_toggle"
+      (click)="toggleFaq()"
+      [attr.aria-expanded]="faqOpen()"
+      aria-haspopup="dialog">
+      <span class="faq-filters_toggle_select max-md:hidden">
+        <span class="faq-filters_toggle_label">Perguntas Frequentes <sup>{{ faqs.length }}</sup></span>
+        <span class="faq-filters_toggle_select_icon">
+          <ng-icon name="lucideChevronDown" class="size-4" />
+        </span>
+      </span>
+      <span class="faq-filters_toggle_select md:hidden">
+        <span class="faq-filters_toggle_label">Perguntas Frequentes</span>
+        <span class="faq-filters_toggle_select_icon">
+          <ng-icon name="lucideChevronDown" class="size-4" />
+        </span>
+      </span>
+    </button>
 
-      <div class="space-y-4">
-        @for (faq of faqs; track faq.question) {
-          <span
-            class="block cursor-default text-sm font-medium underline decoration-dashed underline-offset-4 transition-opacity hover:opacity-70"
-            [style.color]="'hsl(0, 0%, 91%)'"
-            [hlmTooltip]="faq.answer"
-            position="top">
-            {{ faq.question }}
-          </span>
-        }
+    <!-- Dropdown panel -->
+    <div class="faq-filters_container" role="dialog" aria-modal="true" aria-labelledby="faq-title">
+      <div class="faq-filters_form">
+        <!-- FAQ items -->
+        <div class="faq-filters_form_fieldset">
+          <span id="faq-title" class="sr-only">Perguntas Frequentes</span>
+          @for (faq of faqs; track faq.question; let i = $index) {
+            <div
+              class="faq-filters_form_item"
+              [style.--index]="i">
+              <button
+                type="button"
+                class="faq-filters_form_item_button"
+                [class.is-expanded]="expandedFaq() === i"
+                (click)="expandedFaq.set(expandedFaq() === i ? -1 : i)">
+                <span class="faq-filters_form_item_label">{{ faq.question }}</span>
+                <ng-icon name="lucideChevronDown" class="size-4 shrink-0 transition-transform duration-200"
+                  [class.rotate-180]="expandedFaq() === i" />
+              </button>
+              @if (expandedFaq() === i) {
+                <div class="faq-filters_form_item_answer">
+                  {{ faq.answer }}
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <!-- Close button -->
+        <button
+          type="button"
+          class="faq-filters_form_button"
+          (click)="faqOpen.set(false)">
+          <span class="faq-filters_form_button_label">Fechar</span>
+        </button>
       </div>
     </div>
-  </section>
+  </div>
 
 </main>
