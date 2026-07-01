@@ -7,14 +7,15 @@
   [attr.aria-expanded]="menuOpen()"
 >
   <span class="burger-icon">
-    <span class="burger-icon_line -default">
-      <span class="burger-icon_line_inner"></span>
-      <span class="burger-icon_line_inner"></span>
-    </span>
-    <span class="burger-icon_line -close">
-      <span class="burger-icon_line_inner"></span>
-      <span class="burger-icon_line_inner"></span>
-    </span>
+    @if (menuOpen()) {
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 2L12 12M12 2L2 12" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    } @else {
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M2 4H14M2 8H14M2 12H14" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+    }
   </span>
 </button>
 
