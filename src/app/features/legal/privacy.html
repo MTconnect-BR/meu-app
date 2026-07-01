@@ -2,49 +2,281 @@
   class="flex min-h-dvh flex-1 flex-col px-6 py-16 md:py-24"
   style="background-color: hsl(0, 0%, 13%); color: var(--foreground)"
 >
-  <div class="mx-auto max-w-3xl space-y-8">
-    <h1
-      class="text-3xl font-black tracking-tight md:text-4xl lg:text-5xl"
-      [style.color]="'hsl(0, 0%, 91%)'"
-    >
-      Política de Privacidade
-    </h1>
-    <div class="space-y-6 text-base leading-relaxed" [style.color]="'hsl(0, 0%, 65%)'">
-      <p>
-        Sua privacidade é importante para esta Política de Privacidade, explicamos como coletamos,
-        usamos e protegemos suas informações ao utilizar o MeuApp.
-      </p>
-      <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">1. Informações Coletadas</h2>
-      <p>
-        Coletamos informações que você nos fornece diretamente, como nome, endereço de e-mail e
-        preferências de busca. Também coletamos dados de uso automaticamente, como páginas visitadas
-        e tempo de permanência na plataforma.
-      </p>
-      <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">2. Uso das Informações</h2>
-      <p>
-        Utilizamos suas informações para personalizar sua experiência, facilitar a busca por
-        imóveis, enviar atualizações relevantes e melhorar continuamente nossa plataforma.
-      </p>
-      <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">
-        3. Compartilhamento de Dados
-      </h2>
-      <p>
-        Não vendemos nem compartilhamos suas informações pessoais com terceiros para fins de
-        marketing. Podemos compartilhar dados apenas quando necessário para prestar serviços
-        solicitados ou quando exigido por lei.
-      </p>
-      <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">4. Segurança</h2>
-      <p>
-        Adotamos medidas de segurança para proteger suas informações contra acesso não autorizado,
-        alteração, divulgação ou destruição. No entanto, nenhum método de transmissão pela internet
-        é 100% seguro.
-      </p>
-      <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">5. Seus Direitos</h2>
-      <p>
-        Você pode acessar, corrigir ou excluir suas informações pessoais a qualquer momento através
-        das configurações da sua conta. Para dúvidas, entre em contato conosco.
+  <div class="mx-auto max-w-3xl space-y-12">
+    <div class="space-y-4">
+      <h1
+        class="text-3xl font-black tracking-tight md:text-4xl lg:text-5xl"
+        [style.color]="'hsl(0, 0%, 91%)'"
+      >
+        Política de Privacidade
+      </h1>
+      <p class="text-sm" [style.color]="'hsl(0, 0%, 50%)'">
+        <strong>Data de vigência:</strong> 1 de julho de 2026
       </p>
     </div>
+
+    <div class="space-y-10 text-base leading-relaxed" [style.color]="'hsl(0, 0%, 65%)'">
+      <section class="space-y-4">
+        <p>
+          Sua privacidade é fundamental para nós. Assim como valorizamos a transparência em tudo
+          que fazemos, estamos comprometidos em proteger suas informações com o mesmo respeito e
+          cuidado que dedicamos a cada detalhe da nossa plataforma.
+        </p>
+        <p>
+          Sabemos que políticas de privacidade podem parecer impessoais. Escrevemos esta de forma
+          clara, honesta e humana — porque é assim que operamos.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">1. Quem Somos</h2>
+        <p>
+          O MeuApp é uma plataforma digital que conecta pessoas que buscam imóveis com proprietários
+          e corretores. Nossa missão é simplificar a busca por imóveis, oferecendo informações
+          verificadas, transparência e atendimento personalizado.
+        </p>
+        <p>
+          Para qualquer assunto relacionado a esta política ou aos seus dados pessoais, entre em
+          contato conosco pelo e-mail
+          <a
+            href="mailto:privacidade@meuapp.com.br"
+            class="underline transition-colors hover:opacity-80"
+            [style.color]="'hsl(0, 0%, 91%)'"
+          >
+            privacidade&#64;meuapp.com.br
+          </a>
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">2. Informações que Coletamos</h2>
+        <p>Coletamos diferentes tipos de informações dependendo de como você interage com nossa plataforma:</p>
+
+        <h3 class="text-lg font-semibold pt-2" [style.color]="'hsl(0, 0%, 75%)'">
+          Se você é um visitante do site
+        </h3>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>Dados básicos de navegação: endereço IP, tipo de navegador, dispositivo, páginas visitadas e tempo de permanência</li>
+          <li>Cookies e tecnologias semelhantes: arquivos que ajudam nosso site a funcionar e melhorar sua experiência</li>
+        </ul>
+
+        <h3 class="text-lg font-semibold pt-2" [style.color]="'hsl(0, 0%, 75%)'">
+          Se você é um usuário cadastrado
+        </h3>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>Informações de cadastro: nome, endereço de e-mail e telefone</li>
+          <li>Preferências de busca: tipo de imóvel, região, faixa de preço</li>
+          <li>Histórico de atividades: imóveis visualizados, favoritos e contato com anunciantes</li>
+        </ul>
+
+        <h3 class="text-lg font-semibold pt-2" [style.color]="'hsl(0, 0%, 75%)'">
+          Se você é um anunciante
+        </h3>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>Informações profissionais: dados da imobiliária ou do corretor</li>
+          <li>Informações do imóvel: localização, características, fotos e preço</li>
+          <li>Dados de pagamento: informações necessárias para processar transações</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">3. Como Coletamos Informações</h2>
+        <p>Coletamos informações através de:</p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li><strong>Interações diretas:</strong> quando você preenche formulários, cria uma conta ou entra em contato conosco</li>
+          <li><strong>Tecnologias automatizadas:</strong> através de cookies e ferramentas de análise quando você usa nossa plataforma</li>
+          <li><strong>Terceiros:</strong> de parceiros de negócios ou plataformas de anúncios (apenas com permissão apropriada)</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">4. Como Usamos suas Informações</h2>
+        <p>Utilizamos suas informações para:</p>
+
+        <h3 class="text-lg font-semibold pt-2" [style.color]="'hsl(0, 0%, 75%)'">
+          Para todos os usuários
+        </h3>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>Operar e melhorar nossa plataforma</li>
+          <li>Responder suas dúvidas e oferecer suporte</li>
+          <li>Enviar atualizações importantes sobre nossos serviços</li>
+          <li>Cumprir obrigações legais</li>
+        </ul>
+
+        <h3 class="text-lg font-semibold pt-2" [style.color]="'hsl(0, 0%, 75%)'">
+          Para usuários cadastrados
+        </h3>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>Personalizar sua experiência de busca</li>
+          <li>Salvar seus favoritos e preferências</li>
+          <li>Facilitar o contato com anunciantes</li>
+          <li>Enviar recomendações relevantes (você pode cancelar a qualquer momento)</li>
+        </ul>
+
+        <h3 class="text-lg font-semibold pt-2" [style.color]="'hsl(0, 0%, 75%)'">
+          Para anunciantes
+        </h3>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>Publicar e gerenciar seus anúncios</li>
+          <li>Conectá-lo com potenciais compradores ou inquilinos</li>
+          <li>Fornecer estatísticas e relatórios de desempenho</li>
+          <li>Processar pagamentos por serviços contratados</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">5. Compartilhamento de Dados</h2>
+        <p>Não vendemos suas informações pessoais. Jamais.</p>
+        <p>Podemos compartilhar suas informações com:</p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li><strong>Prestadores de serviço:</strong> parceiros que nos ajudam a operar nossa plataforma (hospedagem, processamento de pagamentos, suporte ao cliente). Eles são contratualmente obrigados a proteger seus dados.</li>
+          <li><strong>Anunciantes:</strong> quando você entra em contato com um anunciante, compartilhamos as informações necessárias para facilitar a comunicação.</li>
+          <li><strong>Obrigações legais:</strong> podemos divulgar informações se exigido por lei, processo judicial ou solicitação governamental.</li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">6. Segurança dos Dados</h2>
+        <p>
+          Levamos a segurança de dados a sério e implementamos medidas técnicas e organizacionais
+          apropriadas para proteger suas informações:
+        </p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li><strong>Criptografia:</strong> dados sensíveis são criptografados em trânsito e em repouso</li>
+          <li><strong>Controles de acesso:</strong> apenas membros autorizados da equipe podem acessar informações pessoais</li>
+          <li><strong>Armazenamento seguro:</strong> utilizamos serviços de nuvem confiáveis com padrões rigorosos de proteção</li>
+          <li><strong>Auditorias regulares:</strong> revisamos nossas práticas de segurança periodicamente</li>
+        </ul>
+        <p>
+          No entanto, nenhum sistema é completamente seguro. Fazemos tudo o que podemos para proteger
+          suas informações, mas não podemos garantir segurança absoluta.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">7. Seus Direitos</h2>
+        <p>
+          De acordo com a Lei Geral de Proteção de Dados (LGPD) e outras legislações aplicáveis,
+          você tem os seguintes direitos:
+        </p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li><strong>Acesso:</strong> solicitar uma cópia das informações pessoais que temos sobre você</li>
+          <li><strong>Correção:</strong> nos solicitar que corrijamos informações imprecisas ou incompletas</li>
+          <li><strong>Exclusão:</strong> solicitar que excluamos suas informações pessoais (sujeito a obrigações legais)</li>
+          <li><strong>Oposição:</strong> se opor a certos tipos de processamento</li>
+          <li><strong>Restrição:</strong> nos solicitar que restrinja o uso de suas informações</li>
+          <li><strong>Portabilidade:</strong> receber seus dados em formato estruturado e de uso comum</li>
+          <li><strong>Revogação de consentimento:</strong> se estivermos processando seus dados com base em consentimento, você pode revogá-lo a qualquer momento</li>
+        </ul>
+        <p>
+          Para exercer esses direitos, entre em contato conosco pelo e-mail
+          <a
+            href="mailto:privacidade@meuapp.com.br"
+            class="underline transition-colors hover:opacity-80"
+            [style.color]="'hsl(0, 0%, 91%)'"
+          >
+            privacidade&#64;meuapp.com.br
+          </a>.
+          Responderemos dentro do prazo exigido pela legislação aplicável.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">8. Cookies e Rastreamento</h2>
+        <p>
+          Utilizamos cookies e tecnologias semelhantes para melhorar sua experiência em nossa plataforma.
+        </p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li><strong>Cookies essenciais:</strong> necessários para o funcionamento do site</li>
+          <li><strong>Cookies de análise:</strong> nos ajudam a entender como os visitantes usam nosso site</li>
+          <li><strong>Cookies de preferência:</strong> lembram suas configurações e preferências</li>
+        </ul>
+        <p>
+          Você pode controlar cookies através das configurações do seu navegador. Observe que desabilitar
+          certos cookies pode afetar o funcionamento do site.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">9. Retenção de Dados</h2>
+        <p>
+          Mantemos suas informações apenas pelo tempo necessário para os fins descritos nesta política
+          ou conforme exigido por lei.
+        </p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li><strong>Visitantes do site:</strong> dados de análise são mantidos por até 26 meses</li>
+          <li><strong>Usuários cadastrados:</strong> mantemos enquanto sua conta estiver ativa</li>
+          <li><strong>Anunciantes:</strong> informações são mantidas durante o período contratual e por um período razoável após o término</li>
+        </ul>
+        <p>
+          Quando não precisamos mais de suas informações, excluímos ou anonimizamos de forma segura.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">10. Menores de Idade</h2>
+        <p>
+          Nossos serviços e site não são direcionados a menores de 18 anos, e não coletamos
+          intencionalmente informações pessoais de menores através de nossa plataforma.
+        </p>
+        <p>
+          Se acreditarmos que coletamos informações de um menor sem o consentimento adequado, tomaremos
+          medidas imediatas para excluir essas informações. Se você é pai ou responsável legal e tem
+          preocupações, entre em contato conosco.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">11. Alterações nesta Política</h2>
+        <p>
+          Podemos atualizar esta política de privacidade periodicamente para refletir mudanças em
+          nossas práticas ou exigências legais. Notificaremos você sobre mudanças significativas
+          publicando um aviso em nosso site ou entrando em contato diretamente.
+        </p>
+        <p>
+          A "Data de vigência" no topo desta página indica quando esta política foi atualizada pela
+          última vez.
+        </p>
+      </section>
+
+      <section class="space-y-4">
+        <h2 class="text-xl font-bold" [style.color]="'hsl(0, 0%, 80%)'">12. Contato</h2>
+        <p>
+          Se você tiver dúvidas sobre esta Política de Privacidade ou sobre como tratamos seus dados
+          pessoais, entre em contato conosco:
+        </p>
+        <ul class="list-disc space-y-2 pl-6">
+          <li>
+            E-mail:
+            <a
+              href="mailto:privacidade@meuapp.com.br"
+              class="underline transition-colors hover:opacity-80"
+              [style.color]="'hsl(0, 0%, 91%)'"
+            >
+              privacidade&#64;meuapp.com.br
+            </a>
+          </li>
+          <li>
+            E-mail geral:
+            <a
+              href="mailto:contato@meuapp.com.br"
+              class="underline transition-colors hover:opacity-80"
+              [style.color]="'hsl(0, 0%, 91%)'"
+            >
+              contato&#64;meuapp.com.br
+            </a>
+          </li>
+        </ul>
+      </section>
+
+      <section class="space-y-4">
+        <p [style.color]="'hsl(0, 0%, 55%)'">
+          Tratamos suas informações da mesma forma que gostaríamos que as nossas fossem tratadas —
+          com respeito, transparência e cuidado.
+        </p>
+      </section>
+    </div>
+
     <div class="pt-8">
       <a
         routerLink="/"
