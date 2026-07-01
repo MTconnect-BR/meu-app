@@ -83,14 +83,19 @@ export class App {
   );
 
   constructor() {
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe(() => {
+        if (this.isInitialLoad()) {
+          this.isInitialLoad.set(false);
+        }
+      });
+
     afterNextRender(() => {
       this.router.events
         .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
         .subscribe(() => {
           window.scrollTo(0, 0);
-          if (this.isInitialLoad()) {
-            this.isInitialLoad.set(false);
-          }
         });
     });
   }
