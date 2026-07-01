@@ -27,7 +27,6 @@ import {
   lucideChevronUp,
   lucideSlidersHorizontal,
 } from '@ng-icons/lucide';
-import { provideSpartanHlm } from '@spartan-ng/helm/utils';
 import { RouterModule } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -39,7 +38,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled' })),
     provideClientHydration(),
     provideAnimationsAsync(),
-    provideSpartanHlm(),
     provideIcons({
       lucideSearch,
       lucideBedDouble,

@@ -1,32 +1,12 @@
 <main
   class="flex flex-1 flex-col px-6 py-8"
-  style="
-    background-color: hsl(0, 0%, 13%);
-    color: var(--foreground);
-    --background: hsl(0, 0%, 13%);
-    --foreground: hsl(0, 0%, 91%);
-    --card: hsl(0, 0%, 18%);
-    --card-foreground: hsl(0, 0%, 91%);
-    --popover: hsl(0, 0%, 18%);
-    --popover-foreground: hsl(0, 0%, 91%);
-    --primary: hsl(0, 0%, 91%);
-    --primary-foreground: hsl(0, 0%, 13%);
-    --secondary: hsl(0, 0%, 22%);
-    --secondary-foreground: hsl(0, 0%, 91%);
-    --muted: hsl(0, 0%, 22%);
-    --muted-foreground: hsl(0, 0%, 65%);
-    --accent: hsl(0, 0%, 22%);
-    --accent-foreground: hsl(0, 0%, 91%);
-    --border: hsl(0, 0%, 30%);
-    --input: hsl(0, 0%, 22%);
-    --ring: hsl(0, 0%, 65%);
-  "
+  style="background-color: hsl(0, 0%, 13%); color: hsl(0, 0%, 91%)"
 >
   @if (property(); as prop) {
-    <div class="mx-auto w-full max-w-6xl space-y-8">
+    <div class="mx-auto w-full max-w-6xl space-y-10">
       <a
         routerLink="/properties"
-        class="text-muted-foreground hover:text-foreground inline-flex items-center gap-2 text-sm"
+        class="inline-flex items-center gap-2 text-sm text-[hsl(0,0%,65%)] hover:text-[hsl(0,0%,91%)] transition-colors"
       >
         <ng-icon name="lucideArrowLeft" class="size-4" />
         Voltar para imóveis
@@ -34,7 +14,7 @@
 
       <div class="grid grid-cols-1 gap-8 lg:grid-cols-2">
         <div class="space-y-4">
-          <div hlmAspectRatio="16/9" class="overflow-hidden rounded-xl">
+          <div class="relative w-full overflow-hidden rounded-2xl" style="aspect-ratio: 16/9">
             <img
               [src]="currentImage"
               [alt]="prop.title"
@@ -47,8 +27,8 @@
             @for (img of prop.images; track $index) {
               <button
                 (click)="selectImage($index)"
-                class="overflow-hidden rounded-lg ring-2 transition-all"
-                [class.ring-foreground]="selectedImage() === $index"
+                class="overflow-hidden rounded-xl ring-2 transition-all"
+                [class.ring-[hsl(0,0%,91%)]="selectedImage() === $index"
                 [class.ring-transparent]="selectedImage() !== $index"
                 [class.opacity-50]="selectedImage() !== $index"
                 [attr.aria-label]="'Ver foto ' + ($index + 1)"
@@ -67,63 +47,63 @@
 
         <div class="space-y-6">
           <div class="space-y-2">
-            <h1 hlmH1 class="text-foreground">{{ prop.title }}</h1>
-            <p class="text-muted-foreground flex items-center gap-1">
+            <h1 class="type-h1 text-[hsl(0,0%,91%)]">{{ prop.title }}</h1>
+            <p class="type-body flex items-center gap-1 text-[hsl(0,0%,65%)]">
               <ng-icon name="lucideMapPin" class="size-4" />
               {{ prop.address }}
             </p>
           </div>
 
-          <p class="text-foreground text-3xl font-bold">
+          <p class="type-h2 text-[hsl(0,0%,91%)]">
             {{ propertiesService.formatPrice(prop.price, prop.type) }}
           </p>
 
           <div class="grid grid-cols-2 gap-4">
-            <div class="bg-muted flex items-center gap-2 rounded-lg p-3">
-              <ng-icon name="lucideBedDouble" class="text-muted-foreground size-5" />
+            <div class="flex items-center gap-3 rounded-2xl border border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)] p-4">
+              <ng-icon name="lucideBedDouble" class="size-5 text-[hsl(0,0%,65%)]" />
               <div>
-                <p class="text-foreground text-sm font-medium">{{ prop.bedrooms }}</p>
-                <p class="text-muted-foreground text-xs">Quartos</p>
+                <p class="type-small font-medium text-[hsl(0,0%,91%)]">{{ prop.bedrooms }}</p>
+                <p class="type-caption text-[hsl(0,0%,65%)]">Quartos</p>
               </div>
             </div>
-            <div class="bg-muted flex items-center gap-2 rounded-lg p-3">
-              <ng-icon name="lucideBath" class="text-muted-foreground size-5" />
+            <div class="flex items-center gap-3 rounded-2xl border border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)] p-4">
+              <ng-icon name="lucideBath" class="size-5 text-[hsl(0,0%,65%)]" />
               <div>
-                <p class="text-foreground text-sm font-medium">{{ prop.bathrooms }}</p>
-                <p class="text-muted-foreground text-xs">Banheiros</p>
+                <p class="type-small font-medium text-[hsl(0,0%,91%)]">{{ prop.bathrooms }}</p>
+                <p class="type-caption text-[hsl(0,0%,65%)]">Banheiros</p>
               </div>
             </div>
-            <div class="bg-muted flex items-center gap-2 rounded-lg p-3">
-              <ng-icon name="lucideCar" class="text-muted-foreground size-5" />
+            <div class="flex items-center gap-3 rounded-2xl border border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)] p-4">
+              <ng-icon name="lucideCar" class="size-5 text-[hsl(0,0%,65%)]" />
               <div>
-                <p class="text-foreground text-sm font-medium">{{ prop.parkingSpots }}</p>
-                <p class="text-muted-foreground text-xs">Vagas</p>
+                <p class="type-small font-medium text-[hsl(0,0%,91%)]">{{ prop.parkingSpots }}</p>
+                <p class="type-caption text-[hsl(0,0%,65%)]">Vagas</p>
               </div>
             </div>
-            <div class="bg-muted flex items-center gap-2 rounded-lg p-3">
-              <ng-icon name="lucideMaximize" class="text-muted-foreground size-5" />
+            <div class="flex items-center gap-3 rounded-2xl border border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)] p-4">
+              <ng-icon name="lucideMaximize" class="size-5 text-[hsl(0,0%,65%)]" />
               <div>
-                <p class="text-foreground text-sm font-medium">{{ prop.area }}m²</p>
-                <p class="text-muted-foreground text-xs">Área</p>
+                <p class="type-small font-medium text-[hsl(0,0%,91%)]">{{ prop.area }}m²</p>
+                <p class="type-caption text-[hsl(0,0%,65%)]">Área</p>
               </div>
             </div>
           </div>
 
           <div class="flex gap-2">
             @if (prop.furnished) {
-              <hlm-badge variant="secondary">Mobiliado</hlm-badge>
+              <span class="inline-flex items-center rounded-full border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-3 py-1 text-xs font-medium text-[hsl(0,0%,91%)]">Mobiliado</span>
             }
             @if (prop.petFriendly) {
-              <hlm-badge variant="secondary">Aceita pets</hlm-badge>
+              <span class="inline-flex items-center rounded-full border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-3 py-1 text-xs font-medium text-[hsl(0,0%,91%)]">Aceita pets</span>
             }
           </div>
 
           <div class="flex gap-3">
-            <button hlmBtn class="flex-1">
+            <button class="flex-1 rounded-full bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] px-6 py-3 text-sm font-medium hover:bg-[hsl(0,0%,80%)] transition-colors inline-flex items-center justify-center gap-2">
               <ng-icon name="lucidePhone" class="size-4" />
               Contatar corretor
             </button>
-            <button hlmBtn variant="outline" class="flex-1">
+            <button class="flex-1 rounded-full border border-[hsl(0,0%,30%)] bg-transparent px-6 py-3 text-sm font-medium text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)] transition-colors inline-flex items-center justify-center gap-2">
               <ng-icon name="lucideHeart" class="size-4" />
               Salvar imóvel
             </button>
@@ -131,108 +111,90 @@
         </div>
       </div>
 
-      <hlm-separator />
+      <hr class="border-[hsl(0,0%,25%)]" />
 
       <div class="space-y-4">
-        <h2 hlmH2 class="text-foreground">Descrição</h2>
-        <p hlmP class="text-muted-foreground">{{ prop.description }}</p>
+        <h2 class="type-h2 text-[hsl(0,0%,91%)]">Descrição</h2>
+        <p class="type-body text-[hsl(0,0%,65%)]">{{ prop.description }}</p>
       </div>
 
-      <hlm-separator />
+      <hr class="border-[hsl(0,0%,25%)]" />
 
       <div class="space-y-4">
-        <h2 hlmH2 class="text-foreground">Localização</h2>
+        <h2 class="type-h2 text-[hsl(0,0%,91%)]">Localização</h2>
         @defer (hydrate on viewport) {
           <div
             #mapContainer
-            class="border-border h-80 w-full overflow-hidden rounded-xl border"
+            class="h-80 w-full overflow-hidden rounded-2xl border border-[hsl(0,0%,25%)]"
           ></div>
         }
       </div>
 
-      <hlm-separator />
+      <hr class="border-[hsl(0,0%,25%)]" />
 
       <div class="space-y-4">
-        <h2 hlmH2 class="text-foreground">Detalhes do imóvel</h2>
+        <h2 class="type-h2 text-[hsl(0,0%,91%)]">Detalhes do imóvel</h2>
         <div class="grid grid-cols-2 gap-4 text-sm md:grid-cols-4">
           <div>
-            <p class="text-muted-foreground">Tipo</p>
-            <p class="text-foreground font-medium">
+            <p class="type-caption text-[hsl(0,0%,65%)]">Tipo</p>
+            <p class="type-small font-medium text-[hsl(0,0%,91%)]">
               {{ prop.type === 'sale' ? 'À Venda' : 'Para Alugar' }}
             </p>
           </div>
           <div>
-            <p class="text-muted-foreground">Área</p>
-            <p class="text-foreground font-medium">{{ prop.area }}m²</p>
+            <p class="type-caption text-[hsl(0,0%,65%)]">Área</p>
+            <p class="type-small font-medium text-[hsl(0,0%,91%)]">{{ prop.area }}m²</p>
           </div>
           <div>
-            <p class="text-muted-foreground">Bairro</p>
-            <p class="text-foreground font-medium">{{ prop.neighborhood }}</p>
+            <p class="type-caption text-[hsl(0,0%,65%)]">Bairro</p>
+            <p class="type-small font-medium text-[hsl(0,0%,91%)]">{{ prop.neighborhood }}</p>
           </div>
           <div>
-            <p class="text-muted-foreground">Cidade</p>
-            <p class="text-foreground font-medium">{{ prop.city }}, {{ prop.state }}</p>
+            <p class="type-caption text-[hsl(0,0%,65%)]">Cidade</p>
+            <p class="type-small font-medium text-[hsl(0,0%,91%)]">{{ prop.city }}, {{ prop.state }}</p>
           </div>
         </div>
       </div>
 
       @if (similarProperties().length > 0) {
-        <hlm-separator />
+        <hr class="border-[hsl(0,0%,25%)]" />
 
-        <section class="space-y-4">
-          <h2 hlmH2 class="text-foreground">Imóveis similares</h2>
-          <hlm-carousel [options]="similarOptions">
-            <hlm-carousel-content>
-              @for (similar of similarProperties(); track similar.id) {
-                <hlm-carousel-item class="basis-1/3">
-                  <a [routerLink]="['/properties', similar.slug]" class="block">
-                    <hlm-card hlmCard class="overflow-hidden transition-shadow hover:shadow-md">
-                      <img
-                        [src]="similar.imageUrl"
-                        [alt]="similar.title"
-                        width="400"
-                        height="160"
-                        class="h-40 w-full object-cover"
-                      />
-                      <div hlmCardContent class="space-y-2">
-                        <h3 class="text-foreground font-semibold">{{ similar.title }}</h3>
-                        <p class="text-muted-foreground text-sm">{{ similar.address }}</p>
-                        <p class="text-foreground font-bold">
-                          {{ propertiesService.formatPrice(similar.price, similar.type) }}
-                        </p>
-                      </div>
-                    </hlm-card>
-                  </a>
-                </hlm-carousel-item>
-              }
-            </hlm-carousel-content>
-            <div class="flex items-center justify-center gap-4 pt-4">
-              <button
-                hlmCarouselPrevious
-                aria-label="Anterior"
-                class="!relative !-start-0 !top-0 !translate-none"
-              ></button>
-              <button
-                hlmCarouselNext
-                aria-label="Próximo"
-                class="!relative !-end-0 !top-0 !translate-none"
-              ></button>
-            </div>
-          </hlm-carousel>
+        <section class="space-y-6">
+          <h2 class="type-h2 text-[hsl(0,0%,91%)]">Imóveis similares</h2>
+          <div class="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-4 -mx-2 px-2">
+            @for (similar of similarProperties(); track similar.id) {
+              <a [routerLink]="['/properties', similar.slug]" class="block snap-start shrink-0 w-72">
+                <div class="overflow-hidden rounded-2xl border border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)] transition-shadow hover:shadow-lg">
+                  <img
+                    [src]="similar.imageUrl"
+                    [alt]="similar.title"
+                    width="400"
+                    height="160"
+                    class="h-40 w-full object-cover"
+                  />
+                  <div class="p-4 space-y-2">
+                    <h3 class="type-small font-semibold text-[hsl(0,0%,91%)]">{{ similar.title }}</h3>
+                    <p class="type-caption text-[hsl(0,0%,65%)]">{{ similar.address }}</p>
+                    <p class="type-small font-bold text-[hsl(0,0%,91%)]">
+                      {{ propertiesService.formatPrice(similar.price, similar.type) }}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            }
+          </div>
         </section>
       }
     </div>
   } @else {
     <div class="flex flex-1 items-center justify-center">
-      <div hlmEmpty>
-        <div hlmEmptyHeader>
-          <div hlmEmptyMedia variant="icon">
-            <ng-icon name="lucideSearch" />
-          </div>
-          <h3 hlmEmptyTitle>Imóvel não encontrado</h3>
-          <p hlmEmptyDescription>O imóvel que você procura não existe ou foi removido.</p>
-          <a routerLink="/properties" hlmBtn>Voltar para Imóveis</a>
+      <div class="flex flex-col items-center gap-4 text-center">
+        <div class="rounded-full bg-[hsl(0,0%,22%)] p-4">
+          <ng-icon name="lucideSearch" class="size-8 text-[hsl(0,0%,65%)]" />
         </div>
+        <h3 class="type-h3 text-[hsl(0,0%,91%)]">Imóvel não encontrado</h3>
+        <p class="type-body text-[hsl(0,0%,65%)]">O imóvel que você procura não existe ou foi removido.</p>
+        <a routerLink="/properties" class="rounded-full bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] px-6 py-3 text-sm font-medium hover:bg-[hsl(0,0%,80%)] transition-colors">Voltar para Imóveis</a>
       </div>
     </div>
   }

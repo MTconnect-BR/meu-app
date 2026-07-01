@@ -8,36 +8,10 @@ import {
 } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth';
-import {
-  HlmCard,
-  HlmCardContent,
-  HlmCardHeader,
-  HlmCardTitle,
-  HlmCardDescription,
-  HlmCardFooter,
-} from '@spartan-ng/helm/card';
-import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmInput } from '@spartan-ng/helm/input';
-import { HlmField, HlmFieldLabel, HlmFieldError, HlmFieldGroup } from '@spartan-ng/helm/field';
 
 @Component({
   selector: 'app-signup',
-  imports: [
-    RouterLink,
-    ReactiveFormsModule,
-    HlmCard,
-    HlmCardContent,
-    HlmCardHeader,
-    HlmCardTitle,
-    HlmCardDescription,
-    HlmCardFooter,
-    HlmButton,
-    HlmInput,
-    HlmField,
-    HlmFieldLabel,
-    HlmFieldError,
-    HlmFieldGroup,
-  ],
+  imports: [RouterLink, ReactiveFormsModule],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

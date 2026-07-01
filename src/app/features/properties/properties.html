@@ -1,15 +1,15 @@
 <!-- Main Content -->
 <main
   class="flex flex-1 flex-col"
-  style="background-color: hsl(0, 0%, 13%); color: var(--foreground)"
+  style="background-color: hsl(0, 0%, 13%); color: hsl(0, 0%, 91%)"
 >
   <!-- Hero Search Section -->
   <section class="px-6 pt-12 pb-8 text-center md:pt-16 md:pb-10">
     <div class="mx-auto max-w-2xl space-y-4">
-      <h1 class="text-3xl font-light md:text-4xl" style="color: hsl(0, 0%, 91%)">
+      <h1 class="type-h2 text-[hsl(0,0%,91%)]">
         Encontre seu imóvel perfeito
       </h1>
-      <p class="text-base" style="color: hsl(0, 0%, 65%)">
+      <p class="type-body text-[hsl(0,0%,65%)]">
         Milhares de imóveis para venda e aluguel
       </p>
 
@@ -18,8 +18,7 @@
         <div class="pointer-events-none absolute inset-y-0 left-4 flex items-center">
           <ng-icon
             name="lucideSearch"
-            class="size-5"
-            style="color: hsl(0, 0%, 63%)"
+            class="size-5 text-[hsl(0,0%,50%)]"
             aria-hidden="true"
           />
         </div>
@@ -29,13 +28,7 @@
           aria-label="Buscar por localização"
           [value]="propertiesService.searchQuery()"
           (input)="propertiesService.searchQuery.set($any($event.target).value)"
-          class="w-full rounded-xl border py-3 pr-4 pl-12 text-base transition-shadow outline-none focus:ring-2"
-          style="
-            background-color: hsl(0, 0%, 91%);
-            border-color: hsl(0, 0%, 80%);
-            color: hsl(0, 0%, 13%);
-            --tw-ring-color: hsl(0, 0%, 75%);
-          "
+          class="w-full rounded-full border py-3 pr-4 pl-12 text-sm transition-shadow outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] focus:ring-[hsl(0,0%,75%)]"
         />
       </div>
 
@@ -45,10 +38,10 @@
         <button
           (click)="toggleStatus('all')"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
-          [style]="
+          [class]="
             propertiesService.propertyType() === 'all'
-              ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-              : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'
+              ? 'bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)]'
+              : 'bg-[hsl(0,0%,22%)] text-[hsl(0,0%,65%)] hover:bg-[hsl(0,0%,28%)]'
           "
         >
           Todos
@@ -56,10 +49,10 @@
         <button
           (click)="toggleStatus('sale')"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
-          [style]="
+          [class]="
             propertiesService.propertyType() === 'sale'
-              ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-              : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'
+              ? 'bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)]'
+              : 'bg-[hsl(0,0%,22%)] text-[hsl(0,0%,65%)] hover:bg-[hsl(0,0%,28%)]'
           "
         >
           Comprar
@@ -67,69 +60,73 @@
         <button
           (click)="toggleStatus('rent')"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
-          [style]="
+          [class]="
             propertiesService.propertyType() === 'rent'
-              ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-              : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'
+              ? 'bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)]'
+              : 'bg-[hsl(0,0%,22%)] text-[hsl(0,0%,65%)] hover:bg-[hsl(0,0%,28%)]'
           "
         >
           Alugar
         </button>
 
-        <span class="mx-1 h-5 w-px" style="background-color: hsl(0, 0%, 30%)"></span>
+        <span class="mx-1 h-5 w-px bg-[hsl(0,0%,30%)]"></span>
 
         <!-- Filter dropdown -->
-        <button
-          hlmDropdownMenuTrigger
-          [hlmDropdownMenuTrigger]="filterMenu"
-          hlmBtn
-          variant="outline"
-          size="sm"
-          class="rounded-full"
-        >
-          <ng-icon name="lucideSlidersHorizontal" class="size-4" aria-hidden="true" />
-          @if (activeFilterCount() > 0) {
-            Filtros ({{ activeFilterCount() }})
-          } @else {
-            Filtros
+        <div class="relative" data-filter-menu>
+          <button
+            (click)="toggleFilterMenu($event)"
+            class="rounded-full border px-4 py-1.5 text-sm font-medium transition-colors inline-flex items-center gap-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,28%)]"
+          >
+            <ng-icon name="lucideSlidersHorizontal" class="size-4" aria-hidden="true" />
+            @if (activeFilterCount() > 0) {
+              Filtros ({{ activeFilterCount() }})
+            } @else {
+              Filtros
+            }
+          </button>
+
+          @if (filterMenuOpen()) {
+            <div class="absolute top-full left-1/2 mt-2 w-64 -translate-x-1/2 rounded-2xl border p-4 shadow-xl z-50 border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)]">
+              <!-- Property Types Group -->
+              <div class="space-y-1">
+                <span class="type-caption text-[hsl(0,0%,65%)] font-medium">Tipo de imóvel</span>
+                @for (type of propertyTypes; track type.value) {
+                  <button
+                    (click)="toggleType(type.value)"
+                    class="w-full text-left px-3 py-2 text-sm rounded-lg transition-colors flex items-center gap-2 text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)]"
+                  >
+                    <span class="inline-flex h-4 w-4 items-center justify-center rounded border border-[hsl(0,0%,30%)]">
+                      @if (isTypeSelected(type.value)) {
+                        <span class="h-2 w-2 rounded-sm bg-[hsl(0,0%,91%)]"></span>
+                      }
+                    </span>
+                    {{ type.label }}
+                  </button>
+                }
+              </div>
+
+              <div class="my-3 h-px bg-[hsl(0,0%,25%)]"></div>
+
+              <!-- Amenities Group -->
+              <div class="space-y-1">
+                <span class="type-caption text-[hsl(0,0%,65%)] font-medium">Comodidades</span>
+                @for (amenity of amenityTypes; track amenity.value) {
+                  <button
+                    (click)="toggleAmenity(amenity.value)"
+                    class="w-full text-left px-3 py-2 text-sm rounded-lg transition-colors flex items-center gap-2 text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)]"
+                  >
+                    <span class="inline-flex h-4 w-4 items-center justify-center rounded border border-[hsl(0,0%,30%)]">
+                      @if (isAmenitySelected(amenity.value)) {
+                        <span class="h-2 w-2 rounded-sm bg-[hsl(0,0%,91%)]"></span>
+                      }
+                    </span>
+                    {{ amenity.label }}
+                  </button>
+                }
+              </div>
+            </div>
           }
-        </button>
-
-        <ng-template #filterMenu>
-          <div hlmDropdownMenu class="w-64">
-            <!-- Property Types Group -->
-            <div hlmDropdownMenuGroup>
-              <span hlmDropdownMenuLabel>Tipo de imóvel</span>
-              @for (type of propertyTypes; track type.value) {
-                <button
-                  hlmDropdownMenuCheckbox
-                  [checked]="isTypeSelected(type.value)"
-                  (triggered)="toggleType(type.value)"
-                >
-                  {{ type.label }}
-                  <hlm-dropdown-menu-checkbox-indicator />
-                </button>
-              }
-            </div>
-
-            <div hlmDropdownMenuSeparator></div>
-
-            <!-- Amenities Group -->
-            <div hlmDropdownMenuGroup>
-              <span hlmDropdownMenuLabel>Comodidades</span>
-              @for (amenity of amenityTypes; track amenity.value) {
-                <button
-                  hlmDropdownMenuCheckbox
-                  [checked]="isAmenitySelected(amenity.value)"
-                  (triggered)="toggleAmenity(amenity.value)"
-                >
-                  {{ amenity.label }}
-                  <hlm-dropdown-menu-checkbox-indicator />
-                </button>
-              }
-            </div>
-          </div>
-        </ng-template>
+        </div>
       </div>
     </div>
   </section>
@@ -138,7 +135,7 @@
   <section class="flex-1 px-6 pb-16">
     <div class="mx-auto max-w-5xl">
       <!-- Result count -->
-      <p class="mb-6 text-sm" style="color: hsl(0, 0%, 63%)">
+      <p class="mb-6 text-sm text-[hsl(0,0%,63%)]">
         {{ resultCount() }} imóvel{{ resultCount() !== 1 ? 'is' : '' }} encontrado{{
           resultCount() !== 1 ? 's' : ''
         }}
@@ -150,8 +147,7 @@
           @for (property of filteredProperties(); track property.id) {
             <a
               [routerLink]="['/properties', property.slug]"
-              class="group overflow-hidden rounded-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-xl"
-              style="background-color: hsl(0, 0%, 91%)"
+              class="group overflow-hidden rounded-2xl border transition-all duration-200 hover:scale-[1.02] hover:shadow-xl border-[hsl(0,0%,25%)] bg-[hsl(0,0%,91%)]"
             >
               <!-- Image -->
               <div class="relative aspect-video w-full overflow-hidden">
@@ -166,10 +162,10 @@
                 <!-- Type badge -->
                 <span
                   class="absolute top-3 left-3 rounded-full px-2.5 py-0.5 text-xs font-medium"
-                  [style]="
+                  [class]="
                     property.type === 'sale'
-                      ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-                      : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 91%);'
+                      ? 'bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)]'
+                      : 'bg-[hsl(0,0%,22%)] text-[hsl(0,0%,91%)]'
                   "
                 >
                   {{ property.type === 'sale' ? 'Venda' : 'Aluguel' }}
@@ -179,21 +175,21 @@
               <!-- Content -->
               <div class="space-y-2 p-3">
                 <div class="space-y-1">
-                  <h3 class="line-clamp-1 font-semibold" style="color: hsl(0, 0%, 13%)">
+                  <h3 class="line-clamp-1 font-semibold text-[hsl(0,0%,13%)]">
                     {{ property.title }}
                   </h3>
-                  <p class="flex items-center gap-1 text-sm" style="color: hsl(0, 0%, 65%)">
+                  <p class="flex items-center gap-1 text-sm text-[hsl(0,0%,65%)]">
                     <ng-icon name="lucideMapPin" class="size-3 shrink-0" aria-hidden="true" />
                     <span class="truncate">{{ property.address }}</span>
                   </p>
                 </div>
 
-                <p class="text-base font-bold" style="color: hsl(0, 0%, 13%)">
+                <p class="text-base font-bold text-[hsl(0,0%,13%)]">
                   {{ formatPrice(property.price, property.type) }}
                 </p>
 
                 <!-- Specs -->
-                <div class="flex items-center gap-3 text-sm" style="color: hsl(0, 0%, 70%)">
+                <div class="flex items-center gap-3 text-sm text-[hsl(0,0%,70%)]">
                   <span
                     class="flex items-center gap-1"
                     [attr.aria-label]="
@@ -229,16 +225,14 @@
                   <div class="flex gap-1.5 pt-0.5">
                     @if (property.furnished) {
                       <span
-                        class="rounded-md px-2 py-0.5 text-xs font-medium"
-                        style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 55%)"
+                        class="rounded-full px-2 py-0.5 text-xs font-medium bg-[hsl(0,0%,95%)] text-[hsl(0,0%,55%)]"
                       >
                         Mobiliado
                       </span>
                     }
                     @if (property.petFriendly) {
                       <span
-                        class="rounded-md px-2 py-0.5 text-xs font-medium"
-                        style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 55%)"
+                        class="rounded-full px-2 py-0.5 text-xs font-medium bg-[hsl(0,0%,95%)] text-[hsl(0,0%,55%)]"
                       >
                         Pets
                       </span>
@@ -252,19 +246,17 @@
       } @else {
         <!-- Empty State -->
         <div
-          class="flex flex-col items-center justify-center rounded-xl py-20 text-center"
-          style="background-color: hsl(0, 0%, 16%)"
+          class="flex flex-col items-center justify-center rounded-2xl border py-20 text-center border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)]"
         >
           <ng-icon
             name="lucideSearch"
-            class="mb-4 size-12"
-            style="color: hsl(0, 0%, 50%)"
+            class="mb-4 size-12 text-[hsl(0,0%,50%)]"
             aria-hidden="true"
           />
-          <h3 class="text-lg font-medium" style="color: hsl(0, 0%, 75%)">
+          <h3 class="type-h4 text-[hsl(0,0%,65%)]">
             Nenhum imóvel encontrado
           </h3>
-          <p class="mt-1 text-sm" style="color: hsl(0, 0%, 63%)">
+          <p class="mt-1 text-sm text-[hsl(0,0%,63%)]">
             Tente ajustar os filtros de busca.
           </p>
         </div>

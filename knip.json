@@ -7,11 +7,7 @@
     "@angular/forms",
     "@ng-icons/core",
     "@ng-icons/lucide",
-    "@spartan-ng/cli",
-    "@spartan-ng/brain",
-    "class-variance-authority",
-    "clsx",
-    "embla-carousel",
+
     "embla-carousel-angular",
     "ngx-scrollbar",
     "tailwind-merge",

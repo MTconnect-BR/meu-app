@@ -10,11 +10,7 @@
       "groupName": "Angular",
       "automerge": true
     },
-    {
-      "matchPackagePatterns": ["^@spartan-ng/"],
-      "groupName": "Spartan NG",
-      "automerge": true
-    },
+
     {
       "matchPackagePatterns": ["^@nx/"],
       "groupName": "Nx",

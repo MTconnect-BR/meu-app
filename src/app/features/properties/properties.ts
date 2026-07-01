@@ -1,34 +1,20 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal,
+  HostListener,
+} from '@angular/core';
 import { NgOptimizedImage } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { PropertiesService } from '../../core/services/properties';
-import { HlmButton } from '@spartan-ng/helm/button';
-import {
-  HlmDropdownMenu,
-  HlmDropdownMenuTrigger,
-  HlmDropdownMenuCheckbox,
-  HlmDropdownMenuCheckboxIndicator,
-  HlmDropdownMenuGroup,
-  HlmDropdownMenuLabel,
-  HlmDropdownMenuSeparator,
-} from '@spartan-ng/helm/dropdown-menu';
 
 @Component({
   selector: 'app-properties',
-  imports: [
-    RouterLink,
-    NgIcon,
-    NgOptimizedImage,
-    HlmButton,
-    HlmDropdownMenu,
-    HlmDropdownMenuTrigger,
-    HlmDropdownMenuCheckbox,
-    HlmDropdownMenuCheckboxIndicator,
-    HlmDropdownMenuGroup,
-    HlmDropdownMenuLabel,
-    HlmDropdownMenuSeparator,
-  ],
+  imports: [RouterLink, NgIcon, NgOptimizedImage],
   templateUrl: './properties.html',
   styleUrl: './properties.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -54,6 +40,20 @@ export class Properties implements OnInit {
   ];
 
   protected readonly activeFilterCount = this.propertiesService.activeFilterCount;
+  protected readonly filterMenuOpen = signal(false);
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement;
+    if (!target.closest('[data-filter-menu]')) {
+      this.filterMenuOpen.set(false);
+    }
+  }
+
+  toggleFilterMenu(event: MouseEvent): void {
+    event.stopPropagation();
+    this.filterMenuOpen.update((v) => !v);
+  }
 
   toggleType(value: string) {
     this.propertiesService.selectedTypes.update((current) =>

@@ -1,86 +1,14 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal, HostListener } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 
 import { PropertiesService } from '../../core/services/properties';
 import { Property, PropertyCategory } from '../../core/models/property.model';
-import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmBadge } from '@spartan-ng/helm/badge';
-import { HlmInput } from '@spartan-ng/helm/input';
-import { HlmTextarea } from '@spartan-ng/helm/textarea';
-import { HlmSwitch } from '@spartan-ng/helm/switch';
-import {
-  HlmTable,
-  HlmTableContainer,
-  HlmTHead,
-  HlmTBody,
-  HlmTr,
-  HlmTh,
-  HlmTd,
-} from '@spartan-ng/helm/table';
-import { HlmField, HlmFieldLabel, HlmFieldError } from '@spartan-ng/helm/field';
-import {
-  HlmDropdownMenu,
-  HlmDropdownMenuTrigger,
-  HlmDropdownMenuItem,
-  HlmDropdownMenuSeparator,
-} from '@spartan-ng/helm/dropdown-menu';
-import { HlmRadioGroup, HlmRadio, HlmRadioIndicator } from '@spartan-ng/helm/radio-group';
-import { HlmAlert, HlmAlertTitle, HlmAlertDescription } from '@spartan-ng/helm/alert';
-import {
-  HlmEmpty,
-  HlmEmptyHeader,
-  HlmEmptyMedia,
-  HlmEmptyTitle,
-  HlmEmptyDescription,
-} from '@spartan-ng/helm/empty';
-import {
-  HlmInputGroup,
-  HlmInputGroupAddon,
-  HlmInputGroupInput,
-} from '@spartan-ng/helm/input-group';
 import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-crm',
-  imports: [
-    RouterLink,
-    ReactiveFormsModule,
-    HlmButton,
-    HlmBadge,
-    HlmInput,
-    HlmTextarea,
-    HlmSwitch,
-    HlmTable,
-    HlmTableContainer,
-    HlmTHead,
-    HlmTBody,
-    HlmTr,
-    HlmTh,
-    HlmTd,
-    HlmField,
-    HlmFieldLabel,
-    HlmFieldError,
-    HlmDropdownMenu,
-    HlmDropdownMenuTrigger,
-    HlmDropdownMenuItem,
-    HlmDropdownMenuSeparator,
-    HlmRadioGroup,
-    HlmRadio,
-    HlmRadioIndicator,
-    HlmAlert,
-    HlmAlertTitle,
-    HlmAlertDescription,
-    HlmEmpty,
-    HlmEmptyHeader,
-    HlmEmptyMedia,
-    HlmEmptyTitle,
-    HlmEmptyDescription,
-    HlmInputGroup,
-    HlmInputGroupAddon,
-    HlmInputGroupInput,
-    NgIcon,
-  ],
+  imports: [RouterLink, ReactiveFormsModule, NgIcon],
   templateUrl: './crm.html',
   styleUrl: './crm.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -99,6 +27,7 @@ export class Crm {
     'title' | 'city' | 'price' | 'area' | 'bedrooms' | 'bathrooms'
   >('title');
   protected readonly sortDirection = signal<'asc' | 'desc'>('asc');
+  protected readonly actionsMenuOpen = signal<number | null>(null);
 
   protected readonly filteredProperties = computed(() => {
     const query = this.searchQuery().toLowerCase().trim();
@@ -123,6 +52,11 @@ export class Crm {
     });
   });
 
+  @HostListener('document:click')
+  onDocumentClick(): void {
+    this.actionsMenuOpen.set(null);
+  }
+
   protected toggleSort(key: 'title' | 'city' | 'price' | 'area' | 'bedrooms' | 'bathrooms'): void {
     if (this.sortKey() === key) {
       this.sortDirection.update((d) => (d === 'asc' ? 'desc' : 'asc'));
@@ -135,6 +69,11 @@ export class Crm {
   protected sortIcon(key: string): string {
     if (this.sortKey() !== key) return '';
     return this.sortDirection() === 'asc' ? ' ↑' : ' ↓';
+  }
+
+  protected toggleActionsMenu(event: MouseEvent, id: number): void {
+    event.stopPropagation();
+    this.actionsMenuOpen.update((current) => (current === id ? null : id));
   }
 
   protected readonly form = this._fb.nonNullable.group({
@@ -194,6 +133,7 @@ export class Crm {
 
   protected openEditForm(property: Property): void {
     this.editingId.set(property.id);
+    this.actionsMenuOpen.set(null);
     this.form.reset({
       title: property.title,
       slug: property.slug,
@@ -246,6 +186,7 @@ export class Crm {
   }
 
   protected confirmDelete(id: number): void {
+    this.actionsMenuOpen.set(null);
     this.deletingId.set(id);
     this.showDeleteDialog.set(true);
   }
@@ -267,5 +208,13 @@ export class Crm {
 
   protected formatPrice(price: number, type: 'sale' | 'rent'): string {
     return this._propertiesService.formatPrice(price, type);
+  }
+
+  protected toggleFurnished(): void {
+    this.form.patchValue({ furnished: !this.form.get('furnished')?.value });
+  }
+
+  protected togglePetFriendly(): void {
+    this.form.patchValue({ petFriendly: !this.form.get('petFriendly')?.value });
   }
 }

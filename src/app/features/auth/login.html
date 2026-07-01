@@ -1,75 +1,63 @@
 <main
-  class="flex flex-1 items-center justify-center px-6 py-16"
-  style="
-    background-color: hsl(0, 0%, 13%);
-    color: var(--foreground);
-    --background: hsl(0, 0%, 13%);
-    --foreground: hsl(0, 0%, 91%);
-    --card: hsl(0, 0%, 18%);
-    --card-foreground: hsl(0, 0%, 91%);
-    --popover: hsl(0, 0%, 18%);
-    --popover-foreground: hsl(0, 0%, 91%);
-    --primary: hsl(0, 0%, 91%);
-    --primary-foreground: hsl(0, 0%, 13%);
-    --secondary: hsl(0, 0%, 22%);
-    --secondary-foreground: hsl(0, 0%, 91%);
-    --muted: hsl(0, 0%, 22%);
-    --muted-foreground: hsl(0, 0%, 65%);
-    --accent: hsl(0, 0%, 22%);
-    --accent-foreground: hsl(0, 0%, 91%);
-    --border: hsl(0, 0%, 30%);
-    --input: hsl(0, 0%, 22%);
-    --ring: hsl(0, 0%, 65%);
-  "
+  class="flex flex-1 items-center justify-center px-6 py-20"
+  style="background-color: hsl(0, 0%, 13%); color: hsl(0, 0%, 91%)"
 >
-  <hlm-card class="w-full max-w-md">
-    <div hlmCardHeader>
-      <h2 hlmCardTitle>Entrar</h2>
-      <p hlmCardDescription>Entre com seu email para acessar sua conta</p>
+  <div class="w-full max-w-md rounded-2xl border border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)] shadow-lg">
+    <div class="p-8 pb-0">
+      <h2 class="type-h2 text-[hsl(0,0%,91%)]">Entrar</h2>
+      <p class="type-body text-[hsl(0,0%,65%)] mt-2">Entre com seu email para acessar sua conta</p>
     </div>
-    <div hlmCardContent>
+    <div class="p-8 pt-6">
       <form [formGroup]="form" (ngSubmit)="submit()">
-        <hlm-field-group class="space-y-4">
+        <div class="space-y-5">
           @if (errorMessage) {
-            <p class="text-destructive text-sm">{{ errorMessage }}</p>
+            <p class="type-caption text-red-400">{{ errorMessage }}</p>
           }
-          <hlm-field>
-            <label hlmFieldLabel for="login-email">Email</label>
+          <div class="space-y-2">
+            <label for="login-email" class="type-small text-[hsl(0,0%,65%)] font-medium">Email</label>
             <input
-              hlmInput
               id="login-email"
               type="email"
               placeholder="m@exemplo.com"
               formControlName="email"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
             />
-            <hlm-field-error validator="required">Email é obrigatório.</hlm-field-error>
-            <hlm-field-error validator="email">Digite um email válido.</hlm-field-error>
-          </hlm-field>
-          <hlm-field>
-            <label hlmFieldLabel for="login-password">Senha</label>
+            @if (form.get('email')?.invalid && form.get('email')?.touched) {
+              @if (form.get('email')?.errors?.['required']) {
+                <p class="type-caption text-red-400">Email é obrigatório.</p>
+              }
+              @if (form.get('email')?.errors?.['email']) {
+                <p class="type-caption text-red-400">Digite um email válido.</p>
+              }
+            }
+          </div>
+          <div class="space-y-2">
+            <label for="login-password" class="type-small text-[hsl(0,0%,65%)] font-medium">Senha</label>
             <input
-              hlmInput
               id="login-password"
               type="password"
               placeholder="••••••••"
               formControlName="password"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
             />
-            <hlm-field-error validator="required">Senha é obrigatória.</hlm-field-error>
-            <hlm-field-error validator="minlength"
-              >A senha deve ter pelo menos 6 caracteres.</hlm-field-error
-            >
-          </hlm-field>
-          <button hlmBtn type="submit" class="w-full">Entrar</button>
-        </hlm-field-group>
+            @if (form.get('password')?.invalid && form.get('password')?.touched) {
+              @if (form.get('password')?.errors?.['required']) {
+                <p class="type-caption text-red-400">Senha é obrigatória.</p>
+              }
+              @if (form.get('password')?.errors?.['minlength']) {
+                <p class="type-caption text-red-400">A senha deve ter pelo menos 6 caracteres.</p>
+              }
+            }
+          </div>
+          <button type="submit" class="w-full rounded-full bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] px-6 py-3 text-sm font-medium hover:bg-[hsl(0,0%,80%)] transition-colors">Entrar</button>
+        </div>
       </form>
     </div>
-    <div hlmCardFooter class="border-t-border">
-      <p class="text-muted-foreground text-sm">
+    <div class="border-t border-[hsl(0,0%,25%)] px-8 py-4">
+      <p class="type-small text-[hsl(0,0%,65%)]">
         Não tem uma conta?
-        <a routerLink="/auth/sign-up" class="text-foreground font-medium hover:underline">
-          Criar conta
-        </a>
+        <a routerLink="/auth/sign-up" class="text-[hsl(0,0%,91%)] font-medium hover:underline"> Criar conta </a>
       </p>
     </div>
-  </hlm-card>
+  </div>
 </main>

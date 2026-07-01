@@ -13,49 +13,11 @@ import {
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { PropertiesService } from '../../core/services/properties';
 import { Property } from '../../core/models/property.model';
-import { HlmCard, HlmCardContent } from '@spartan-ng/helm/card';
-import { HlmButton } from '@spartan-ng/helm/button';
-import { HlmBadge } from '@spartan-ng/helm/badge';
-import { HlmSeparator } from '@spartan-ng/helm/separator';
-import {
-  HlmCarousel,
-  HlmCarouselContent,
-  HlmCarouselItem,
-  HlmCarouselNext,
-  HlmCarouselPrevious,
-} from '@spartan-ng/helm/carousel';
-import { HlmAspectRatio } from '@spartan-ng/helm/aspect-ratio';
-import {
-  HlmEmpty,
-  HlmEmptyHeader,
-  HlmEmptyMedia,
-  HlmEmptyTitle,
-  HlmEmptyDescription,
-} from '@spartan-ng/helm/empty';
 import { NgIcon } from '@ng-icons/core';
 
 @Component({
   selector: 'app-property-detail',
-  imports: [
-    RouterLink,
-    HlmCard,
-    HlmCardContent,
-    HlmButton,
-    HlmBadge,
-    HlmSeparator,
-    HlmCarousel,
-    HlmCarouselContent,
-    HlmCarouselItem,
-    HlmCarouselNext,
-    HlmCarouselPrevious,
-    HlmAspectRatio,
-    HlmEmpty,
-    HlmEmptyHeader,
-    HlmEmptyMedia,
-    HlmEmptyTitle,
-    HlmEmptyDescription,
-    NgIcon,
-  ],
+  imports: [RouterLink, NgIcon],
   templateUrl: './property-detail.html',
   styleUrl: './property-detail.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -71,11 +33,6 @@ export class PropertyDetail implements OnInit, AfterViewInit, OnDestroy {
     const p = this.property();
     return p ? this._propertiesService.getSimilar(p, 5) : [];
   });
-  protected readonly similarOptions = {
-    align: 'start',
-    slidesToScroll: 2,
-    containScroll: 'trimSnaps',
-  } as const;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _map: any;
