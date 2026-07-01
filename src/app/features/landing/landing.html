@@ -63,58 +63,57 @@
         <div class="flex items-center gap-3">
           <div class="relative flex-1">
             <button
-              hlmDropdownMenuTrigger
-              [hlmDropdownMenuTrigger]="filterMenu"
-              class="flex w-full items-center justify-between rounded-xl px-3 py-2.5 text-sm sm:px-4 sm:py-3"
-              [style.background-color]="'hsl(0, 0%, 18%)'" [style.color]="'hsl(0, 0%, 91%)'">
+              type="button"
+              class="hero-filter_toggle"
+              [class.is-open]="filterOpen()"
+              (click)="toggleFilter()">
               <span class="flex items-center gap-2">
                 <ng-icon name="lucideSlidersHorizontal" class="size-4" [style.color]="'hsl(0, 0%, 63%)'" />
                 {{ activeFilterLabel() }}
               </span>
               <ng-icon name="lucideChevronUp" class="size-4 shrink-0 transition-transform duration-200"
-                [style.color]="'hsl(0, 0%, 63%)'" />
+                [class.rotate-180]="filterOpen()" [style.color]="'hsl(0, 0%, 63%)'" />
             </button>
 
-            <ng-template #filterMenu>
-              <div hlmDropdownMenu class="w-72">
-                <!-- Property Types Group -->
-                <div hlmDropdownMenuGroup>
-                  <span hlmDropdownMenuLabel>Tipo de imóvel</span>
-                  @for (type of propertyTypes; track type.value) {
-                    <button
-                      hlmDropdownMenuCheckbox
+            @if (filterOpen()) {
+              <div class="hero-filter_backdrop" (click)="filterOpen.set(false)" (keyup.escape)="filterOpen.set(false)" tabindex="-1" role="presentation"></div>
+            }
+
+            <div class="hero-filter_panel" [class.is-open]="filterOpen()">
+              <div class="hero-filter_group">
+                <span class="hero-filter_label">Tipo de imóvel</span>
+                @for (type of propertyTypes; track type.value; let i = $index) {
+                  <label class="hero-filter_item" [style.--index]="i">
+                    <input type="checkbox" class="hero-filter_input"
                       [checked]="isTypeSelected(type.value)"
-                      (triggered)="toggleType(type.value)">
-                      {{ type.label }}
-                      <hlm-dropdown-menu-checkbox-indicator />
-                    </button>
-                  }
-                </div>
-
-                <div hlmDropdownMenuSeparator></div>
-
-                <!-- Amenities Group -->
-                <div hlmDropdownMenuGroup>
-                  <span hlmDropdownMenuLabel>Comodidades</span>
-                  @for (amenity of amenityTypes; track amenity.value) {
-                    <button
-                      hlmDropdownMenuCheckbox
-                      [checked]="isAmenitySelected(amenity.value)"
-                      (triggered)="toggleAmenity(amenity.value)">
-                      {{ amenity.label }}
-                      <hlm-dropdown-menu-checkbox-indicator />
-                    </button>
-                  }
-                </div>
-
-                <div hlmDropdownMenuSeparator></div>
-
-                <!-- Apply Button -->
-                <button hlmDropdownMenuItem (click)="applyFilters()">
-                  Aplicar filtro
-                </button>
+                      (change)="toggleType(type.value)" />
+                    <span class="hero-filter_checkbox"></span>
+                    <span>{{ type.label }}</span>
+                  </label>
+                }
               </div>
-            </ng-template>
+
+              <div class="hero-filter_separator"></div>
+
+              <div class="hero-filter_group">
+                <span class="hero-filter_label">Comodidades</span>
+                @for (amenity of amenityTypes; track amenity.value; let i = $index) {
+                  <label class="hero-filter_item" [style.--index]="i + propertyTypes.length">
+                    <input type="checkbox" class="hero-filter_input"
+                      [checked]="isAmenitySelected(amenity.value)"
+                      (change)="toggleAmenity(amenity.value)" />
+                    <span class="hero-filter_checkbox"></span>
+                    <span>{{ amenity.label }}</span>
+                  </label>
+                }
+              </div>
+
+              <div class="hero-filter_separator"></div>
+
+              <button class="hero-filter_apply" (click)="applyFilters(); filterOpen.set(false)">
+                Aplicar filtro
+              </button>
+            </div>
           </div>
           <button
             (click)="onSearch()"

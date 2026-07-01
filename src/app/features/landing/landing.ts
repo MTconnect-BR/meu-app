@@ -12,30 +12,12 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { NgIcon } from '@ng-icons/core';
 import { PropertiesService } from '../../core/services/properties';
-import {
-  HlmDropdownMenu,
-  HlmDropdownMenuTrigger,
-  HlmDropdownMenuItem,
-  HlmDropdownMenuCheckbox,
-  HlmDropdownMenuCheckboxIndicator,
-  HlmDropdownMenuGroup,
-  HlmDropdownMenuLabel,
-  HlmDropdownMenuSeparator,
-} from '@spartan-ng/helm/dropdown-menu';
 
 @Component({
   selector: 'app-landing',
   imports: [
     RouterLink,
     NgIcon,
-    HlmDropdownMenu,
-    HlmDropdownMenuTrigger,
-    HlmDropdownMenuItem,
-    HlmDropdownMenuCheckbox,
-    HlmDropdownMenuCheckboxIndicator,
-    HlmDropdownMenuGroup,
-    HlmDropdownMenuLabel,
-    HlmDropdownMenuSeparator,
   ],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
@@ -54,6 +36,7 @@ export class Landing {
   protected readonly searchQuery = signal('');
   protected readonly faqOpen = signal(false);
   protected readonly expandedFaq = signal(-1);
+  protected readonly filterOpen = signal(false);
 
   protected readonly tempSelectedTypes = signal<string[]>([]);
   protected readonly tempSelectedAmenities = signal<string[]>([]);
@@ -160,6 +143,10 @@ export class Landing {
 
   toggleFaq() {
     this.faqOpen.update((v) => !v);
+  }
+
+  toggleFilter() {
+    this.filterOpen.update((v) => !v);
   }
 
   constructor() {
