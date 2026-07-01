@@ -40,7 +40,6 @@ import {
   HlmInputGroupInput,
 } from '@spartan-ng/helm/input-group';
 import { NgIcon } from '@ng-icons/core';
-import { HlmH1 } from '@spartan-ng/helm/typography';
 
 @Component({
   selector: 'app-crm',
@@ -81,7 +80,6 @@ import { HlmH1 } from '@spartan-ng/helm/typography';
     HlmInputGroupAddon,
     HlmInputGroupInput,
     NgIcon,
-    HlmH1,
   ],
   templateUrl: './crm.html',
   styleUrl: './crm.scss',

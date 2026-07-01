@@ -33,7 +33,6 @@ import {
   HlmEmptyDescription,
 } from '@spartan-ng/helm/empty';
 import { NgIcon } from '@ng-icons/core';
-import { HlmH1, HlmH2, HlmP } from '@spartan-ng/helm/typography';
 
 @Component({
   selector: 'app-property-detail',
@@ -56,9 +55,6 @@ import { HlmH1, HlmH2, HlmP } from '@spartan-ng/helm/typography';
     HlmEmptyTitle,
     HlmEmptyDescription,
     NgIcon,
-    HlmH1,
-    HlmH2,
-    HlmP,
   ],
   templateUrl: './property-detail.html',
   styleUrl: './property-detail.scss',
