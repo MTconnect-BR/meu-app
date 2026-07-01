@@ -2,6 +2,14 @@
 
 This file provides context for AI coding agents working on this project.
 
+## Git Repository
+
+**ALWAYS** use `MTconnect-BR/meu-app` for all git and GitHub operations. NEVER use `mmdj04/meu-app` (deleted).
+
+- Remote URL: `https://github.com/MTconnect-BR/meu-app/`
+- Owner: `MTconnect-BR`
+- All `gh` CLI commands must target `MTconnect-BR/meu-app`
+
 ## Project Overview
 
 MTconnect-BR is a real estate platform built with Angular 22, featuring SSR, deployed on Vercel. The project uses a feature-first architecture with Spartan NG components and Tailwind CSS.
