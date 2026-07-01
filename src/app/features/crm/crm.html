@@ -2,19 +2,27 @@
   class="flex flex-1 flex-col px-6 py-8"
   style="background-color: hsl(0, 0%, 13%); color: hsl(0, 0%, 91%)"
 >
-  <div class="mx-auto w-full max-w-6xl space-y-8">
+  <div class="mx-auto w-full max-w-6xl space-y-10">
     <div class="flex items-center justify-between gap-4">
-      <h1 class="type-h1 text-[hsl(0,0%,91%)]">Gerenciamento de Imóveis</h1>
-      <button (click)="openCreateForm()" class="rounded-full bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] px-5 py-2 text-sm font-medium hover:bg-[hsl(0,0%,80%)] transition-colors inline-flex items-center gap-2">
-        <ng-icon name="lucidePlus" class="size-4" />
+      <div>
+        <h1 class="type-h1 text-[hsl(0,0%,91%)]">Gerenciar Imóveis</h1>
+        <p class="type-lead text-[hsl(0,0%,65%)] mt-2">Gerencie seus anúncios de forma simples e rápida</p>
+      </div>
+      <button
+        (click)="openCreateForm()"
+        class="rounded-full bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] pl-3 pr-5 py-2.5 text-sm font-semibold hover:bg-[hsl(0,0%,80%)] transition-colors inline-flex items-center gap-2.5"
+      >
+        <span class="rounded-full bg-[hsl(0,0%,13%)] p-1.5">
+          <ng-icon name="lucidePlus" class="size-3.5 text-[hsl(0,0%,91%)]" />
+        </span>
         Novo Imóvel
       </button>
     </div>
 
     <!-- Search -->
-    <div class="flex items-center gap-3">
-      <div class="relative max-w-sm flex-1">
-        <span class="absolute left-3 top-1/2 -translate-y-1/2 text-[hsl(0,0%,50%)]">
+    <div class="flex items-center gap-4">
+      <div class="relative max-w-md flex-1">
+        <span class="absolute left-4 top-1/2 -translate-y-1/2 text-[hsl(0,0%,50%)]">
           <ng-icon name="lucideSearch" class="size-4" />
         </span>
         <input
@@ -22,29 +30,31 @@
           placeholder="Buscar por título, cidade ou endereço..."
           [value]="searchQuery()"
           (input)="searchQuery.set($any($event.target).value)"
-          class="w-full rounded-xl border py-2.5 pl-10 pr-4 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+          class="w-full rounded-full border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] py-3 pl-11 pr-4 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
         />
       </div>
-      <span class="text-sm text-[hsl(0,0%,65%)]">{{ filteredProperties().length }} imóveis</span>
+      <span class="type-small text-[hsl(0,0%,65%)]">{{ filteredProperties().length }} imóveis</span>
     </div>
 
     @if (alertMessage()) {
-      <div class="rounded-2xl border p-4 flex items-start gap-3 border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)]">
-        <ng-icon name="lucideInfo" class="mt-0.5 size-5 text-[hsl(0,0%,65%)]" />
+      <div class="rounded-2xl border border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)] p-5 flex items-start gap-4">
+        <div class="rounded-full bg-[hsl(0,0%,22%)] p-2">
+          <ng-icon name="lucideInfo" class="size-4 text-[hsl(0,0%,65%)]" />
+        </div>
         <div>
           <h3 class="type-small font-semibold text-[hsl(0,0%,91%)]">Sucesso</h3>
-          <p class="type-caption text-[hsl(0,0%,65%)]">{{ alertMessage() }}</p>
+          <p class="type-caption text-[hsl(0,0%,65%)] mt-0.5">{{ alertMessage() }}</p>
         </div>
       </div>
     }
 
     @if (filteredProperties().length === 0) {
-      <div class="flex flex-col items-center justify-center py-12 text-center">
-        <div class="rounded-full bg-[hsl(0,0%,22%)] p-4 mb-4">
+      <div class="flex flex-col items-center justify-center py-20 text-center">
+        <div class="rounded-full bg-[hsl(0,0%,22%)] p-5 mb-5">
           <ng-icon name="lucideSearch" class="size-8 text-[hsl(0,0%,50%)]" />
         </div>
-        <h3 class="type-h4 text-[hsl(0,0%,65%)]">Nenhum imóvel encontrado</h3>
-        <p class="type-body text-[hsl(0,0%,63%)] mt-1">
+        <h3 class="type-h3 text-[hsl(0,0%,65%)]">Nenhum imóvel encontrado</h3>
+        <p class="type-body text-[hsl(0,0%,63%)] mt-2">
           {{
             searchQuery()
               ? 'Tente ajustar os filtros de busca.'
@@ -58,62 +68,62 @@
           <thead class="border-b border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)]">
             <tr>
               <th
-                class="px-4 py-3 text-left font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
+                class="px-5 py-4 text-left font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
                 (click)="toggleSort('title')"
               >
                 Título{{ sortIcon('title') }}
               </th>
               <th
-                class="px-4 py-3 text-left font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
+                class="px-5 py-4 text-left font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
                 (click)="toggleSort('city')"
               >
                 Localização{{ sortIcon('city') }}
               </th>
               <th
-                class="px-4 py-3 text-right font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
+                class="px-5 py-4 text-right font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
                 (click)="toggleSort('price')"
               >
                 Preço{{ sortIcon('price') }}
               </th>
-              <th class="px-4 py-3 text-center font-medium text-[hsl(0,0%,65%)]">Tipo</th>
+              <th class="px-5 py-4 text-center font-medium text-[hsl(0,0%,65%)]">Tipo</th>
               <th
-                class="px-4 py-3 text-center font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
+                class="px-5 py-4 text-center font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
                 (click)="toggleSort('bedrooms')"
               >
                 Quartos{{ sortIcon('bedrooms') }}
               </th>
               <th
-                class="px-4 py-3 text-center font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
+                class="px-5 py-4 text-center font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
                 (click)="toggleSort('bathrooms')"
               >
                 Banheiros{{ sortIcon('bathrooms') }}
               </th>
               <th
-                class="px-4 py-3 text-right font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
+                class="px-5 py-4 text-right font-medium text-[hsl(0,0%,65%)] cursor-pointer select-none hover:text-[hsl(0,0%,91%)] transition-colors"
                 (click)="toggleSort('area')"
               >
                 Área{{ sortIcon('area') }}
               </th>
-              <th class="px-4 py-3 text-right font-medium text-[hsl(0,0%,65%)]">Ações</th>
+              <th class="px-5 py-4 text-right font-medium text-[hsl(0,0%,65%)]">Ações</th>
             </tr>
           </thead>
           <tbody>
             @for (p of filteredProperties(); track p.id) {
               <tr class="border-b border-[hsl(0,0%,25%)] last:border-b-0 hover:bg-[hsl(0,0%,17%)] transition-colors">
-                <td class="px-4 py-3 font-medium text-[hsl(0,0%,91%)]">{{ p.title }}</td>
-                <td class="px-4 py-3 text-[hsl(0,0%,65%)]">{{ p.city }}, {{ p.state }}</td>
-                <td class="px-4 py-3 text-right font-semibold text-[hsl(0,0%,91%)]">
+                <td class="px-5 py-4 font-medium text-[hsl(0,0%,91%)]">{{ p.title }}</td>
+                <td class="px-5 py-4 text-[hsl(0,0%,65%)]">{{ p.city }}, {{ p.state }}</td>
+                <td class="px-5 py-4 text-right font-semibold text-[hsl(0,0%,91%)]">
                   {{ formatPrice(p.price, p.type) }}
                 </td>
-                <td class="px-4 py-3 text-center">
-                  <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] text-[hsl(0,0%,91%)]">
+                <td class="px-5 py-4 text-center">
+                  <span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] text-[hsl(0,0%,91%)]">
                     {{ p.type === 'sale' ? 'Venda' : 'Aluguel' }}
                   </span>
                 </td>
-                <td class="px-4 py-3 text-center text-[hsl(0,0%,65%)]">{{ p.bedrooms }}</td>
-                <td class="px-4 py-3 text-center text-[hsl(0,0%,65%)]">{{ p.bathrooms }}</td>
-                <td class="px-4 py-3 text-right text-[hsl(0,0%,65%)]">{{ p.area }}m²</td>
-                <td class="px-4 py-3 text-right">
+                <td class="px-5 py-4 text-center text-[hsl(0,0%,65%)]">{{ p.bedrooms }}</td>
+                <td class="px-5 py-4 text-center text-[hsl(0,0%,65%)]">{{ p.bathrooms }}</td>
+                <td class="px-5 py-4 text-right text-[hsl(0,0%,65%)]">{{ p.area }}m²</td>
+                <td class="px-5 py-4 text-right">
                   <span class="relative inline-block">
                     <button
                       (click)="toggleActionsMenu($event, p.id)"
@@ -124,17 +134,17 @@
                       <ng-icon name="lucideChevronDown" class="size-4" />
                     </button>
                     @if (actionsMenuOpen() === p.id) {
-                      <div class="absolute right-0 top-full mt-1 w-40 rounded-xl border p-1 shadow-xl z-50 border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)]">
-                        <a [routerLink]="['/properties', p.slug]" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)] transition-colors">
+                      <div class="absolute right-0 top-full mt-1 w-44 rounded-xl border border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)] p-1.5 shadow-xl z-50">
+                        <a [routerLink]="['/properties', p.slug]" class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)] transition-colors">
                           <ng-icon name="lucideEye" class="size-4" />
                           Visualizar
                         </a>
                         <div class="my-1 h-px bg-[hsl(0,0%,25%)]"></div>
-                        <button (click)="openEditForm(p)" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)] transition-colors">
+                        <button (click)="openEditForm(p)" class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)] transition-colors">
                           <ng-icon name="lucidePencil" class="size-4" />
                           Editar
                         </button>
-                        <button (click)="confirmDelete(p.id)" class="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-red-400 hover:bg-[hsl(0,0%,22%)] transition-colors">
+                        <button (click)="confirmDelete(p.id)" class="flex w-full items-center gap-2.5 rounded-lg px-3 py-2.5 text-sm text-red-400 hover:bg-[hsl(0,0%,22%)] transition-colors">
                           <ng-icon name="lucideTrash2" class="size-4" />
                           Excluir
                         </button>
@@ -151,6 +161,7 @@
   </div>
 </main>
 
+<!-- Slide-over Form -->
 @if (showForm()) {
   <div
     class="fixed inset-0 z-50 flex justify-end"
@@ -159,38 +170,38 @@
     (keydown.escape)="closeForm()"
     (click)="closeForm()"
   >
-    <div class="absolute inset-0 bg-black/50" tabindex="-1"></div>
+    <div class="absolute inset-0 bg-black/60" tabindex="-1"></div>
     <div
-      class="relative z-10 h-full w-full max-w-2xl overflow-y-auto p-6 shadow-xl"
+      class="relative z-10 h-full w-full max-w-2xl overflow-y-auto p-8 shadow-2xl"
       tabindex="-1"
       (click)="$event.stopPropagation()"
       (keydown.escape)="$event.stopPropagation()"
       style="background-color: hsl(0, 0%, 17%); color: hsl(0, 0%, 91%)"
     >
-      <div class="mb-6 flex items-center justify-between">
+      <div class="mb-8 flex items-center justify-between">
         <div>
           <h2 class="type-h3 text-[hsl(0,0%,91%)]">
             {{ editingId() ? 'Editar Imóvel' : 'Novo Imóvel' }}
           </h2>
-          <p class="type-small text-[hsl(0,0%,65%)] mt-1">Preencha os dados do imóvel abaixo.</p>
+          <p class="type-body text-[hsl(0,0%,65%)] mt-1">Preencha os dados do imóvel abaixo.</p>
         </div>
         <button
           (click)="closeForm()"
           aria-label="Fechar formulário"
-          class="rounded-full p-2 text-[hsl(0,0%,65%)] hover:bg-[hsl(0,0%,22%)] hover:text-[hsl(0,0%,91%)] transition-colors"
+          class="rounded-full p-2.5 text-[hsl(0,0%,65%)] hover:bg-[hsl(0,0%,22%)] hover:text-[hsl(0,0%,91%)] transition-colors"
         >
-          <ng-icon name="lucideX" class="size-4" />
+          <ng-icon name="lucideX" class="size-5" />
         </button>
       </div>
 
-      <form [formGroup]="form" (ngSubmit)="save()" class="space-y-4">
-        <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <form [formGroup]="form" (ngSubmit)="save()" class="space-y-5">
+        <div class="grid grid-cols-1 gap-5 md:grid-cols-2">
           <div class="space-y-2">
             <label for="crm-title" class="type-small text-[hsl(0,0%,65%)] font-medium">Título *</label>
             <input
               id="crm-title"
               formControlName="title"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
               placeholder="Apartamento Moderno"
             />
           </div>
@@ -200,7 +211,7 @@
             <input
               id="crm-slug"
               formControlName="slug"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
               placeholder="venda-apartamento-sp-100m2"
             />
           </div>
@@ -210,7 +221,7 @@
             <input
               id="crm-address"
               formControlName="address"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
               placeholder="Vila Madalena, São Paulo"
             />
           </div>
@@ -220,7 +231,7 @@
             <input
               id="crm-neighborhood"
               formControlName="neighborhood"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
               placeholder="Vila Madalena"
             />
           </div>
@@ -230,7 +241,7 @@
             <input
               id="crm-city"
               formControlName="city"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
               placeholder="São Paulo"
             />
           </div>
@@ -240,7 +251,7 @@
             <input
               id="crm-state"
               formControlName="state"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
               maxlength="2"
               placeholder="SP"
             />
@@ -252,19 +263,19 @@
               id="crm-price"
               type="number"
               formControlName="price"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
               placeholder="500000"
             />
           </div>
 
           <div class="space-y-2">
-            <label for="crm-type" class="type-small text-[hsl(0,0%,65%)] font-medium">Tipo *</label>
-            <div id="crm-type" class="flex gap-4 pt-2">
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input type="radio" value="sale" formControlName="type" class="accent-[hsl(0,0%,91%)]" />
+            <label for="crm-type-sale" class="type-small text-[hsl(0,0%,65%)] font-medium">Tipo *</label>
+            <div class="flex gap-4 pt-1">
+              <label class="flex items-center gap-2.5 cursor-pointer">
+                <input id="crm-type-sale" type="radio" value="sale" formControlName="type" class="accent-[hsl(0,0%,91%)]" />
                 <span class="type-small text-[hsl(0,0%,91%)]">À Venda</span>
               </label>
-              <label class="flex items-center gap-2 cursor-pointer">
+              <label class="flex items-center gap-2.5 cursor-pointer">
                 <input type="radio" value="rent" formControlName="type" class="accent-[hsl(0,0%,91%)]" />
                 <span class="type-small text-[hsl(0,0%,91%)]">Para Alugar</span>
               </label>
@@ -273,7 +284,7 @@
 
           <div class="space-y-2">
             <label for="crm-category" class="type-small text-[hsl(0,0%,65%)] font-medium">Categoria *</label>
-            <select id="crm-category" formControlName="category" class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]">
+            <select id="crm-category" formControlName="category" class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow">
               <option value="apartment">Apartamento</option>
               <option value="house">Casa</option>
               <option value="condo">Condomínio</option>
@@ -287,7 +298,7 @@
               id="crm-bedrooms"
               type="number"
               formControlName="bedrooms"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
             />
           </div>
 
@@ -297,7 +308,7 @@
               id="crm-bathrooms"
               type="number"
               formControlName="bathrooms"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
             />
           </div>
 
@@ -307,13 +318,13 @@
               id="crm-parking"
               type="number"
               formControlName="parkingSpots"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
             />
           </div>
 
           <div class="space-y-2">
             <label for="crm-area" class="type-small text-[hsl(0,0%,65%)] font-medium">Área (m²) *</label>
-            <input id="crm-area" type="number" formControlName="area" class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]" />
+            <input id="crm-area" type="number" formControlName="area" class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow" />
           </div>
 
           <div class="space-y-2">
@@ -323,7 +334,7 @@
               type="number"
               step="any"
               formControlName="lat"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
               placeholder="-23.5505"
             />
           </div>
@@ -335,7 +346,7 @@
               type="number"
               step="any"
               formControlName="lng"
-              class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
               placeholder="-46.6333"
             />
           </div>
@@ -346,11 +357,11 @@
           <input
             id="crm-imageUrl"
             formControlName="imageUrl"
-            class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)]"
+            class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
             placeholder="https://picsum.photos/seed/meuimovel/600/400"
           />
           @if (form.controls.imageUrl.value) {
-            <div class="mt-2 overflow-hidden rounded-2xl border border-[hsl(0,0%,25%)]">
+            <div class="mt-3 overflow-hidden rounded-2xl border border-[hsl(0,0%,25%)]">
               <img
                 [src]="form.controls.imageUrl.value"
                 alt="Preview"
@@ -368,7 +379,7 @@
           <textarea
             id="crm-images"
             formControlName="images"
-            class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)] min-h-[80px]"
+            class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow min-h-[80px]"
             rows="3"
             placeholder="https://picsum.photos/seed/img1/800/600&#10;https://picsum.photos/seed/img2/800/600"
           ></textarea>
@@ -379,14 +390,14 @@
           <textarea
             id="crm-description"
             formControlName="description"
-            class="w-full rounded-xl border px-4 py-2.5 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] focus:ring-[hsl(0,0%,65%)] min-h-[80px]"
+            class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow min-h-[80px]"
             rows="3"
             placeholder="Descreva o imóvel..."
           ></textarea>
         </div>
 
         <div class="flex gap-6">
-          <label for="crm-furnished" class="flex items-center gap-2 cursor-pointer text-sm text-[hsl(0,0%,91%)]">
+          <span class="flex items-center gap-2.5 text-sm text-[hsl(0,0%,91%)]">
             <button
               type="button"
               role="switch"
@@ -401,8 +412,8 @@
               ></span>
             </button>
             Mobiliado
-          </label>
-          <label for="crm-petFriendly" class="flex items-center gap-2 cursor-pointer text-sm text-[hsl(0,0%,91%)]">
+          </span>
+          <span class="flex items-center gap-2.5 text-sm text-[hsl(0,0%,91%)]">
             <button
               type="button"
               role="switch"
@@ -416,14 +427,14 @@
                 [class]="form.get('petFriendly')?.value ? 'translate-x-5 bg-[hsl(0,0%,13%)]' : 'translate-x-0 bg-[hsl(0,0%,65%)]'"
               ></span>
             </button>
-            Aceita pets
-          </label>
+            Pet Friendly
+          </span>
         </div>
       </form>
 
-      <div class="mt-6 flex justify-end gap-3 border-t border-[hsl(0,0%,25%)] pt-4">
-        <button type="button" (click)="closeForm()" class="rounded-full border px-5 py-2 text-sm text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)] transition-colors border-[hsl(0,0%,30%)]">Cancelar</button>
-        <button type="button" [disabled]="form.invalid" (click)="save()" class="rounded-full bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] px-5 py-2 text-sm font-medium hover:bg-[hsl(0,0%,80%)] transition-colors inline-flex items-center gap-2 disabled:opacity-50 disabled:pointer-events-none">
+      <div class="mt-8 flex justify-end gap-3 border-t border-[hsl(0,0%,25%)] pt-6">
+        <button type="button" (click)="closeForm()" class="rounded-full border border-[hsl(0,0%,30%)] px-6 py-2.5 text-sm font-medium text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)] transition-colors">Cancelar</button>
+        <button type="button" [disabled]="form.invalid" (click)="save()" class="rounded-full bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] px-6 py-2.5 text-sm font-semibold hover:bg-[hsl(0,0%,80%)] transition-colors inline-flex items-center gap-2 disabled:opacity-50 disabled:pointer-events-none">
           <ng-icon name="lucideCheck" class="size-4" />
           {{ editingId() ? 'Atualizar' : 'Criar' }}
         </button>
@@ -432,6 +443,7 @@
   </div>
 }
 
+<!-- Delete Modal -->
 @if (showDeleteDialog()) {
   <div
     class="fixed inset-0 z-50 flex items-end justify-center sm:items-center"
@@ -440,21 +452,21 @@
     (keydown.escape)="cancelDelete()"
     (click)="cancelDelete()"
   >
-    <div class="absolute inset-0 bg-black/50" tabindex="-1"></div>
+    <div class="absolute inset-0 bg-black/60" tabindex="-1"></div>
     <div
-      class="relative z-10 w-full max-w-md rounded-t-2xl p-6 shadow-xl sm:rounded-2xl"
+      class="relative z-10 w-full max-w-md rounded-t-2xl p-8 shadow-2xl sm:rounded-2xl"
       tabindex="-1"
       (click)="$event.stopPropagation()"
       (keydown.escape)="$event.stopPropagation()"
       style="background-color: hsl(0, 0%, 17%); color: hsl(0, 0%, 91%)"
     >
       <h2 class="type-h3 text-[hsl(0,0%,91%)]">Excluir Imóvel</h2>
-      <p class="type-body text-[hsl(0,0%,65%)] mt-2">
+      <p class="type-body text-[hsl(0,0%,65%)] mt-3">
         Tem certeza? Esta ação não pode ser desfeita.
       </p>
-      <div class="mt-6 flex justify-end gap-3">
-        <button (click)="cancelDelete()" class="rounded-full border px-5 py-2 text-sm text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)] transition-colors border-[hsl(0,0%,30%)]">Cancelar</button>
-        <button (click)="doDelete()" class="rounded-full bg-red-600 px-5 py-2 text-sm text-white hover:bg-red-700 transition-colors inline-flex items-center gap-2">
+      <div class="mt-8 flex justify-end gap-3">
+        <button (click)="cancelDelete()" class="rounded-full border border-[hsl(0,0%,30%)] px-6 py-2.5 text-sm font-medium text-[hsl(0,0%,91%)] hover:bg-[hsl(0,0%,22%)] transition-colors">Cancelar</button>
+        <button (click)="doDelete()" class="rounded-full bg-red-600 px-6 py-2.5 text-sm font-semibold text-white hover:bg-red-700 transition-colors inline-flex items-center gap-2">
           <ng-icon name="lucideTrash2" class="size-4" />
           Excluir
         </button>

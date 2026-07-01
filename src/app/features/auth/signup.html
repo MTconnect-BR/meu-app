@@ -1,81 +1,90 @@
 <main
-  class="flex flex-1 items-center justify-center px-6 py-20"
+  class="flex flex-1 flex-col items-center justify-center px-6 py-20"
   style="background-color: hsl(0, 0%, 13%); color: hsl(0, 0%, 91%)"
 >
-  <div class="w-full max-w-md rounded-2xl border border-[hsl(0,0%,25%)] bg-[hsl(0,0%,17%)] shadow-lg">
-    <div class="p-8 pb-0">
-      <h2 class="type-h2 text-[hsl(0,0%,91%)]">Criar conta</h2>
-      <p class="type-body text-[hsl(0,0%,65%)] mt-2">Crie uma nova conta</p>
+  <div class="w-full max-w-xl space-y-10">
+    <div class="space-y-3">
+      <h1 class="type-h1 text-[hsl(0,0%,91%)]">Criar conta</h1>
+      <p class="type-lead text-[hsl(0,0%,65%)]">Preencha os dados para começar a gerenciar seus imóveis</p>
     </div>
-    <div class="p-8 pt-6">
-      <form [formGroup]="form" (ngSubmit)="submit()">
-        <div class="space-y-5">
-          @if (errorMessage) {
-            <p class="type-caption text-red-400">{{ errorMessage }}</p>
+
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <div class="space-y-6">
+        @if (errorMessage) {
+          <div class="rounded-xl border border-red-500/30 bg-red-500/10 p-4">
+            <p class="type-small text-red-400">{{ errorMessage }}</p>
+          </div>
+        }
+
+        <div class="space-y-2">
+          <label for="signup-email" class="type-small text-[hsl(0,0%,65%)] font-medium">Email</label>
+          <input
+            id="signup-email"
+            type="email"
+            placeholder="m@exemplo.com"
+            formControlName="email"
+            class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3.5 text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
+          />
+          @if (form.get('email')?.invalid && form.get('email')?.touched) {
+            @if (form.get('email')?.errors?.['required']) {
+              <p class="type-caption text-red-400">Email é obrigatório.</p>
+            }
+            @if (form.get('email')?.errors?.['email']) {
+              <p class="type-caption text-red-400">Digite um email válido.</p>
+            }
           }
-          <div class="space-y-2">
-            <label for="signup-email" class="type-small text-[hsl(0,0%,65%)] font-medium">Email</label>
-            <input
-              id="signup-email"
-              type="email"
-              placeholder="m@exemplo.com"
-              formControlName="email"
-              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
-            />
-            @if (form.get('email')?.invalid && form.get('email')?.touched) {
-              @if (form.get('email')?.errors?.['required']) {
-                <p class="type-caption text-red-400">Email é obrigatório.</p>
-              }
-              @if (form.get('email')?.errors?.['email']) {
-                <p class="type-caption text-red-400">Digite um email válido.</p>
-              }
-            }
-          </div>
-          <div class="space-y-2">
-            <label for="signup-password" class="type-small text-[hsl(0,0%,65%)] font-medium">Senha</label>
-            <input
-              id="signup-password"
-              type="password"
-              placeholder="••••••••"
-              formControlName="password"
-              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
-            />
-            @if (form.get('password')?.invalid && form.get('password')?.touched) {
-              @if (form.get('password')?.errors?.['required']) {
-                <p class="type-caption text-red-400">Senha é obrigatória.</p>
-              }
-              @if (form.get('password')?.errors?.['minlength']) {
-                <p class="type-caption text-red-400">A senha deve ter pelo menos 6 caracteres.</p>
-              }
-            }
-          </div>
-          <div class="space-y-2">
-            <label for="signup-confirm-password" class="type-small text-[hsl(0,0%,65%)] font-medium">Confirmar senha</label>
-            <input
-              id="signup-confirm-password"
-              type="password"
-              placeholder="••••••••"
-              formControlName="confirmPassword"
-              class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3 text-sm text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
-            />
-            @if (form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched) {
-              @if (form.get('confirmPassword')?.errors?.['required']) {
-                <p class="type-caption text-red-400">Por favor, confirme sua senha.</p>
-              }
-            }
-            @if (form.get('confirmPassword')?.touched && form.errors?.['passwordMismatch'] && !form.get('confirmPassword')?.errors?.['required']) {
-              <p class="type-caption text-red-400">As senhas não coincidem.</p>
-            }
-          </div>
-          <button type="submit" class="w-full rounded-full bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] px-6 py-3 text-sm font-medium hover:bg-[hsl(0,0%,80%)] transition-colors">Criar conta</button>
         </div>
-      </form>
-    </div>
-    <div class="border-t border-[hsl(0,0%,25%)] px-8 py-4">
-      <p class="type-small text-[hsl(0,0%,65%)]">
-        Já tem uma conta?
-        <a routerLink="/auth/login" class="text-[hsl(0,0%,91%)] font-medium hover:underline"> Entrar </a>
-      </p>
-    </div>
+
+        <div class="space-y-2">
+          <label for="signup-password" class="type-small text-[hsl(0,0%,65%)] font-medium">Senha</label>
+          <input
+            id="signup-password"
+            type="password"
+            placeholder="••••••••"
+            formControlName="password"
+            class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3.5 text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
+          />
+          @if (form.get('password')?.invalid && form.get('password')?.touched) {
+            @if (form.get('password')?.errors?.['required']) {
+              <p class="type-caption text-red-400">Senha é obrigatória.</p>
+            }
+            @if (form.get('password')?.errors?.['minlength']) {
+              <p class="type-caption text-red-400">A senha deve ter pelo menos 6 caracteres.</p>
+            }
+          }
+        </div>
+
+        <div class="space-y-2">
+          <label for="signup-confirm-password" class="type-small text-[hsl(0,0%,65%)] font-medium">Confirmar senha</label>
+          <input
+            id="signup-confirm-password"
+            type="password"
+            placeholder="••••••••"
+            formControlName="confirmPassword"
+            class="w-full rounded-xl border border-[hsl(0,0%,30%)] bg-[hsl(0,0%,22%)] px-4 py-3.5 text-[hsl(0,0%,91%)] placeholder:text-[hsl(0,0%,50%)] focus:outline-none focus:ring-2 focus:ring-[hsl(0,0%,65%)] transition-shadow"
+          />
+          @if (form.get('confirmPassword')?.invalid && form.get('confirmPassword')?.touched) {
+            @if (form.get('confirmPassword')?.errors?.['required']) {
+              <p class="type-caption text-red-400">Por favor, confirme sua senha.</p>
+            }
+          }
+          @if (form.get('confirmPassword')?.touched && form.errors?.['passwordMismatch'] && !form.get('confirmPassword')?.errors?.['required']) {
+            <p class="type-caption text-red-400">As senhas não coincidem.</p>
+          }
+        </div>
+
+        <button
+          type="submit"
+          class="w-full rounded-full bg-[hsl(0,0%,91%)] text-[hsl(0,0%,13%)] px-6 py-3.5 text-sm font-semibold hover:bg-[hsl(0,0%,80%)] transition-colors"
+        >
+          Criar conta
+        </button>
+      </div>
+    </form>
+
+    <p class="type-body text-[hsl(0,0%,65%)]">
+      Já tem uma conta?
+      <a routerLink="/login" class="type-small text-[hsl(0,0%,91%)] font-semibold hover:underline">Entrar</a>
+    </p>
   </div>
 </main>
