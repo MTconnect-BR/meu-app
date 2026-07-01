@@ -276,13 +276,13 @@
       (click)="toggleFaq()"
       [attr.aria-expanded]="faqOpen()"
       aria-haspopup="dialog">
-      <span class="faq-filters_toggle_select max-md:hidden">
+      <span class="faq-filters_toggle_select faq-filters_toggle_select--desktop">
         <span class="faq-filters_toggle_label">Perguntas Frequentes <sup>{{ faqs.length }}</sup></span>
         <span class="faq-filters_toggle_select_icon">
           <ng-icon name="lucideChevronDown" class="size-4" />
         </span>
       </span>
-      <span class="faq-filters_toggle_select md:hidden">
+      <span class="faq-filters_toggle_select faq-filters_toggle_select--mobile">
         <span class="faq-filters_toggle_label">Perguntas Frequentes</span>
         <span class="faq-filters_toggle_select_icon">
           <ng-icon name="lucideChevronDown" class="size-4" />

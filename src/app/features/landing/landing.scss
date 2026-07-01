@@ -75,6 +75,18 @@
   border-radius: 8px;
 }
 
+.faq-filters_toggle_select--desktop {
+  @media (max-width: 47.999rem) {
+    display: none;
+  }
+}
+
+.faq-filters_toggle_select--mobile {
+  @media (min-width: 48rem) {
+    display: none;
+  }
+}
+
 .faq-filters_toggle_label {
   width: calc(100% - 40px);
   min-width: 0;
