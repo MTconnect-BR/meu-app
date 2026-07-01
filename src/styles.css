@@ -225,6 +225,8 @@ body {
   font-feature-settings: var(--features-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: hsl(0, 0%, 13%);
+  color: hsl(0, 0%, 91%);
 }
 
 /* =============================================
