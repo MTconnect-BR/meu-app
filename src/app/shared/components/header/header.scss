@@ -7,7 +7,7 @@
   width: 40px;
   height: 40px;
   border-radius: 100%;
-  background-color: #8ED462;
+  background-color: #8ed462;
   transition: transform 0.4s cubic-bezier(0.17, 0.67, 0.3, 1.33);
 }
 
@@ -41,8 +41,9 @@
   height: 2px;
   background-color: #000;
   border-radius: 1px;
-  transition: transform 0.4s cubic-bezier(0.17, 0.67, 0.3, 1.33),
-              opacity 0.1s ease;
+  transition:
+    transform 0.4s cubic-bezier(0.17, 0.67, 0.3, 1.33),
+    opacity 0.1s ease;
 }
 
 /* Default lines (hamburger) */
@@ -110,16 +111,18 @@
   opacity: 0;
   visibility: hidden;
   will-change: transform, opacity;
-  transition: transform 0.4s cubic-bezier(0.17, 0.67, 0.3, 1.33) 0.1s,
-              opacity 0.3s cubic-bezier(0.5, 0, 0, 1) 0.1s;
+  transition:
+    transform 0.4s cubic-bezier(0.17, 0.67, 0.3, 1.33) 0.1s,
+    opacity 0.3s cubic-bezier(0.5, 0, 0, 1) 0.1s;
 }
 
 .menu-panel.is-open {
   transform: translateX(0);
   opacity: 1;
   visibility: visible;
-  transition: transform 0.4s cubic-bezier(0.17, 0.67, 0.3, 1.33),
-              opacity 0.3s cubic-bezier(0.5, 0, 0, 1);
+  transition:
+    transform 0.4s cubic-bezier(0.17, 0.67, 0.3, 1.33),
+    opacity 0.3s cubic-bezier(0.5, 0, 0, 1);
 }
 
 .menu-panel_inner {
@@ -171,7 +174,7 @@
 .menu-nav_label {
   font-size: clamp(1.5rem, 1.2826rem + 1.087vw, 2.125rem);
   font-family: var(--font-sans, 'Inter', sans-serif);
-  letter-spacing: -.06em;
+  letter-spacing: -0.06em;
   font-weight: 500;
   line-height: 1.2;
   color: #2c2e2a;
@@ -182,8 +185,9 @@
   opacity: 0;
   transform: translateY(16px);
   will-change: transform, opacity;
-  transition: opacity 0.3s cubic-bezier(0.5, 0, 0, 1),
-              transform 0.4s cubic-bezier(0.17, 0.67, 0.3, 1.33);
+  transition:
+    opacity 0.3s cubic-bezier(0.5, 0, 0, 1),
+    transform 0.4s cubic-bezier(0.17, 0.67, 0.3, 1.33);
   transition-delay: 0s;
 }
 
@@ -223,7 +227,9 @@
   text-decoration: none;
   cursor: pointer;
   border: none;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .menu-cta_link:hover,
@@ -235,7 +241,7 @@
 .menu-cta_label {
   font-size: clamp(1.1rem, 1rem + 0.5vw, 1.25rem);
   font-family: var(--font-sans, 'Inter', sans-serif);
-  letter-spacing: -.04em;
+  letter-spacing: -0.04em;
   font-weight: 500;
   color: #2c2e2a;
 }

@@ -36,9 +36,7 @@ import { provideVercelAnalytics } from './analytics';
 export const appConfig: ApplicationConfig = {
   providers: [
     provideBrowserGlobalErrorListeners(),
-    importProvidersFrom(
-      RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled' }),
-    ),
+    importProvidersFrom(RouterModule.forRoot(routes, { scrollPositionRestoration: 'disabled' })),
     provideClientHydration(),
     provideAnimationsAsync(),
     provideSpartanHlm(),

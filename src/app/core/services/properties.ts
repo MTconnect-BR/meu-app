@@ -13,11 +13,12 @@ export class PropertiesService {
   public readonly selectedTypes = signal<string[]>([]);
   public readonly selectedAmenities = signal<string[]>([]);
 
-  public readonly activeFilterCount = computed(() =>
-    this.selectedTypes().length + this.selectedAmenities().length
+  public readonly activeFilterCount = computed(
+    () => this.selectedTypes().length + this.selectedAmenities().length,
   );
 
-  private readonly _description = 'Este imóvel impressionante oferece um espaço moderno e confortável com acabamentos de primeira. Localizado em uma área privilegiada com fácil acesso a restaurantes, lojas e transporte público. O imóvel possui amplos cômodos, abundância de luz natural e uma distribuição funcional perfeita para famílias ou profissionais.';
+  private readonly _description =
+    'Este imóvel impressionante oferece um espaço moderno e confortável com acabamentos de primeira. Localizado em uma área privilegiada com fácil acesso a restaurantes, lojas e transporte público. O imóvel possui amplos cômodos, abundância de luz natural e uma distribuição funcional perfeita para famílias ou profissionais.';
 
   public readonly mockProperties: Property[] = [
     {
@@ -36,7 +37,12 @@ export class PropertiesService {
       parkingSpots: 2,
       area: 120,
       imageUrl: 'https://picsum.photos/seed/apt1/600/400',
-      images: ['https://picsum.photos/seed/apt1a/800/600', 'https://picsum.photos/seed/apt1b/800/600', 'https://picsum.photos/seed/apt1c/800/600', 'https://picsum.photos/seed/apt1d/800/600'],
+      images: [
+        'https://picsum.photos/seed/apt1a/800/600',
+        'https://picsum.photos/seed/apt1b/800/600',
+        'https://picsum.photos/seed/apt1c/800/600',
+        'https://picsum.photos/seed/apt1d/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: false,
@@ -59,7 +65,11 @@ export class PropertiesService {
       parkingSpots: 0,
       area: 45,
       imageUrl: 'https://picsum.photos/seed/studio2/600/400',
-      images: ['https://picsum.photos/seed/studio2a/800/600', 'https://picsum.photos/seed/studio2b/800/600', 'https://picsum.photos/seed/studio2c/800/600'],
+      images: [
+        'https://picsum.photos/seed/studio2a/800/600',
+        'https://picsum.photos/seed/studio2b/800/600',
+        'https://picsum.photos/seed/studio2c/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: true,
@@ -82,7 +92,13 @@ export class PropertiesService {
       parkingSpots: 3,
       area: 250,
       imageUrl: 'https://picsum.photos/seed/house3/600/400',
-      images: ['https://picsum.photos/seed/house3a/800/600', 'https://picsum.photos/seed/house3b/800/600', 'https://picsum.photos/seed/house3c/800/600', 'https://picsum.photos/seed/house3d/800/600', 'https://picsum.photos/seed/house3e/800/600'],
+      images: [
+        'https://picsum.photos/seed/house3a/800/600',
+        'https://picsum.photos/seed/house3b/800/600',
+        'https://picsum.photos/seed/house3c/800/600',
+        'https://picsum.photos/seed/house3d/800/600',
+        'https://picsum.photos/seed/house3e/800/600',
+      ],
       description: this._description,
       furnished: false,
       petFriendly: true,
@@ -105,7 +121,11 @@ export class PropertiesService {
       parkingSpots: 2,
       area: 95,
       imageUrl: 'https://picsum.photos/seed/penthouse4/600/400',
-      images: ['https://picsum.photos/seed/penthouse4a/800/600', 'https://picsum.photos/seed/penthouse4b/800/600', 'https://picsum.photos/seed/penthouse4c/800/600'],
+      images: [
+        'https://picsum.photos/seed/penthouse4a/800/600',
+        'https://picsum.photos/seed/penthouse4b/800/600',
+        'https://picsum.photos/seed/penthouse4c/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: false,
@@ -128,7 +148,11 @@ export class PropertiesService {
       parkingSpots: 1,
       area: 75,
       imageUrl: 'https://picsum.photos/seed/condo5/600/400',
-      images: ['https://picsum.photos/seed/condo5a/800/600', 'https://picsum.photos/seed/condo5b/800/600', 'https://picsum.photos/seed/condo5c/800/600'],
+      images: [
+        'https://picsum.photos/seed/condo5a/800/600',
+        'https://picsum.photos/seed/condo5b/800/600',
+        'https://picsum.photos/seed/condo5c/800/600',
+      ],
       description: this._description,
       furnished: false,
       petFriendly: false,
@@ -151,7 +175,11 @@ export class PropertiesService {
       parkingSpots: 1,
       area: 60,
       imageUrl: 'https://picsum.photos/seed/loft6/600/400',
-      images: ['https://picsum.photos/seed/loft6a/800/600', 'https://picsum.photos/seed/loft6b/800/600', 'https://picsum.photos/seed/loft6c/800/600'],
+      images: [
+        'https://picsum.photos/seed/loft6a/800/600',
+        'https://picsum.photos/seed/loft6b/800/600',
+        'https://picsum.photos/seed/loft6c/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: true,
@@ -174,7 +202,12 @@ export class PropertiesService {
       parkingSpots: 4,
       area: 350,
       imageUrl: 'https://picsum.photos/seed/villa7/600/400',
-      images: ['https://picsum.photos/seed/villa7a/800/600', 'https://picsum.photos/seed/villa7b/800/600', 'https://picsum.photos/seed/villa7c/800/600', 'https://picsum.photos/seed/villa7d/800/600'],
+      images: [
+        'https://picsum.photos/seed/villa7a/800/600',
+        'https://picsum.photos/seed/villa7b/800/600',
+        'https://picsum.photos/seed/villa7c/800/600',
+        'https://picsum.photos/seed/villa7d/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: true,
@@ -197,7 +230,10 @@ export class PropertiesService {
       parkingSpots: 0,
       area: 35,
       imageUrl: 'https://picsum.photos/seed/apt8/600/400',
-      images: ['https://picsum.photos/seed/apt8a/800/600', 'https://picsum.photos/seed/apt8b/800/600'],
+      images: [
+        'https://picsum.photos/seed/apt8a/800/600',
+        'https://picsum.photos/seed/apt8b/800/600',
+      ],
       description: this._description,
       furnished: false,
       petFriendly: false,
@@ -220,7 +256,11 @@ export class PropertiesService {
       parkingSpots: 1,
       area: 40,
       imageUrl: 'https://picsum.photos/seed/loft9/600/400',
-      images: ['https://picsum.photos/seed/loft9a/800/600', 'https://picsum.photos/seed/loft9b/800/600', 'https://picsum.photos/seed/loft9c/800/600'],
+      images: [
+        'https://picsum.photos/seed/loft9a/800/600',
+        'https://picsum.photos/seed/loft9b/800/600',
+        'https://picsum.photos/seed/loft9c/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: false,
@@ -243,7 +283,12 @@ export class PropertiesService {
       parkingSpots: 2,
       area: 180,
       imageUrl: 'https://picsum.photos/seed/house10/600/400',
-      images: ['https://picsum.photos/seed/house10a/800/600', 'https://picsum.photos/seed/house10b/800/600', 'https://picsum.photos/seed/house10c/800/600', 'https://picsum.photos/seed/house10d/800/600'],
+      images: [
+        'https://picsum.photos/seed/house10a/800/600',
+        'https://picsum.photos/seed/house10b/800/600',
+        'https://picsum.photos/seed/house10c/800/600',
+        'https://picsum.photos/seed/house10d/800/600',
+      ],
       description: this._description,
       furnished: false,
       petFriendly: true,
@@ -266,7 +311,11 @@ export class PropertiesService {
       parkingSpots: 1,
       area: 80,
       imageUrl: 'https://picsum.photos/seed/flat11/600/400',
-      images: ['https://picsum.photos/seed/flat11a/800/600', 'https://picsum.photos/seed/flat11b/800/600', 'https://picsum.photos/seed/flat11c/800/600'],
+      images: [
+        'https://picsum.photos/seed/flat11a/800/600',
+        'https://picsum.photos/seed/flat11b/800/600',
+        'https://picsum.photos/seed/flat11c/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: false,
@@ -289,7 +338,11 @@ export class PropertiesService {
       parkingSpots: 2,
       area: 200,
       imageUrl: 'https://picsum.photos/seed/colonial12/600/400',
-      images: ['https://picsum.photos/seed/colonial12a/800/600', 'https://picsum.photos/seed/colonial12b/800/600', 'https://picsum.photos/seed/colonial12c/800/600'],
+      images: [
+        'https://picsum.photos/seed/colonial12a/800/600',
+        'https://picsum.photos/seed/colonial12b/800/600',
+        'https://picsum.photos/seed/colonial12c/800/600',
+      ],
       description: this._description,
       furnished: false,
       petFriendly: true,
@@ -312,7 +365,11 @@ export class PropertiesService {
       parkingSpots: 1,
       area: 50,
       imageUrl: 'https://picsum.photos/seed/beach13/600/400',
-      images: ['https://picsum.photos/seed/beach13a/800/600', 'https://picsum.photos/seed/beach13b/800/600', 'https://picsum.photos/seed/beach13c/800/600'],
+      images: [
+        'https://picsum.photos/seed/beach13a/800/600',
+        'https://picsum.photos/seed/beach13b/800/600',
+        'https://picsum.photos/seed/beach13c/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: false,
@@ -335,7 +392,12 @@ export class PropertiesService {
       parkingSpots: 2,
       area: 150,
       imageUrl: 'https://picsum.photos/seed/penthouse14/600/400',
-      images: ['https://picsum.photos/seed/penthouse14a/800/600', 'https://picsum.photos/seed/penthouse14b/800/600', 'https://picsum.photos/seed/penthouse14c/800/600', 'https://picsum.photos/seed/penthouse14d/800/600'],
+      images: [
+        'https://picsum.photos/seed/penthouse14a/800/600',
+        'https://picsum.photos/seed/penthouse14b/800/600',
+        'https://picsum.photos/seed/penthouse14c/800/600',
+        'https://picsum.photos/seed/penthouse14d/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: true,
@@ -358,7 +420,10 @@ export class PropertiesService {
       parkingSpots: 0,
       area: 15,
       imageUrl: 'https://picsum.photos/seed/room15/600/400',
-      images: ['https://picsum.photos/seed/room15a/800/600', 'https://picsum.photos/seed/room15b/800/600'],
+      images: [
+        'https://picsum.photos/seed/room15a/800/600',
+        'https://picsum.photos/seed/room15b/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: false,
@@ -381,7 +446,11 @@ export class PropertiesService {
       parkingSpots: 1,
       area: 90,
       imageUrl: 'https://picsum.photos/seed/newapt16/600/400',
-      images: ['https://picsum.photos/seed/newapt16a/800/600', 'https://picsum.photos/seed/newapt16b/800/600', 'https://picsum.photos/seed/newapt16c/800/600'],
+      images: [
+        'https://picsum.photos/seed/newapt16a/800/600',
+        'https://picsum.photos/seed/newapt16b/800/600',
+        'https://picsum.photos/seed/newapt16c/800/600',
+      ],
       description: this._description,
       furnished: false,
       petFriendly: true,
@@ -404,7 +473,10 @@ export class PropertiesService {
       parkingSpots: 1,
       area: 42,
       imageUrl: 'https://picsum.photos/seed/studio17/600/400',
-      images: ['https://picsum.photos/seed/studio17a/800/600', 'https://picsum.photos/seed/studio17b/800/600'],
+      images: [
+        'https://picsum.photos/seed/studio17a/800/600',
+        'https://picsum.photos/seed/studio17b/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: false,
@@ -427,7 +499,12 @@ export class PropertiesService {
       parkingSpots: 3,
       area: 300,
       imageUrl: 'https://picsum.photos/seed/country18/600/400',
-      images: ['https://picsum.photos/seed/country18a/800/600', 'https://picsum.photos/seed/country18b/800/600', 'https://picsum.photos/seed/country18c/800/600', 'https://picsum.photos/seed/country18d/800/600'],
+      images: [
+        'https://picsum.photos/seed/country18a/800/600',
+        'https://picsum.photos/seed/country18b/800/600',
+        'https://picsum.photos/seed/country18c/800/600',
+        'https://picsum.photos/seed/country18d/800/600',
+      ],
       description: this._description,
       furnished: true,
       petFriendly: true,
@@ -450,7 +527,11 @@ export class PropertiesService {
       parkingSpots: 1,
       area: 70,
       imageUrl: 'https://picsum.photos/seed/minimal19/600/400',
-      images: ['https://picsum.photos/seed/minimal19a/800/600', 'https://picsum.photos/seed/minimal19b/800/600', 'https://picsum.photos/seed/minimal19c/800/600'],
+      images: [
+        'https://picsum.photos/seed/minimal19a/800/600',
+        'https://picsum.photos/seed/minimal19b/800/600',
+        'https://picsum.photos/seed/minimal19c/800/600',
+      ],
       description: this._description,
       furnished: false,
       petFriendly: false,
@@ -473,7 +554,11 @@ export class PropertiesService {
       parkingSpots: 2,
       area: 110,
       imageUrl: 'https://picsum.photos/seed/waterfront20/600/400',
-      images: ['https://picsum.photos/seed/waterfront20a/800/600', 'https://picsum.photos/seed/waterfront20b/800/600', 'https://picsum.photos/seed/waterfront20c/800/600'],
+      images: [
+        'https://picsum.photos/seed/waterfront20a/800/600',
+        'https://picsum.photos/seed/waterfront20b/800/600',
+        'https://picsum.photos/seed/waterfront20c/800/600',
+      ],
       description: this._description,
       furnished: false,
       petFriendly: true,
@@ -561,7 +646,8 @@ export class PropertiesService {
       if (selectedAmenities.includes('petFriendly') && !p.petFriendly) return false;
       if (selectedAmenities.includes('parking') && p.parkingSpots === 0) return false;
       if (q) {
-        if (!p.title.toLowerCase().includes(q) && !p.address.toLowerCase().includes(q)) return false;
+        if (!p.title.toLowerCase().includes(q) && !p.address.toLowerCase().includes(q))
+          return false;
       }
       return true;
     });

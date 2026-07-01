@@ -1,14 +1,15 @@
 <main class="flex flex-1 flex-col">
-
   <!-- Hero Section — MindMarket style -->
-  <section class="sticky relative top-0 min-h-dvh overflow-hidden px-6 pb-0 lg:min-h-[130vh]" style="background-color: hsl(46, 46%, 93%);">
+  <section
+    class="relative sticky top-0 min-h-dvh overflow-hidden px-6 pb-0 lg:min-h-[130vh]"
+    style="background-color: hsl(46, 46%, 93%)"
+  >
     <!-- Shadow overlay — darkens as content scrolls over hero -->
     <div #heroOverlay class="pointer-events-none absolute inset-0 z-20"></div>
     <div class="flex h-dvh flex-col items-center justify-center">
       <!-- Headline -->
       <div class="relative z-10 space-y-4 text-center">
-        <h1 class="mx-auto max-w-4xl text-4xl font-black leading-[0.95] tracking-tight sm:text-5xl md:text-6xl lg:text-6xl"
-            [style.color]="'hsl(0, 0%, 13%)'">
+        <h1 class="type-h1 mx-auto max-w-4xl" [style.color]="'hsl(0, 0%, 13%)'">
           Encontre o imóvel
           <br />
           <span [style.color]="'hsl(0, 0%, 13%)'">perfeito</span>
@@ -17,160 +18,199 @@
 
       <!-- Subtitle -->
       <div class="relative z-10 mt-4 text-center">
-        <p class="text-base font-medium sm:text-lg md:text-xl lg:text-2xl" [style.color]="'hsl(0, 0%, 40%)'">
-          Seu novo lar começa aqui
-        </p>
+        <p class="type-lead" [style.color]="'hsl(0, 0%, 40%)'">Seu novo lar começa aqui</p>
       </div>
 
       <!-- Search Card — ZAP Imóveis style -->
       <div class="relative z-10 mt-8 w-full max-w-2xl">
-      <div class="rounded-2xl p-5 shadow-2xl sm:p-6" [style.background-color]="'hsl(0, 0%, 13%)'">
-        <!-- Tabs -->
-        <div class="mb-4 flex gap-1 rounded-lg p-1 sm:mb-5" [style.background-color]="'hsl(0, 0%, 18%)'">
-          <button
-            class="flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-all sm:px-4 sm:py-2.5"
-            [style]="searchType() === 'buy'
-              ? 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 91%); box-shadow: 0 1px 3px rgba(0,0,0,0.3);'
-              : 'background-color: transparent; color: hsl(0, 0%, 63%);'"
-            (click)="searchType.set('buy')"
+        <div class="rounded-2xl p-5 shadow-2xl sm:p-6" [style.background-color]="'hsl(0, 0%, 13%)'">
+          <!-- Tabs -->
+          <div
+            class="mb-4 flex gap-1 rounded-lg p-1 sm:mb-5"
+            [style.background-color]="'hsl(0, 0%, 18%)'"
           >
-            Comprar
-          </button>
-          <button
-            class="flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-all sm:px-4 sm:py-2.5"
-            [style]="searchType() === 'rent'
-              ? 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 91%); box-shadow: 0 1px 3px rgba(0,0,0,0.3);'
-              : 'background-color: transparent; color: hsl(0, 0%, 63%);'"
-            (click)="searchType.set('rent')"
-          >
-            Alugar
-          </button>
-        </div>
-
-        <!-- Search Input -->
-        <div class="mb-4 flex items-center gap-3 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3" [style.background-color]="'hsl(0, 0%, 18%)'">
-          <ng-icon name="lucideSearch" class="size-5 shrink-0" [style.color]="'hsl(0, 0%, 63%)'" />
-          <input
-            type="text"
-            [value]="searchQuery()"
-            (input)="searchQuery.set($any($event.target).value)"
-            placeholder="Bairro, cidade ou endereço"
-            class="w-full bg-transparent text-sm outline-none" [style.color]="'hsl(0, 0%, 91%)'"
-          />
-        </div>
-
-        <!-- Bottom row: filter dropdown + search button -->
-        <div class="flex items-center gap-3">
-          <div class="relative flex-1">
             <button
-              type="button"
-              class="hero-filter_toggle"
-              [class.is-open]="filterOpen()"
-              (click)="toggleFilter()">
-              <span class="flex items-center gap-2">
-                <ng-icon name="lucideSlidersHorizontal" class="size-4" [style.color]="'hsl(0, 0%, 63%)'" />
-                {{ activeFilterLabel() }}
-              </span>
-              <ng-icon name="lucideChevronUp" class="size-4 shrink-0 transition-transform duration-200"
-                [class.rotate-180]="filterOpen()" [style.color]="'hsl(0, 0%, 63%)'" />
+              class="flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-all sm:px-4 sm:py-2.5"
+              [style]="
+                searchType() === 'buy'
+                  ? 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 91%); box-shadow: 0 1px 3px rgba(0,0,0,0.3);'
+                  : 'background-color: transparent; color: hsl(0, 0%, 63%);'
+              "
+              (click)="searchType.set('buy')"
+            >
+              Comprar
             </button>
-
-            @if (filterOpen()) {
-              <div class="hero-filter_backdrop" (click)="filterOpen.set(false)" (keyup.escape)="filterOpen.set(false)" tabindex="-1" role="presentation"></div>
-            }
-
-            <div class="hero-filter_panel" [class.is-open]="filterOpen()">
-              <div class="hero-filter_group">
-                <span class="hero-filter_label">Tipo de imóvel</span>
-                @for (type of propertyTypes; track type.value; let i = $index) {
-                  <label class="hero-filter_item" [style.--index]="i">
-                    <input type="checkbox" class="hero-filter_input"
-                      [checked]="isTypeSelected(type.value)"
-                      (change)="toggleType(type.value)" />
-                    <span class="hero-filter_checkbox"></span>
-                    <span>{{ type.label }}</span>
-                  </label>
-                }
-              </div>
-
-              <div class="hero-filter_separator"></div>
-
-              <div class="hero-filter_group">
-                <span class="hero-filter_label">Comodidades</span>
-                @for (amenity of amenityTypes; track amenity.value; let i = $index) {
-                  <label class="hero-filter_item" [style.--index]="i + propertyTypes.length">
-                    <input type="checkbox" class="hero-filter_input"
-                      [checked]="isAmenitySelected(amenity.value)"
-                      (change)="toggleAmenity(amenity.value)" />
-                    <span class="hero-filter_checkbox"></span>
-                    <span>{{ amenity.label }}</span>
-                  </label>
-                }
-              </div>
-
-              <div class="hero-filter_separator"></div>
-
-              <button class="hero-filter_apply" (click)="applyFilters(); filterOpen.set(false)">
-                Aplicar filtro
-              </button>
-            </div>
+            <button
+              class="flex-1 rounded-md px-3 py-2 text-sm font-semibold transition-all sm:px-4 sm:py-2.5"
+              [style]="
+                searchType() === 'rent'
+                  ? 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 91%); box-shadow: 0 1px 3px rgba(0,0,0,0.3);'
+                  : 'background-color: transparent; color: hsl(0, 0%, 63%);'
+              "
+              (click)="searchType.set('rent')"
+            >
+              Alugar
+            </button>
           </div>
-          <button
-            (click)="onSearch()"
-            class="flex items-center gap-2 whitespace-nowrap rounded-xl px-4 py-2.5 text-sm font-semibold transition-colors sm:px-6 sm:py-3"
-            [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'"
+
+          <!-- Search Input -->
+          <div
+            class="mb-4 flex items-center gap-3 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3"
+            [style.background-color]="'hsl(0, 0%, 18%)'"
           >
-            <ng-icon name="lucideSearch" class="size-4" />
-            Buscar
-          </button>
+            <ng-icon
+              name="lucideSearch"
+              class="size-5 shrink-0"
+              [style.color]="'hsl(0, 0%, 63%)'"
+            />
+            <input
+              type="text"
+              [value]="searchQuery()"
+              (input)="searchQuery.set($any($event.target).value)"
+              placeholder="Bairro, cidade ou endereço"
+              class="w-full bg-transparent text-sm outline-none"
+              [style.color]="'hsl(0, 0%, 91%)'"
+            />
+          </div>
+
+          <!-- Bottom row: filter dropdown + search button -->
+          <div class="flex items-center gap-3">
+            <div class="relative flex-1">
+              <button
+                type="button"
+                class="hero-filter_toggle"
+                [class.is-open]="filterOpen()"
+                (click)="toggleFilter()"
+              >
+                <span class="flex items-center gap-2">
+                  <ng-icon
+                    name="lucideSlidersHorizontal"
+                    class="size-4"
+                    [style.color]="'hsl(0, 0%, 63%)'"
+                  />
+                  {{ activeFilterLabel() }}
+                </span>
+                <ng-icon
+                  name="lucideChevronUp"
+                  class="size-4 shrink-0 transition-transform duration-200"
+                  [class.rotate-180]="filterOpen()"
+                  [style.color]="'hsl(0, 0%, 63%)'"
+                />
+              </button>
+
+              @if (filterOpen()) {
+                <div
+                  class="hero-filter_backdrop"
+                  (click)="filterOpen.set(false)"
+                  (keyup.escape)="filterOpen.set(false)"
+                  tabindex="-1"
+                  role="presentation"
+                ></div>
+              }
+
+              <div class="hero-filter_panel" [class.is-open]="filterOpen()">
+                <div class="hero-filter_group">
+                  <span class="hero-filter_label">Tipo de imóvel</span>
+                  @for (type of propertyTypes; track type.value; let i = $index) {
+                    <label class="hero-filter_item" [style.--index]="i">
+                      <input
+                        type="checkbox"
+                        class="hero-filter_input"
+                        [checked]="isTypeSelected(type.value)"
+                        (change)="toggleType(type.value)"
+                      />
+                      <span class="hero-filter_checkbox"></span>
+                      <span>{{ type.label }}</span>
+                    </label>
+                  }
+                </div>
+
+                <div class="hero-filter_separator"></div>
+
+                <div class="hero-filter_group">
+                  <span class="hero-filter_label">Comodidades</span>
+                  @for (amenity of amenityTypes; track amenity.value; let i = $index) {
+                    <label class="hero-filter_item" [style.--index]="i + propertyTypes.length">
+                      <input
+                        type="checkbox"
+                        class="hero-filter_input"
+                        [checked]="isAmenitySelected(amenity.value)"
+                        (change)="toggleAmenity(amenity.value)"
+                      />
+                      <span class="hero-filter_checkbox"></span>
+                      <span>{{ amenity.label }}</span>
+                    </label>
+                  }
+                </div>
+
+                <div class="hero-filter_separator"></div>
+
+                <button class="hero-filter_apply" (click)="applyFilters(); filterOpen.set(false)">
+                  Aplicar filtro
+                </button>
+              </div>
+            </div>
+            <button
+              (click)="onSearch()"
+              class="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold whitespace-nowrap transition-colors sm:px-6 sm:py-3"
+              [style.background-color]="'hsl(0, 0%, 91%)'"
+              [style.color]="'hsl(0, 0%, 13%)'"
+            >
+              <ng-icon name="lucideSearch" class="size-4" />
+              Buscar
+            </button>
+          </div>
         </div>
       </div>
-    </div>
 
       <!-- Scroll indicator -->
       <div class="relative z-10 mt-12 flex justify-center">
         <div class="scroll-indicator flex flex-col items-center gap-2">
-          <span class="text-xs font-medium tracking-wide" [style.color]="'hsl(0, 0%, 40%)'">Role para baixo</span>
+          <span class="type-small" [style.color]="'hsl(0, 0%, 40%)'">Role para baixo</span>
           <ng-icon name="lucideChevronDown" class="size-5" [style.color]="'hsl(0, 0%, 40%)'" />
         </div>
       </div>
-
     </div>
   </section>
 
   <!-- Content Section -->
-  <section class="relative z-10 rounded-t-3xl px-6 py-16 md:py-24" style="background-color: hsl(0, 0%, 13%);">
+  <section
+    class="relative z-10 rounded-t-3xl px-6 py-16 md:py-24"
+    style="background-color: hsl(0, 0%, 13%)"
+  >
     <div class="mx-auto max-w-3xl space-y-8">
-      <h2 class="text-2xl font-bold md:text-3xl lg:text-4xl" [style.color]="'hsl(0, 0%, 91%)'">
+      <h2 class="type-h2" [style.color]="'hsl(0, 0%, 91%)'">
         Sua jornada para o imóvel ideal começa aqui
       </h2>
-      <div class="space-y-8 text-base leading-relaxed md:text-lg" [style.color]="'hsl(0, 0%, 75%)'">
+      <div class="type-body space-y-8" [style.color]="'hsl(0, 0%, 75%)'">
         <p>
-          Encontrar o imóvel certo é uma das decisões mais importantes da vida.
-          Seja para morar, investir ou começar um novo capítulo, cada escolha carrega
-          expectativas e sonhos que merecem ser realizados com segurança e confiança.
+          Encontrar o imóvel certo é uma das decisões mais importantes da vida. Seja para morar,
+          investir ou começar um novo capítulo, cada escolha carrega expectativas e sonhos que
+          merecem ser realizados com segurança e confiança.
         </p>
         <p>
-          No MeuApp, reunimos uma seleção cuidadosa de imóveis para venda e aluguel
-          em diversas regiões do Brasil. Cada anúncio passa por verificação para garantir
-          que as informações sejam precisas e atualizadas, desde a metragem até as
-          condições do imóvel.
+          No MeuApp, reunimos uma seleção cuidadosa de imóveis para venda e aluguel em diversas
+          regiões do Brasil. Cada anúncio passa por verificação para garantir que as informações
+          sejam precisas e atualizadas, desde a metragem até as condições do imóvel.
         </p>
         <p>
-          Nossa plataforma foi pensada para simplificar o processo de busca. Com filtros
-          intuitivos, você pode refinar sua pesquisa por localização, tipo de imóvel,
-          faixa de preço e muito mais. Tudo isso de forma rápida e sem complicações.
+          Nossa plataforma foi pensada para simplificar o processo de busca. Com filtros intuitivos,
+          você pode refinar sua pesquisa por localização, tipo de imóvel, faixa de preço e muito
+          mais. Tudo isso de forma rápida e sem complicações.
         </p>
         <p>
-          Além disso, nossa equipe está pronta para ajudar em cada etapa — desde a
-          primeira busca até a finalização do negócio. Acreditamos que a experiência
-          de comprar ou alugar um imóvel deve ser tão boa quanto viver nele.
+          Além disso, nossa equipe está pronta para ajudar em cada etapa — desde a primeira busca
+          até a finalização do negócio. Acreditamos que a experiência de comprar ou alugar um imóvel
+          deve ser tão boa quanto viver nele.
         </p>
       </div>
       <div class="flex justify-center">
-        <a routerLink="/properties"
-           class="flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-colors sm:max-w-xs"
-           [style.background-color]="'hsl(0, 0%, 91%)'" [style.color]="'hsl(0, 0%, 13%)'">
+        <a
+          routerLink="/properties"
+          class="flex w-full items-center justify-center rounded-full px-6 py-3 text-sm font-semibold transition-colors sm:max-w-xs"
+          [style.background-color]="'hsl(0, 0%, 91%)'"
+          [style.color]="'hsl(0, 0%, 13%)'"
+        >
           Ver imóveis
         </a>
       </div>
@@ -178,42 +218,54 @@
   </section>
 
   <!-- Company Logos -->
-  <section class="relative z-10 px-6 py-12" style="background-color: hsl(0, 0%, 13%);">
+  <section class="relative z-10 px-6 py-12" style="background-color: hsl(0, 0%, 13%)">
     <div class="mx-auto max-w-6xl space-y-8 text-center">
-      <p class="text-sm font-medium tracking-wide uppercase" [style.color]="'hsl(0, 0%, 63%)'">
+      <p class="type-caption uppercase" [style.color]="'hsl(0, 0%, 63%)'">
         Empresas que confiam no MeuApp
       </p>
       <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
         @for (company of companies; track company.name) {
-          <img [src]="company.logo" [alt]="company.name" width="80" height="24"
-               class="h-6 w-auto brightness-0 invert opacity-40 transition-all duration-300 hover:opacity-70 md:h-7" />
+          <img
+            [src]="company.logo"
+            [alt]="company.name"
+            width="80"
+            height="24"
+            class="h-6 w-auto opacity-40 brightness-0 invert transition-all duration-300 hover:opacity-70 md:h-7"
+          />
         }
       </div>
     </div>
   </section>
 
   <!-- Stats Section Header -->
-  <section class="relative z-10 px-6 pt-20 pb-8 md:pt-28 md:pb-12" style="background-color: hsl(0, 0%, 13%);">
+  <section
+    class="relative z-10 px-6 pt-20 pb-8 md:pt-28 md:pb-12"
+    style="background-color: hsl(0, 0%, 13%)"
+  >
     <div class="mx-auto max-w-3xl text-center">
-      <h2 class="text-3xl font-black leading-tight tracking-tight md:text-4xl lg:text-5xl" [style.color]="'hsl(0, 0%, 91%)'">
-        Nossos números<br />falam por si
-      </h2>
-      <p class="mx-auto mt-4 max-w-md text-base md:text-lg" [style.color]="'hsl(0, 0%, 65%)'">
+      <h2 class="type-h2" [style.color]="'hsl(0, 0%, 91%)'">Nossos números<br />falam por si</h2>
+      <p class="type-body mx-auto mt-4 max-w-md" [style.color]="'hsl(0, 0%, 65%)'">
         Cada número representa confiança, dedicação e resultados reais para quem busca um novo lar.
       </p>
     </div>
   </section>
 
   <!-- Stacking Cards — scroll-triggered folder effect -->
-  <div class="relative z-10" style="background-color: hsl(0, 0%, 13%);">
+  <div class="relative z-10" style="background-color: hsl(0, 0%, 13%)">
     <!-- Card 1 — Imóveis anunciados -->
-    <section class="sticky pb-2" style="top: clamp(40px, 12vh, 120px); z-index: 1; background-color: hsl(0, 0%, 13%);">
-      <div class="mx-auto w-[92%] max-w-2xl lg:max-w-3xl overflow-hidden rounded-3xl py-16 px-10 md:py-20 md:px-12" style="background-color: hsl(0, 0%, 91%);">
-        <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">5.000+</span>
-        <p class="mt-6 text-lg font-medium leading-snug md:text-xl" [style.color]="'hsl(0, 0%, 40%)'">
+    <section
+      class="sticky pb-2"
+      style="top: clamp(40px, 12vh, 120px); z-index: 1; background-color: hsl(0, 0%, 13%)"
+    >
+      <div
+        class="mx-auto w-[92%] max-w-2xl overflow-hidden rounded-3xl px-10 py-16 md:px-12 md:py-20 lg:max-w-3xl"
+        style="background-color: hsl(0, 0%, 91%)"
+      >
+        <span class="type-display" [style.color]="'hsl(0, 0%, 13%)'">5.000+</span>
+        <p class="type-lead mt-6" [style.color]="'hsl(0, 0%, 40%)'">
           Imóveis anunciados em todo o Brasil.
         </p>
-        <div class="mt-4 space-y-2 text-sm" [style.color]="'hsl(0, 0%, 40%)'">
+        <div class="type-small mt-4 space-y-2" [style.color]="'hsl(0, 0%, 40%)'">
           <p>Apartamentos, casas, condomínios e terrenos</p>
           <p>Informações verificadas e atualizadas</p>
         </div>
@@ -221,13 +273,23 @@
     </section>
 
     <!-- Card 2 — Famílias atendidas -->
-    <section class="sticky pb-2" style="top: calc(clamp(40px, 12vh, 120px) + 20px); z-index: 2; background-color: hsl(0, 0%, 13%);">
-      <div class="mx-auto w-[92%] max-w-2xl lg:max-w-3xl overflow-hidden rounded-3xl py-16 px-10 md:py-20 md:px-12" style="background-color: hsl(0, 0%, 82%);">
-        <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">1.200+</span>
-        <p class="mt-6 text-lg font-medium leading-snug md:text-xl" [style.color]="'hsl(0, 0%, 30%)'">
+    <section
+      class="sticky pb-2"
+      style="
+        top: calc(clamp(40px, 12vh, 120px) + 20px);
+        z-index: 2;
+        background-color: hsl(0, 0%, 13%);
+      "
+    >
+      <div
+        class="mx-auto w-[92%] max-w-2xl overflow-hidden rounded-3xl px-10 py-16 md:px-12 md:py-20 lg:max-w-3xl"
+        style="background-color: hsl(0, 0%, 82%)"
+      >
+        <span class="type-display" [style.color]="'hsl(0, 0%, 13%)'">1.200+</span>
+        <p class="type-lead mt-6" [style.color]="'hsl(0, 0%, 30%)'">
           Famílias que realizaram o sonho do próprio lar.
         </p>
-        <div class="mt-4 space-y-2 text-sm" [style.color]="'hsl(0, 0%, 30%)'">
+        <div class="type-small mt-4 space-y-2" [style.color]="'hsl(0, 0%, 30%)'">
           <p>Em mais de 150 cidades brasileiras</p>
           <p>Atendimento personalizado do início ao fim</p>
         </div>
@@ -235,13 +297,23 @@
     </section>
 
     <!-- Card 3 — Avaliação -->
-    <section class="sticky pb-2" style="top: calc(clamp(40px, 12vh, 120px) + 40px); z-index: 3; background-color: hsl(0, 0%, 13%);">
-      <div class="mx-auto w-[92%] max-w-2xl lg:max-w-3xl overflow-hidden rounded-3xl py-16 px-10 md:py-20 md:px-12" style="background-color: hsl(0, 0%, 76%);">
-        <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">98%</span>
-        <p class="mt-6 text-lg font-medium leading-snug md:text-xl" [style.color]="'hsl(0, 0%, 25%)'">
+    <section
+      class="sticky pb-2"
+      style="
+        top: calc(clamp(40px, 12vh, 120px) + 40px);
+        z-index: 3;
+        background-color: hsl(0, 0%, 13%);
+      "
+    >
+      <div
+        class="mx-auto w-[92%] max-w-2xl overflow-hidden rounded-3xl px-10 py-16 md:px-12 md:py-20 lg:max-w-3xl"
+        style="background-color: hsl(0, 0%, 76%)"
+      >
+        <span class="type-display" [style.color]="'hsl(0, 0%, 13%)'">98%</span>
+        <p class="type-lead mt-6" [style.color]="'hsl(0, 0%, 25%)'">
           Dos clientes nos avaliam com 5 estrelas.
         </p>
-        <div class="mt-4 space-y-2 text-sm" [style.color]="'hsl(0, 0%, 25%)'">
+        <div class="type-small mt-4 space-y-2" [style.color]="'hsl(0, 0%, 25%)'">
           <p>Baseado em avaliações reais de compradores</p>
           <p>Confiança que nos move a cada negócio</p>
         </div>
@@ -249,13 +321,23 @@
     </section>
 
     <!-- Card 4 — Cidades atendidas -->
-    <section class="sticky pb-2" style="top: calc(clamp(40px, 12vh, 120px) + 60px); z-index: 4; background-color: hsl(0, 0%, 13%);">
-      <div class="mx-auto w-[92%] max-w-2xl lg:max-w-3xl overflow-hidden rounded-3xl py-16 px-10 md:py-20 md:px-12" style="background-color: hsl(0, 0%, 70%);">
-        <span class="text-7xl font-black leading-none tracking-tight md:text-8xl lg:text-9xl" [style.color]="'hsl(0, 0%, 13%)'">150+</span>
-        <p class="mt-6 text-lg font-medium leading-snug md:text-xl" [style.color]="'hsl(0, 0%, 25%)'">
+    <section
+      class="sticky pb-2"
+      style="
+        top: calc(clamp(40px, 12vh, 120px) + 60px);
+        z-index: 4;
+        background-color: hsl(0, 0%, 13%);
+      "
+    >
+      <div
+        class="mx-auto w-[92%] max-w-2xl overflow-hidden rounded-3xl px-10 py-16 md:px-12 md:py-20 lg:max-w-3xl"
+        style="background-color: hsl(0, 0%, 70%)"
+      >
+        <span class="type-display" [style.color]="'hsl(0, 0%, 13%)'">150+</span>
+        <p class="type-lead mt-6" [style.color]="'hsl(0, 0%, 25%)'">
           Cidades atendidas em todo o Brasil.
         </p>
-        <div class="mt-4 space-y-2 text-sm" [style.color]="'hsl(0, 0%, 25%)'">
+        <div class="type-small mt-4 space-y-2" [style.color]="'hsl(0, 0%, 25%)'">
           <p>Presença em todos os estados brasileiros</p>
           <p>Equipe local em cada região</p>
         </div>
@@ -274,9 +356,12 @@
       class="faq-filters_toggle"
       (click)="toggleFaq()"
       [attr.aria-expanded]="faqOpen()"
-      aria-haspopup="dialog">
+      aria-haspopup="dialog"
+    >
       <span class="faq-filters_toggle_select faq-filters_toggle_select--desktop">
-        <span class="faq-filters_toggle_label">Perguntas Frequentes <sup>{{ faqs.length }}</sup></span>
+        <span class="faq-filters_toggle_label"
+          >Perguntas Frequentes <sup>{{ faqs.length }}</sup></span
+        >
         <span class="faq-filters_toggle_select_icon">
           <ng-icon name="lucideChevronDown" class="size-4" />
         </span>
@@ -296,17 +381,19 @@
         <div class="faq-filters_form_fieldset">
           <span id="faq-title" class="sr-only">Perguntas Frequentes</span>
           @for (faq of faqs; track faq.question; let i = $index) {
-            <div
-              class="faq-filters_form_item"
-              [style.--index]="i">
+            <div class="faq-filters_form_item" [style.--index]="i">
               <button
                 type="button"
                 class="faq-filters_form_item_button"
                 [class.is-expanded]="expandedFaq() === i"
-                (click)="expandedFaq.set(expandedFaq() === i ? -1 : i)">
+                (click)="expandedFaq.set(expandedFaq() === i ? -1 : i)"
+              >
                 <span class="faq-filters_form_item_label">{{ faq.question }}</span>
-                <ng-icon name="lucideChevronDown" class="size-4 shrink-0 transition-transform duration-200"
-                  [class.rotate-180]="expandedFaq() === i" />
+                <ng-icon
+                  name="lucideChevronDown"
+                  class="size-4 shrink-0 transition-transform duration-200"
+                  [class.rotate-180]="expandedFaq() === i"
+                />
               </button>
               @if (expandedFaq() === i) {
                 <div class="faq-filters_form_item_answer">
@@ -318,14 +405,10 @@
         </div>
 
         <!-- Close button -->
-        <button
-          type="button"
-          class="faq-filters_form_button"
-          (click)="faqOpen.set(false)">
+        <button type="button" class="faq-filters_form_button" (click)="faqOpen.set(false)">
           <span class="faq-filters_form_button_label">Fechar</span>
         </button>
       </div>
     </div>
   </div>
-
 </main>

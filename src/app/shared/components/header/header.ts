@@ -1,4 +1,11 @@
-import { ChangeDetectionStrategy, Component, inject, signal, afterNextRender, effect } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+  afterNextRender,
+  effect,
+} from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 import { AuthService } from '../../../core/services/auth';
@@ -24,7 +31,7 @@ export class Header {
   }
 
   toggleMenu() {
-    this.menuOpen.update(v => !v);
+    this.menuOpen.update((v) => !v);
   }
 
   closeMenu() {

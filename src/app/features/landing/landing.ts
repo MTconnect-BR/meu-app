@@ -15,10 +15,7 @@ import { PropertiesService } from '../../core/services/properties';
 
 @Component({
   selector: 'app-landing',
-  imports: [
-    RouterLink,
-    NgIcon,
-  ],
+  imports: [RouterLink, NgIcon],
   templateUrl: './landing.html',
   styleUrl: './landing.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

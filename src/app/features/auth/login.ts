@@ -2,7 +2,14 @@ import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth';
-import { HlmCard, HlmCardContent, HlmCardHeader, HlmCardTitle, HlmCardDescription, HlmCardFooter } from '@spartan-ng/helm/card';
+import {
+  HlmCard,
+  HlmCardContent,
+  HlmCardHeader,
+  HlmCardTitle,
+  HlmCardDescription,
+  HlmCardFooter,
+} from '@spartan-ng/helm/card';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmInput } from '@spartan-ng/helm/input';
 import { HlmField, HlmFieldLabel, HlmFieldError, HlmFieldGroup } from '@spartan-ng/helm/field';
@@ -12,8 +19,18 @@ import { HlmField, HlmFieldLabel, HlmFieldError, HlmFieldGroup } from '@spartan-
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    HlmCard, HlmCardContent, HlmCardHeader, HlmCardTitle, HlmCardDescription, HlmCardFooter,
-    HlmButton, HlmInput, HlmField, HlmFieldLabel, HlmFieldError, HlmFieldGroup,
+    HlmCard,
+    HlmCardContent,
+    HlmCardHeader,
+    HlmCardTitle,
+    HlmCardDescription,
+    HlmCardFooter,
+    HlmButton,
+    HlmInput,
+    HlmField,
+    HlmFieldLabel,
+    HlmFieldError,
+    HlmFieldGroup,
   ],
   templateUrl: './login.html',
   styleUrl: './login.scss',

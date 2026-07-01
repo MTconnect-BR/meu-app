@@ -73,10 +73,7 @@ app.use((req, res, next) => {
 
       if (contentType.includes('text/html')) {
         const html = await response.text();
-        const safeHtml = html.replace(
-          /<script(?=[\s>])/g,
-          `<script nonce="${nonce}"`,
-        );
+        const safeHtml = html.replace(/<script(?=[\s>])/g, `<script nonce="${nonce}"`);
         res.setHeader('Content-Type', 'text/html;charset=UTF-8');
         res.send(safeHtml);
       } else {

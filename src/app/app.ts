@@ -8,33 +8,55 @@ import { WhatsAppButton } from './shared/components/whatsapp-button/whatsapp-but
 
 const routeAnimation = trigger('routeAnimation', [
   transition('* <=> *', [
-    query(':enter', [
-      style({
-        opacity: 0,
-        transform: 'translateY(100svh)',
-      }),
-    ], { optional: true }),
-    query(':leave', [
-      style({
-        position: 'absolute',
-        width: '100%',
-        top: 0,
-        left: 0,
-        zIndex: 1,
-      }),
-    ], { optional: true }),
-    group([
-      query(':leave', [
-        animate('0.75s cubic-bezier(.5,0,0,1)', style({
+    query(
+      ':enter',
+      [
+        style({
           opacity: 0,
-        })),
-      ], { optional: true }),
-      query(':enter', [
-        animate('0.75s cubic-bezier(.5,0,0,1)', style({
-          opacity: 1,
-          transform: 'translateY(0)',
-        })),
-      ], { optional: true }),
+          transform: 'translateY(100svh)',
+        }),
+      ],
+      { optional: true },
+    ),
+    query(
+      ':leave',
+      [
+        style({
+          position: 'absolute',
+          width: '100%',
+          top: 0,
+          left: 0,
+          zIndex: 1,
+        }),
+      ],
+      { optional: true },
+    ),
+    group([
+      query(
+        ':leave',
+        [
+          animate(
+            '0.75s cubic-bezier(.5,0,0,1)',
+            style({
+              opacity: 0,
+            }),
+          ),
+        ],
+        { optional: true },
+      ),
+      query(
+        ':enter',
+        [
+          animate(
+            '0.75s cubic-bezier(.5,0,0,1)',
+            style({
+              opacity: 1,
+              transform: 'translateY(0)',
+            }),
+          ),
+        ],
+        { optional: true },
+      ),
     ]),
   ]),
 ]);
@@ -62,14 +84,14 @@ export class App {
 
   constructor() {
     afterNextRender(() => {
-      this.router.events.pipe(
-        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
-      ).subscribe(() => {
-        window.scrollTo(0, 0);
-        if (this.isInitialLoad()) {
-          this.isInitialLoad.set(false);
-        }
-      });
+      this.router.events
+        .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+        .subscribe(() => {
+          window.scrollTo(0, 0);
+          if (this.isInitialLoad()) {
+            this.isInitialLoad.set(false);
+          }
+        });
     });
   }
 

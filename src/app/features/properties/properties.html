@@ -1,6 +1,8 @@
 <!-- Main Content -->
-<main class="flex flex-1 flex-col" style="background-color: hsl(0, 0%, 13%); color: var(--foreground);">
-
+<main
+  class="flex flex-1 flex-col"
+  style="background-color: hsl(0, 0%, 13%); color: var(--foreground)"
+>
   <!-- Hero Search Section -->
   <section class="px-6 pt-12 pb-8 text-center md:pt-16 md:pb-10">
     <div class="mx-auto max-w-2xl space-y-4">
@@ -14,7 +16,12 @@
       <!-- Search Bar -->
       <div class="relative mx-auto max-w-xl">
         <div class="pointer-events-none absolute inset-y-0 left-4 flex items-center">
-          <ng-icon name="lucideSearch" class="size-5" style="color: hsl(0, 0%, 63%)" aria-hidden="true" />
+          <ng-icon
+            name="lucideSearch"
+            class="size-5"
+            style="color: hsl(0, 0%, 63%)"
+            aria-hidden="true"
+          />
         </div>
         <input
           type="text"
@@ -22,8 +29,13 @@
           aria-label="Buscar por localização"
           [value]="propertiesService.searchQuery()"
           (input)="propertiesService.searchQuery.set($any($event.target).value)"
-          class="w-full rounded-xl border py-3 pl-12 pr-4 text-base outline-none transition-shadow focus:ring-2"
-          style="background-color: hsl(0, 0%, 91%); border-color: hsl(0, 0%, 80%); color: hsl(0, 0%, 13%); --tw-ring-color: hsl(0, 0%, 75%);"
+          class="w-full rounded-xl border py-3 pr-4 pl-12 text-base transition-shadow outline-none focus:ring-2"
+          style="
+            background-color: hsl(0, 0%, 91%);
+            border-color: hsl(0, 0%, 80%);
+            color: hsl(0, 0%, 13%);
+            --tw-ring-color: hsl(0, 0%, 75%);
+          "
         />
       </div>
 
@@ -33,27 +45,33 @@
         <button
           (click)="toggleStatus('all')"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
-          [style]="propertiesService.propertyType() === 'all'
-            ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-            : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'"
+          [style]="
+            propertiesService.propertyType() === 'all'
+              ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
+              : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'
+          "
         >
           Todos
         </button>
         <button
           (click)="toggleStatus('sale')"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
-          [style]="propertiesService.propertyType() === 'sale'
-            ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-            : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'"
+          [style]="
+            propertiesService.propertyType() === 'sale'
+              ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
+              : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'
+          "
         >
           Comprar
         </button>
         <button
           (click)="toggleStatus('rent')"
           class="rounded-full px-4 py-1.5 text-sm font-medium transition-all"
-          [style]="propertiesService.propertyType() === 'rent'
-            ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-            : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'"
+          [style]="
+            propertiesService.propertyType() === 'rent'
+              ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
+              : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 75%);'
+          "
         >
           Alugar
         </button>
@@ -86,7 +104,8 @@
                 <button
                   hlmDropdownMenuCheckbox
                   [checked]="isTypeSelected(type.value)"
-                  (triggered)="toggleType(type.value)">
+                  (triggered)="toggleType(type.value)"
+                >
                   {{ type.label }}
                   <hlm-dropdown-menu-checkbox-indicator />
                 </button>
@@ -102,7 +121,8 @@
                 <button
                   hlmDropdownMenuCheckbox
                   [checked]="isAmenitySelected(amenity.value)"
-                  (triggered)="toggleAmenity(amenity.value)">
+                  (triggered)="toggleAmenity(amenity.value)"
+                >
                   {{ amenity.label }}
                   <hlm-dropdown-menu-checkbox-indicator />
                 </button>
@@ -119,25 +139,39 @@
     <div class="mx-auto max-w-5xl">
       <!-- Result count -->
       <p class="mb-6 text-sm" style="color: hsl(0, 0%, 63%)">
-        {{ resultCount() }} imóvel{{ resultCount() !== 1 ? 'is' : '' }} encontrado{{ resultCount() !== 1 ? 's' : '' }}
+        {{ resultCount() }} imóvel{{ resultCount() !== 1 ? 'is' : '' }} encontrado{{
+          resultCount() !== 1 ? 's' : ''
+        }}
       </p>
 
       @if (filteredProperties().length > 0) {
         <!-- Property Grid -->
         <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           @for (property of filteredProperties(); track property.id) {
-            <a [routerLink]="['/properties', property.slug]"
-               class="group overflow-hidden rounded-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-xl"
-               style="background-color: hsl(0, 0%, 91%);">
+            <a
+              [routerLink]="['/properties', property.slug]"
+              class="group overflow-hidden rounded-xl transition-all duration-200 hover:scale-[1.02] hover:shadow-xl"
+              style="background-color: hsl(0, 0%, 91%)"
+            >
               <!-- Image -->
               <div class="relative aspect-video w-full overflow-hidden">
-                <img [ngSrc]="property.imageUrl" [alt]="property.title" width="600" height="400" priority
-                     class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105" />
+                <img
+                  [ngSrc]="property.imageUrl"
+                  [alt]="property.title"
+                  width="600"
+                  height="400"
+                  priority
+                  class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                />
                 <!-- Type badge -->
-                <span class="absolute top-3 left-3 rounded-full px-2.5 py-0.5 text-xs font-medium"
-                      [style]="property.type === 'sale'
-                        ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
-                        : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 91%);'">
+                <span
+                  class="absolute top-3 left-3 rounded-full px-2.5 py-0.5 text-xs font-medium"
+                  [style]="
+                    property.type === 'sale'
+                      ? 'background-color: hsl(0, 0%, 91%); color: hsl(0, 0%, 13%);'
+                      : 'background-color: hsl(0, 0%, 22%); color: hsl(0, 0%, 91%);'
+                  "
+                >
                   {{ property.type === 'sale' ? 'Venda' : 'Aluguel' }}
                 </span>
               </div>
@@ -160,15 +194,30 @@
 
                 <!-- Specs -->
                 <div class="flex items-center gap-3 text-sm" style="color: hsl(0, 0%, 70%)">
-                  <span class="flex items-center gap-1" [attr.aria-label]="property.bedrooms + ' quarto' + (property.bedrooms !== 1 ? 's' : '')">
+                  <span
+                    class="flex items-center gap-1"
+                    [attr.aria-label]="
+                      property.bedrooms + ' quarto' + (property.bedrooms !== 1 ? 's' : '')
+                    "
+                  >
                     <ng-icon name="lucideBedDouble" class="size-3.5" aria-hidden="true" />
                     {{ property.bedrooms }}
                   </span>
-                  <span class="flex items-center gap-1" [attr.aria-label]="property.bathrooms + ' banheiro' + (property.bathrooms !== 1 ? 's' : '')">
+                  <span
+                    class="flex items-center gap-1"
+                    [attr.aria-label]="
+                      property.bathrooms + ' banheiro' + (property.bathrooms !== 1 ? 's' : '')
+                    "
+                  >
                     <ng-icon name="lucideBath" class="size-3.5" aria-hidden="true" />
                     {{ property.bathrooms }}
                   </span>
-                  <span class="flex items-center gap-1" [attr.aria-label]="property.parkingSpots + ' vaga' + (property.parkingSpots !== 1 ? 's' : '')">
+                  <span
+                    class="flex items-center gap-1"
+                    [attr.aria-label]="
+                      property.parkingSpots + ' vaga' + (property.parkingSpots !== 1 ? 's' : '')
+                    "
+                  >
                     <ng-icon name="lucideCar" class="size-3.5" aria-hidden="true" />
                     {{ property.parkingSpots }}
                   </span>
@@ -179,14 +228,18 @@
                 @if (property.furnished || property.petFriendly) {
                   <div class="flex gap-1.5 pt-0.5">
                     @if (property.furnished) {
-                      <span class="rounded-md px-2 py-0.5 text-xs font-medium"
-                            style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 55%);">
+                      <span
+                        class="rounded-md px-2 py-0.5 text-xs font-medium"
+                        style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 55%)"
+                      >
                         Mobiliado
                       </span>
                     }
                     @if (property.petFriendly) {
-                      <span class="rounded-md px-2 py-0.5 text-xs font-medium"
-                            style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 55%);">
+                      <span
+                        class="rounded-md px-2 py-0.5 text-xs font-medium"
+                        style="background-color: hsl(0, 0%, 95%); color: hsl(0, 0%, 55%)"
+                      >
                         Pets
                       </span>
                     }
@@ -198,9 +251,16 @@
         </div>
       } @else {
         <!-- Empty State -->
-        <div class="flex flex-col items-center justify-center rounded-xl py-20 text-center"
-             style="background-color: hsl(0, 0%, 16%);">
-          <ng-icon name="lucideSearch" class="mb-4 size-12" style="color: hsl(0, 0%, 50%)" aria-hidden="true" />
+        <div
+          class="flex flex-col items-center justify-center rounded-xl py-20 text-center"
+          style="background-color: hsl(0, 0%, 16%)"
+        >
+          <ng-icon
+            name="lucideSearch"
+            class="mb-4 size-12"
+            style="color: hsl(0, 0%, 50%)"
+            aria-hidden="true"
+          />
           <h3 class="text-lg font-medium" style="color: hsl(0, 0%, 75%)">
             Nenhum imóvel encontrado
           </h3>

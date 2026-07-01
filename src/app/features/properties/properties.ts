@@ -56,14 +56,14 @@ export class Properties implements OnInit {
   protected readonly activeFilterCount = this.propertiesService.activeFilterCount;
 
   toggleType(value: string) {
-    this.propertiesService.selectedTypes.update(current =>
-      current.includes(value) ? current.filter(v => v !== value) : [...current, value]
+    this.propertiesService.selectedTypes.update((current) =>
+      current.includes(value) ? current.filter((v) => v !== value) : [...current, value],
     );
   }
 
   toggleAmenity(value: string) {
-    this.propertiesService.selectedAmenities.update(current =>
-      current.includes(value) ? current.filter(v => v !== value) : [...current, value]
+    this.propertiesService.selectedAmenities.update((current) =>
+      current.includes(value) ? current.filter((v) => v !== value) : [...current, value],
     );
   }
 
@@ -84,7 +84,7 @@ export class Properties implements OnInit {
   }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe((params) => {
       if (params['types']) {
         this.propertiesService.selectedTypes.set(params['types'].split(','));
       }

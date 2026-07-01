@@ -39,12 +39,12 @@ export class AuthService {
     const data = encoder.encode(password);
     const hashBuffer = await crypto.subtle.digest('SHA-256', data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
   }
 
   async signup(email: string, password: string): Promise<{ success: boolean; error?: string }> {
     const users = this.getUsers();
-    if (users.some(u => u.email === email)) {
+    if (users.some((u) => u.email === email)) {
       return { success: false, error: 'Este email já está cadastrado.' };
     }
     const passwordHash = await this.hashPassword(password);
@@ -57,7 +57,7 @@ export class AuthService {
   async login(email: string, password: string): Promise<{ success: boolean; error?: string }> {
     const users = this.getUsers();
     const passwordHash = await this.hashPassword(password);
-    const user = users.find(u => u.email === email && u.passwordHash === passwordHash);
+    const user = users.find((u) => u.email === email && u.passwordHash === passwordHash);
     if (!user) {
       return { success: false, error: 'Email ou senha inválidos.' };
     }

@@ -1,8 +1,21 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { AbstractControl, FormBuilder, ReactiveFormsModule, ValidationErrors, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  ReactiveFormsModule,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../core/services/auth';
-import { HlmCard, HlmCardContent, HlmCardHeader, HlmCardTitle, HlmCardDescription, HlmCardFooter } from '@spartan-ng/helm/card';
+import {
+  HlmCard,
+  HlmCardContent,
+  HlmCardHeader,
+  HlmCardTitle,
+  HlmCardDescription,
+  HlmCardFooter,
+} from '@spartan-ng/helm/card';
 import { HlmButton } from '@spartan-ng/helm/button';
 import { HlmInput } from '@spartan-ng/helm/input';
 import { HlmField, HlmFieldLabel, HlmFieldError, HlmFieldGroup } from '@spartan-ng/helm/field';
@@ -12,8 +25,18 @@ import { HlmField, HlmFieldLabel, HlmFieldError, HlmFieldGroup } from '@spartan-
   imports: [
     RouterLink,
     ReactiveFormsModule,
-    HlmCard, HlmCardContent, HlmCardHeader, HlmCardTitle, HlmCardDescription, HlmCardFooter,
-    HlmButton, HlmInput, HlmField, HlmFieldLabel, HlmFieldError, HlmFieldGroup,
+    HlmCard,
+    HlmCardContent,
+    HlmCardHeader,
+    HlmCardTitle,
+    HlmCardDescription,
+    HlmCardFooter,
+    HlmButton,
+    HlmInput,
+    HlmField,
+    HlmFieldLabel,
+    HlmFieldError,
+    HlmFieldGroup,
   ],
   templateUrl: './signup.html',
   styleUrl: './signup.scss',
@@ -26,11 +49,14 @@ export class Signup {
 
   errorMessage: string | null = null;
 
-  public form = this._fb.group({
-    email: ['', [Validators.required, Validators.email]],
-    password: ['', [Validators.required, Validators.minLength(6)]],
-    confirmPassword: ['', [Validators.required]],
-  }, { validators: this.passwordMatchValidator });
+  public form = this._fb.group(
+    {
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', [Validators.required]],
+    },
+    { validators: this.passwordMatchValidator },
+  );
 
   private passwordMatchValidator(form: AbstractControl): ValidationErrors | null {
     const password = form.get('password')?.value;

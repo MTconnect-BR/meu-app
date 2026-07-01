@@ -40,6 +40,7 @@
     "@angular/router": "^22.0.4",
     "@angular/ssr": "^22.0.4",
     "@bluehalo/ngx-leaflet": "^22.0.0",
+    "@fontsource-variable/inter": "^5.2.8",
     "@ng-icons/core": "^33.3.0",
     "@ng-icons/lucide": "^33.3.0",
     "@spartan-ng/brain": "^1.0.2",

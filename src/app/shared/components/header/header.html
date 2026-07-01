@@ -1,8 +1,11 @@
-<button type="button" (click)="toggleMenu()"
-  class="burger-button fixed left-4 top-4 z-[250] flex items-center justify-center"
+<button
+  type="button"
+  (click)="toggleMenu()"
+  class="burger-button fixed top-4 left-4 z-[250] flex items-center justify-center"
   [class.is-open]="menuOpen()"
   [attr.aria-label]="menuOpen() ? 'Fechar menu' : 'Abrir menu'"
-  [attr.aria-expanded]="menuOpen()">
+  [attr.aria-expanded]="menuOpen()"
+>
   <span class="burger-icon">
     <span class="burger-icon_line -default">
       <span class="burger-icon_line_inner"></span>
@@ -16,18 +19,18 @@
 </button>
 
 <!-- Backdrop -->
-<div class="menu-backdrop"
-     [class.is-visible]="menuOpen()"
-     role="button"
-     tabindex="0"
-     aria-label="Fechar menu"
-     (click)="closeMenu()"
-     (keyup.enter)="closeMenu()"></div>
+<div
+  class="menu-backdrop"
+  [class.is-visible]="menuOpen()"
+  role="button"
+  tabindex="0"
+  aria-label="Fechar menu"
+  (click)="closeMenu()"
+  (keyup.enter)="closeMenu()"
+></div>
 
 <!-- Dropdown panel below burger -->
-<nav class="menu-panel fixed left-4 z-[300] flex w-72 flex-col"
-     [class.is-open]="menuOpen()">
-
+<nav class="menu-panel fixed left-4 z-[300] flex w-72 flex-col" [class.is-open]="menuOpen()">
   <!-- Nav links -->
   <div class="menu-panel_inner flex flex-1 flex-col">
     <ul class="menu-list">
@@ -63,7 +66,12 @@
           </button>
         </div>
       } @else {
-        <a routerLink="/auth/login" (click)="closeMenu()" class="menu-item menu-cta_link" style="--index: 4">
+        <a
+          routerLink="/auth/login"
+          (click)="closeMenu()"
+          class="menu-item menu-cta_link"
+          style="--index: 4"
+        >
           <span class="menu-cta_label">Entrar</span>
         </a>
       }
