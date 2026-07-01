@@ -253,26 +253,6 @@
     </div>
   </section>
 
-  <!-- Company Logos -->
-  <section class="relative z-10 px-6 py-12" style="background-color: hsl(0, 0%, 13%)">
-    <div class="mx-auto max-w-6xl space-y-8 text-center">
-      <p class="type-caption uppercase" [style.color]="'hsl(0, 0%, 63%)'">
-        Empresas que confiam no MeuApp
-      </p>
-      <div class="flex flex-wrap items-center justify-center gap-8 md:gap-12">
-        @for (company of companies; track company.name) {
-          <img
-            [src]="company.logo"
-            [alt]="company.name"
-            width="80"
-            height="24"
-            class="h-6 w-auto opacity-40 brightness-0 invert transition-all duration-300 hover:opacity-70 md:h-7"
-          />
-        }
-      </div>
-    </div>
-  </section>
-
   <!-- Stats Section Header -->
   <section
     class="relative z-10 px-6 pt-20 pb-8 md:pt-28 md:pb-12"
@@ -383,6 +363,72 @@
     <!-- Spacer so last card can fully stack -->
     <div class="h-[60vh]"></div>
   </div>
+
+  <!-- About Section — MindMarket style -->
+  <section class="relative z-10 px-6 py-16 md:py-24" style="background-color: hsl(0, 0%, 13%)">
+    <div class="mx-auto max-w-2xl">
+      <!-- Section subtitle -->
+      <p class="type-lead mb-16" [style.color]="'hsl(0, 0%, 63%)'">Somos o MeuApp</p>
+
+      <!-- Mission statement -->
+      <p class="type-body mb-16" [style.color]="'hsl(0, 0%, 63%)'">
+        Conectar pessoas aos seus lares é mais do que um serviço — é uma missão. Nascemos para
+        simplificar a busca por imóveis, oferecendo transparência, confiança e atendimento
+        personalizado em cada etapa da jornada.
+      </p>
+
+      <!-- Feature cards -->
+      <div class="grid grid-cols-1 gap-6 sm:grid-cols-3">
+        <!-- Card 1 -->
+        <div class="rounded-2xl p-6" style="background-color: hsl(0, 0%, 18%)">
+          <span class="type-caption mb-3 inline-block uppercase" [style.color]="'hsl(0, 0%, 50%)'">
+            Transparência
+          </span>
+          <h3 class="type-h4 mb-3" [style.color]="'hsl(0, 0%, 91%)'">Informações verificadas</h3>
+          <p class="type-body" [style.color]="'hsl(0, 0%, 63%)'">
+            Cada anúncio passa por verificação para garantir que as informações sejam precisas e
+            atualizadas.
+          </p>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="rounded-2xl p-6" style="background-color: hsl(0, 0%, 18%)">
+          <span class="type-caption mb-3 inline-block uppercase" [style.color]="'hsl(0, 0%, 50%)'">
+            Confiança
+          </span>
+          <h3 class="type-h4 mb-3" [style.color]="'hsl(0, 0%, 91%)'">Seleção cuidadosa</h3>
+          <p class="type-body" [style.color]="'hsl(0, 0%, 63%)'">
+            Reunimos imóveis de qualidade em diversas regiões do Brasil, com metragem e condições
+            verificadas.
+          </p>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="rounded-2xl p-6" style="background-color: hsl(0, 0%, 18%)">
+          <span class="type-caption mb-3 inline-block uppercase" [style.color]="'hsl(0, 0%, 50%)'">
+            Proximidade
+          </span>
+          <h3 class="type-h4 mb-3" [style.color]="'hsl(0, 0%, 91%)'">Equipe dedicada</h3>
+          <p class="type-body" [style.color]="'hsl(0, 0%, 63%)'">
+            Nossa equipe está pronta para ajudar em cada etapa, desde a primeira busca até a
+            finalização.
+          </p>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-12">
+        <a
+          routerLink="/contact"
+          class="type-body inline-flex items-center gap-2 font-medium transition-opacity hover:opacity-80"
+          [style.color]="'hsl(0, 0%, 91%)'"
+        >
+          Fale conosco
+          <span aria-hidden="true">&rarr;</span>
+        </a>
+      </div>
+    </div>
+  </section>
 
   <!-- FAQ Section — MindMarket-style sticky bottom filter bar -->
   <div class="faq-filters" [class.is-open]="faqOpen()">
